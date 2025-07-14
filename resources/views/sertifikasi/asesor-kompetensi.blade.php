@@ -49,57 +49,66 @@
     </div>
   </div>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center">
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top">
+  <div class="container d-flex align-items-center">
 
-      <a href="index.php" class="logo me-auto"><img src="/THEMES/Medicio/assets/img/logo_lsp.png" alt=""></a>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <h1 class="logo me-auto"><a href="index.html">Medicio</a></h1> -->
+    <a href="/" class="logo me-auto">
+      <img src="/THEMES/Medicio/assets/img/logo_lsp.png" alt="Logo LSP">
+    </a>
 
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <li><a class="nav-link scrollto " href="#hero">Home</a></li>
-           <li class="dropdown"><a href="#"><span>Profil</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-               <li><a class="dropdown-item" href="{{ url('/profil/sejarah-visi-&-misi') }}">Sejarah, Visi & Misi</a></li>
-                <li><a class="dropdown-item" href="{{ url('/profil/struktur-organisasi') }}">Struktur Organisasi</a></li>
-               <li><a class="dropdown-item" href="{{ url('/profil/wewenang-tugas-dan-fungsi') }}">Wewenang Tugas dan Fungsi</a></li>
-              <li><a class="dropdown-item" href="{{ url('/profil/tugas-pokok-personal') }}">Tugas Pokok Personal</a></li>
-             <li><a class="dropdown-item" href="{{ url('/profil/program-kerja') }}">Program Kerja</a></li>
-            </ul>
-          </li>
+    <nav id="navbar" class="navbar order-last order-lg-0">
+      <ul>
+        <li><a class="nav-link scrollto" href="#hero">Home</a></li>
+
+        <!-- Profil Dropdown -->
+        <li class="dropdown"><a href="#"><span>Profil</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a class="dropdown-item" href="{{ url('/profil/sejarah-visi-&-misi') }}">Sejarah, Visi & Misi</a></li>
+            <li><a class="dropdown-item" href="{{ url('/profil/struktur-organisasi') }}">Struktur Organisasi</a></li>
+            <li><a class="dropdown-item" href="{{ url('/profil/wewenang-tugas-&-fungsi') }}">Wewenang Tugas & Fungsi</a></li>
+            <li><a class="dropdown-item" href="{{ url('/profil/tugas-pokok-personal') }}">Tugas Pokok Personal</a></li>
+            <li><a class="dropdown-item" href="{{ url('/profil/program-kerja') }}">Program Kerja</a></li>
+          </ul>
+        </li>
+
+        <!-- Sertifikasi Dropdown -->
         <li class="dropdown"><a href="#"><span>Sertifikasi</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+    <li><a class="dropdown-item" href="{{ route('sertifikasi.asesor') }}">Asesor Kompetensi</a></li>
+            <li><a class="dropdown-item" href="{{ route('sertifikasi.pemegang') }}">Pemegang Sertifikat</a></li>
+            <li><a class="dropdown-item" href="{{ route('sertifikasi.skema') }}">Skema Sertifikasi</a></li>
+            <li><a class="dropdown-item" href="{{ route('sertifikasi.tuk') }}">Tempat Uji Kompetensi</a></li>
+          </ul>
+        </li>
+
+
+          <!-- Media -->
+          <li class="dropdown"><a href="#"><span>Media</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">Skema Sertifikasi</a></li>
-              <li><a href="#">Tempat Uji Kompetensi</a></li>
-              <li><a href="#">Asesor Kompetensi</a></li>
-              <li><a href="#">Pemegang Sertifikat</a></li>
+              <li><a class="dropdown-item" href="{{ route('media.brosur') }}">Brosur</a></li>
             </ul>
           </li>
-   <li class="dropdown"><a href="#"><span>Media</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Youtube </a></li>
-              <li><a href="#">Instagram </a></li>
-              <li><a href="#">Brosur LSP</a></li>
-              <li><a href="#">Gallery</a></li>
-            </ul>
-          </li>
+
+          <!-- Informasi -->
           <li class="dropdown"><a href="#"><span>Informasi</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">Alamat</a></li>
-              <li><a href="#">FAQ</a></li>
+              <li><a class="dropdown-item" href="{{ route('informasi.faq') }}">FAQ</a></li>
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="#contact">Kontak Kami</a></li>
+
+          <li><a class="nav-link scrollto" href="{{ route('kontak') }}">Kontak Kami</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+      </nav>
 
-      <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Login</span> </a>
-
+      <a href="#appointment" class="appointment-btn scrollto">
+        <span class="d-none d-md-inline">Login</span>
+      </a>
     </div>
-  </header><!-- End Header -->
+  </header>
+  <!-- End Header -->
+
 
     {{-- Breadcrumb Area --}}
 <section class="py-3" style="background: #eefafd; border-top: 1px solid #ddd;">
@@ -108,48 +117,70 @@
             <div class="d-flex gap-2 align-items-center text-muted">
                 <span style="color: #17c0d1; font-weight: 500;">Home</span>
                 <span>/</span>
+                <span class="text-secondary">Sejarah, Visi & Misi</span>
             </div>
         </div>
     </div>
 </section>
 
 
-{{-- Judul dan Gambar --}}
-<section class="py-5 bg-light">
-    <div class="container text-center">
-        <h2 class="text-primary fw-bold mb-4">SEJARAH VISI & MISI</h2>
+<!-- ======= Skema Sertifikasi Section ======= -->
+<section id="skema" class="py-5">
+  <div class="container" data-aos="fade-up">
 
-        {{-- Gambar besar --}}
-        <img src="{{ asset('/THEMES/Medicio/assets/img/wewenang.png') }}" alt="Sejarah Visi Misi" class="img-fluid rounded shadow-sm" style="max-width: 700px;">
+    <div class="section-title">
+      <h2>Daftar Skema Kompetensi</h2>
     </div>
-</section>
 
-{{-- Konten --}}
-<section class="py-4">
-    <div class="container">
-        <h4 class="fw-bold">SEJARAH</h4>
-        <p>
-            LSP Trainer Kompeten Indonesia dibentuk oleh Asosiasi Trainer Kompeten Indonesia pada tanggal 20 November 2020.
-            LSP Trainer Kompeten Indonesia adalah lembaga yang telah mendapatkan lisensi dari BNSP dan berperan sebagai pelaksana
-            kegiatan sertifikasi kompetensi kerja. Sertifikasi ini dilaksanakan melalui Uji Kompetensi yang mengacu pada skema sertifikasi.
-        </p>
-
-        <h4 class="fw-bold mt-4">Visi</h4>
-        <p>
-            Menjadikan Lembaga Sertifikasi Profesi Trainer Kompeten Indonesia sebagai lembaga sertifikasi bidang pelatihan
-            kompetensi yang terpercaya dalam pelayanan prima dan profesional.
-        </p>
-
-        <h4 class="fw-bold mt-4">Misi</h4>
-        <ul>
-            <li>Menyelenggarakan proses uji kompetensi sesuai prosedur dan sistem sertifikasi</li>
-            <li>Memberikan pelayanan prima dan profesional dalam proses sertifikasi</li>
-            <li>Menjamin obyektivitas, independensi, dan integritas dalam pelaksanaan uji kompetensi</li>
-            <li>Membangun kerja sama dengan dunia usaha, dunia industri, dan lembaga pelatihan dalam memastikan mutu sumber daya manusia</li>
-            <li>Meningkatkan kerjasama dan jejaring, bersinergi dengan pemangku kepentingan</li>
-        </ul>
+    <div class="mb-3">
+      <input type="text" class="form-control" placeholder="search">
     </div>
+
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="table-light">
+          <tr>
+            <th style="width: 5%; text-align:center;"><i class="bi bi-gear"></i></th>
+            <th>Skema Sertifikasi</th>
+            <th>Jumlah Unit</th>
+            <th>Jenis</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center"><i class="bi bi-search"></i></td>
+            <td><a href="#">Instruktur Master</a></td>
+            <td>14</td>
+            <td>Okupasi</td>
+          </tr>
+          <tr>
+            <td class="text-center"><i class="bi bi-search"></i></td>
+            <td><a href="#">Instruktur</a></td>
+            <td>14</td>
+            <td>Okupasi</td>
+          </tr>
+          <tr>
+            <td class="text-center"><i class="bi bi-search"></i></td>
+            <td><a href="#">Instruktur Junior</a></td>
+            <td>9</td>
+            <td>Okupasi</td>
+          </tr>
+          <tr>
+            <td class="text-center"><i class="bi bi-search"></i></td>
+            <td><a href="#">Pelatih di Tempat Kerja</a></td>
+            <td>9</td>
+            <td>Okupasi</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
 </section>
+<!-- End Skema Sertifikasi Section -->
+
+
+
 
      <!-- ======= Footer ======= -->
   <footer id="footer">

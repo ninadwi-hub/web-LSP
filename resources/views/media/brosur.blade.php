@@ -57,7 +57,7 @@
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <h1 class="logo me-auto"><a href="index.html">Medicio</a></h1> -->
 
-       <nav id="navbar" class="navbar order-last order-lg-0">
+        <nav id="navbar" class="navbar order-last order-lg-0">
       <ul>
         <li><a class="nav-link scrollto" href="#hero">Home</a></li>
 
@@ -75,7 +75,7 @@
         <!-- Sertifikasi Dropdown -->
         <li class="dropdown"><a href="#"><span>Sertifikasi</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
-  <li><a class="dropdown-item" href="{{ route('sertifikasi.asesor') }}">Asesor Kompetensi</a></li>
+<li><a class="dropdown-item" href="{{ route('sertifikasi.asesor') }}">Asesor Kompetensi</a></li>
             <li><a class="dropdown-item" href="{{ route('sertifikasi.pemegang') }}">Pemegang Sertifikat</a></li>
             <li><a class="dropdown-item" href="{{ route('sertifikasi.skema') }}">Skema Sertifikasi</a></li>
             <li><a class="dropdown-item" href="{{ route('sertifikasi.tuk') }}">Tempat Uji Kompetensi</a></li>
@@ -128,77 +128,7 @@
     <div class="container text-center">
 
         {{-- Gambar besar --}}
-        <img src="{{ asset('/THEMES/Medicio/assets/img/tugas-pokok.png') }}" alt="Sejarah Visi Misi" class="img-fluid rounded shadow-sm" style="max-width: 700px;">
-    </div>
-</section>
-
-{{-- Konten --}}
-<section class="py-4">
-    <div class="container">
-
-        <h2 class="fw-bold mb-2">Tugas Pokok Personel</h2>
-        <div class="mb-3 text-muted">
-            <i class="bi bi-person-fill"></i> By Admin
-            <i class="bi bi-tag-fill ms-3"></i> Profil
-        </div>
-
-        <h5 class="fw-bold text-uppercase mt-4">Uraian Tugas dan Tanggung Jawab Organisasi LSP Trainer Kompeten Indonesia</h5>
-
-        <h6 class="fw-bold mt-4">Dewan Pengarah</h6>
-        <ol>
-            <li>Bertanggung atas keberlangsungan LSP</li>
-            <li>Penetapan visi, misi dan tujuan LSP</li>
-            <li>Menyusun rencana strategi, program kerja dan anggaran belanja</li>
-            <li>Mengangkat dan memberhentikan pelaksana LSP</li>
-            <li>Membina komunikasi dengan para pemangku kepentingan</li>
-            <li>Memobilisasi sumber daya.</li>
-        </ol>
-        <p class="mb-4"><em>Peraturan BNSP Nomor 2 Tahun 2014 (7.1.3)</em></p>
-
-        <h6 class="fw-bold">Direktur LSP</h6>
-        <ol>
-            <li>Melaksanakan program kerja LSP</li>
-            <li>Melakukan monitoring dan evaluasi</li>
-            <li>Rencana program dan anggaran</li>
-            <li>Memberikan laporan bertanggung jawab kepada Dewan Pengarah</li>
-        </ol>
-        <p class="mb-4"><em>Peraturan BNSP Nomor 2 Tahun 2014 (7.1.4)</em></p>
-
-        <h6 class="fw-bold">Manager Sertifikasi</h6>
-        <ol>
-            <li>Memfasilitasi penyusunan skema sertifikasi</li>
-            <li>Gunakan perangkat asesmen dan materi uji</li>
-            <li>Melaksanakan sertifikasi, termasuk pemeliharaan dan sertifikasi ulang</li>
-            <li>Menentukan persyaratan tempat uji (TUK)</li>
-            <li>Melaksanakan pelaksanaan dan penetapan TUK</li>
-            <li>Melakukan rekrutmen asesor kompetensi serta pemeliharaan kompetensinya</li>
-        </ol>
-        <p class="mb-4"><em>Peraturan BNSP Nomor 2 Tahun 2014 (7.1.5)</em></p>
-
-        <h6 class="fw-bold">Manager Mutu</h6>
-        <ol>
-            <li>Menerapkan sistem manajemen mutu LSP sesuai Pedoman BNSP 201</li>
-            <li>Memelihara berlangsungnya sistem manajemen agar tetap sesuai dengan standar dan pedoman yang diacu</li>
-            <li>Melakukan audit internal dan memfasilitasi kaji ulang manajemen</li>
-        </ol>
-        <p class="mb-4"><em>Peraturan BNSP Nomor 2 Tahun 2014 (7.1.6)</em></p>
-
-        <h6 class="fw-bold">Manager Administrasi dan Tempat Uji Kompetensi</h6>
-        <ol>
-            <li>Memfasilitasi unsur-unsur LSP guna terselenggaranya program sertifikasi profesi</li>
-            <li>Melaksanakan tugas-tugas ketatausahaan organisasi LSP</li>
-            <li>Memelihara informasi sertifikasi kompetensi</li>
-            <li>Mengetahui laporan kegiatan LSP</li>
-        </ol>
-        <p class="mb-4"><em>Peraturan BNSP Nomor 2 Tahun 2014 (7.1.7)</em></p>
-
-        <h6 class="fw-bold">Manager Keuangan</h6>
-        <ol>
-            <li>Merencanakan penerimaan dan pengeluaran LSP</li>
-            <li>Menerima dan mengeluarkan anggaran LSP</li>
-            <li>Membuat laporan penggunaan dana</li>
-        </ol>
-
+        <img src="{{ asset('/THEMES/Medicio/assets/img/Brosur.jpeg') }}" alt="Sejarah Visi Misi" class="img-fluid rounded shadow-sm" style="max-width: 700px;">
     </div>
 </section>
 

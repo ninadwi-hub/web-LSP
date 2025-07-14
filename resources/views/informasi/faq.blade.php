@@ -57,7 +57,7 @@
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <h1 class="logo me-auto"><a href="index.html">Medicio</a></h1> -->
 
-       <nav id="navbar" class="navbar order-last order-lg-0">
+        <nav id="navbar" class="navbar order-last order-lg-0">
       <ul>
         <li><a class="nav-link scrollto" href="#hero">Home</a></li>
 
@@ -75,7 +75,7 @@
         <!-- Sertifikasi Dropdown -->
         <li class="dropdown"><a href="#"><span>Sertifikasi</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
-  <li><a class="dropdown-item" href="{{ route('sertifikasi.asesor') }}">Asesor Kompetensi</a></li>
+<li><a class="dropdown-item" href="{{ route('sertifikasi.asesor') }}">Asesor Kompetensi</a></li>
             <li><a class="dropdown-item" href="{{ route('sertifikasi.pemegang') }}">Pemegang Sertifikat</a></li>
             <li><a class="dropdown-item" href="{{ route('sertifikasi.skema') }}">Skema Sertifikasi</a></li>
             <li><a class="dropdown-item" href="{{ route('sertifikasi.tuk') }}">Tempat Uji Kompetensi</a></li>
@@ -126,81 +126,77 @@
 {{-- Judul dan Gambar --}}
 <section class="py-5 bg-light">
     <div class="container text-center">
+<!-- ======= Frequently Asked Questioins Section ======= -->
+    <section id="faq" class="faq section-bg">
+      <div class="container" data-aos="fade-up">
 
-        {{-- Gambar besar --}}
-        <img src="{{ asset('/THEMES/Medicio/assets/img/tugas-pokok.png') }}" alt="Sejarah Visi Misi" class="img-fluid rounded shadow-sm" style="max-width: 700px;">
-    </div>
-</section>
-
-{{-- Konten --}}
-<section class="py-4">
-    <div class="container">
-
-        <h2 class="fw-bold mb-2">Tugas Pokok Personel</h2>
-        <div class="mb-3 text-muted">
-            <i class="bi bi-person-fill"></i> By Admin
-            <i class="bi bi-tag-fill ms-3"></i> Profil
+        <div class="section-title">
+          <h2>Frequently Asked Questioins</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
         </div>
 
-        <h5 class="fw-bold text-uppercase mt-4">Uraian Tugas dan Tanggung Jawab Organisasi LSP Trainer Kompeten Indonesia</h5>
+        <ul class="faq-list">
 
-        <h6 class="fw-bold mt-4">Dewan Pengarah</h6>
-        <ol>
-            <li>Bertanggung atas keberlangsungan LSP</li>
-            <li>Penetapan visi, misi dan tujuan LSP</li>
-            <li>Menyusun rencana strategi, program kerja dan anggaran belanja</li>
-            <li>Mengangkat dan memberhentikan pelaksana LSP</li>
-            <li>Membina komunikasi dengan para pemangku kepentingan</li>
-            <li>Memobilisasi sumber daya.</li>
-        </ol>
-        <p class="mb-4"><em>Peraturan BNSP Nomor 2 Tahun 2014 (7.1.3)</em></p>
+          <li>
+            <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">Non consectetur a erat nam at lectus urna duis? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div id="faq1" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+              </p>
+            </div>
+          </li>
 
-        <h6 class="fw-bold">Direktur LSP</h6>
-        <ol>
-            <li>Melaksanakan program kerja LSP</li>
-            <li>Melakukan monitoring dan evaluasi</li>
-            <li>Rencana program dan anggaran</li>
-            <li>Memberikan laporan bertanggung jawab kepada Dewan Pengarah</li>
-        </ol>
-        <p class="mb-4"><em>Peraturan BNSP Nomor 2 Tahun 2014 (7.1.4)</em></p>
+          <li>
+            <div data-bs-toggle="collapse" href="#faq2" class="collapsed question">Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div id="faq2" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+              </p>
+            </div>
+          </li>
 
-        <h6 class="fw-bold">Manager Sertifikasi</h6>
-        <ol>
-            <li>Memfasilitasi penyusunan skema sertifikasi</li>
-            <li>Gunakan perangkat asesmen dan materi uji</li>
-            <li>Melaksanakan sertifikasi, termasuk pemeliharaan dan sertifikasi ulang</li>
-            <li>Menentukan persyaratan tempat uji (TUK)</li>
-            <li>Melaksanakan pelaksanaan dan penetapan TUK</li>
-            <li>Melakukan rekrutmen asesor kompetensi serta pemeliharaan kompetensinya</li>
-        </ol>
-        <p class="mb-4"><em>Peraturan BNSP Nomor 2 Tahun 2014 (7.1.5)</em></p>
+          <li>
+            <div data-bs-toggle="collapse" href="#faq3" class="collapsed question">Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div id="faq3" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+              </p>
+            </div>
+          </li>
 
-        <h6 class="fw-bold">Manager Mutu</h6>
-        <ol>
-            <li>Menerapkan sistem manajemen mutu LSP sesuai Pedoman BNSP 201</li>
-            <li>Memelihara berlangsungnya sistem manajemen agar tetap sesuai dengan standar dan pedoman yang diacu</li>
-            <li>Melakukan audit internal dan memfasilitasi kaji ulang manajemen</li>
-        </ol>
-        <p class="mb-4"><em>Peraturan BNSP Nomor 2 Tahun 2014 (7.1.6)</em></p>
+          <li>
+            <div data-bs-toggle="collapse" href="#faq4" class="collapsed question">Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div id="faq4" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+              </p>
+            </div>
+          </li>
 
-        <h6 class="fw-bold">Manager Administrasi dan Tempat Uji Kompetensi</h6>
-        <ol>
-            <li>Memfasilitasi unsur-unsur LSP guna terselenggaranya program sertifikasi profesi</li>
-            <li>Melaksanakan tugas-tugas ketatausahaan organisasi LSP</li>
-            <li>Memelihara informasi sertifikasi kompetensi</li>
-            <li>Mengetahui laporan kegiatan LSP</li>
-        </ol>
-        <p class="mb-4"><em>Peraturan BNSP Nomor 2 Tahun 2014 (7.1.7)</em></p>
+          <li>
+            <div data-bs-toggle="collapse" href="#faq5" class="collapsed question">Tempus quam pellentesque nec nam aliquam sem et tortor consequat? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div id="faq5" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
+              </p>
+            </div>
+          </li>
 
-        <h6 class="fw-bold">Manager Keuangan</h6>
-        <ol>
-            <li>Merencanakan penerimaan dan pengeluaran LSP</li>
-            <li>Menerima dan mengeluarkan anggaran LSP</li>
-            <li>Membuat laporan penggunaan dana</li>
-        </ol>
+          <li>
+            <div data-bs-toggle="collapse" href="#faq6" class="collapsed question">Tortor vitae purus faucibus ornare. Varius vel pharetra vel turpis nunc eget lorem dolor? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div id="faq6" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Nibh tellus molestie nunc non blandit massa enim nec.
+              </p>
+            </div>
+          </li>
 
-    </div>
-</section>
+        </ul>
+
+      </div>
+    </section><!-- End Frequently Asked Questioins Section -->
+
+
 
 
      <!-- ======= Footer ======= -->

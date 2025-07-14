@@ -49,15 +49,15 @@
     </div>
   </div>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center">
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top">
+  <div class="container d-flex align-items-center">
 
-      <a href="index.php" class="logo me-auto"><img src="/THEMES/Medicio/assets/img/logo_lsp.png" alt=""></a>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <h1 class="logo me-auto"><a href="index.html">Medicio</a></h1> -->
+    <a href="/" class="logo me-auto">
+      <img src="/THEMES/Medicio/assets/img/logo_lsp.png" alt="Logo LSP">
+    </a>
 
-       <nav id="navbar" class="navbar order-last order-lg-0">
+    <nav id="navbar" class="navbar order-last order-lg-0">
       <ul>
         <li><a class="nav-link scrollto" href="#hero">Home</a></li>
 
@@ -75,7 +75,7 @@
         <!-- Sertifikasi Dropdown -->
         <li class="dropdown"><a href="#"><span>Sertifikasi</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
-  <li><a class="dropdown-item" href="{{ route('sertifikasi.asesor') }}">Asesor Kompetensi</a></li>
+            <li><a class="dropdown-item" href="{{ route('sertifikasi.asesor') }}">Asesor Kompetensi</a></li>
             <li><a class="dropdown-item" href="{{ route('sertifikasi.pemegang') }}">Pemegang Sertifikat</a></li>
             <li><a class="dropdown-item" href="{{ route('sertifikasi.skema') }}">Skema Sertifikasi</a></li>
             <li><a class="dropdown-item" href="{{ route('sertifikasi.tuk') }}">Tempat Uji Kompetensi</a></li>
@@ -109,6 +109,7 @@
   </header>
   <!-- End Header -->
 
+
     {{-- Breadcrumb Area --}}
 <section class="py-3" style="background: #eefafd; border-top: 1px solid #ddd;">
     <div class="container">
@@ -122,85 +123,86 @@
     </div>
 </section>
 
-
-{{-- Judul dan Gambar --}}
-<section class="py-5 bg-light">
-    <div class="container text-center">
-
-        {{-- Gambar besar --}}
-        <img src="{{ asset('/THEMES/Medicio/assets/img/tugas-pokok.png') }}" alt="Sejarah Visi Misi" class="img-fluid rounded shadow-sm" style="max-width: 700px;">
+<!-- ======= Contact Section ======= -->
+<section id="contact" class="contact">
+  <div class="container">
+    <div class="section-title">
+      <h2>Kontak Kami</h2>
     </div>
-</section>
+  </div>
 
-{{-- Konten --}}
-<section class="py-4">
-    <div class="container">
+  <!-- Google Maps Embed -->
+  <div>
+    <iframe style="border:0; width: 100%; height: 350px;"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.920759929992!2d110.3360937!3d-7.8625761!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5747828cf8e5%3A0x3f6419de12178de5!2sLSP%20Trainer%20Kompeten%20Indonesia!5e0!3m2!1sid!2sid!4v1720586300994!5m2!1sid!2sid"
+      frameborder="0" allowfullscreen></iframe>
+  </div>
 
-        <h2 class="fw-bold mb-2">Tugas Pokok Personel</h2>
-        <div class="mb-3 text-muted">
-            <i class="bi bi-person-fill"></i> By Admin
-            <i class="bi bi-tag-fill ms-3"></i> Profil
+  <div class="container">
+    <div class="row mt-5">
+
+      <!-- Informasi Kontak -->
+      <div class="col-lg-6">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="info-box">
+              <i class="bx bx-map"></i>
+              <h3>Alamat Kami</h3>
+              <p>Jalan Bangmalang No. 5, RT 56, Dusun Diro, Kelurahan Pendowoharjo<br>Kecamatan Sewon, Kabupaten Bantul, Provinsi Daerah Istimewa Yogyakarta</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="info-box mt-4">
+              <i class="bx bx-envelope"></i>
+              <h3>Email Kami</h3>
+              <p>admin@lsptrainerkompetenindonesia.id</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="info-box mt-4">
+              <i class="bx bx-phone-call"></i>
+              <h3>Hubungi Kami</h3>
+              <a href="https://wa.me/6281364715451" target="_blank" style="color: inherit; text-decoration: none;">
+                <p>0813-6471-5451</p>
+              </a>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <h5 class="fw-bold text-uppercase mt-4">Uraian Tugas dan Tanggung Jawab Organisasi LSP Trainer Kompeten Indonesia</h5>
-
-        <h6 class="fw-bold mt-4">Dewan Pengarah</h6>
-        <ol>
-            <li>Bertanggung atas keberlangsungan LSP</li>
-            <li>Penetapan visi, misi dan tujuan LSP</li>
-            <li>Menyusun rencana strategi, program kerja dan anggaran belanja</li>
-            <li>Mengangkat dan memberhentikan pelaksana LSP</li>
-            <li>Membina komunikasi dengan para pemangku kepentingan</li>
-            <li>Memobilisasi sumber daya.</li>
-        </ol>
-        <p class="mb-4"><em>Peraturan BNSP Nomor 2 Tahun 2014 (7.1.3)</em></p>
-
-        <h6 class="fw-bold">Direktur LSP</h6>
-        <ol>
-            <li>Melaksanakan program kerja LSP</li>
-            <li>Melakukan monitoring dan evaluasi</li>
-            <li>Rencana program dan anggaran</li>
-            <li>Memberikan laporan bertanggung jawab kepada Dewan Pengarah</li>
-        </ol>
-        <p class="mb-4"><em>Peraturan BNSP Nomor 2 Tahun 2014 (7.1.4)</em></p>
-
-        <h6 class="fw-bold">Manager Sertifikasi</h6>
-        <ol>
-            <li>Memfasilitasi penyusunan skema sertifikasi</li>
-            <li>Gunakan perangkat asesmen dan materi uji</li>
-            <li>Melaksanakan sertifikasi, termasuk pemeliharaan dan sertifikasi ulang</li>
-            <li>Menentukan persyaratan tempat uji (TUK)</li>
-            <li>Melaksanakan pelaksanaan dan penetapan TUK</li>
-            <li>Melakukan rekrutmen asesor kompetensi serta pemeliharaan kompetensinya</li>
-        </ol>
-        <p class="mb-4"><em>Peraturan BNSP Nomor 2 Tahun 2014 (7.1.5)</em></p>
-
-        <h6 class="fw-bold">Manager Mutu</h6>
-        <ol>
-            <li>Menerapkan sistem manajemen mutu LSP sesuai Pedoman BNSP 201</li>
-            <li>Memelihara berlangsungnya sistem manajemen agar tetap sesuai dengan standar dan pedoman yang diacu</li>
-            <li>Melakukan audit internal dan memfasilitasi kaji ulang manajemen</li>
-        </ol>
-        <p class="mb-4"><em>Peraturan BNSP Nomor 2 Tahun 2014 (7.1.6)</em></p>
-
-        <h6 class="fw-bold">Manager Administrasi dan Tempat Uji Kompetensi</h6>
-        <ol>
-            <li>Memfasilitasi unsur-unsur LSP guna terselenggaranya program sertifikasi profesi</li>
-            <li>Melaksanakan tugas-tugas ketatausahaan organisasi LSP</li>
-            <li>Memelihara informasi sertifikasi kompetensi</li>
-            <li>Mengetahui laporan kegiatan LSP</li>
-        </ol>
-        <p class="mb-4"><em>Peraturan BNSP Nomor 2 Tahun 2014 (7.1.7)</em></p>
-
-        <h6 class="fw-bold">Manager Keuangan</h6>
-        <ol>
-            <li>Merencanakan penerimaan dan pengeluaran LSP</li>
-            <li>Menerima dan mengeluarkan anggaran LSP</li>
-            <li>Membuat laporan penggunaan dana</li>
-        </ol>
+      <!-- Form Kontak -->
+      <div class="col-lg-6">
+        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <input type="text" name="name" class="form-control" id="name" placeholder="Nama Anda" required>
+            </div>
+            <div class="col-md-6 form-group mt-3 mt-md-0">
+              <input type="email" class="form-control" name="email" id="email" placeholder="Email Anda" required>
+            </div>
+          </div>
+          <div class="form-group mt-3">
+            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subjek" required>
+          </div>
+          <div class="form-group mt-3">
+            <textarea class="form-control" name="message" rows="7" placeholder="Pesan Anda" required></textarea>
+          </div>
+          <div class="my-3">
+            <div class="loading">Loading</div>
+            <div class="error-message"></div>
+            <div class="sent-message">Pesan Anda telah terkirim. Terima kasih!</div>
+          </div>
+          <div class="text-center"><button type="submit">Kirim Pesan</button></div>
+        </form>
+      </div>
 
     </div>
+  </div>
 </section>
+<!-- End Contact Section -->
+
 
 
      <!-- ======= Footer ======= -->

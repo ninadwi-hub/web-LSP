@@ -57,49 +57,57 @@
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <h1 class="logo me-auto"><a href="index.html">Medicio</a></h1> -->
 
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <li><a class="nav-link scrollto " href="#hero">Home</a></li>
-           <li class="dropdown"><a href="#"><span>Profil</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-             <li><a class="dropdown-item" href="{{ url('/profil/sejarah-visi-&-misi') }}">Sejarah, Visi & Misi</a></li>
-                <li><a class="dropdown-item" href="{{ url('/profil/struktur-organisasi') }}">Struktur Organisasi</a></li>
-               <li><a class="dropdown-item" href="{{ url('/profil/wewenang-tugas-dan-fungsi') }}">Wewenang Tugas dan Fungsi</a></li>
-              <li><a class="dropdown-item" href="{{ url('/profil/tugas-pokok-personal') }}">Tugas Pokok Personal</a></li>
-             <li><a class="dropdown-item" href="{{ url('/profil/program-kerja') }}">Program Kerja</a></li>
-            </ul>
-          </li>
+       <nav id="navbar" class="navbar order-last order-lg-0">
+      <ul>
+        <li><a class="nav-link scrollto" href="#hero">Home</a></li>
+
+        <!-- Profil Dropdown -->
+        <li class="dropdown"><a href="#"><span>Profil</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a class="dropdown-item" href="{{ url('/profil/sejarah-visi-&-misi') }}">Sejarah, Visi & Misi</a></li>
+            <li><a class="dropdown-item" href="{{ url('/profil/struktur-organisasi') }}">Struktur Organisasi</a></li>
+            <li><a class="dropdown-item" href="{{ url('/profil/wewenang-tugas-&-fungsi') }}">Wewenang Tugas & Fungsi</a></li>
+            <li><a class="dropdown-item" href="{{ url('/profil/tugas-pokok-personal') }}">Tugas Pokok Personal</a></li>
+            <li><a class="dropdown-item" href="{{ url('/profil/program-kerja') }}">Program Kerja</a></li>
+          </ul>
+        </li>
+
+        <!-- Sertifikasi Dropdown -->
         <li class="dropdown"><a href="#"><span>Sertifikasi</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+           <li><a class="dropdown-item" href="{{ route('sertifikasi.asesor') }}">Asesor Kompetensi</a></li>
+            <li><a class="dropdown-item" href="{{ route('sertifikasi.pemegang') }}">Pemegang Sertifikat</a></li>
+            <li><a class="dropdown-item" href="{{ route('sertifikasi.skema') }}">Skema Sertifikasi</a></li>
+            <li><a class="dropdown-item" href="{{ route('sertifikasi.tuk') }}">Tempat Uji Kompetensi</a></li>
+          </ul>
+        </li>
+
+
+          <!-- Media -->
+          <li class="dropdown"><a href="#"><span>Media</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">Skema Sertifikasi</a></li>
-              <li><a href="#">Tempat Uji Kompetensi</a></li>
-              <li><a href="#">Asesor Kompetensi</a></li>
-              <li><a href="#">Pemegang Sertifikat</a></li>
+              <li><a class="dropdown-item" href="{{ route('media.brosur') }}">Brosur</a></li>
             </ul>
           </li>
-   <li class="dropdown"><a href="#"><span>Media</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Youtube </a></li>
-              <li><a href="#">Instagram </a></li>
-              <li><a href="#">Brosur LSP</a></li>
-              <li><a href="#">Gallery</a></li>
-            </ul>
-          </li>
+
+          <!-- Informasi -->
           <li class="dropdown"><a href="#"><span>Informasi</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">Alamat</a></li>
-              <li><a href="#">FAQ</a></li>
+              <li><a class="dropdown-item" href="{{ route('informasi.faq') }}">FAQ</a></li>
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="#contact">Kontak Kami</a></li>
+
+          <li><a class="nav-link scrollto" href="{{ route('kontak') }}">Kontak Kami</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+      </nav>
 
-      <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Login</span> </a>
-
+      <a href="#appointment" class="appointment-btn scrollto">
+        <span class="d-none d-md-inline">Login</span>
+      </a>
     </div>
-  </header><!-- End Header -->
+  </header>
+  <!-- End Header -->
 
     {{-- Breadcrumb Area --}}
 <section class="py-3" style="background: #eefafd; border-top: 1px solid #ddd;">
@@ -118,7 +126,6 @@
 {{-- Judul dan Gambar --}}
 <section class="py-5 bg-light">
     <div class="container text-center">
-        <h2 class="text-primary fw-bold mb-4">STRUKTUR ORGANISASI</h2>
 
         {{-- Gambar besar --}}
         <img src="{{ asset('/THEMES/Medicio/assets/img/SO.png') }}" alt="Sejarah Visi Misi" class="img-fluid rounded shadow-sm" style="max-width: 700px;">

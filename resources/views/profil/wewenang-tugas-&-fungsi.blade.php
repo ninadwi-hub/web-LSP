@@ -57,7 +57,7 @@
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <h1 class="logo me-auto"><a href="index.html">Medicio</a></h1> -->
 
-       <nav id="navbar" class="navbar order-last order-lg-0">
+      <nav id="navbar" class="navbar order-last order-lg-0">
       <ul>
         <li><a class="nav-link scrollto" href="#hero">Home</a></li>
 
@@ -75,7 +75,7 @@
         <!-- Sertifikasi Dropdown -->
         <li class="dropdown"><a href="#"><span>Sertifikasi</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
-  <li><a class="dropdown-item" href="{{ route('sertifikasi.asesor') }}">Asesor Kompetensi</a></li>
+    <li><a class="dropdown-item" href="{{ route('sertifikasi.asesor') }}">Asesor Kompetensi</a></li>
             <li><a class="dropdown-item" href="{{ route('sertifikasi.pemegang') }}">Pemegang Sertifikat</a></li>
             <li><a class="dropdown-item" href="{{ route('sertifikasi.skema') }}">Skema Sertifikasi</a></li>
             <li><a class="dropdown-item" href="{{ route('sertifikasi.tuk') }}">Tempat Uji Kompetensi</a></li>
@@ -116,7 +116,6 @@
             <div class="d-flex gap-2 align-items-center text-muted">
                 <span style="color: #17c0d1; font-weight: 500;">Home</span>
                 <span>/</span>
-                <span class="text-secondary">Sejarah, Visi & Misi</span>
             </div>
         </div>
     </div>
@@ -128,7 +127,7 @@
     <div class="container text-center">
 
         {{-- Gambar besar --}}
-        <img src="{{ asset('/THEMES/Medicio/assets/img/tugas-pokok.png') }}" alt="Sejarah Visi Misi" class="img-fluid rounded shadow-sm" style="max-width: 700px;">
+        <img src="{{ asset('/THEMES/Medicio/assets/img/wewenang.png') }}" alt="Sejarah Visi Misi" class="img-fluid rounded shadow-sm" style="max-width: 700px;">
     </div>
 </section>
 
@@ -136,67 +135,66 @@
 <section class="py-4">
     <div class="container">
 
-        <h2 class="fw-bold mb-2">Tugas Pokok Personel</h2>
+        <h2 class="fw-bold mb-2">Wewenang, Tugas & Fungsi</h2>
         <div class="mb-3 text-muted">
             <i class="bi bi-person-fill"></i> By Admin
             <i class="bi bi-tag-fill ms-3"></i> Profil
         </div>
 
-        <h5 class="fw-bold text-uppercase mt-4">Uraian Tugas dan Tanggung Jawab Organisasi LSP Trainer Kompeten Indonesia</h5>
+        <div class="bg-info bg-opacity-25 rounded p-3 mb-4">
+            <strong class="text-primary">KEDUDUKAN DAN FUNGSI</strong>
+        </div>
 
-        <h6 class="fw-bold mt-4">Dewan Pengarah</h6>
+        <p>
+            LSP Trainer Kompeten Indonesia adalah organisasi tingkat nasional yang berkedudukan di wilayah Republik Indonesia, berkantor pusat di Jl. Bangmalang No. 5, RT 56, Diro, Pendowoharjo, Sewon Bantul, Daerah Istimewa Yogyakarta.
+        </p>
+
+        <p>
+            Fungsi dari LSP Trainer Kompeten Indonesia adalah sebagai lembaga sertifikasi profesi di bidang Pelatihan Kerja, yang dilaksanakan dengan memperhatikan perspektif Undang-Undang Ketenagakerjaan No 13 tahun 2003 antara lain:
+        </p>
+
         <ol>
-            <li>Bertanggung atas keberlangsungan LSP</li>
-            <li>Penetapan visi, misi dan tujuan LSP</li>
-            <li>Menyusun rencana strategi, program kerja dan anggaran belanja</li>
-            <li>Mengangkat dan memberhentikan pelaksana LSP</li>
-            <li>Membina komunikasi dengan para pemangku kepentingan</li>
-            <li>Memobilisasi sumber daya.</li>
+            <li>Pasal 11: Setiap tenaga kerja berhak memperoleh dan/atau meningkatkan dan/atau mengembangkan kompetensi kerja sesuai dengan bakat, minat, dan kemampuannya melalui pelatihan kerja.</li>
+            <li>Pasal 12: Pengusaha bertanggungjawab atas peningkatan dan atau pengembangan kompetensi pekerjaannya melalui kerja.</li>
+            <li>Pasal 18 ayat 1: Tenaga kerja berhak memperoleh pengakuan kompetensi kerja setelah mengikuti pelatihan kerja yang diselenggarakan lembaga pelatihan kerja (pemerintah, swasta, sendiri).</li>
+            <li>Pasal 18 ayat 2: Pengakuan kompetensi kerja dilakukan melalui sertifikasi kompetensi kerja.</li>
+            <li>Pasal 18 ayat 3: Sertifikasi kompetensi kerja dapat pula diikuti oleh tenaga kerja berpengalaman.</li>
+            <!-- Tambahkan poin lainnya jika perlu -->
         </ol>
-        <p class="mb-4"><em>Peraturan BNSP Nomor 2 Tahun 2014 (7.1.3)</em></p>
+        <div class="bg-info bg-opacity-25 rounded p-3 mb-4">
+            <strong class="text-primary">TUGAS</strong>
+        </div>
 
-        <h6 class="fw-bold">Direktur LSP</h6>
+        <p>
+            LSP Trainer Kompeten Indonesia adalah organisasi tingkat nasional dan dapat memiliki cabang di kota - kota di seluruh wilayah Republik Indonesai, memiliki tugas:
+        </p>
+
         <ol>
-            <li>Melaksanakan program kerja LSP</li>
-            <li>Melakukan monitoring dan evaluasi</li>
-            <li>Rencana program dan anggaran</li>
-            <li>Memberikan laporan bertanggung jawab kepada Dewan Pengarah</li>
+            <li>Melaksanakan sertifikasi kompetensi;</li>
+            <li>Meninjau ulang standar Kompetensi;</li>
+            <li>Menyusun skema sertifikasi melalui identifikasi kompetensi bidang;</li>
+            <li>Membuat Materi Uji Kompetensi;</li>
+            <li>Menyediakan tenaga penguji (asesor) sekaligus memelihara kinerja asesor; melakukan asesmen;</li>
+            <li>Menetapkan tempat uji kompetensi (TUK) sekaligus memelihara kinerja TUK.</li>
+            <!-- Tambahkan poin lainnya jika perlu -->
         </ol>
-        <p class="mb-4"><em>Peraturan BNSP Nomor 2 Tahun 2014 (7.1.4)</em></p>
+        <div class="bg-info bg-opacity-25 rounded p-3 mb-4">
+            <strong class="text-primary">WEWENANG</strong>
+        </div>
 
-        <h6 class="fw-bold">Manager Sertifikasi</h6>
-        <ol>
-            <li>Memfasilitasi penyusunan skema sertifikasi</li>
-            <li>Gunakan perangkat asesmen dan materi uji</li>
-            <li>Melaksanakan sertifikasi, termasuk pemeliharaan dan sertifikasi ulang</li>
-            <li>Menentukan persyaratan tempat uji (TUK)</li>
-            <li>Melaksanakan pelaksanaan dan penetapan TUK</li>
-            <li>Melakukan rekrutmen asesor kompetensi serta pemeliharaan kompetensinya</li>
-        </ol>
-        <p class="mb-4"><em>Peraturan BNSP Nomor 2 Tahun 2014 (7.1.5)</em></p>
+        <p>
+            Wewenang LSP Trainer Kompeten Indonesia adalah sebagai berikut:
+        </p>
 
-        <h6 class="fw-bold">Manager Mutu</h6>
         <ol>
-            <li>Menerapkan sistem manajemen mutu LSP sesuai Pedoman BNSP 201</li>
-            <li>Memelihara berlangsungnya sistem manajemen agar tetap sesuai dengan standar dan pedoman yang diacu</li>
-            <li>Melakukan audit internal dan memfasilitasi kaji ulang manajemen</li>
-        </ol>
-        <p class="mb-4"><em>Peraturan BNSP Nomor 2 Tahun 2014 (7.1.6)</em></p>
-
-        <h6 class="fw-bold">Manager Administrasi dan Tempat Uji Kompetensi</h6>
-        <ol>
-            <li>Memfasilitasi unsur-unsur LSP guna terselenggaranya program sertifikasi profesi</li>
-            <li>Melaksanakan tugas-tugas ketatausahaan organisasi LSP</li>
-            <li>Memelihara informasi sertifikasi kompetensi</li>
-            <li>Mengetahui laporan kegiatan LSP</li>
-        </ol>
-        <p class="mb-4"><em>Peraturan BNSP Nomor 2 Tahun 2014 (7.1.7)</em></p>
-
-        <h6 class="fw-bold">Manager Keuangan</h6>
-        <ol>
-            <li>Merencanakan penerimaan dan pengeluaran LSP</li>
-            <li>Menerima dan mengeluarkan anggaran LSP</li>
-            <li>Membuat laporan penggunaan dana</li>
+            <li>Menetapkan biaya uji kompetensi;</li>
+            <li>Menerbitkan sertifikat kompetensi;</li>
+            <li>Mencabut/membatalkan sertifikat kompetensi;</li>
+            <li>Menetapkan dan meverifikasi TUK;</li>
+            <li>Memberikan sanksi kepada asesor dan TUK yang melangggar aturan dan ketentuan;</li>
+            <li>Mereview dan mengusulkan perbaikan standar kompetensi;</li>
+            <li>Menyelenggarakan kerjasama dengan lembaga lain di dalam dan di luar negeri yang mempunyai maksud dan tujuan yang sama.</li>
+            <!-- Tambahkan poin lainnya jika perlu -->
         </ol>
 
     </div>

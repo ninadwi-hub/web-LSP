@@ -57,49 +57,57 @@
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <h1 class="logo me-auto"><a href="index.html">Medicio</a></h1> -->
 
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <li><a class="nav-link scrollto " href="#hero">Home</a></li>
-           <li class="dropdown"><a href="#"><span>Profil</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-             <li><a class="dropdown-item" href="{{ url('/profil/sejarah-visi-&-misi') }}">Sejarah, Visi & Misi</a></li>
-                <li><a class="dropdown-item" href="{{ url('/profil/struktur-organisasi') }}">Struktur Organisasi</a></li>
-               <li><a class="dropdown-item" href="{{ url('/profil/wewenang-tugas-dan-fungsi') }}">Wewenang Tugas dan Fungsi</a></li>
-              <li><a class="dropdown-item" href="{{ url('/profil/tugas-pokok-personal') }}">Tugas Pokok Personal</a></li>
-             <li><a class="dropdown-item" href="{{ url('/profil/program-kerja') }}">Program Kerja</a></li>
-            </ul>
-          </li>
+        <nav id="navbar" class="navbar order-last order-lg-0">
+      <ul>
+        <li><a class="nav-link scrollto" href="#hero">Home</a></li>
+
+        <!-- Profil Dropdown -->
+        <li class="dropdown"><a href="#"><span>Profil</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a class="dropdown-item" href="{{ url('/profil/sejarah-visi-&-misi') }}">Sejarah, Visi & Misi</a></li>
+            <li><a class="dropdown-item" href="{{ url('/profil/struktur-organisasi') }}">Struktur Organisasi</a></li>
+            <li><a class="dropdown-item" href="{{ url('/profil/wewenang-tugas-&-fungsi') }}">Wewenang Tugas & Fungsi</a></li>
+            <li><a class="dropdown-item" href="{{ url('/profil/tugas-pokok-personal') }}">Tugas Pokok Personal</a></li>
+            <li><a class="dropdown-item" href="{{ url('/profil/program-kerja') }}">Program Kerja</a></li>
+          </ul>
+        </li>
+
+        <!-- Sertifikasi Dropdown -->
         <li class="dropdown"><a href="#"><span>Sertifikasi</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+<li><a class="dropdown-item" href="{{ route('sertifikasi.asesor') }}">Asesor Kompetensi</a></li>
+            <li><a class="dropdown-item" href="{{ route('sertifikasi.pemegang') }}">Pemegang Sertifikat</a></li>
+            <li><a class="dropdown-item" href="{{ route('sertifikasi.skema') }}">Skema Sertifikasi</a></li>
+            <li><a class="dropdown-item" href="{{ route('sertifikasi.tuk') }}">Tempat Uji Kompetensi</a></li>
+          </ul>
+        </li>
+
+
+          <!-- Media -->
+          <li class="dropdown"><a href="#"><span>Media</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">Skema Sertifikasi</a></li>
-              <li><a href="#">Tempat Uji Kompetensi</a></li>
-              <li><a href="#">Asesor Kompetensi</a></li>
-              <li><a href="#">Pemegang Sertifikat</a></li>
+              <li><a class="dropdown-item" href="{{ route('media.brosur') }}">Brosur</a></li>
             </ul>
           </li>
-   <li class="dropdown"><a href="#"><span>Media</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Youtube </a></li>
-              <li><a href="#">Instagram </a></li>
-              <li><a href="#">Brosur LSP</a></li>
-              <li><a href="#">Gallery</a></li>
-            </ul>
-          </li>
+
+          <!-- Informasi -->
           <li class="dropdown"><a href="#"><span>Informasi</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">Alamat</a></li>
-              <li><a href="#">FAQ</a></li>
+              <li><a class="dropdown-item" href="{{ route('informasi.faq') }}">FAQ</a></li>
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="#contact">Kontak Kami</a></li>
+
+          <li><a class="nav-link scrollto" href="{{ route('kontak') }}">Kontak Kami</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+      </nav>
 
-      <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Login</span> </a>
-
+      <a href="#appointment" class="appointment-btn scrollto">
+        <span class="d-none d-md-inline">Login</span>
+      </a>
     </div>
-  </header><!-- End Header -->
+  </header>
+  <!-- End Header -->
 
     {{-- Breadcrumb Area --}}
 <section class="py-3" style="background: #eefafd; border-top: 1px solid #ddd;">
@@ -118,7 +126,6 @@
 {{-- Judul dan Gambar --}}
 <section class="py-5 bg-light">
     <div class="container text-center">
-        <h2 class="text-primary fw-bold mb-4">STRUKTUR ORGANISASI</h2>
 
         {{-- Gambar besar --}}
         <img src="{{ asset('/THEMES/Medicio/assets/img/program-kerja.png') }}" alt="Sejarah Visi Misi" class="img-fluid rounded shadow-sm" style="max-width: 700px;">
@@ -128,36 +135,73 @@
 {{-- Konten --}}
 <section class="py-4">
     <div class="container">
-         <h4 class="fw-bold mt-4">Dewan Pengarah</h4>
+
+        <h2 class="fw-bold mb-2">Program Kerja</h2>
+        <div class="mb-3 text-muted">
+            <i class="bi bi-person-fill"></i> By Admin
+            <i class="bi bi-tag-fill ms-3"></i> Profil
+        </div>
+
+        <h5 class="fw-bold text-uppercase mt-4">PROGRAM KERJA</h5>
+        <p>
+            Untuk mencapai target kerja, LSP Trainer Kompeten Indonesia telah menyusun program kerja jangka menengah yaitu 4 (empat) tahun ke depan (2022–2026), dengan garis besar sebagai berikut:
+        </p>
+
+        <h6 class="fw-bold mt-4">Bidang Sertifikasi</h6>
+        <p>
+            Mengajukan permohonan full assessment lisensi kepada BNSP dengan memenuhi semua persyaratan lisensi sesuai ketentuan BNSP.
+        </p>
+        <p>
+            Menyusun <em>time schedule full assessment</em> dan <em>witness</em> untuk memperoleh lisensi, sehingga LSP TKI dapat melaksanakan uji kompetensi bagi para pengelola pelatihan dan instruktur.
+        </p>
+
+        <h6 class="fw-bold mt-4">Bidang Skema dan TUK</h6>
+        <p>
+            Sesuai dengan usulan dalam permohonan lisensi, bahwa skema yang sudah mendapat verifikasi BNSP ada 5 (lima) skema okupasi, yaitu Pelatih di Tempat Kerja, Instruktur Junior, Instruktur, Instruktur Master, dan Penyelenggara Pelatihan.
+        </p>
         <ul>
-            <li>- Bertanggung atas keberlangsungan LSP</li>
-            <li>- Penetapan visi, misi dan tujuan LSP</li>
-            <li>- Menyusun rencana strategi, program kerja dan anggaran belanja</li>
-            <li>- Mengangkat dan memberhentikan pelaksana LSP</li>
-            <li>- Membina komunikasi dengan para pemangku kepentingan</li>
-             <li>- Memobilisasi sumber daya.</li>
-            <li>Peraturan BNSP Nomor 2 Tahun 2014 (7.1.3)</li>
+            <li>Komite Skema membentuk tim kerja yang terdiri dari assessor dan Subject Matter Expert (SME) dari Perguruan Tinggi/Lembaga kajian.</li>
+            <li>Rencana Pengembangan Skema:</li>
         </ul>
 
-        <h4 class="fw-bold mt-4">Direktur LSP</h4>
-         <ul>
-            <li>- Melaksanakan program kerja LSP</li>
-            <li>- Melakukan monitoring dan evaluasi</li>
-            <li>- Rencana program dan anggaran</li>
-            <li>- Memberikan laporan bertanggungjawab kepada Dewan Pengarah</li>
-            <li>Peraturan BNSP Nomor 2 Tahun 2014 (7.1.4)</li>
+        <div class="text-center my-3">
+            <img src="{{ asset('/THEMES/Medicio/assets/img/penambahan_skema.jpg') }}" alt="Tabel Penambahan Skema Sertifikasi" class="img-fluid rounded shadow">
+        </div>
+
+        <h6 class="fw-bold mt-4">Pelaksanaan Uji Kompetensi</h6>
+        <p>
+            Apabila lisensi LSP Trainer Kompeten Indonesia telah diperoleh dari BNSP, maka pelaksanaan uji kompetensi bagi seluruh pengelola pelatihan di sejumlah wilayah segera dilaksanakan. Rencana untuk 5 (lima) skema yang sudah diverifikasi BNSP sebagaimana ditunjukkan dalam tabel di bawah ini:
+        </p>
+
+        <div class="text-center my-3">
+            <img src="{{ asset('/THEMES/Medicio/assets/img/penambahan_skema.jpg') }}" alt="Pelaksanaan Uji Kompetensi" class="img-fluid rounded shadow">
+        </div>
+
+        <h6 class="fw-bold mt-4">Bidang Keuangan</h6>
+        <ul>
+            <li>Menyusun SOP Bidang Keuangan dan Aplikasi Program Keuangan.</li>
+            <li>Menyusun Rencana Kerja dan Anggaran (RKA) tahunan sesuai rencana strategis.</li>
+            <li>Evaluasi rencana dan realisasi RKAP secara berkala (per semester).</li>
+            <li>Menyusun laporan kinerja LSP secara triwulan dan tahunan.</li>
         </ul>
 
-        <h4 class="fw-bold mt-4">Manajer Sertifikasi</h4>
+        <h6 class="fw-bold mt-4">Bidang SDM dan Umum</h6>
         <ul>
-            <li>Menyelenggarakan proses uji kompetensi sesuai prosedur dan sistem sertifikasi</li>
-            <li>Memberikan pelayanan prima dan profesional dalam proses sertifikasi</li>
-            <li>Menjamin obyektivitas, independensi, dan integritas dalam pelaksanaan uji kompetensi</li>
-            <li>Membangun kerja sama dengan dunia usaha, dunia industri, dan lembaga pelatihan dalam memastikan mutu sumber daya manusia</li>
-            <li>Meningkatkan kerjasama dan jejaring, bersinergi dengan pemangku kepentingan</li>
+            <li>Menyusun rencana pelatihan untuk pengurus, asesor, auditor, dan staf bekerjasama dengan BNSP.</li>
+            <li>Mengikutsertakan SDM dalam pelatihan/training eksternal seperti keuangan, pajak, dll.</li>
+            <li>Memenuhi kebutuhan operasional LSP (inventaris, kerja sama eksternal).</li>
+            <li>Rekrutmen dan seleksi SDM/personil LSP.</li>
+            <li>Mengembangkan uji kompetensi berbasis digital yang user friendly dan paperless.</li>
         </ul>
+
+        <h6 class="fw-bold mt-4">Pemeliharaan Kompetensi Pengelola Pelatihan dan Instruktur melalui Surveilance</h6>
+        <p>
+            Untuk menjaga kualitas kompetensi, LSP Trainer Kompeten Indonesia akan mengadakan surveilans terhadap pengguna sertifikat setiap 2 tahun sekali. Surveilans dilakukan secara sampel dengan memperhatikan keterwakilan peserta.
+        </p>
+
     </div>
 </section>
+
 
      <!-- ======= Footer ======= -->
   <footer id="footer">
