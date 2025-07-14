@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Page;
+use App\Models\Info;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class PageController extends Controller
+class InfoController extends Controller
 {
+
     public function index()
     {
         $pages = Page::latest()->get();
@@ -82,4 +84,5 @@ class PageController extends Controller
         $page = Page::where('slug', $slug)->where('status', 'published')->firstOrFail();
         return view('pages.show', compact('page'));
     }
+
 }

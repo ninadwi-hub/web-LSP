@@ -22,8 +22,8 @@ Info</a>
 <tbody>
 @foreach ($infos as $info)
 <tr>
-<td>{{ $info->judul }}</td>
-<td>{{ $info->kategori->nama }}</td>
+<td>{{ $info->title }}</td>
+<td>{{ $info->kategori->nama ?? '-' }}</td>
 <td>{{ $info->created_at->format('d-m-Y') }}</td>
 <td>
 <a href="{{ route('infos.edit', $info->id) }}" class="btn btn-sm

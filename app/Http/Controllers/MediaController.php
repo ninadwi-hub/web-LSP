@@ -53,37 +53,41 @@ class MediaController extends Controller
 
     // Admin: Tampilkan form edit
     public function edit(Media $media)
-    {
-        return view('paneladmin.media.edit', compact('media'));
-    }
+{
+    return view('paneladmin.media.edit', compact('media'));
+}
+
 
     // Admin: Update file
-    public function update(Request $request, Media $media)
-    {
-        $data = $request->validate([
-            'title' => 'required|string|max:255',
-            'slug' => 'nullable|string|max:255',
-            'description' => 'nullable|string',
-            'file_path' => 'nullable|file|max:10240',
-            'status' => 'required|in:draft,published,archived',
-        ]);
+   public function update(Request $request, Media $media)
+{
+    $data = $request->validate([
+        'title' => 'required|string|max:255',
+        'slug' => 'nullable|string|max:255',
+        'description' => 'nullable|string',
+        'file_path' => 'nullable|file|max:10240',
+        'status' => 'required|in:draft,published,archived',
+    ]);
 
-        if ($request->hasFile('file_path')) {
-            // Hapus file lama
-            if ($media->file_path) {
-                Storage::disk('public')->delete($media->file_path);
-            }
+    $data['slug'] = $request->slug ?? \Str::slug($request->title);
 
-            $file = $request->file('file_path');
-            $data['file_path'] = $file->store('media', 'public');
-            $data['file_type'] = $file->getClientOriginalExtension();
-            $data['file_size'] = $file->getSize();
+    // Jika file baru diunggah
+    if ($request->hasFile('file_path')) {
+        // Hapus file lama
+        if ($media->file_path && Storage::disk('public')->exists($media->file_path)) {
+            Storage::disk('public')->delete($media->file_path);
         }
 
-        $media->update($data);
-
-        return redirect()->route('media.index')->with('success', 'File berhasil diperbarui.');
+        $file = $request->file('file_path');
+        $data['file_path'] = $file->store('media', 'public');
+        $data['file_type'] = $file->getClientOriginalExtension();
+        $data['file_size'] = $file->getSize();
     }
+
+    $media->update($data);
+
+    return redirect()->route('media.index')->with('success', 'File berhasil diperbarui.');
+}
 
     // Admin: Hapus file
     public function destroy(Media $media)

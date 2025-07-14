@@ -9,14 +9,10 @@ class Info extends Model
 {
 use HasFactory;
 
-protected $fillable = [
-'kategori_id',
-'judul',
-'isi',
-'gambar',
-];
+protected $fillable = ['category_id', 'title', 'content', 'thumbnail'];
 
 public function kategori()
 {
-return $this->belongsTo(Kategori::class);
-}}
+    return $this->belongsTo(Kategori::class, 'category_id');
+}
+}

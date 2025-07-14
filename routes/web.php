@@ -8,6 +8,14 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\KontakController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\PublicInfoController;
+
+Route::get('/informasi', [PublicInfoController::class, 'index'])->name('info.index');
+Route::get('/informasi/{id}', [PublicInfoController::class, 'show'])->name('info.show');
+
+
+Route::resource('menus', MenuController::class);
 
 // Form kontak publik
 Route::get('/kontakk', [KontakController::class, 'showForm'])->name('kontakk.form');
@@ -21,7 +29,10 @@ Route::get('/admin/kontak/create', [KontakController::class, 'showForm'])->name(
 Route::get('/admin/kontak', [KontakController::class, 'index'])->name('kontak-lsp');
 
 // Admin
-Route::resource('/admin/media', MediaController::class)->middleware('auth');
+Route::resource('/admin/media', MediaController::class)
+    ->parameters(['media' => 'media']) // <--- fix penting!
+    ->names('media') // optional, agar nama route tetap rapi
+    ->middleware('auth');
 
 // Publik
 Route::get('/file-download', [MediaController::class, 'publicIndex'])->name('media.publik');
@@ -55,9 +66,6 @@ Route::view('/profil/program-kerja', 'profil.program-kerja');
 Route::view('/kontak', 'kontak')->name('kontak');
 Route::view('/informasi/faq', 'informasi.faq')->name('informasi.faq');
 
-
-
-
 // MEDIA
 Route::view('/media/brosur', 'media.brosur')->name('media.brosur');
 
@@ -69,7 +77,12 @@ Route::view('/sertifikasi/tempat-uji', 'sertifikasi.tempat-uji')->name('sertifik
 
 // Route slug halaman publik dari database
 Route::get('/{slug}', [PageController::class, 'showPublic'])->name('pages.public.show');
-Route::get('/{slug}', [PageController::class, 'show'])->name('pages.public.show');
+
+
+
+
+
+
 
 
 

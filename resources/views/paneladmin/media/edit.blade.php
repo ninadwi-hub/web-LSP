@@ -5,7 +5,8 @@
     <h2 class="mb-4">Edit File</h2>
 
     <form action="{{ route('media.update', $media->id) }}" method="POST" enctype="multipart/form-data">
-        @csrf @method('PUT')
+    @csrf
+    @method('PUT')
 
         <div class="mb-3">
             <label>Judul</label>
