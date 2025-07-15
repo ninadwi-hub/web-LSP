@@ -16,3 +16,4 @@ class Contact extends Model
         'status' => 'new'
     ];
 }
+

@@ -16,17 +16,18 @@ Route::get('/informasi/{id}', [PublicInfoController::class, 'show'])->name('info
 
 
 Route::resource('menus', MenuController::class);
-
 // Form kontak publik
-Route::get('/kontakk', [KontakController::class, 'showForm'])->name('kontakk.form');
+Route::get('/kontak', [KontakController::class, 'showForm'])->name('kontak.form');
+Route::post('/kontak', [KontakController::class, 'submitForm'])->name('kontak.submit');
 
-// Proses kirim
-Route::post('/kontakk', [KontakController::class, 'submitForm'])->name('kontakk.kirim');
-Route::get('/admin/kontak/create', [KontakController::class, 'showForm'])->name('kontakk');
+// Panel Admin (autentikasi dibutuhkan)
+Route::prefix('admin/kontak')->middleware('auth')->group(function () {
+    Route::get('/', [KontakController::class, 'index'])->name('contacts.index');
+    Route::get('/{id}/edit', [KontakController::class, 'edit'])->name('contacts.edit');
+    Route::put('/{id}', [KontakController::class, 'update'])->name('contacts.update');
+    Route::delete('/{id}', [KontakController::class, 'destroy'])->name('contacts.destroy');
+});
 
-
-// Untuk admin
-Route::get('/admin/kontak', [KontakController::class, 'index'])->name('kontak-lsp');
 
 // Admin
 Route::resource('/admin/media', MediaController::class)

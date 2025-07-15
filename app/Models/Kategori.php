@@ -5,22 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Info; // pastikan ini di-import jika menggunakan relasi
+use Illuminate\Support\Str;
 
 class Kategori extends Model
 {
-    use HasFactory;
+    protected $fillable = ['nama', 'slug', 'deskripsi'];
 
-    protected $table = 'kategoris';
-
-    protected $fillable = [
-        'nama',
-        'deskripsi',
-    ];
-
-    public function infos()
+    protected static function booted()
     {
-        return $this->hasMany(Info::class);
-    }
+        static::creating(function ($kategori) {
+            $kategori->slug = Str::slug($kategori->nama);
+        });
 
+        // Opsional: saat update juga perbarui slug
+        static::updating(function ($kategori) {
+            $kategori->slug = Str::slug($kategori->nama);
+        });
+    }
 }
+
+
 

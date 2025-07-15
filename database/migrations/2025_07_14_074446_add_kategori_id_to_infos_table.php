@@ -15,7 +15,7 @@ return new class extends Migration
         $table->unsignedBigInteger('kategori_id')->after('id');
 
         // Jika ingin menambahkan foreign key (opsional)
-        $table->foreign('kategori_id')->references('id')->on('kategoris')->onDelete('cascade');
+       $table->foreignId('category_id')->nullable()->constrained('kategoris')->onDelete('set null');
     });
 }
 

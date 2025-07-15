@@ -20,16 +20,16 @@ return view('kategoris.create');
 
 public function store(Request $request)
 {
-$request->validate([
-'nama' => 'required|string|max:255',
-'deskripsi' => 'nullable|string',
-]);
+    $request->validate([
+        'nama' => 'required|string|max:255',
+        'deskripsi' => 'nullable|string',
+    ]);
 
-Kategori::create($request->only(['nama', 'deskripsi']));
+    Kategori::create($request->only('nama', 'deskripsi'));
 
-return redirect()->route('kategoris.index')->with('success', 'Kategori
-berhasil ditambahkan.');
+    return redirect()->route('kategoris.index')->with('success', 'Kategori berhasil ditambahkan.');
 }
+
 
 public function edit(Kategori $kategori)
 {

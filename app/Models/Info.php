@@ -7,12 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Info extends Model
 {
-use HasFactory;
+    use HasFactory;
 
-protected $fillable = ['category_id', 'title', 'content', 'thumbnail'];
+    // Tambahkan 'slug' di sini
+    protected $fillable = [
+    'title',
+    'slug',
+    'content',
+    'thumbnail',
+    'kategori_id',
+];
 
-public function kategori()
-{
-    return $this->belongsTo(Kategori::class, 'category_id');
-}
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'category_id');
+    }
 }

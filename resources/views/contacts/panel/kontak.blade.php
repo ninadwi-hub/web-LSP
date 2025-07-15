@@ -21,6 +21,7 @@
                 <th>Pesan</th>
                 <th>Status</th>
                 <th>Dikirim</th>
+                <th>Aksi</th> {{-- Tambahan kolom aksi --}}
             </tr>
         </thead>
         <tbody>
@@ -32,10 +33,24 @@
                     <td>{{ Str::limit($contact->message, 100) }}</td>
                     <td>{{ ucfirst($contact->status) }}</td>
                     <td>{{ $contact->created_at->format('d M Y H:i') }}</td>
+                    <td>
+                        {{-- Tombol Edit --}}
+                        <a href="{{ route('contacts.edit', $contact->id) }}" class="btn btn-sm btn-primary">
+                            Edit
+                        </a>
+
+                        {{-- Tombol Hapus --}}
+                        <form action="{{ route('contacts.destroy', $contact->id) }}" method="POST" class="d-inline"
+                            onsubmit="return confirm('Yakin ingin menghapus pesan ini?')">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-sm btn-danger">Hapus</button>
+                        </form>
+                    </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6">Belum ada pesan masuk.</td>
+                    <td colspan="7">Belum ada pesan masuk.</td>
                 </tr>
             @endforelse
         </tbody>

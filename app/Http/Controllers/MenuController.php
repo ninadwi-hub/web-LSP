@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
@@ -8,7 +9,7 @@ class MenuController extends Controller
 {
     public function index()
     {
-        $menus = Menu::all();
+        $menus = Menu::orderBy('order')->get();
         return view('menus.index', compact('menus'));
     }
 
@@ -20,49 +21,43 @@ class MenuController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'url' => 'nullable|string|max:255',
-            'order' => 'nullable|integer',
-            'is_active' => 'nullable|boolean',
+            'title' => 'required',
+            'url' => 'required',
+            'order' => 'required|integer',
+            'is_active' => 'required|boolean',
         ]);
 
-        Menu::create([
-            'title' => $request->title,
-            'url' => $request->url,
-            'order' => $request->order ?? 0,
-            'is_active' => $request->has('is_active') ? 1 : 0,
-        ]);
+        Menu::create($request->all());
 
         return redirect()->route('menus.index')->with('success', 'Menu berhasil ditambahkan.');
     }
 
-    public function edit(Menu $menu)
+    public function edit($id)
     {
-        return view('menus.edit', compact('menu'));
+        $menu = Menu::findOrFail($id);
+        return view('panel.menus.edit', compact('menu'));
     }
 
-    public function update(Request $request, Menu $menu)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'url' => 'nullable|string|max:255',
-            'order' => 'nullable|integer',
-            'is_active' => 'nullable|boolean',
+            'title' => 'required',
+            'url' => 'required',
+            'order' => 'required|integer',
+            'is_active' => 'required|boolean',
         ]);
 
-        $menu->update([
-            'title' => $request->title,
-            'url' => $request->url,
-            'order' => $request->order ?? 0,
-            'is_active' => $request->has('is_active') ? 1 : 0,
-        ]);
+        $menu = Menu::findOrFail($id);
+        $menu->update($request->all());
 
         return redirect()->route('menus.index')->with('success', 'Menu berhasil diperbarui.');
     }
 
-    public function destroy(Menu $menu)
+    public function destroy($id)
     {
+        $menu = Menu::findOrFail($id);
         $menu->delete();
+
         return redirect()->route('menus.index')->with('success', 'Menu berhasil dihapus.');
     }
 }

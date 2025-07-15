@@ -4,88 +4,61 @@ namespace App\Http\Controllers;
 
 use App\Models\Galeri;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class GaleriController extends Controller
 {
-    // Admin: Tampilkan semua galeri
-    public function index()
-    {
+    public function index() {
         $galeris = Galeri::latest()->get();
         return view('panel.galeri.index', compact('galeris'));
     }
 
-    // Admin: Form tambah
-    public function create()
-    {
+    public function create() {
         return view('panel.galeri.create');
     }
 
-    // Admin: Simpan data baru
-    public function store(Request $request)
-    {
-        $request->validate([
+    public function store(Request $request) {
+        $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'slug' => 'nullable|string|max:255',
+          'slug' => 'required|string|max:255|unique:galleries',
             'description' => 'nullable|string',
-            'image_path' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'image_path' => 'required|string|max:255',
+            'category_id' => 'nullable|exists:gallery_categories,id',
+            'album_id' => 'nullable|exists:albums,id',
+            'uploader' => 'nullable|string|max:100',
             'status' => 'required|in:draft,published,archived',
+            'taken_at' => 'nullable|date',
+            'is_featured' => 'nullable|boolean',
         ]);
 
-        $data = $request->only(['title', 'slug', 'description', 'status']);
-        $data['image_path'] = $request->file('image_path')->store('galleries', 'public');
-
-        Galeri::create($data);
-
+        Galeri::create($validated);
         return redirect()->route('galeri.index')->with('success', 'Galeri berhasil ditambahkan.');
     }
 
-    // Admin: Form edit
-    public function edit(Galeri $galeri)
-    {
+    public function edit(Galeri $galeri) {
         return view('panel.galeri.edit', compact('galeri'));
     }
 
-    // Admin: Update data
-    public function update(Request $request, Galeri $galeri)
-    {
-        $data = $request->validate([
+    public function update(Request $request, Galeri $galeri) {
+        $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'slug' => 'nullable|string|max:255',
+           'slug' => 'required|string|max:255|unique:galleries,slug,' . $galeri->id,
             'description' => 'nullable|string',
-            'image_path' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'image_path' => 'required|string|max:255',
+            'category_id' => 'nullable|exists:gallery_categories,id',
+            'album_id' => 'nullable|exists:albums,id',
+            'uploader' => 'nullable|string|max:100',
             'status' => 'required|in:draft,published,archived',
+            'taken_at' => 'nullable|date',
+            'is_featured' => 'nullable|boolean',
         ]);
 
-        if ($request->hasFile('image_path')) {
-            if ($galeri->image_path) {
-                Storage::disk('public')->delete($galeri->image_path);
-            }
-            $data['image_path'] = $request->file('image_path')->store('galleries', 'public');
-        }
-
-        $galeri->update($data);
-
+        $galeri->update($validated);
         return redirect()->route('galeri.index')->with('success', 'Galeri berhasil diperbarui.');
     }
 
-    // Admin: Hapus data
-    public function destroy(Galeri $galeri)
-    {
-        if ($galeri->image_path) {
-            Storage::disk('public')->delete($galeri->image_path);
-        }
-
+    public function destroy(Galeri $galeri) {
         $galeri->delete();
-
         return redirect()->route('galeri.index')->with('success', 'Galeri berhasil dihapus.');
     }
-
-    // Publik: Tampilkan galeri yang sudah dipublish
-    public function publicIndex()
-    {
-        $galeris = Galeri::where('status', 'published')->latest()->get();
-        return view('galeri.publik', compact('galeris'));
-    }
 }
-
