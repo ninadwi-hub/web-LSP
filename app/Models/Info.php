@@ -2,25 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Info extends Model
 {
     use HasFactory;
 
-    // Tambahkan 'slug' di sini
     protected $fillable = [
-    'title',
-    'slug',
-    'content',
-    'thumbnail',
-    'kategori_id',
-];
-
+        'kategori_id', 'title', 'slug', 'content', 'thumbnail'
+    ];
 
     public function kategori()
     {
-        return $this->belongsTo(Kategori::class, 'category_id');
+        return $this->belongsTo(Kategori::class);
     }
 }
+

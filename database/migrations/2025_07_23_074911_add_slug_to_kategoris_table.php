@@ -9,18 +9,17 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+   public function up()
 {
-    Schema::table('contacts', function (Blueprint $table) {
-        $table->string('status')->default('baru')->after('message');
+    Schema::table('kategoris', function (Blueprint $table) {
+        $table->string('slug')->unique()->after('nama');
     });
 }
 
 public function down()
 {
-    Schema::table('contacts', function (Blueprint $table) {
-        $table->dropColumn('status');
+    Schema::table('kategoris', function (Blueprint $table) {
+        $table->dropColumn('slug');
     });
 }
-
 };

@@ -5,8 +5,7 @@
     <h1>Edit Status Pesan</h1>
 
     <form action="{{ route('contacts.update', $contact->id) }}" method="POST">
-        @csrf
-        @method('PUT')
+        @csrf @method('PUT')
 
         <div class="mb-3">
             <label>Nama</label>
@@ -22,8 +21,8 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-        <a href="{{ route('contacts.panel.kontak') }}" class="btn btn-secondary">Kembali</a>
+        <button type="submit" class="btn btn-primary">Simpan</button>
+        <a href="{{ route('contacts.index') }}" class="btn btn-secondary">Kembali</a>
     </form>
 </div>
 @endsection

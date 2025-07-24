@@ -1,60 +1,36 @@
 @extends('layouts.app')
 
+@section('title', 'Edit Halaman')
+
 @section('content')
-<div class="container">
-    <h4>Edit Halaman</h4>
+    <h3 class="mb-3">Edit Halaman Statis</h3>
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <strong>Oops!</strong> Ada kesalahan input:<br>
+            <ul class="mb-0 mt-1">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <form action="{{ route('pages.update', $page->id) }}" method="POST">
-        @csrf @method('PUT')
+        @csrf
+        @method('PUT')
 
         <div class="mb-3">
-            <label>Judul</label>
-            <input type="text" name="title" class="form-control" value="{{ $page->title }}" required>
-        </div>
-
-        <div class="mb-3">
-            <label>Isi Konten</label>
-            <textarea name="content" class="form-control" rows="6" required>{{ $page->content }}</textarea>
+            <label for="title" class="form-label">Judul Halaman</label>
+            <input type="text" name="title" class="form-control" value="{{ old('title', $page->title) }}" required>
         </div>
 
         <div class="mb-3">
-            <label>Status</label>
-            <select name="status" class="form-select">
-                <option value="draft" {{ $page->status == 'draft' ? 'selected' : '' }}>Draft</option>
-                <option value="published" {{ $page->status == 'published' ? 'selected' : '' }}>Published</option>
-                <option value="archived" {{ $page->status == 'archived' ? 'selected' : '' }}>Archived</option>
-            </select>
+            <label for="content" class="form-label">Isi Konten</label>
+            <textarea name="content" rows="8" class="form-control" required>{{ old('content', $page->content) }}</textarea>
         </div>
 
-        <div class="mb-3">
-            <label>Waktu Publish</label>
-            <input type="datetime-local" name="published_at" class="form-control" value="{{ $page->published_at ? $page->published_at->format('Y-m-d\TH:i') : '' }}">
-        </div>
-
-        <div class="mb-3">
-            <label>Featured Image</label>
-            <input type="text" name="featured_image" class="form-control" value="{{ $page->featured_image }}">
-        </div>
-
-        <div class="mb-3">
-            <label>Meta Description</label>
-            <input type="text" name="meta_description" class="form-control" value="{{ $page->meta_description }}">
-        </div>
-
-        <div class="mb-3">
-            <label>Meta Keywords</label>
-            <input type="text" name="meta_keywords" class="form-control" value="{{ $page->meta_keywords }}">
-        </div>
-
-        <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" name="is_homepage" value="1" {{ $page->is_homepage ? 'checked' : '' }}>
-            <label class="form-check-label">
-                Tampilkan di Beranda?
-            </label>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-success">Update</button>
         <a href="{{ route('pages.index') }}" class="btn btn-secondary">Batal</a>
     </form>
-</div>
 @endsection

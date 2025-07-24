@@ -2,65 +2,66 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contact; // ✅ Ini sudah benar
-
+use App\Models\Contact;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class KontakController extends Controller
 {
-    // ✅ Untuk halaman publik: form kontak
+    // Form kontak publik
     public function showForm()
     {
-        return view('kontakk'); // arahkan ke kontakk.blade.php
+        return view('kontak.form');
     }
 
     public function submitForm(Request $request)
     {
         $request->validate([
-            'name'    => 'required|max:100',
-            'email'   => 'required|email|max:100',
+            'name' => 'required|max:100',
+            'email' => 'required|email|max:100',
             'subject' => 'nullable|max:150',
             'message' => 'required',
-            'phone'   => 'nullable|max:20',
+            'phone' => 'nullable|max:20',
         ]);
 
-        Contact::create($request->all()); // ✅ ganti ke Contact
+        Contact::create($request->all());
 
-        return redirect()->route('contacts.panel.kontak')->with('success', 'Pesan Anda berhasil dikirim.');
+        return redirect()->route('kontak.form')->with('success', 'Pesan berhasil dikirim.');
     }
 
-    // ✅ Untuk admin: lihat daftar pesan kontak
+    // Halaman manajemen kontak
     public function index()
-    {
-        $contacts = Contact::latest()->get(); // ✅ ganti ke Contact
-        return view('contacts.panel.kontak', compact('contacts'));
-    }
+{
+    $contacts = Contact::latest()->paginate(10)->withQueryString();
+    return view('kontak.index', compact('contacts'));
+}
+
     public function edit($id)
-{
-    $contact = Contact::findOrFail($id);
-    return view('contacts.panel.edit', compact('contact'));
-}
+    {
+        $contact = Contact::findOrFail($id);
+        return view('kontak.edit', compact('contact')); // ✅ ganti path
+    }
 
-public function update(Request $request, $id)
-{
-    $contact = Contact::findOrFail($id);
+    public function update(Request $request, $id)
+    {
+        $contact = Contact::findOrFail($id);
 
-    $request->validate([
-        'status' => 'required|string|max:20',
-    ]);
+        $request->validate(['status' => 'required|string|max:20']);
 
-    $contact->status = $request->status;
-    $contact->save();
+        $contact->status = $request->status;
+        if ($request->status === 'selesai') {
+            $contact->responded_at = Carbon::now();
+        }
+        $contact->save();
 
-    return redirect()->route('contacts.panel.kontak')->with('success', 'Status pesan berhasil diperbarui.');
-}
+        return redirect()->route('contacts.index')->with('success', 'Status berhasil diperbarui.');
+    }
 
-public function destroy($id)
-{
-    $contact = Contact::findOrFail($id);
-    $contact->delete();
+    public function destroy($id)
+    {
+        $contact = Contact::findOrFail($id);
+        $contact->delete();
 
-    return redirect()->route('contacts.panel.kontak')->with('success', 'Pesan berhasil dihapus.');
-}
-
+        return redirect()->route('contacts.index')->with('success', 'Pesan berhasil dihapus.');
+    }
 }

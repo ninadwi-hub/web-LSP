@@ -2,41 +2,35 @@
 
 @section('content')
 <div class="container">
-    <h1>Hubungi Kami</h1>
+    <h1>Kontak Kami</h1>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <form method="POST" action="{{ route('kontakk.kirim') }}">
+    <form method="POST" action="{{ route('kontak.submit') }}">
         @csrf
-
         <div class="mb-3">
             <label>Nama</label>
-            <input type="text" name="name" class="form-control" required>
+            <input name="name" class="form-control" required>
         </div>
-
         <div class="mb-3">
             <label>Email</label>
-            <input type="email" name="email" class="form-control" required>
+            <input name="email" type="email" class="form-control" required>
         </div>
-
         <div class="mb-3">
-            <label>Nomor HP</label>
-            <input type="text" name="phone" class="form-control">
+            <label>Telepon</label>
+            <input name="phone" class="form-control">
         </div>
-
         <div class="mb-3">
             <label>Subjek</label>
-            <input type="text" name="subject" class="form-control">
+            <input name="subject" class="form-control">
         </div>
-
         <div class="mb-3">
             <label>Pesan</label>
             <textarea name="message" class="form-control" rows="5" required></textarea>
         </div>
-
-        <button type="submit" class="btn btn-primary">Kirim</button>
+        <button class="btn btn-primary">Kirim Pesan</button>
     </form>
 </div>
 @endsection

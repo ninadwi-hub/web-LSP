@@ -4,25 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Info; // pastikan ini di-import jika menggunakan relasi
-use Illuminate\Support\Str;
+use App\Models\Info;
 
 class Kategori extends Model
 {
-    protected $fillable = ['nama', 'slug', 'deskripsi'];
+    use HasFactory;
 
-    protected static function booted()
-    {
-        static::creating(function ($kategori) {
-            $kategori->slug = Str::slug($kategori->nama);
-        });
+    protected $fillable = ['nama', 'deskripsi'];
 
-        // Opsional: saat update juga perbarui slug
-        static::updating(function ($kategori) {
-            $kategori->slug = Str::slug($kategori->nama);
-        });
-    }
+    // Hapus booted() karena tidak ada kolom slug
 }
-
-
-

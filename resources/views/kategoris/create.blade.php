@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Kategori')
+@section('title', 'Tambah Kategori')
 
 @section('content')
 <div class="container mt-4">
-    <h3 class="mb-4">Edit Kategori</h3>
+    <h3 class="mb-4">Tambah Kategori</h3>
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -17,22 +17,21 @@
         </div>
     @endif
 
-    <form action="{{ route('kategoris.update', $kategori->id) }}" method="POST">
+    <form action="{{ route('kategoris.store') }}" method="POST">
         @csrf
-        @method('PUT')
 
         <div class="mb-3">
             <label for="nama" class="form-label">Nama Kategori</label>
-            <input type="text" name="nama" class="form-control" id="nama" value="{{ old('nama', $kategori->nama) }}" required>
+            <input type="text" name="nama" class="form-control" id="nama" value="{{ old('nama') }}" required>
         </div>
 
         <div class="mb-3">
             <label for="deskripsi" class="form-label">Deskripsi</label>
-            <textarea name="deskripsi" class="form-control" id="deskripsi" rows="3">{{ old('deskripsi', $kategori->deskripsi) }}</textarea>
+            <textarea name="deskripsi" class="form-control" id="deskripsi" rows="3">{{ old('deskripsi') }}</textarea>
         </div>
 
         <a href="{{ route('kategoris.index') }}" class="btn btn-secondary">Batal</a>
-        <button type="submit" class="btn btn-success">Perbarui</button>
+        <button type="submit" class="btn btn-primary">Simpan</button>
     </form>
 </div>
 @endsection
