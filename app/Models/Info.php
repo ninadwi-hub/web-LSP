@@ -10,8 +10,8 @@ class Info extends Model
     use HasFactory;
 
     protected $fillable = [
-        'kategori_id', 'title', 'slug', 'content', 'thumbnail'
-    ];
+    'kategori_id', 'title', 'slug', 'content', 'thumbnail', 'views'
+];
 
     public function kategori()
     {

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str; 
+
 
 class KategoriController extends Controller
 {
@@ -18,20 +20,24 @@ class KategoriController extends Controller
         return view('kategoris.create');
     }
 
-   public function store(Request $request)
+public function store(Request $request)
 {
     $request->validate([
         'nama' => 'required|string|max:100',
         'deskripsi' => 'nullable|string',
     ]);
 
-    Kategori::create([
-        'nama' => $request->nama,
-        'deskripsi' => $request->deskripsi,
-    ]);
+
+Kategori::create([
+    'nama' => $request->nama,
+    'slug' => Str::slug($request->nama),
+    'deskripsi' => $request->deskripsi,
+]);
+
 
     return redirect()->route('kategoris.index')->with('success', 'Kategori berhasil ditambahkan.');
 }
+
 
 
     public function edit(Kategori $kategori)
@@ -48,11 +54,13 @@ class KategoriController extends Controller
 
     $kategori->update([
         'nama' => $request->nama,
+        'slug' => Str::slug($request->nama), // 🔁 Update slug juga
         'deskripsi' => $request->deskripsi,
     ]);
 
     return redirect()->route('kategoris.index')->with('success', 'Kategori berhasil diperbarui.');
 }
+
 
     public function destroy(Kategori $kategori)
     {

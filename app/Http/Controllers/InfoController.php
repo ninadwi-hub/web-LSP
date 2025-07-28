@@ -85,4 +85,8 @@ class InfoController extends Controller
         $info->delete();
         return back()->with('success', 'Info berhasil dihapus');
     }
+    public function show(Info $info)
+{
+    return view('infos.show', compact('info'));
+}
 }

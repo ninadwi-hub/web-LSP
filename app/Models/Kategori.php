@@ -10,7 +10,7 @@ class Kategori extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama', 'deskripsi'];
+   protected $fillable = ['nama', 'slug', 'deskripsi'];
 
     // Hapus booted() karena tidak ada kolom slug
 }

@@ -8,26 +8,34 @@ use Carbon\Carbon;
 
 class KontakController extends Controller
 {
-    // Form kontak publik
-    public function showForm()
-    {
-        return view('kontak.form');
-    }
+    // KontakController.php
+public function create()
+{
+    return view('fitur.contact.create');
+}
 
-    public function submitForm(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|max:100',
-            'email' => 'required|email|max:100',
-            'subject' => 'nullable|max:150',
-            'message' => 'required',
-            'phone' => 'nullable|max:20',
-        ]);
+public function store(Request $request)
+{
+    $request->validate([
+        'name' => 'required|max:100',
+        'email' => 'required|email',
+        'phone' => 'nullable|max:20',
+        'subject' => 'nullable|max:100',
+        'message' => 'required',
+    ]);
 
-        Contact::create($request->all());
+    Contact::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'phone' => $request->phone,
+        'subject' => $request->subject,
+        'message' => $request->message,
+        'status' => 'pending',
+    ]);
 
-        return redirect()->route('kontak.form')->with('success', 'Pesan berhasil dikirim.');
-    }
+    return redirect()->route('contacts.index')->with('success', 'Pesan berhasil ditambahkan.');
+}
+
 
     // Halaman manajemen kontak
     public function index()
