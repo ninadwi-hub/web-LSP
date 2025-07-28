@@ -56,6 +56,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('kategoris', KategoriController::class);
     Route::resource('pages', PageController::class);
+    Route::get('/page/{slug}', [PageController::class, 'show'])->name('page.show');
+
 });
 
 

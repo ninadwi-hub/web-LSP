@@ -18,14 +18,32 @@
                 <thead>
                     <tr>
                         <th>Judul</th>
+                        <th>Kategori</th>
+                        <th>Status</th>
                         <th>Slug</th>
                         <th width="180">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($pages as $page)
+                    @forelse ($pages as $page)
                         <tr>
                             <td>{{ $page->title }}</td>
+                            <td>
+                                @if ($page->category === 'profil')
+                                    <span class="badge bg-info text-dark">Profil</span>
+                                @elseif ($page->category === 'informasi')
+                                    <span class="badge bg-warning text-dark">Informasi</span>
+                                @else
+                                    <span class="badge bg-secondary">-</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if ($page->status === 'published')
+                                    <span class="badge bg-success">Published</span>
+                                @else
+                                    <span class="badge bg-secondary">Draft</span>
+                                @endif
+                            </td>
                             <td>{{ $page->slug }}</td>
                             <td>
                                 <a href="{{ route('pages.edit', $page->id) }}" class="btn btn-sm btn-warning">Edit</a>
@@ -36,13 +54,11 @@
                                 </form>
                             </td>
                         </tr>
-                    @endforeach
-
-                    @if ($pages->isEmpty())
+                    @empty
                         <tr>
-                            <td colspan="3" class="text-center">Belum ada halaman.</td>
+                            <td colspan="5" class="text-center">Belum ada halaman.</td>
                         </tr>
-                    @endif
+                    @endforelse
                 </tbody>
             </table>
         </div>

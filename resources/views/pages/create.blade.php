@@ -25,6 +25,23 @@
         </div>
 
         <div class="mb-3">
+            <label for="category" class="form-label">Kategori</label>
+            <select name="category" class="form-control" required>
+                <option value="">-- Pilih Kategori --</option>
+                <option value="profil" {{ old('category') == 'profil' ? 'selected' : '' }}>Profil</option>
+                <option value="informasi" {{ old('category') == 'informasi' ? 'selected' : '' }}>Informasi</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="status" class="form-label">Status</label>
+            <select name="status" class="form-control" required>
+                <option value="published" {{ old('status') == 'published' ? 'selected' : '' }}>Published</option>
+                <option value="draft" {{ old('status') == 'draft' ? 'selected' : '' }}>Draft</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
             <label for="content" class="form-label">Isi Konten</label>
             <textarea name="content" rows="8" class="form-control" placeholder="Masukkan konten..." required>{{ old('content') }}</textarea>
         </div>
