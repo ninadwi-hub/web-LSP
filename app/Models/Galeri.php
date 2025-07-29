@@ -1,11 +1,13 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str; 
+use App\Models\GalleryCategory;
 
 class Galeri extends Model
 {
-    // ✅ Tambahkan baris ini untuk menyesuaikan nama tabel:
     protected $table = 'galleries';
 
     protected $fillable = [
@@ -21,5 +23,14 @@ class Galeri extends Model
     public function album()
     {
         return $this->belongsTo(Album::class, 'album_id');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($galeri) {
+            $galeri->slug = Str::slug($galeri->title);
+        });
     }
 }

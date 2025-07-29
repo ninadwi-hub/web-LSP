@@ -59,7 +59,8 @@
 
     <nav id="navbar" class="navbar order-last order-lg-0">
       <ul>
-        <li><a class="nav-link scrollto" href="#hero">Home</a></li>
+       <li><a class="nav-link scrollto" href="{{ route('home') }}#hero">Home</a></li>
+
 
         <!-- Profil Dropdown -->
         <li class="dropdown"><a href="#"><span>Profil</span> <i class="bi bi-chevron-down"></i></a>
@@ -172,38 +173,32 @@
         </div>
       </div>
 
-      <!-- Form Kontak -->
-      <div class="col-lg-6">
-        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-          <div class="row">
-            <div class="col-md-6 form-group">
-              <input type="text" name="name" class="form-control" id="name" placeholder="Nama Anda" required>
-            </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
-              <input type="email" class="form-control" name="email" id="email" placeholder="Email Anda" required>
-            </div>
-          </div>
-          <div class="form-group mt-3">
-            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subjek" required>
-          </div>
-          <div class="form-group mt-3">
-            <textarea class="form-control" name="message" rows="7" placeholder="Pesan Anda" required></textarea>
-          </div>
-          <div class="my-3">
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Pesan Anda telah terkirim. Terima kasih!</div>
-          </div>
-          <div class="text-center"><button type="submit">Kirim Pesan</button></div>
-        </form>
+     <!-- Contact Form Section -->
+<div class="col-lg-6">
+  <form action="{{ route('contacts.store') }}" method="POST" role="form" id="contactForm">
+    @csrf
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <input type="text" name="name" class="form-control" placeholder="Nama Anda" required>
       </div>
-
+      <div class="col-md-6 form-group mt-3 mt-md-0">
+        <input type="email" name="email" class="form-control" placeholder="Email Anda" required>
+      </div>
     </div>
+    <div class="form-group mt-3">
+      <input type="text" name="subject" class="form-control" placeholder="Subjek" required>
+    </div>
+    <div class="form-group mt-3">
+      <textarea name="message" class="form-control" rows="7" placeholder="Pesan Anda" required></textarea>
+    </div>
+    <div class="text-center"><button type="submit">Kirim Pesan</button></div>
+    <div id="formAlert" class="mt-3"></div>
+  </form>
+</div>
+  </div>
   </div>
 </section>
 <!-- End Contact Section -->
-
-
 
      <!-- ======= Footer ======= -->
   <footer id="footer">
@@ -266,6 +261,33 @@
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>
+    <script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const formData = new FormData(form);
+  const alertBox = document.getElementById('formAlert');
+
+  fetch(form.action, {
+    method: 'POST',
+    headers: {
+      'X-CSRF-TOKEN': form.querySelector('[name="_token"]').value,
+      'Accept': 'application/json',
+    },
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    alertBox.innerHTML = `<div class="alert alert-success">${data.success}</div>`;
+    form.reset();
+  })
+  .catch(error => {
+    alertBox.innerHTML = `<div class="alert alert-danger">Gagal mengirim pesan.</div>`;
+  });
+});
+</script>
+
   </footer><!-- End Footer -->
 
 </body>

@@ -11,10 +11,10 @@ use Illuminate\Support\Facades\Storage;
 class InfoController extends Controller
 {
     public function index()
-{
-    $info = Info::latest()->paginate(10); // ✅ ubah get() jadi paginate()
-    return view('info.index', compact('info'));
-}
+    {
+        $info = Info::latest()->paginate(10);
+        return view('info.index', compact('info'));
+    }
 
     public function create()
     {
@@ -32,7 +32,7 @@ class InfoController extends Controller
         ]);
 
         $slug = Str::slug($request->title);
-        $thumbnail = $request->file('thumbnail')?->store('thumbnails');
+        $thumbnail = $request->file('thumbnail')?->store('thumbnails', 'public');
 
         Info::create([
             'title' => $request->title,
@@ -48,7 +48,7 @@ class InfoController extends Controller
     public function edit(Info $info)
     {
         $kategoris = Kategori::all();
-        return view('.info.edit', compact('info', 'kategoris'));
+        return view('info.edit', compact('info', 'kategoris'));
     }
 
     public function update(Request $request, Info $info)
@@ -64,8 +64,8 @@ class InfoController extends Controller
         $thumbnail = $info->thumbnail;
 
         if ($request->hasFile('thumbnail')) {
-            if ($info->thumbnail) Storage::delete($info->thumbnail);
-            $thumbnail = $request->file('thumbnail')->store('thumbnails');
+            if ($thumbnail) Storage::disk('public')->delete($thumbnail);
+            $thumbnail = $request->file('thumbnail')->store('thumbnails', 'public');
         }
 
         $info->update([
@@ -81,12 +81,25 @@ class InfoController extends Controller
 
     public function destroy(Info $info)
     {
-        if ($info->thumbnail) Storage::delete($info->thumbnail);
+        if ($info->thumbnail) {
+            Storage::disk('public')->delete($info->thumbnail);
+        }
+
         $info->delete();
         return back()->with('success', 'Info berhasil dihapus');
     }
-    public function show(Info $info)
-{
-    return view('infos.show', compact('info'));
-}
+
+    // ✅ Halaman publik: list berdasarkan kategori
+    public function publik()
+    {
+        $kategoris = Kategori::with('infos')->get();
+        return view('public.infos', compact('kategoris'));
+    }
+
+    // ✅ Halaman detail publik: berdasarkan slug
+    public function show($slug)
+    {
+        $info = Info::where('slug', $slug)->with('kategori')->firstOrFail();
+        return view('info.show', compact('info'));
+    }
 }

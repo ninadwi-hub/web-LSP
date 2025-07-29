@@ -33,7 +33,9 @@ public function store(Request $request)
         'status' => 'pending',
     ]);
 
-    return redirect()->route('contacts.index')->with('success', 'Pesan berhasil ditambahkan.');
+   Contact::create($validated);
+
+    return response()->json(['success' => 'Pesan berhasil dikirim!']);
 }
 
 

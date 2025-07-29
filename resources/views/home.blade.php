@@ -62,7 +62,7 @@
 
        <nav id="navbar" class="navbar order-last order-lg-0">
       <ul>
-        <li><a class="nav-link scrollto" href="#hero">Home</a></li>
+      <li><a class="nav-link scrollto" href="{{ route('home') }}#hero">Home</a></li>
 
         <!-- Profil Dropdown -->
         <li class="dropdown"><a href="#"><span>Profil</span> <i class="bi bi-chevron-down"></i></a>
@@ -112,81 +112,36 @@
   </header>
   <!-- End Header -->
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero">
-    <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+ <!-- ======= Hero Section ======= -->
+<section id="hero">
+  <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
 
-      <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
-
-      <div class="carousel-inner" role="listbox">
-
-        <!-- Slide 1 -->
-        <div class="carousel-item active" style="background-image:url(/THEMES/Medicio/assets/img/img.png)">
+    <div class="carousel-inner" role="listbox">
+      @foreach ($featuredGaleri as $key => $item)
+        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}" style="background-image:url('{{ asset('storage/' . $item->image_path) }}')">
           <div class="container">
-              <h2>Pelatihan Asesor Kompetensi</h2>
-            <p>Pembukaan Pelatihan Asesor Kompetensi LSP Trainer Kompeten Indonesia dihadiri oleh Kepala Dinas Tenaga Kerja dan Transmigrasi Provinsi Daerah Istimewa Yogyakarta dan Kepala Dinas Tenaga Kerja dan Transmigrasi Kabupaten Bantul.</p>
+            <h2>{{ $item->title }}</h2>
+            @if($item->description)
+              <p>{{ $item->description }}</p>
+            @endif
           </div>
         </div>
-
-        <!-- Slide 2 -->
-        <div class="carousel-item" style="background-image:url(/THEMES/Medicio/assets/img/ramah_tamah.png)">
-          <div class="container">
-            <h2>Ramah Tamah</h2>
-            <p>Direktur LSP Trainer Kompeten Indonesia beramah tamah dengan Pejabat Dinas Tenaga Kerja Provinsi Daerah Istimewa Yogyakarta, dalam sesi coffe break pada Pelatihan Asesor Kompetensi bersama Master Asesor Agus Subagyo dan Master Asesor Sujiyanto</p>
-            <a href="#about" class="btn-get-started scrollto">Read More</a>
-          </div>
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="carousel-item" style="background-image:url(/THEMES/Medicio/assets/img/rapat_koordinasi.png)">
-          <div class="container">
-            <h2>Rapat Koordinasi Pelatihan Asesor</h2>
-            <p>Rapat Koordinasi Pelatihan Asesor ini diselenggarakan di Kantor LSP Trainer Kompeten Indonesia pada hari Jum'at, 25 Maret 2022 3 Hari menjelang Pelaksanaan Pelatihan Asesor Kompetensi.</p>
-            <a href="#about" class="btn-get-started scrollto">Read More</a>
-          </div>
-        </div>
-           <!-- Slide 4 -->
-        <div class="carousel-item" style="background-image:url(/THEMES/Medicio/assets/img/pelatihan_asesor.png)">
-          <div class="container">
-            <h2>Pelatihan Asesor Kompetensi</h2>
-            <p>Master Asesor Agus Subagyo sebagai narasumber pada pelatihan Asesor Kompetensi</p>
-            <a href="#about" class="btn-get-started scrollto">Read More</a>
-          </div>
-        </div>
-           <!-- Slide 5 -->
-        <div class="carousel-item" style="background-image:url(/THEMES/Medicio/assets/img/pelatihan_auditor.png)">
-          <div class="container">
-            <h2>Pelatihan Auditor Mutu Sertifikasi</h2>
-            <p>dilaksanakan Hari Jum'at - Ahad, 13 - 15 Mei 2022 di The Cube Hotel Yogyakarta dengan Nara Sumber Dr. Agus Sutarna, S. Kp., MN. Sc.</p>
-            <a href="#about" class="btn-get-started scrollto">Read More</a>
-          </div>
-        </div>
-<div class="carousel-item" style="background-image:url(/THEMES/Medicio/assets/img/witness.png)">
-          <div class="container">
-            <h2>Witness</h2>
-            <p>Penyaksian Uji Kompetensi LSP Trainer Kompeten Indonesia oleh BNSP</p>
-            <a href="#about" class="btn-get-started scrollto">Read More</a>
-          </div>
-        </div>
-          <!-- Slide 7 -->
-        <div class="carousel-item" style="background-image:url(/THEMES/Medicio/assets/img/trainer_kompeten.png)">
-        </div>
-          <!-- Slide 8 -->
-        <div class="carousel-item" style="background-image:url(/THEMES/Medicio/assets/img/Screen-Shot-2023-06-07-at-14.51.35.png)">
-        </div>
-
-      </div>
-
-      <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
-      </a>
-
-      <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
-        <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
-      </a>
-
+      @endforeach
     </div>
-  </section><!-- End Hero -->
+
+    <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+    </a>
+
+    <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+      <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+    </a>
+  </div>
+</section>
+
+</section><!-- End Hero -->
+
 
   <main id="main">
 
@@ -198,7 +153,7 @@
         <div class="text-center">
           <h3>Lembaga Sertifikat Profesi</h3>
           <p> LSP Trainer Kompeten Indonesia adalah lembaga sertifikasi profesi di bidang Pelatihan Kerja, telah mendapatkan lisensi BNSP untuk melakukan sertifikasi profesi pada bidang Pelatihan Kerja.</p>
-          <a class="cta-btn scrollto" href="#login">Daftar Sekarang</a>
+         <a href="{{ route('login') }}" class="cta-btn scrollto">Daftar Sekarang</a>
         </div>
 
       </div>
@@ -338,27 +293,30 @@
 
     <!-- ======= Gallery Section ======= -->
     <section id="gallery" class="gallery">
-      <div class="container" data-aos="fade-up">
+  <div class="container" data-aos="fade-up">
 
-        <div class="section-title">
-          <h2>Gallery</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
+    <div class="section-title">
+      <h2>Gallery</h2>
+    </div>
 
-        <div class="gallery-slider swiper">
-          <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide"><a class="gallery-lightbox" href="/THEMES/Medicio/assets/img/img.png"><img src="/THEMES/Medicio/assets/img/img.png" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="/THEMES/Medicio/assets/img/ramah_tamah.png"><img src="/THEMES/Medicio/assets/img/ramah_tamah.png" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="/THEMES/Medicio/assets/img/rapat_koordinasi.png"><img src="/THEMES/Medicio/assets/img/rapat_koordinasi.png" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="/THEMES/Medicio/assets/img/pelatihan_asesor.png"><img src="/THEMES/Medicio/assets/img/pelatihan_asesor.png" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="/THEMES/Medicio/assets/img/witness.png"><img src="/THEMES/Medicio/assets/img/witness.png" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="/THEMES/Medicio/assets/img/pelatihan_auditor.png"><img src="/THEMES/Medicio/assets/img/pelatihan_auditor.png" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="/THEMES/Medicio/assets/img/trainer_kompeten.png"><img src="/THEMES/Medicio/assets/img/trainer_kompeten.png" class="img-fluid" alt=""></a></div>
+    <div class="gallery-slider swiper">
+      <div class="swiper-wrapper align-items-center">
+        @forelse ($galeris as $galeri)
+          <div class="swiper-slide">
+            <a class="gallery-lightbox" href="{{ asset('storage/' . $galeri->image_path) }}">
+              <img src="{{ asset('storage/' . $galeri->image_path) }}" class="img-fluid" alt="{{ $galeri->title }}">
+            </a>
           </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
+        @empty
+          <p>Belum ada galeri ditampilkan.</p>
+        @endforelse
       </div>
+      <div class="swiper-pagination"></div>
+    </div>
+
+  </div>
+</section>
+
     </section><!-- End Gallery Section -->
 
   </main><!-- End #main -->

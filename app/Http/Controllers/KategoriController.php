@@ -67,4 +67,12 @@ Kategori::create([
         $kategori->delete();
         return redirect()->route('kategoris.index')->with('success', 'Kategori berhasil dihapus.');
     }
+    public function show($slug)
+{
+    $kategori = Kategori::where('slug', $slug)->firstOrFail();
+    $infos = $kategori->infos()->latest()->get();
+
+    return view('kategori.show', compact('kategori', 'infos'));
+}
+
 }

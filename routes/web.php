@@ -5,15 +5,24 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PublicPageController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GaleriPublikController;
+use App\Http\Controllers\HomeController;
+
+
+
+Route::get('/galeri/publik', [GaleriPublikController::class, 'index'])->name('galeri.publik');
 
 // Info
 Route::resource('infos', InfoController::class);
 Route::get('/informasi/{id}', [InfoController::class, 'show'])->name('infos.show');
+Route::get('/informasi/publik', [InfoController::class, 'publik'])->name('info.publik');
+
 
 // Halaman publik
 Route::get('/kontak', [KontakController::class, 'showForm'])->name('kontak.form');
@@ -41,9 +50,6 @@ Route::get('/file-download', [MediaController::class, 'publicIndex'])->name('med
 // Admin - Galeri
 Route::resource('galeri', GaleriController::class);
 
-// Publik - Galeri
-Route::get('/galeripublik', [GaleriController::class, 'showGallery'])->name('galeripublik');
-
 // Auth
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -57,12 +63,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('kategoris', KategoriController::class);
     Route::resource('pages', PageController::class);
     Route::get('/page/{slug}', [PageController::class, 'show'])->name('page.show');
-
 });
 
 
 // Static Pages - Umum
-Route::view('/', 'home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::view('/profil/sejarah-visi-&-misi', 'profil.sejarah-visi-&-misi');
 Route::view('/profil/struktur-organisasi', 'profil.struktur-organisasi');
 Route::view('/profil/wewenang-tugas-&-fungsi', 'profil.wewenang-tugas-&-fungsi');
