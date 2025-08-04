@@ -14,9 +14,10 @@ class Kategori extends Model
 
     // Relasi ke Info
     public function infos()
-    {
-        return $this->hasMany(Info::class, 'kategori_id');
-    }
+{
+    return $this->hasMany(Info::class, 'kategori_id');
+}
+
 
     // Slug otomatis saat create
     protected static function boot()

@@ -175,7 +175,7 @@
 
      <!-- Contact Form Section -->
 <div class="col-lg-6">
-  <form action="{{ route('contacts.store') }}" method="POST" role="form" id="contactForm">
+  <form action="{{ route('kontak.submit') }}" method="POST" role="form" id="contactForm">
     @csrf
     <div class="row">
       <div class="col-md-6 form-group">

@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+  use App\Models\Menu;
 
 class KontakController extends Controller
 {
+
+public function showKontak()
+{
+    $menus = Menu::with('children')->whereNull('parent_id')->orderBy('order')->get();
+    return view('kontak', compact('menus'));
+}
+
     // KontakController.php
 public function create()
 {
@@ -74,4 +82,8 @@ public function store(Request $request)
 
         return redirect()->route('contacts.index')->with('success', 'Pesan berhasil dihapus.');
     }
+    public function showForm() {
+    return view('kontak'); // 
+}
+
 }

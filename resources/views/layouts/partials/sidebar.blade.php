@@ -34,7 +34,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('pages.index') }}">
+                    <a href="{{ route('admin.pages.index') }}">
                         <i data-feather="layers"></i>
                         <span>Halaman Statis</span>
                     </a>
@@ -60,6 +60,13 @@
                         <span>File Download</span>
                     </a>
                 </li>
+                <li>
+    <a href="{{ route('menus.index') }}">
+        <i data-feather="menu"></i>
+        <span>Manajemen Menu</span>
+    </a>
+</li>
+
 
             </ul>
         </div>

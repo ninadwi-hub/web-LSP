@@ -1,3 +1,11 @@
+
+
+@section('title', 'Beranda')
+
+@section('content')
+  <section class="hero-section"> ... </section>
+  <section class="features"> ... </section>
+@endsection
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,73 +60,69 @@
     </div>
   </div>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center">
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top">
+  <div class="container d-flex align-items-center">
+    <a href="{{ url('/') }}" class="logo me-auto">
+      <img src="{{ asset('themes/medicio/assets/img/logo_lsp.png') }}" alt="Logo LSP">
+    </a>
 
-      <a href="index.php" class="logo me-auto"><img src="/THEMES/Medicio/assets/img/logo_lsp.png" alt=""></a>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <h1 class="logo me-auto"><a href="index.html">Medicio</a></h1> -->
-
-       <nav id="navbar" class="navbar order-last order-lg-0">
+    <nav id="navbar" class="navbar order-last order-lg-0">
       <ul>
-      <li><a class="nav-link scrollto" href="{{ route('home') }}#hero">Home</a></li>
+        <li><a class="nav-link scrollto" href="{{ url('/') }}">Home</a></li>
 
-        <!-- Profil Dropdown -->
-        <li class="dropdown"><a href="#"><span>Profil</span> <i class="bi bi-chevron-down"></i></a>
-          <ul>
-            <li><a class="dropdown-item" href="{{ url('/profil/sejarah-visi-&-misi') }}">Sejarah, Visi & Misi</a></li>
-            <li><a class="dropdown-item" href="{{ url('/profil/struktur-organisasi') }}">Struktur Organisasi</a></li>
-            <li><a class="dropdown-item" href="{{ url('/profil/wewenang-tugas-&-fungsi') }}">Wewenang Tugas & Fungsi</a></li>
-            <li><a class="dropdown-item" href="{{ url('/profil/tugas-pokok-personal') }}">Tugas Pokok Personal</a></li>
-            <li><a class="dropdown-item" href="{{ url('/profil/program-kerja') }}">Program Kerja</a></li>
-          </ul>
-        </li>
+      @php
+  $kategoriUrutan = ['profil', 'sertifikasi', 'media', 'informasi'];
+@endphp
 
-        <!-- Sertifikasi Dropdown -->
-        <li class="dropdown"><a href="#"><span>Sertifikasi</span> <i class="bi bi-chevron-down"></i></a>
-          <ul>
-            <li><a class="dropdown-item" href="{{ route('sertifikasi.asesor') }}">Asesor Kompetensi</a></li>
-            <li><a class="dropdown-item" href="{{ route('sertifikasi.pemegang') }}">Pemegang Sertifikat</a></li>
-            <li><a class="dropdown-item" href="{{ route('sertifikasi.skema') }}">Skema Sertifikasi</a></li>
-            <li><a class="dropdown-item" href="{{ route('sertifikasi.tuk') }}">Tempat Uji Kompetensi</a></li>
-          </ul>
-        </li>
+@foreach($kategoriUrutan as $kategori)
+  @php
+    $halamanKategori = $pagesByCategory[$kategori] ?? collect();
+    $firstPage = $halamanKategori->first();
+  @endphp
+
+  @if($firstPage)
+    <li class="dropdown">
+      <a class="nav-link scrollto {{ request()->is('halaman/*') ? 'active' : '' }}"
+         href="{{ route('pages.show', ['slug' => $firstPage->slug]) }}">
+        {{ ucfirst($kategori) }} <i class="bi bi-chevron-down"></i>
+      </a>
+      <ul>
+        @foreach($halamanKategori as $page)
+          @if($page->slug)
+            <li>
+              <a class="nav-link scrollto {{ request()->is('halaman/'.$page->slug) ? 'active' : '' }}"
+                 href="{{ route('pages.show', ['slug' => $page->slug]) }}">
+                {{ $page->title }}
+              </a>
+            </li>
+          @endif
+        @endforeach
+      </ul>
+    </li>
+  @endif
+@endforeach
 
 
-          <!-- Media -->
-          <li class="dropdown"><a href="#"><span>Media</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a class="dropdown-item" href="{{ route('media.brosur') }}">Brosur</a></li>
-            </ul>
-          </li>
+        <li><a class="nav-link scrollto" href="{{ route('kontak') }}">Kontak Kami</a></li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
 
-          <!-- Informasi -->
-          <li class="dropdown"><a href="#"><span>Informasi</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a class="dropdown-item" href="{{ route('informasi.faq') }}">FAQ</a></li>
-            </ul>
-          </li>
+    <a href="{{ route('login') }}" class="appointment-btn scrollto">
+      <span class="d-none d-md-inline">Login</span>
+    </a>
+  </div>
+</header>
+<!-- End Header -->
 
-          <li><a class="nav-link scrollto" href="{{ route('kontak') }}">Kontak Kami</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav>
-
-      <a href="{{ route('login') }}" class="appointment-btn scrollto">
-    <span class="d-none d-md-inline">Login</span>
-</a>
-    </div>
-  </header>
-  <!-- End Header -->
-
- <!-- ======= Hero Section ======= -->
+<!-- ======= Hero Section ======= -->
 <section id="hero">
   <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
     <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
 
     <div class="carousel-inner" role="listbox">
-      @foreach ($featuredGaleri as $key => $item)
+      @foreach ($sliderGaleri as $key => $item)
         <div class="carousel-item {{ $key == 0 ? 'active' : '' }}" style="background-image:url('{{ asset('storage/' . $item->image_path) }}')">
           <div class="container">
             <h2>{{ $item->title }}</h2>
@@ -138,26 +142,24 @@
       <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
     </a>
   </div>
-</section>
-
 </section><!-- End Hero -->
 
-
-  <main id="main">
-
-
-    <!-- ======= Cta Section ======= -->
-    <section id="cta" class="cta">
-      <div class="container" data-aos="zoom-in">
-
-        <div class="text-center">
-          <h3>Lembaga Sertifikat Profesi</h3>
-          <p> LSP Trainer Kompeten Indonesia adalah lembaga sertifikasi profesi di bidang Pelatihan Kerja, telah mendapatkan lisensi BNSP untuk melakukan sertifikasi profesi pada bidang Pelatihan Kerja.</p>
-         <a href="{{ route('login') }}" class="cta-btn scrollto">Daftar Sekarang</a>
-        </div>
-
+<main id="main">
+  <!-- ======= Cta Section ======= -->
+  <section id="cta" class="cta">
+    <div class="container" data-aos="zoom-in">
+      <div class="text-center">
+        <h3>Lembaga Sertifikat Profesi</h3>
+        <p>
+          LSP Trainer Kompeten Indonesia adalah lembaga sertifikasi profesi di bidang Pelatihan Kerja,
+          telah mendapatkan lisensi BNSP untuk melakukan sertifikasi profesi pada bidang Pelatihan Kerja.
+        </p>
+        <a href="{{ route('login') }}" class="cta-btn scrollto">Daftar Sekarang</a>
       </div>
-    </section><!-- End Cta Section -->
+    </div>
+  </section><!-- End Cta Section -->
+</main>
+
 
     <!-- ======= Counts Section ======= -->
     <section id="counts" class="counts">
@@ -401,3 +403,4 @@
 </body>
 
 </html>
+

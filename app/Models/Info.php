@@ -20,9 +20,10 @@ class Info extends Model
 
     // Relasi ke kategori
     public function kategori()
-    {
-        return $this->belongsTo(Kategori::class, 'kategori_id');
-    }
+{
+    return $this->belongsTo(Kategori::class, 'kategori_id');
+}
+
 
     // Slug otomatis saat create
     protected static function boot()

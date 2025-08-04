@@ -3,22 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Galeri;
+ use App\Models\Page;
 
 class HomeController extends Controller
 {
-    public function index()
-    {
-        // Semua galeri
-        $galeris = Galeri::where('status', 'published')->latest()->get();
 
-        // Galeri yang ditampilkan di slider (hanya yang is_featured = 1)
-        $featuredGaleri = Galeri::where('status', 'published')
-                                ->where('is_featured', true)
-                                ->latest()
-                                ->take(5)
-                                ->get();
+public function index()
+{
+    $galeris = Galeri::where('status', 'published')->latest()->get();
 
-        return view('home', compact('galeris', 'featuredGaleri'));
-    }
+    $featuredPages = Page::where('status', 'published')
+                         ->where('is_featured', true)
+                         ->latest('published_at')
+                         ->take(6)
+                         ->get();
+
+    $pagesByCategory = Page::where('status', 'published')
+        ->get()
+        ->groupBy('category');
+
+    return view('home', compact('galeris','featuredPages', 'pagesByCategory'));
+}
+
 }

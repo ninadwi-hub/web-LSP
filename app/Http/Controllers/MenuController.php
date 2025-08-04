@@ -8,56 +8,38 @@ use Illuminate\Http\Request;
 class MenuController extends Controller
 {
     public function index()
-    {
-        $menus = Menu::orderBy('order')->get();
-        return view('menus.index', compact('menus'));
-    }
+{
+    $menus = Menu::with('parent')->orderBy('order')->get();
+    return view('menus.index', compact('menus'));
+}
 
-    public function create()
-    {
-        return view('menus.create');
-    }
+public function create()
+{
+    $parents = Menu::whereNull('parent_id')->get();
+    return view('menus.create', compact('parents'));
+}
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required',
-            'url' => 'required',
-            'order' => 'required|integer',
-            'is_active' => 'required|boolean',
-        ]);
+public function store(Request $request)
+{
+    $request->validate([
+        'title' => 'required',
+        'type' => 'required|in:internal,external',
+        'slug' => 'nullable',
+        'url' => 'nullable|url',
+        'order' => 'nullable|integer',
+        'parent_id' => 'nullable|exists:menus,id',
+        'is_active' => 'boolean',
+    ]);
 
-        Menu::create($request->all());
+    Menu::create($request->all());
+    return redirect()->route('menus.index')->with('success', 'Menu berhasil ditambahkan.');
+}
+public function edit($id)
+{
+    $menu = Menu::findOrFail($id);
+    $parents = Menu::whereNull('parent_id')->where('id', '!=', $id)->get();
 
-        return redirect()->route('menus.index')->with('success', 'Menu berhasil ditambahkan.');
-    }
+    return view('menus.edit', compact('menu', 'parents'));
+}
 
-    public function edit($id)
-    {
-        $menu = Menu::findOrFail($id);
-        return view('panel.menus.edit', compact('menu'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'title' => 'required',
-            'url' => 'required',
-            'order' => 'required|integer',
-            'is_active' => 'required|boolean',
-        ]);
-
-        $menu = Menu::findOrFail($id);
-        $menu->update($request->all());
-
-        return redirect()->route('menus.index')->with('success', 'Menu berhasil diperbarui.');
-    }
-
-    public function destroy($id)
-    {
-        $menu = Menu::findOrFail($id);
-        $menu->delete();
-
-        return redirect()->route('menus.index')->with('success', 'Menu berhasil dihapus.');
-    }
 }

@@ -9,23 +9,19 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('pages', function (Blueprint $table) {
-    $table->id();
-    $table->string('title');
-    $table->string('slug')->unique();
-    $table->text('content');
-    $table->timestamps();
-});
-
-    }
-
+    public function up()
+{
+    Schema::table('galeris', function (Blueprint $table) {
+        $table->boolean('is_featured')->default(false);
+    });
+}
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('pages');
+        Schema::table('galeris', function (Blueprint $table) {
+            //
+        });
     }
 };

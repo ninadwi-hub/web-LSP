@@ -33,4 +33,8 @@
         Kontak
     </a>
 
+    <a href="{{ route('menus.index') }}" class="list-group-item list-group-item-action">
+        Manajemen Menu
+    </a>
+
 </div>
