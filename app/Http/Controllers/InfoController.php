@@ -4,102 +4,51 @@ namespace App\Http\Controllers;
 
 use App\Models\Info;
 use App\Models\Kategori;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
 
 class InfoController extends Controller
 {
+    // Halaman list info berdasarkan kategori
     public function index()
     {
-        $info = Info::latest()->paginate(10);
-        return view('info.index', compact('info'));
+        $infos = Info::whereHas('kategori')
+            ->latest()
+            ->paginate(10);
+
+        return view('public.info.indexp', compact('infos'));
     }
 
-    public function create()
-    {
-        $kategoris = Kategori::all();
-        return view('info.create', compact('kategoris'));
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|max:200',
-            'kategori_id' => 'required|exists:kategoris,id',
-            'content' => 'required',
-            'thumbnail' => 'image|nullable'
-        ]);
-
-        $slug = Str::slug($request->title);
-        $thumbnail = $request->file('thumbnail')?->store('thumbnails', 'public');
-
-        Info::create([
-            'title' => $request->title,
-            'slug' => $slug,
-            'kategori_id' => $request->kategori_id,
-            'content' => $request->content,
-            'thumbnail' => $thumbnail
-        ]);
-
-        return redirect()->route('infos.index')->with('success', 'Info berhasil ditambahkan');
-    }
-
-    public function edit(Info $info)
-    {
-        $kategoris = Kategori::all();
-        return view('info.edit', compact('info', 'kategoris'));
-    }
-
-    public function update(Request $request, Info $info)
-    {
-        $request->validate([
-            'title' => 'required|max:200',
-            'kategori_id' => 'required|exists:kategoris,id',
-            'content' => 'required',
-            'thumbnail' => 'image|nullable'
-        ]);
-
-        $slug = Str::slug($request->title);
-        $thumbnail = $info->thumbnail;
-
-        if ($request->hasFile('thumbnail')) {
-            if ($thumbnail) Storage::disk('public')->delete($thumbnail);
-            $thumbnail = $request->file('thumbnail')->store('thumbnails', 'public');
-        }
-
-        $info->update([
-            'title' => $request->title,
-            'slug' => $slug,
-            'kategori_id' => $request->kategori_id,
-            'content' => $request->content,
-            'thumbnail' => $thumbnail
-        ]);
-
-        return redirect()->route('infos.index')->with('success', 'Info berhasil diperbarui');
-    }
-
-    public function destroy(Info $info)
-    {
-        if ($info->thumbnail) {
-            Storage::disk('public')->delete($info->thumbnail);
-        }
-
-        $info->delete();
-        return back()->with('success', 'Info berhasil dihapus');
-    }
-
-    // ✅ Halaman publik: list berdasarkan kategori
-    public function publik()
-    {
-        $kategoris = Kategori::with('infos')->get();
-        return view('public.infos', compact('kategoris'));
-    }
-
-    // ✅ Halaman detail publik: berdasarkan slug
+    // Halaman detail info (pakai layout page.show)
     public function show($slug)
     {
-        $info = Info::where('slug', $slug)->with('kategori')->firstOrFail();
-        return view('info.show', compact('info'));
+        $info = Info::where('slug', $slug)
+            ->with('kategori')
+            ->firstOrFail();
+
+        $page = (object) [
+            'title' => $info->title,
+            'content' => $info->content,
+            'meta_description' => $info->meta_description ?? '',
+            'meta_keywords' => $info->meta_keywords ?? '',
+            'featured_image' => $info->thumbnail,
+        ];
+
+        return view('page.show', compact('page', 'info'));
+    }
+
+    // Halaman list info per kategori
+    public function kategori($slug)
+    {
+        $kategori = Kategori::where('slug', $slug)->firstOrFail();
+        $infos = $kategori->infos()->latest()->paginate(10);
+
+        $page = (object) [
+            'title' => 'Kategori: ' . $kategori->name,
+            'content' => '',
+            'meta_description' => 'Informasi pada kategori ' . $kategori->name,
+            'meta_keywords' => $kategori->name,
+            'featured_image' => null,
+        ];
+
+        return view('page.show', compact('page', 'kategori', 'infos'));
     }
 }

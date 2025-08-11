@@ -3,7 +3,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KategoriController;
-use App\Http\Controllers\InfoController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\KontakController;
@@ -12,48 +11,57 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GaleriPublikController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\InfoController;
 
-//Static Page
-// Untuk halaman publik
-Route::get('/halaman/{slug}', [FrontendController::class, 'show'])->name('pages.show');
 
-// Untuk admin
-Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
-    Route::resource('pages', \App\Http\Controllers\Admin\PageController::class);
-});
+// ===========================
+// Halaman Utama Website
+// ===========================
+Route::get('/', [FrontendController::class, 'home'])->name('home');
+Route::get('/beranda', fn() => redirect()->route('home'))->name('website');
 
-// Halaman Blade statis langsung
-Route::view('/profil/sejarah-visi-&-misi', 'profil.sejarah-visi-&-misi');
-Route::view('/profil/struktur-organisasi', 'profil.struktur-organisasi');
-Route::view('/profil/wewenang-tugas-&-fungsi', 'profil.wewenang-tugas-&-fungsi');
-Route::view('/profil/tugas-pokok-personal', 'profil.tugas-pokok-personal');
-Route::view('/profil/program-kerja', 'profil.program-kerja');
-Route::view('/informasi/faq', 'informasi.faq')->name('informasi.faq');
-Route::view('/media/brosur', 'media.brosur')->name('media.brosur');
-Route::view('/sertifikasi/asesor-kompetensi', 'sertifikasi.asesor-kompetensi')->name('sertifikasi.asesor');
-Route::view('/sertifikasi/pemegang-sertifikat', 'sertifikasi.pemegang-sertifikat')->name('sertifikasi.pemegang');
-Route::view('/sertifikasi/skema-sertifikasi', 'sertifikasi.skema-sertifikasi')->name('sertifikasi.skema');
-Route::view('/sertifikasi/tempat-uji', 'sertifikasi.tempat-uji')->name('sertifikasi.tuk');
+// ===========================
+// Halaman Publik Statis dari Database
+// ===========================
+Route::get('/halaman/{slug}', [FrontendController::class, 'showPage'])->name('info.showw');
+Route::get('/info/{slug}', [InfoController::class, 'show'])->name('info.showw');
+Route::get('/info/detail/{id}', [InfoController::class, 'showById'])->name('info.showById');
+Route::get('/info/{slug}', [FrontendController::class, 'showInfo'])->name('info.showw');
 
+// Halaman publik berdasarkan slug (frontend)
+Route::get('/page/{slug}', [FrontendController::class, 'showPage'])->name('page.show');
+
+// ===========================
 // Galeri Publik
+// ===========================
 Route::get('/galeri/publik', [GaleriPublikController::class, 'index'])->name('galeri.publik');
 
+// ===========================
 // Kontak Publik
+// ===========================
 Route::get('/kontak', [FrontendController::class, 'showKontak'])->name('kontak');
-Route::post('/kontak', [KontakController::class, 'submitForm'])->name('kontak.submit');
+Route::post('/kontak', [KontakController::class, 'submit'])->name('kontak.submit');
 
-// File Download Publik
+// ===========================
+// Media Publik
+// ===========================
 Route::get('/file-download', [MediaController::class, 'publicIndex'])->name('media.publik');
 
-// ===========================
-// Auth Routes
-// ===========================
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+// Public Info
+Route::get('/info', [FrontendInfoController::class, 'index'])->name('public.info.indexp');
+Route::get('/info/{slug}', [FrontendInfoController::class, 'show'])->name('public.info.show');
+
+// Admin Info
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('info', InfoController::class);
+});
+Route::post('/admin/info', [InfoController::class, 'store'])->name('admin.info.store');
+Route::get('/info', [InfoController::class, 'index'])->name('info.index');
 
 // ===========================
-// Route dengan Auth Middleware
+// Admin (Autentikasi Diperlukan)
 // ===========================
 Route::middleware(['auth'])->group(function () {
 
@@ -61,13 +69,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
-    // Resource Admin
+    // Resources
     Route::resource('users', UserController::class);
     Route::resource('kategoris', KategoriController::class);
     Route::resource('menus', MenuController::class);
     Route::resource('galeri', GaleriController::class);
+    Route::resource('infos', InfoController::class);
 
-    // Kontak Admin
+    // Media
+    Route::resource('admin/media', MediaController::class)->names('media');
+
+    // Kontak
     Route::prefix('admin/kontak')->group(function () {
         Route::get('/', [KontakController::class, 'index'])->name('contacts.index');
         Route::get('/create', [KontakController::class, 'create'])->name('contacts.create');
@@ -77,23 +89,27 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/{id}', [KontakController::class, 'destroy'])->name('contacts.destroy');
     });
 
-    // Media Admin
-    Route::resource('/admin/media', MediaController::class)
-        ->parameters(['media' => 'media'])
-        ->names('media');
+    // Halaman Statis Admin
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::resource('pages', PageController::class);
+    });
+
+    // Halmaman Kategori Publik
+    Route::get('/kategori/{slug}', [KategoriController::class, 'showpublik'])->name('kategoris.showpublik');
+
 });
 
 // ===========================
-// Info Routes
+// Auth Routes
 // ===========================
-Route::resource('infos', InfoController::class);
-Route::get('/informasi/{id}', [InfoController::class, 'show'])->name('infos.show');
-Route::get('/informasi/publik', [InfoController::class, 'publik'])->name('info.publik');
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Homepage
-Route::get('/', [FrontendController::class, 'home'])->name('home');
-
-// Fallback slug (jika slug bukan yang di atas)
+// ===========================
+// Fallback Slug — jika URL tidak cocok dengan yang lain
+// (berfungsi untuk menampilkan halaman dinamis selain /halaman/...)
+// ===========================
 Route::get('/{slug}', [FrontendController::class, 'show'])
     ->where('slug', '^(?!halaman|admin|login|logout|dashboard|media|galeri|kontak|informasi|infos|file-download|pages).*$')
-    ->name('page.show');
+    ->name('slug.show');

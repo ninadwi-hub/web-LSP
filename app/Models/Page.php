@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Page extends Model
 {
@@ -29,6 +30,10 @@ protected static function boot()
             $page->slug = Str::slug($page->title);
         }
     });
+}
+public function infos()
+{
+    return $this->hasMany(Info::class);
 }
 
 }

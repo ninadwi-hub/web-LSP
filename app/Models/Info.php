@@ -13,19 +13,27 @@ class Info extends Model
     public $timestamps = true;
 
     protected $dates = ['created_at', 'updated_at'];
-
-    protected $fillable = [
-        'kategori_id', 'title', 'slug', 'content', 'thumbnail', 'views'
+ protected $fillable = [
+        'page_id',
+        'title',
+        'content',
+        'status',
+        'image'
     ];
 
     // Relasi ke kategori
     public function kategori()
-{
-    return $this->belongsTo(Kategori::class, 'kategori_id');
-}
+    {
+        return $this->belongsTo(Kategori::class, 'kategori_id');
+    }
 
+    // Relasi ke page (halaman statis)
+    public function page()
+    {
+        return $this->belongsTo(Page::class);
+    }
 
-    // Slug otomatis saat create
+    // Slug otomatis saat create & update
     protected static function boot()
     {
         parent::boot();

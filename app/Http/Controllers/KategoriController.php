@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kategori;
+use App\Models\Page;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str; 
 
@@ -72,7 +73,7 @@ Kategori::create([
     $kategori = Kategori::where('slug', $slug)->firstOrFail();
     $infos = $kategori->infos()->latest()->get();
 
-    return view('kategori.show', compact('kategori', 'infos'));
+    return view('page.show', compact('kategori', 'infos','page'));
 }
 
 }

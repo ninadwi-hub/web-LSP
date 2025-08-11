@@ -13,7 +13,7 @@ class KontakController extends Controller
 public function showKontak()
 {
     $menus = Menu::with('children')->whereNull('parent_id')->orderBy('order')->get();
-    return view('kontak', compact('menus'));
+   return view('kontak', compact('menus')); // atau 'frontend.kontak' kalau kamu pakai subfolder
 }
 
     // KontakController.php
@@ -41,23 +41,30 @@ public function store(Request $request)
         'status' => 'pending',
     ]);
 
-   Contact::create($validated);
-
     return response()->json(['success' => 'Pesan berhasil dikirim!']);
 }
 
 
     // Halaman manajemen kontak
-    public function index()
+public function index(Request $request)
 {
-    $contacts = Contact::latest()->paginate(10)->withQueryString();
-    return view('kontak.index', compact('contacts'));
+    $query = Contact::query();
+
+    if ($search = $request->input('search')) {
+        $query->where('name', 'like', "%{$search}%")
+              ->orWhere('email', 'like', "%{$search}%")
+              ->orWhere('subject', 'like', "%{$search}%");
+    }
+
+    $contacts = $query->orderBy('created_at', 'desc')->paginate(10);
+
+    return view('contacts.index', compact('contacts'));
 }
 
     public function edit($id)
     {
         $contact = Contact::findOrFail($id);
-        return view('kontak.edit', compact('contact')); // ✅ ganti path
+        return view('contacts.edit', compact('contact')); // ✅ ganti path
     }
 
     public function update(Request $request, $id)
@@ -85,5 +92,26 @@ public function store(Request $request)
     public function showForm() {
     return view('kontak'); // 
 }
+
+public function submit(Request $request)
+{
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email',
+        'subject' => 'required|string|max:255',
+        'message' => 'required|string',
+    ]);
+
+    Contact::create([
+    'name' => $validated['name'],
+    'email' => $validated['email'],
+    'subject' => $validated['subject'],
+    'message' => $validated['message'],
+    'status' => 'pending', // ✅ SESUAI ENUM
+]);
+
+    return response()->json(['success' => 'Pesan Anda telah terkirim!']);
+}
+
 
 }

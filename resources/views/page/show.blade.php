@@ -1,19 +1,46 @@
-@extends('layouts.app') {{-- Sesuaikan jika kamu punya layout utama --}}
-
+@extends('layouts.website') 
 @section('title', $page->title)
 
-@section('content')
-<div class="container my-5">
-    <h1 class="mb-3">{{ $page->title }}</h1>
+@section('meta')
+    @if ($page->meta_description)
+        <meta name="description" content="{{ $page->meta_description }}">
+    @endif
+    @if ($page->meta_keywords)
+        <meta name="keywords" content="{{ $page->meta_keywords }}">
+    @endif
+@endsection
 
-    @if($page->image)
-        <div class="mb-4">
-            <img src="{{ asset('storage/' . $page->image) }}" alt="{{ $page->title }}" class="img-fluid rounded">
-        </div>
+@section('content')
+
+<!-- ======= Breadcrumb Section (Sederhana, tanpa judul besar) ======= -->
+<section class="breadcrumbs py-3" style="background-color: #eaf7f9;">
+  <div class="container">
+    <div class="d-flex justify-content-end align-items-center">
+      <ol class="breadcrumb mb-0 p-0">
+        <li class="breadcrumb-item"><a href="{{ route('website') }}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ $page->title }}</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ======= Page Section ======= -->
+<section id="page" class="page py-5">
+  <div class="container" data-aos="fade-up">
+    
+    {{-- Konten tampil dulu --}}
+    <div class="page-content mb-4">
+      {!! $page->content !!}
+    </div>
+
+    {{-- Gambar tampil setelah konten --}}
+    @if($page->featured_image)
+      <div class="text-center">
+        <img src="{{ asset('storage/' . $page->featured_image) }}" alt="{{ $page->title }}" class="img-fluid rounded">
+      </div>
     @endif
 
-    <div class="content">
-        {!! $page->content !!}
-    </div>
-</div>
-@endsection
+  </div>
+</section>
+<!-- End Page Section -->
+

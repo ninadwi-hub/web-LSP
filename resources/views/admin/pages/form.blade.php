@@ -1,5 +1,5 @@
 @php
-  $kategoriUrutan = ['profil', 'sertifikasi', 'media', 'informasi'];
+  $kategoriUrutan = ['home','profil', 'sertifikasi', 'media', 'informasi','kontak'];
 @endphp
 
 <div class="mb-3">
@@ -43,7 +43,7 @@
 
 <div class="mb-3">
     <label>Featured Image</label>
-    <input type="text" name="featured_image" class="form-control" value="{{ old('featured_image', $page->featured_image ?? '') }}">
+    <input type="file" name="featured_image" class="form-control">
 </div>
 
 <div class="mb-3">
