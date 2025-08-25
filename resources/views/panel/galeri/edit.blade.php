@@ -61,9 +61,10 @@
         </div>
 
         <div class="mb-3">
-            <label>Tanggal Pengambilan</label>
-            <input type="date" name="taken_at" class="form-control" value="{{ old('taken_at', $galeri->taken_at) }}">
-        </div>
+    <label>Tanggal Pengambilan</label>
+    <input type="date" name="taken_at" class="form-control"
+        value="{{ old('taken_at', $galeri->taken_at ? \Carbon\Carbon::parse($galeri->taken_at)->format('Y-m-d') : '') }}">
+</div>
 
         <div class="form-check mb-3">
             <input type="checkbox" name="is_featured" class="form-check-input" id="featuredCheck" value="1" {{ $galeri->is_featured ? 'checked' : '' }}>

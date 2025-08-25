@@ -1,36 +1,25 @@
-
 @extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1>Manajemen Kontak</h1>
+@section('title', 'Manajemen Kontak')
 
-        {{-- Tombol Tambah Pesan --}}
+@section('content')
+<div class="container mt-4">
+    <h1>Manajemen Kontak</h1>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
         <a href="{{ route('contacts.create') }}" class="btn btn-primary">
-            <i class="fas fa-plus-circle"></i> Tambah Pesan
+            <i class="bx bx-plus-circle"></i> Tambah
         </a>
+
+        <form method="GET" action="{{ route('contacts.index') }}" class="d-flex">
+            <input type="text" name="search" class="form-control me-2" placeholder="Cari nama/email..." value="{{ request('search') }}">
+            <button class="btn btn-outline-secondary" type="submit">Cari</button>
+        </form>
     </div>
 
-    {{-- Alert Sukses --}}
-    @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
-    {{-- Form Pencarian --}}
-    <form method="GET" action="{{ route('contacts.index') }}" class="row mb-3">
-        <div class="col-md-4">
-            <input type="text" name="search" class="form-control" placeholder="Cari nama/email..." value="{{ request('search') }}">
-        </div>
-        <div class="col-md-2">
-            <button class="btn btn-outline-secondary" type="submit">Cari</button>
-        </div>
-    </form>
-
-    {{-- Tabel Kontak --}}
     <div class="table-responsive">
         <table class="table table-bordered table-striped align-middle">
-            <thead class="table-light">
+            <thead class="table-dark">
                 <tr>
                     <th>Nama</th>
                     <th>Email</th>
@@ -55,15 +44,20 @@
                         </td>
                         <td>{{ $contact->created_at->format('d-m-Y') }}</td>
                         <td>
-                            <a href="{{ route('contacts.edit', $contact->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <div class="btn-group">
+                                <a href="{{ route('contacts.edit', $contact->id) }}" class="btn btn-warning btn-sm">
+                                    <i class="bx bx-edit"></i> Edit
+                                </a>
 
-                            <form method="POST" action="{{ route('contacts.destroy', $contact->id) }}" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button onclick="return confirm('Yakin ingin hapus?')" class="btn btn-sm btn-danger">
-                                    Hapus
-                                </button>
-                            </form>
+                                <form method="POST" action="{{ route('contacts.destroy', $contact->id) }}" class="d-inline"
+                                      onsubmit="return confirm('Yakin ingin hapus?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger btn-sm">
+                                        <i class="bx bx-trash"></i> Hapus
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @empty
@@ -73,11 +67,11 @@
                 @endforelse
             </tbody>
         </table>
-    </div>
 
-    {{-- Pagination --}}
-    <div class="mt-3">
-        {{ $contacts->withQueryString()->links() }}
+        <!-- Pagination -->
+        <div class="d-flex justify-content-end mt-2">
+            {{ $contacts->links('pagination::bootstrap-5') }}
+        </div>
     </div>
 </div>
 @endsection

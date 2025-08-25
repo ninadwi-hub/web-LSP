@@ -3,49 +3,78 @@
 @section('title', 'Manajemen Menu')
 
 @section('content')
-<div class="container">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+<div class="container mt-4">
+    <!-- Header dan tombol tambah -->
+    <div class="d-flex justify-content-between align-items-center mb-2">
         <h4>Manajemen Menu Navigasi</h4>
-        <a href="{{ route('menus.create') }}" class="btn btn-primary">+ Tambah Menu</a>
     </div>
 
+    <!-- Tombol tambah -->
+    <div class="mb-3">
+        <a href="{{ route('menus.create') }}" class="btn btn-primary">
+            <i class="bx bx-plus"></i> Tambah Menu
+        </a>
+    </div>
+
+    <!-- Alert sukses -->
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Judul</th>
-                <th>Slug / URL</th>
-                <th>Tipe</th>
-                <th>Parent</th>
-                <th>Status</th>
-                <th>Urutan</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($menus as $menu)
+    <!-- Tabel menu -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped align-middle">
+            <thead class="table-dark text-center">
                 <tr>
-                    <td>{{ $menu->title }}</td>
-                    <td>{{ $menu->type == 'external' ? $menu->url : $menu->slug }}</td>
-                    <td>{{ ucfirst($menu->type) }}</td>
-                    <td>{{ $menu->parent?->title ?? '-' }}</td>
-                    <td><span class="badge bg-{{ $menu->is_active ? 'success' : 'secondary' }}">
-                        {{ $menu->is_active ? 'Aktif' : 'Nonaktif' }}</span></td>
-                    <td>{{ $menu->order }}</td>
-                    <td>
-                        <a href="{{ route('menus.edit', $menu->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                        <form action="{{ route('menus.destroy', $menu->id) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
-                        </form>
-                    </td>
+                    <th>Judul</th>
+                    <th>Slug / URL</th>
+                    <th>Tipe</th>
+                    <th>Parent</th>
+                    <th>Status</th>
+                    <th>Urutan</th>
+                    <th>Aksi</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @forelse($datamenu as $menu)
+                    <tr>
+                        <td>{{ $menu->title }}</td>
+                        <td>{{ $menu->type == 'external' ? $menu->url : $menu->slug }}</td>
+                        <td class="text-center">{{ ucfirst($menu->type) }}</td>
+                        <td>{{ $menu->parent?->title ?? '-' }}</td>
+                        <td class="text-center">
+                            <span class="badge bg-{{ $menu->is_active ? 'success' : 'secondary' }}">
+                                {{ $menu->is_active ? 'Aktif' : 'Nonaktif' }}
+                            </span>
+                        </td>
+                        <td class="text-center">{{ $menu->order }}</td>
+                        <td class="text-center">
+                            <div class="btn-group" role="group">
+                                <a href="{{ route('menus.edit', $menu->id) }}" class="btn btn-warning btn-sm">
+                                    <i class="bx bx-edit"></i> Edit
+                                </a>
+                                <form action="{{ route('menus.destroy', $menu->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger btn-sm">
+                                        <i class="bx bx-trash"></i> Hapus
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="7" class="text-center text-muted">Tidak ada data menu.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-end mt-3">
+        {{ $datamenu->links('pagination::bootstrap-5') }}
+    </div>
 </div>
 @endsection

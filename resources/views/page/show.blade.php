@@ -28,9 +28,13 @@
 <section id="page" class="page py-5">
   <div class="container" data-aos="fade-up">
     
-    {{-- Konten tampil dulu --}}
+    {{-- Jika kategori kontak, tampilkan partial kontak --}}
     <div class="page-content mb-4">
-      {!! $page->content !!}
+      @if($page->category == 'kontak')
+        @include('layouts.partials.contact-section')
+      @else
+        {!! $page->content !!}
+      @endif
     </div>
 
     {{-- Gambar tampil setelah konten --}}
@@ -43,4 +47,4 @@
   </div>
 </section>
 <!-- End Page Section -->
-
+@endsection

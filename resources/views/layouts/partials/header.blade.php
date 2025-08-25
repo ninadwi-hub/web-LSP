@@ -17,46 +17,67 @@
       <img src="{{ asset('themes/medicio/assets/img/logo_lsp.png') }}" alt="Logo LSP">
     </a>
 
-    <nav id="navbar" class="navbar order-last order-lg-0">
-      <ul>
-        <li><a class="nav-link scrollto" href="{{ url('/') }}">Home</a></li>
+<nav id="navbar" class="navbar order-last order-lg-0">
+  <ul>
+    @foreach($menus->where('parent_id', null) as $menu)
+      @php
+        if ($menu->type === 'route' && $menu->route) {
+          $url = route($menu->route);
+        } elseif ($menu->type === 'internal' && $menu->page) {
+          $url = route('page.show', $menu->page->slug);
+        } elseif ($menu->url) {
+          $url = $menu->url;
+        } else {
+          $url = '#';
+        }
+        $children = $menu->children;
+      @endphp
 
-        @php
-          $kategoriUrutan = ['profil', 'sertifikasi', 'media', 'informasi'];
-        @endphp
+      @if($children->count() > 0 || $menu->slug === 'skema-sertifikasi')
+        <li class="dropdown">
+          {{-- Parent dropdown tidak pakai href, cukup trigger dropdown --}}
+          <a href="#" onclick="return false;">
+            {{ $menu->title }} <i class="bi bi-chevron-down"></i>
+          </a>
+          <ul>
+            {{-- Children biasa --}}
+            @foreach($children as $child)
+              @php
+                if ($child->type === 'route' && $child->route) {
+                  $childUrl = route($child->route);
+                } elseif ($child->type === 'internal' && $child->page) {
+                  $childUrl = route('page.show', $child->page->slug);
+                } elseif ($child->url) {
+                  $childUrl = $child->url;
+                } else {
+                  $childUrl = '#';
+                }
+              @endphp
+              <li><a href="{{ $childUrl }}">{{ $child->title }}</a></li>
+            @endforeach
 
-        @foreach($kategoriUrutan as $kategori)
-          @php
-            $halamanKategori = $pagesByCategory[$kategori] ?? collect();
-            $firstPage = $halamanKategori->first();
-          @endphp
-
-          @if($firstPage)
-            <li class="dropdown">
-              <a class="nav-link scrollto {{ request()->is('halaman/*') ? 'active' : '' }}"
-                 href="{{ route('page.show', ['slug' => $firstPage->slug]) }}">
-                {{ ucfirst($kategori) }} <i class="bi bi-chevron-down"></i>
-              </a>
-              <ul>
-                @foreach($halamanKategori as $page)
-                  @if($page->slug)
-                    <li>
-                      <a class="nav-link scrollto {{ request()->is('halaman/'.$page->slug) ? 'active' : '' }}"
-                         href="{{ route('page.show', ['slug' => $page->slug]) }}">
-                        {{ $page->title }}
-                      </a>
-                    </li>
-                  @endif
-                @endforeach
-              </ul>
-            </li>
-          @endif
-        @endforeach
-
-        <li><a class="nav-link scrollto" href="{{ route('kontak') }}">Kontak Kami</a></li>
-      </ul>
-      <i class="bi bi-list mobile-nav-toggle"></i>
-    </nav>
+            {{-- Submenu skema sertifikasi --}}
+            @if($menu->slug === 'skema-sertifikasi')
+              @php
+              $skemas = \App\Models\Skema::all();
+              @endphp
+              @foreach($skemas as $skema)
+                <li>
+                  <a href="{{ route('frontend.skema.detail', $skema->id) }}">
+                    {{ $skema->nama }}
+                  </a>
+                </li>
+              @endforeach
+            @endif
+          </ul>
+        </li>
+      @else
+        <li><a href="{{ $url }}">{{ $menu->title }}</a></li>
+      @endif
+    @endforeach
+  </ul>
+  <i class="bi bi-list mobile-nav-toggle"></i>
+</nav>
 
     <a href="{{ route('login') }}" class="appointment-btn scrollto">
       <span class="d-none d-md-inline">Login</span>

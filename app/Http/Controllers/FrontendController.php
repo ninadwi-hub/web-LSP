@@ -7,29 +7,30 @@ use App\Models\Page;
 use App\Models\Galeri;
 use App\Models\Kategori;
 use App\Models\Info;
+use App\Models\Skema;
+use App\Models\UnitKompetensi;
 
 class FrontendController extends Controller
 {
-    /**
-     * Menampilkan halaman kontak publik
-     */
-    public function showKontak()
-    {
-        return view('kontak');
-    }
 
     /**
      * Menampilkan halaman fallback berbasis slug (untuk Page)
      */
     public function show($slug)
-    {
-        $page = Page::where('slug', $slug)
-            ->where('status', 'published')
-            ->firstOrFail();
+{
+    $page = Page::where('slug', $slug)
+        ->where('status', 'published')
+        ->firstOrFail();
 
-        return view('page.show', compact('page'));
+    // Jika halaman ini adalah skema sertifikasi
+    if ($slug === 'skema-sertifikasi') {
+        $skemaList = Skema::withCount('unitKompetensi')->orderBy('nama')->get();
+        return view('frontend.skema.statis', compact('page', 'skemaList'));
     }
 
+    // Halaman statis biasa
+    return view('page.show', compact('page'));
+}
     /**
      * Halaman beranda
      */
@@ -89,17 +90,34 @@ class FrontendController extends Controller
 
         return view('info.show', compact('info', 'page'));
     }
-    public function showSkemaSertifikasi()
+
+    public function skemaSertifikasi()
 {
-    // Pastikan page_id sesuai ID halaman Skema Sertifikasi
-    $pageId = Page::where('slug', 'skema_sertifikasi')->value('id');
+    // Ambil page "Skema Sertifikasi" dari admin
+    $page = Page::where('slug', 'skema-sertifikasi')
+        ->where('status', 'published')
+        ->first();
 
-    $skemas = Info::where('page_id', $pageId)
-                ->where('status', 'published')
-                ->orderBy('created_at', 'desc')
-                ->get();
+    // Ambil daftar skema + jumlah unit kompetensi
+    $skemaList = Skema::withCount('unitKompetensi')
+        ->orderBy('nama')
+        ->get();
 
-    return view('frontend.skema_sertifikasi', compact('skemas'));
+    return view('frontend.skema.index', compact('page', 'skemaList'));
 }
+
+public function skemaIndex()
+{
+    $skemaList = Skema::withCount('unitKompetensi')->orderBy('nama')->get();
+    return view('frontend.skema.index', compact('skemaList'));
+}
+public function skemaDetail($id)
+{
+    // Load skema + unit kompetensinya
+    $skema = \App\Models\Skema::with('unitKompetensi')->findOrFail($id);
+
+    return view('frontend.skema.detail', compact('skema'));
+}
+
 
 }

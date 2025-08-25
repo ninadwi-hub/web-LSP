@@ -1,36 +1,68 @@
 @extends('layouts.app')
 
+@section('title', 'Daftar Halaman')
+
 @section('content')
-    <h3>Daftar Halaman</h3>
+<div class="container mt-4">
+    <h3 class="mb-4">Daftar Halaman</h3>
 
-    <a href="{{ route('admin.pages.create') }}" class="btn btn-primary mb-3">Tambah Halaman</a>
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Judul</th>
-                <th>Kategori</th>
-                <th>Status</th>
-                <th>Unggulan</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($pages as $page)
+    <a href="{{ route('admin.pages.create') }}" class="btn btn-primary mb-3">
+        <i class="bx bx-plus"></i> Tambah
+    </a>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
                 <tr>
+                    <th>No</th>
+                    <th>Judul</th>
+                    <th>Kategori</th>
+                    <th>Status</th>
+                    <th>Unggulan</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($pages as $index => $page)
+                <tr>
+                    <td>{{ $index + $pages->firstItem() }}</td>
                     <td>{{ $page->title }}</td>
                     <td>{{ ucfirst($page->category) }}</td>
-                    <td>{{ $page->status }}</td>
+                    <td>{{ ucfirst($page->status) }}</td>
                     <td>{{ $page->is_featured ? 'Ya' : 'Tidak' }}</td>
                     <td>
-                        <a href="{{ route('admin.pages.edit', $page) }}" class="btn btn-sm btn-warning">Edit</a>
-                        <form action="{{ route('admin.pages.destroy', $page) }}" method="POST" style="display:inline;">
-                            @csrf @method('DELETE')
-                            <button type="submit" onclick="return confirm('Yakin hapus?')" class="btn btn-sm btn-danger">Hapus</button>
-                        </form>
+                        <div class="btn-group">
+                            <a href="{{ route('admin.pages.edit', $page) }}" class="btn btn-warning btn-sm">
+                                <i class="bx bx-edit"></i> Edit
+                            </a>
+
+                            <form action="{{ route('admin.pages.destroy', $page) }}" method="POST" class="d-inline"
+                                  onsubmit="return confirm('Yakin ingin menghapus halaman ini?')">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm">
+                                    <i class="bx bx-trash"></i> Hapus
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+                @empty
+                <tr>
+                    <td colspan="6" class="text-center">Belum ada data halaman.</td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-end mt-2">
+            {{ $pages->links('pagination::bootstrap-5') }}
+        </div>
+    </div>
+</div>
 @endsection

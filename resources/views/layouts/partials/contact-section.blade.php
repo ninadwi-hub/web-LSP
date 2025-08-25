@@ -1,8 +1,3 @@
-@extends('layouts.website')
-
-@section('title', 'Kontak Kami')
-
-@section('content')
 <!-- ======= Contact Section ======= -->
 <section id="contact" class="contact">
   <div class="container">
@@ -89,7 +84,6 @@
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
   <i class="bi bi-arrow-up-short"></i>
 </a>
-@endsection
 
 @push('styles')
 <style>

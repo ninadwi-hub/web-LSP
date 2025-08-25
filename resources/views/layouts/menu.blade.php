@@ -36,5 +36,12 @@
     <a href="{{ route('menus.index') }}" class="list-group-item list-group-item-action">
         Manajemen Menu
     </a>
+    <a href="{{ route('skema.index') }}" class="list-group-item list-group-item-action">
+    Skema Sertifikasi
+</a>
+
+<a href="{{ route('unit.index') }}" class="list-group-item list-group-item-action">
+    Unit Kompetensi
+</a>
 
 </div>

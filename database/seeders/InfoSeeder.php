@@ -12,7 +12,7 @@ class InfoSeeder extends Seeder
 
         for ($i = 1; $i <= 10; $i++) {
             Info::create([
-                'kategori_id' => $kategori->id,
+                '' => $kategori->id,
                 'title' => "Contoh Info $i",
                 'slug' => Str::slug("Contoh Info $i"),
                 'content' => "Isi dari informasi ke-$i",

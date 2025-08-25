@@ -35,20 +35,37 @@
                 <input type="text" name="slug" class="form-control" value="{{ old('slug') }}">
             </div>
 
-            {{-- Tipe menu --}}
-            <div class="col-md-6 mb-3">
-                <label for="type">Tipe</label>
-                <select name="type" class="form-control" required>
-                    <option value="internal" {{ old('type') == 'internal' ? 'selected' : '' }}>Internal</option>
-                    <option value="external" {{ old('type') == 'external' ? 'selected' : '' }}>External</option>
-                </select>
-            </div>
+            <div class="form-group">
+    <label for="type">Tipe Menu</label>
+    <select name="type" class="form-control" id="type">
+        <option value="internal">Internal (Page)</option>
+        <option value="external">External (URL)</option>
+        <option value="route">Route Khusus</option>
+    </select>
+</div>
 
-            {{-- URL jika external --}}
-            <div class="col-md-6 mb-3">
-                <label for="url">URL (jika external)</label>
-                <input type="text" name="url" class="form-control" value="{{ old('url') }}">
-            </div>
+{{-- Jika internal --}}
+<div class="form-group" id="internal-section">
+    <label for="page_id">Pilih Halaman</label>
+    <select name="page_id" class="form-control">
+        <option value="">-- pilih halaman --</option>
+        @foreach($pages as $page)
+            <option value="{{ $page->id }}">{{ $page->title }}</option>
+        @endforeach
+    </select>
+</div>
+
+{{-- Jika external --}}
+<div class="form-group" id="external-section">
+    <label for="url">URL</label>
+    <input type="url" name="url" class="form-control" placeholder="https://...">
+</div>
+
+{{-- Jika route khusus --}}
+<div class="form-group" id="route-section">
+    <label for="route">Nama Route</label>
+    <input type="text" name="route" class="form-control" placeholder="contoh: frontend.skema.index">
+</div>
 
             {{-- Parent --}}
             <div class="col-md-6 mb-3">

@@ -4,13 +4,13 @@
     <head>
 
         <meta charset="utf-8" />
-        <title>Login | Minia - Minimal Admin & Dashboard Template</title>
+        <title>Login | LSP Trainer Kompeten Indonesia</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
 
     <!-- App favicon -->
-<link rel="shortcut icon" href="{{ asset('themes/minia/assets/images/favicon.ico') }}">
+<link rel="shortcut icon" href="{{ asset('THEMES/minia/images/logo.bg.png') }}">
 
 <!-- preloader css -->
 <link rel="stylesheet" href="{{ asset('themes/minia/assets/css/preloader.min.css') }}" type="text/css" />
@@ -18,7 +18,7 @@
 <!-- Bootstrap Css -->
 <link href="{{ asset('themes/minia/assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
 <!-- Icons Css -->
-<link href="{{ asset('themes/minia/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('THEMES/minia/images/logo.bg.png') }}" rel="stylesheet" type="text/css" />
 <!-- App Css-->
 <link href="{{ asset('themes/minia/assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 
@@ -26,7 +26,7 @@
 
     <body>
 
-    <!-- <body data-layout="horizontal"> -->
+    <!-- <body data-layout="horizontal"> --> 
         <div class="auth-page">
             <div class="container-fluid p-0">
                 <div class="row g-0">
@@ -36,13 +36,13 @@
                                 <div class="d-flex flex-column h-100">
                                     <div class="mb-4 mb-md-5 text-center">
                                         <a href="index.html" class="d-block auth-logo">
-                                           <img src="{{ asset('themes/minia/assets/images/logo-sm.svg') }}" alt="" height="28">
+                                           <img src="{{ asset('THEMES/minia/images/logo.png') }}" alt="" height="28">
                                         </a>
                                     </div>
                                     <div class="auth-content my-auto">
                                         <div class="text-center">
                                             <h5 class="mb-0">Welcome Back !</h5>
-                                            <p class="text-muted mt-2">Sign in to continue to Minia.</p>
+                                            <p class="text-muted mt-2">Sign in to continue.</p>
                                         </div>
                                         <form method="POST" action="{{ route('login') }}">
                                             @csrf

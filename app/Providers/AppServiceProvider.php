@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Page;
+use App\Models\Skema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
 public function boot()
 {
     View::composer('*', function ($view) {
-        $categories = ['profil', 'sertifikasi', 'media', 'informasi'];
+        $categories = ['home','profil', 'sertifikasi', 'media', 'informasi','kontak'];
 
         $pagesByCategory = [];
 
@@ -37,6 +38,12 @@ public function boot()
 
         $view->with('pagesByCategory', $pagesByCategory);
     });
+{
+    // Kirim data skema ke semua view
+    view()->composer('layouts.website', function ($view) {
+        $view->with('menuSkema', Skema::orderBy('nama')->get());
+    });
+}
 }
 
 

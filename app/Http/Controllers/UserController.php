@@ -12,7 +12,7 @@ class UserController extends Controller
 // Tampilkan semua user
 public function index()
 {
-$users = User::orderBy('id', 'DESC')->get();
+$users = User::orderBy('id')->paginate(10);
 return view('users.index', compact('users'));
 }
 

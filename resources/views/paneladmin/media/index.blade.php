@@ -4,7 +4,7 @@
 <div class="container">
     <h2 class="mb-4">Manajemen File Download</h2>
 
-    <a href="{{ route('media.create') }}" class="btn btn-success mb-3">+ Tambah File</a>
+    <a href="{{ route('media.create') }}" class="btn btn-success mb-3">+ Tambah </a>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>

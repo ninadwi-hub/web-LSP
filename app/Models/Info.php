@@ -13,13 +13,16 @@ class Info extends Model
     public $timestamps = true;
 
     protected $dates = ['created_at', 'updated_at'];
- protected $fillable = [
-        'page_id',
-        'title',
-        'content',
-        'status',
-        'image'
-    ];
+    protected $fillable = [
+    'kategori_id',
+    'page_id',
+    'title',
+    'content',
+    'status',
+    'slug',
+    'thumbnail',
+    'is_active'
+];
 
     // Relasi ke kategori
     public function kategori()

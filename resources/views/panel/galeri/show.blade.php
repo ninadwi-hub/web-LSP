@@ -18,7 +18,12 @@
             <div class="col-md-7">
                 <div class="card-body">
                     <h5 class="card-title">{{ $galeri->title }}</h5>
-                    <p class="card-text">{{ $galeri->description }}</p>
+                    
+                    <!-- Deskripsi transparan -->
+                    <p class="card-text text-muted" style="opacity: 0.6;">
+                        {{ $galeri->description }}
+                    </p>
+
                     <p class="card-text"><strong>Kategori:</strong> {{ $galeri->category->name ?? '-' }}</p>
                     <p class="card-text"><strong>Album:</strong> {{ $galeri->album->name ?? '-' }}</p>
                     <p class="card-text"><strong>Uploader:</strong> {{ $galeri->uploader ?? '-' }}</p>

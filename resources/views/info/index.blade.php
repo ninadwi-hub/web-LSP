@@ -1,51 +1,81 @@
 @extends('layouts.app')
 
-@section('title', 'Info')
+@section('title', 'Manajemen Info')
 
 @section('content')
 <div class="container mt-4">
-    <h3 class="mb-4">Daftar Info</h3>
-    <a href="{{ route('infos.create') }}" class="btn btn-primary mb-3">+ Tambah Info</a>
+    <h1 class="mb-2">Manajemen Info</h1>
 
-    @if (session('success'))
+    <a href="{{ route('admin.info.create') }}" class="btn btn-primary mb-3">
+        <i class="bx bx-plus"></i> Tambah
+    </a>
+
+    @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Judul</th>
-                <th>Kategori</th>
-                <th>Thumbnail</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($info as $item)
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped align-middle">
+            <thead class="table-dark text-center">
                 <tr>
-                    <td>{{ $item->title }}</td>
-                    <td>{{ $item->kategori->nama }}</td>
-                    <td>
-                        @if($item->thumbnail)
-                            <img src="{{ asset('storage/' . $item->thumbnail) }}" width="80">
-                        @endif
-                    </td>
-                    <td>
-                        <a href="{{ route('infos.edit', $item) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('infos.destroy', $item) }}" method="POST" class="d-inline"
-                            onsubmit="return confirm('Yakin hapus?')">
-                            @csrf @method('DELETE')
-                            <button class="btn btn-danger btn-sm">Hapus</button>
-                        </form>
-                    </td>
+                    <th>No</th>
+                    <th>Thumbnail</th>
+                    <th>Judul</th>
+                    <th>Kategori</th>
+                    <th>Status</th>
+                    <th>Aktif</th>
+                    <th>Dilihat</th>
+                    <th>Aksi</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @forelse($info as $i => $item)
+                    <tr>
+                        <td class="text-center">{{ $i + $info->firstItem() }}</td>
+                        <td class="text-center">
+                            @if($item->thumbnail)
+                                <img src="{{ asset('storage/'.$item->thumbnail) }}" width="80" alt="">
+                            @else
+                                <span class="text-muted">-</span>
+                            @endif
+                        </td>
+                        <td>{{ $item->title }}</td>
+                        <td>{{ $item->kategori->nama ?? '-' }}</td>
+                        <td class="text-center">
+                            <span class="badge bg-{{ $item->status == 'published' ? 'success' : 'secondary' }}">
+                                {{ ucfirst($item->status) }}
+                            </span>
+                        </td>
+                        <td class="text-center">{{ $item->is_active ? 'Ya' : 'Tidak' }}</td>
+                        <td class="text-center">{{ $item->views }}</td>
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <a href="{{ route('admin.info.edit', $item->id) }}" class="btn btn-warning btn-sm">
+                                    <i class="bx bx-edit"></i> Edit
+                                </a>
 
-    {{-- ✅ Tampilkan pagination --}}
-    <div class="mt-3">
-        {{ $info->links() }}
+                                <form action="{{ route('admin.info.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus data ini?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger btn-sm">
+                                        <i class="bx bx-trash"></i> Hapus
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="8" class="text-center">Belum ada data</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+
+    {{-- Pagination --}}
+    <div class="d-flex justify-content-end">
+        {{ $info->links('pagination::bootstrap-5') }}
     </div>
 </div>
 @endsection

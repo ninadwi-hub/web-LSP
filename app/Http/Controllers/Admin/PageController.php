@@ -10,35 +10,37 @@ use App\Models\Page;
 class PageController extends Controller
 {
     public function index()
-    {
-        $pages = Page::all();
-        return view('admin.pages.index', compact('pages'));
-    }
+{
+    $pages = Page::paginate(10); // langsung paginate
+    return view('admin.pages.index', compact('pages'));
+}
+
 
     public function create()
     {
         return view('admin.pages.create');
     }
 
-   public function store(Request $request)
+public function store(Request $request)
 {
-    $validated = $request->validate([
-        'title' => 'required|string|max:255',
-        'content' => 'required',
-        'status' => 'required|in:draft,published,archived',
-        'category' => 'required|in:profil,sertifikasi,media,informasi',
-        'featured_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-        'meta_description' => 'nullable|string',
-        'meta_keywords' => 'nullable|string',
-        'published_at' => 'nullable|date',
-        'is_homepage' => 'nullable|boolean',
-        'slug' => 'nullable|string|unique:pages,slug',
-    ]);
+    $kategoriValid = \App\Models\Menu::where('is_active', 1)->pluck('slug')->toArray();
+
+$validated = $request->validate([
+    'title' => 'required|string|max:255',
+    'content' => 'required',
+    'status' => 'required|in:draft,published,archived',
+    'category' => 'required|in:' . implode(',', $kategoriValid),
+    'featured_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+    'meta_description' => 'nullable|string',
+    'meta_keywords' => 'nullable|string',
+    'published_at' => 'nullable|date',
+    'is_homepage' => 'nullable|boolean',
+    'slug' => 'nullable|string|unique:pages,slug' . (isset($page) ? ',' . $page->id : ''),
+]);
 
     $validated['slug'] = $validated['slug'] ?? Str::slug($validated['title']);
     $validated['is_homepage'] = $request->has('is_homepage');
 
-    // Simpan gambar jika ada
     if ($request->hasFile('featured_image')) {
         $path = $request->file('featured_image')->store('uploads/pages', 'public');
         $validated['featured_image'] = $path;
@@ -59,7 +61,7 @@ class PageController extends Controller
         'title' => 'required|string|max:255',
         'content' => 'required',
         'status' => 'required|in:draft,published,archived',
-        'category' => 'required|in:profil,sertifikasi,media,informasi',
+        'category' => 'required|in:home,profil,sertifikasi,media,informasi,kontak',
         'featured_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         'meta_description' => 'nullable|string',
         'meta_keywords' => 'nullable|string',

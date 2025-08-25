@@ -1,80 +1,88 @@
-
 @extends('layouts.app')
 
-@section('title', 'Edit Info')
-
 @section('content')
-<div class="container mt-4">
-    <h3>Edit Info</h3>
+@php
+    $kategoriUrutan = ['home','profil', 'sertifikasi', 'media', 'informasi','kontak'];
+@endphp
 
-    @php
-        $pageUrutan = ['home','profil', 'sertifikasi', 'media', 'informasi','kontak'];
-        $pages = $pages->sortBy(function($page) use ($pageUrutan) {
-            return array_search($page->slug, $pageUrutan);
-        });
-    @endphp
+<div class="container">
+    <h1 class="mb-4">Edit Info</h1>
 
-    <form action="{{ route('infos.update', $info) }}" method="POST" enctype="multipart/form-data">
-        @csrf @method('PUT')
+    <form action="{{ route('admin.info.update', $info->id) }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
 
-        {{-- Kategori --}}
+            {{-- Kategori --}}
+            <div class="mb-3">
+                <label>Kategori</label>
+                <select name="kategori_id" class="form-control" required>
+    <option value="">-- Pilih Kategori --</option>
+    @foreach($kategoris as $kategori)
+        <option value="{{ $kategori->id }}"
+            {{ old('kategori_id') == $kategori->id ? 'selected' : '' }}>
+            {{ ucfirst($kategori->nama) }}
+        </option>
+    @endforeach
+</select>
+            </div>
+
+        {{-- Halaman Statis Opsional --}}
         <div class="mb-3">
-            <label>Kategori</label>
-            <select name="kategori_id" class="form-control">
-                @foreach ($kategoris as $kategori)
-                    <option value="{{ $kategori->id }}" {{ $info->kategori_id == $kategori->id ? 'selected' : '' }}>
-                        {{ $kategori->nama }}
+            <label>Halaman Statis (Opsional)</label>
+            <select name="page_id" class="form-control">
+                <option value="">-- Tidak Ada --</option>
+                @foreach($pages as $p)
+                    <option value="{{ $p->id }}" {{ old('page_id', $info->page_id) == $p->id ? 'selected' : '' }}>
+                        {{ $p->title }}
                     </option>
                 @endforeach
             </select>
         </div>
 
-
-{{-- Tampilkan di Halaman --}}
-<div class="mb-3">
-    <label>Tampilkan di Halaman</label>
-    <select name="page_slug" class="form-control">
-        <option value="">-- Tidak ditampilkan di halaman statis --</option>
-        @foreach ($pages as $page)
-            <option value="{{ $page->slug }}" {{ old('page_slug', $info->page_slug ?? '') == $page->slug ? 'selected' : '' }}>
-                {{ ucfirst($page->title) }}
-            </option>
-        @endforeach
-    </select>
-</div>
-
-
         {{-- Judul --}}
         <div class="mb-3">
             <label>Judul</label>
-            <input type="text" name="title" class="form-control" value="{{ $info->title }}">
+            <input type="text" name="title" class="form-control"
+                   value="{{ old('title', $info->title) }}" required>
         </div>
 
         {{-- Konten --}}
         <div class="mb-3">
-            <label>Isi Konten</label>
-            <textarea name="content" class="form-control">{{ $info->content }}</textarea>
-        </div>
-
-        {{-- Thumbnail --}}
-        <div class="mb-3">
-            <label>Thumbnail</label><br>
-            @if($info->thumbnail)
-                <img src="{{ asset('storage/' . $info->thumbnail) }}" width="100"><br><br>
-            @endif
-            <input type="file" name="thumbnail" class="form-control">
+            <label>Konten</label>
+            <textarea name="content" class="form-control" rows="8">{{ old('content', $info->content) }}</textarea>
         </div>
 
         {{-- Status --}}
         <div class="mb-3">
-            <label for="status" class="form-label">Status</label>
-            <select name="status" id="status" class="form-control">
-                <option value="draft" {{ old('status', $info->status ?? '') == 'draft' ? 'selected' : '' }}>Draft</option>
-                <option value="published" {{ old('status', $info->status ?? '') == 'published' ? 'selected' : '' }}>Published</option>
+            <label>Status</label>
+            <select name="status" class="form-control" required>
+                <option value="draft" {{ old('status', $info->status) == 'draft' ? 'selected' : '' }}>Draft</option>
+                <option value="published" {{ old('status', $info->status) == 'published' ? 'selected' : '' }}>Published</option>
+                <option value="archived" {{ old('status', $info->status) == 'archived' ? 'selected' : '' }}>Archived</option>
             </select>
         </div>
 
-        <button class="btn btn-primary">Update</button>
+        {{-- Thumbnail --}}
+        <div class="mb-3">
+            <label>Thumbnail (Opsional)</label>
+            <input type="file" name="thumbnail" class="form-control">
+            @if($info->thumbnail)
+                <p class="mt-2">
+                    <img src="{{ asset('storage/'.$info->thumbnail) }}" alt="" width="150">
+                </p>
+            @endif
+        </div>
+
+        {{-- Checkbox tampil di publik --}}
+        <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" name="is_public" value="1"
+                {{ old('is_public', $info->is_active) ? 'checked' : '' }}>
+            <label class="form-check-label">Tampilkan di halaman publik</label>
+        </div>
+
+        {{-- Tombol --}}
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{{ route('admin.info.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
 @endsection

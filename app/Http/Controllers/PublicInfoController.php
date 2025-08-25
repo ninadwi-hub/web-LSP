@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Info;
 use App\Models\Kategori;
 
-class InfoController extends Controller
+class PublicInfoController extends Controller
 {
     // Halaman list info berdasarkan kategori
     public function index()

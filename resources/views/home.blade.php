@@ -93,88 +93,73 @@
     </div>
   </section><!-- End Counts Section -->
 
-     <!-- ======= Departments Section ======= -->
-    <section id="departments" class="departments">
-      <div class="container" data-aos="fade-up">
+<!-- ======= Departments Section ======= -->
+<section id="departments" class="departments">
+  <div class="container" data-aos="fade-up">
 
-        <div class="section-title">
-          <h2>Skema Sertifikasi</h2>
-        </div>
+    <div class="section-title">
+      <h2>Skema Sertifikasi</h2>
+    </div>
 
-        <div class="row" data-aos="fade-up" data-aos-delay="100">
-          <div class="col-lg-4 mb-5 mb-lg-0">
-            <ul class="nav nav-tabs flex-column">
-              <li class="nav-item">
-                <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#tab-1">
-                  <h4>Instruktur Master</h4>
-                  <p>SKM-LSPTKI-05-2022</p>
-                </a>
-              </li>
-              <li class="nav-item mt-2">
-                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-2">
-                  <h4>Instruktur</h4>
-                  <p>SKM-LSPTKI-04-2022</p>
-                </a>
-              </li>
-              <li class="nav-item mt-2">
-                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-3">
-                  <h4>Instruktur Junior</h4>
-                  <p>SKM-LSPTKI-03-2022</p>
-                </a>
-              </li>
-              <li class="nav-item mt-2">
-                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-4">
-                  <h4>Pelatih di Tempat Kerja</h4>
-                  <p>SKM-LSPTKI-02-2022</p>
-                </a>
-              </li>
-              </li>
-              <li class="nav-item mt-2">
-                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-4">
-                  <h4>Penyelenggara Pelatihan</h4>
-                  <p>SKM-LSPTKI-01-2022</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-lg-8">
-            <div class="tab-content">
-              <div class="tab-pane active show" id="tab-1">
-                <h3>Instruktur Master</h3>
-                <p class="fst-italic">SKM-LSPTKI-05-2022</p>
-                <img src="/THEMES/Medicio/assets/img/instruktur_master.jpg" alt="" class="img-fluid">
-                <p>Skema sertifikasi okupasi Instruktur Master adalah skema sertifikasi yang dikembangkan oleh Komite Skema LSP Trainer Kompeten Indonesia untuk memenuhi kebutuhan sertifikasi kompetensi kerja di LSP Trainer Kompeten Indonesia. Kemasan yang digunakan mengacu pada Standar Kompetensi Kerja Nasional Indonesia berdasarkan Keputusan Menteri Ketenagakerjaan Republik Indonesia No. 333 Tahun 2020 Tentang Penetapan Standar Kompetensi Kerja Nasional Indonesia Kategori Aktivitas Penyewaan dan Sewa Guna Usaha Tanpa Hak Opsi, Ketenagakerjaan, Agen Perjalanan, dan Penunjang Usaha Lainnya Golongan Pokok Aktivitas Ketenagakerjaan Bidang Standarisasi, Pelatihan Kerja, dan Sertifikasi, Keputusan Menteri Ketenagakerjaan Republik Indonesia Nomor 3 Tahun 2021 tentang Penetapan Jenjang Kualifikasi Nasional lndonesia Bidang Pelatihan Kerja dan Sertifikasi dan Keputusan Direktur Jenderal Pembinaan Pelatihan Vokasi dan Produktivitas Nomor 2/1645/LP.00.01/XII/2021 tentang Pengemasan Unit Kompetensi Bidang Pelatihan Kerja. Skema sertifikasi ini digunakan sebagai acuan pada pelaksanaan assesmen oleh Asesor kompetensi LSP Trainer Kompeten Indonesia dan memastikan kompetensi pada jabatan Instruktur Master.</p>
-              </div>
-              <div class="tab-pane" id="tab-2">
-                <h3>Instruktur</h3>
-                <p class="fst-italic">SKM-LSPTKI-04-2022</p>
-                <img src="/THEMES/Medicio/assets/img/instruktur.jpg" alt="" class="img-fluid">
-                <p>Skema sertifikasi okupasi Instruktur adalah skema sertifikasi yang dikembangkan oleh Komite Skema LSP Trainer Kompeten Indonesia untuk memenuhi kebutuhan sertifikasi kompetensi kerja di LSP Trainer Kompeten Indonesia. Kemasan yang digunakan mengacu pada Standar Kompetensi Kerja Nasional Indonesia berdasarkan Keputusan Menteri Ketenagakerjaan Republik Indonesia No. 333 Tahun 2020 Tentang Penetapan Standar Kompetensi Kerja Nasional Indonesia Kategori Aktivitas Penyewaan dan Sewa Guna Usaha Tanpa Hak Opsi, Ketenagakerjaan, Agen Perjalanan, dan Penunjang Usaha Lainnya Golongan Pokok Aktivitas Ketenagakerjaan Bidang Standarisasi, Pelatihan Kerja, dan Sertifikasi, Keputusan Menteri Ketenagakerjaan Republik Indonesia Nomor 3 Tahun 2021 tentang Penetapan Jenjang Kualifikasi Nasional lndonesia Bidang Pelatihan Kerja dan Sertifikasi dan Keputusan Direktur Jenderal Pembinaan Pelatihan Vokasi dan Produktivitas Nomor 2/1645/LP.00.01/XII/2021 tentang Pengemasan Unit Kompetensi Bidang Pelatihan Kerja. Skema sertifikasi ini digunakan sebagai acuan pada pelaksanaan assesmen oleh Asesor kompetensi LSP Trainer Kompeten Indonesia dan memastikan kompetensi pada jabatan Instruktur.</p>
-              </div>
-              <div class="tab-pane" id="tab-3">
-                <h3>Instruktur Junior</h3>
-                <p class="fst-italic">SKM-LSPTKI-03-2022</p>
-                <img src="/THEMES/Medicio/assets/img/departments-3.jpg" alt="" class="img-fluid">
-                <p>Skema sertifikasi okupasi Instruktur Junior adalah skema sertifikasi yang dikembangkan oleh Komite Skema LSP Trainer Kompeten Indonesia untuk memenuhi kebutuhan sertifikasi kompetensi kerja di LSP Trainer Kompeten Indonesia. Kemasan yang digunakan mengacu pada Standar Kompetensi Kerja Nasional Indonesia berdasarkan Keputusan Menteri Ketenagakerjaan Republik Indonesia No. 333 Tahun 2020 Tentang Penetapan Standar Kompetensi Kerja Nasional Indonesia Kategori Aktivitas Penyewaan dan Sewa Guna Usaha Tanpa Hak Opsi, Ketenagakerjaan, Agen Perjalanan, dan Penunjang Usaha Lainnya Golongan Pokok Aktivitas Ketenagakerjaan Bidang Standarisasi, Pelatihan Kerja, dan Sertifikasi, Keputusan Menteri Ketenagakerjaan Republik Indonesia Nomor 3 Tahun 2021 tentang Penetapan Jenjang Kualifikasi Nasional lndonesia Bidang Pelatihan Kerja dan Sertifikasi dan Keputusan Direktur Jenderal Pembinaan Pelatihan Vokasi dan Produktivitas Nomor 2/1645/LP.00.01/XII/2021 tentang Pengemasan Unit Kompetensi Bidang Pelatihan Kerja. Skema sertifikasi ini digunakan sebagai acuan pada pelaksanaan assesmen oleh Asesor kompetensi LSP Trainer Kompeten Indonesia dan memastikan kompetensi pada jabatan Instruktur Junior.</p>
-              </div>
-              <div class="tab-pane" id="tab-4">
-                <h3>Pelatih di Tempat Kerja</h3>
-                <p class="fst-italic">SKM-LSPTKI-02-2022</p>
-                <img src="/THEMES/Medicio/assets/img/pelatih_di_tempat_kerja.jpg" alt="" class="img-fluid">
-                <p>Skema sertifikasi okupasi Pelatih di Tempat Kerja adalah skema sertifikasi yang dikembangkan oleh Komite Skema LSP Trainer Kompeten Indonesia untuk memenuhi kebutuhan sertifikasi kompetensi kerja di LSP Trainer Kompeten Indonesia. Kemasan yang digunakan mengacu pada Standar Kompetensi Kerja Nasional Indonesia berdasarkan Keputusan Menteri Ketenagakerjaan Republik Indonesia No. 333 Tahun 2020 Tentang Penetapan Standar Kompetensi Kerja Nasional Indonesia Kategori Aktivitas Penyewaan dan Sewa Guna Usaha Tanpa Hak Opsi, Ketenagakerjaan, Agen Perjalanan, dan Penunjang Usaha Lainnya Golongan Pokok Aktivitas Ketenagakerjaan Bidang Standarisasi, Pelatihan Kerja, dan Sertifikasi, Keputusan Menteri Ketenagakerjaan Republik Indonesia Nomor 3 Tahun 2021 tentang Penetapan Jenjang Kualifikasi Nasional lndonesia Bidang Pelatihan Kerja dan Sertifikasi dan Keputusan Direktur Jenderal Pembinaan Pelatihan Vokasi dan Produktivitas Nomor 2/1645/LP.00.01/XII/2021 tentang Pengemasan Unit Kompetensi Bidang Pelatihan Kerja. Skema sertifikasi ini digunakan sebagai acuan pada pelaksanaan assesmen oleh Asesor kompetensi LSP Trainer Kompeten Indonesia dan memastikan kompetensi pada jabatan Pelatih di Tempat Kerja.</p>
-              </div>
-               <div class="tab-pane" id="tab-3">
-                <h3>Penyelenggara Pelatihan</h3>
-                <p class="fst-italic">SKM-LSPTKI-01-2022</p>
-                <img src="/THEMES/Medicio/assets/img/penyelenggara_pelatihan.jpg" alt="" class="img-fluid">
-                <p>Skema sertifikasi okupasi Penyelenggara Pelatihan adalah skema sertifikasi yang dikembangkan oleh Komite Skema LSP Trainer Kompeten Indonesia untuk memenuhi kebutuhan sertifikasi kompetensi kerja di LSP Trainer Kompeten Indonesia. Kemasan yang digunakan mengacu pada Standar Kompetensi Kerja Nasional Indonesia berdasarkan Keputusan Menteri Ketenagakerjaan Republik Indonesia No. 333 Tahun 2020 Tentang Penetapan Standar Kompetensi Kerja Nasional Indonesia Kategori Aktivitas Penyewaan dan Sewa Guna Usaha Tanpa Hak Opsi, Ketenagakerjaan, Agen Perjalanan, dan Penunjang Usaha Lainnya Golongan Pokok Aktivitas Ketenagakerjaan Bidang Standarisasi, Pelatihan Kerja, dan Sertifikasi, Keputusan Menteri Ketenagakerjaan Republik Indonesia Nomor 3 Tahun 2021 tentang Penetapan Jenjang Kualifikasi Nasional lndonesia Bidang Pelatihan Kerja dan Sertifikasi dan Keputusan Direktur Jenderal Pembinaan Pelatihan Vokasi dan Produktivitas Nomor 2/1645/LP.00.01/XII/2021 tentang Pengemasan Unit Kompetensi Bidang Pelatihan Kerja. Skema sertifikasi ini digunakan sebagai acuan pada pelaksanaan assesmen oleh Asesor kompetensi LSP Trainer Kompeten Indonesia dan memastikan kompetensi pada jabatan Penyelenggara Pelatihan.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
+    <div class="row" data-aos="fade-up" data-aos-delay="100">
+      <!-- Sidebar List -->
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <ul class="nav nav-tabs flex-column">
+          @forelse(($skemas ?? collect()) as $skema)
+            <li class="nav-item mt-2">
+              <a class="nav-link {{ $loop->first ? 'active show' : '' }}"
+                 data-bs-toggle="tab"
+                 data-bs-target="#tab-{{ $skema->id }}">
+                <h4>{{ $skema->nama }}</h4>
+                <p>{{ $skema->kode }}</p>
+              </a>
+            </li>
+          @empty
+            <li class="nav-item">
+              <span class="nav-link disabled">Belum ada skema</span>
+            </li>
+          @endforelse
+        </ul>
       </div>
-    </section><!-- End Departments Section -->
+
+      <!-- Tab Content -->
+      <div class="col-lg-8">
+        <div class="tab-content">
+          @forelse(($skemas ?? collect()) as $skema)
+            <div class="tab-pane {{ $loop->first ? 'active show' : '' }}" id="tab-{{ $skema->id }}">
+              <h3>{{ $skema->nama }}</h3>
+              <p class="mb-1"><strong>Kategori:</strong> {{ $skema->kategori }}</p>
+              <p class="fst-italic"><strong>Kode:</strong> {{ $skema->kode }}</p>
+
+              @php
+                $thumb = $skema->thumbnail;
+                $pdf   = $skema->pdf_path ?: $skema->file_skema;
+              @endphp
+
+              @if(!empty($thumb))
+                <img src="{{ asset('storage/'.$thumb) }}"
+                     alt="{{ $skema->nama }}"
+                     class="img-fluid mb-3 rounded">
+              @endif
+
+              <p>{{ $skema->ringkasan }}</p>
+
+              @if(!empty($pdf))
+                <a href="{{ asset('storage/'.$pdf) }}" target="_blank" class="btn btn-primary mt-2">
+                  <i class="bi bi-file-earmark-pdf"></i> Lihat Skema (PDF)
+                </a>
+              @endif
+            </div>
+          @empty
+            <div class="alert alert-info">Belum ada skema ditampilkan.</div>
+          @endforelse
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- End Departments Section -->
 
   <!-- ======= Gallery Section ======= -->
   <section id="gallery" class="gallery">

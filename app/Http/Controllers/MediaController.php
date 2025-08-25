@@ -11,7 +11,7 @@ class MediaController extends Controller
     // Admin: Tampilkan semua file
     public function index()
     {
-        $media = Media::latest()->get();
+        $media = Media::latest()->paginate(10);
         return view('paneladmin.media.index', compact('media'));
     }
 

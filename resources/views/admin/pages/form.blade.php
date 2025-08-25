@@ -1,5 +1,6 @@
 @php
-  $kategoriUrutan = ['home','profil', 'sertifikasi', 'media', 'informasi','kontak'];
+  // ambil slug semua menu aktif untuk jadi kategori
+  $kategoriUrutan = \App\Models\Menu::where('is_active', 1)->orderBy('order')->pluck('slug')->toArray();
 @endphp
 
 <div class="mb-3">
@@ -20,6 +21,7 @@
         @endforeach
     </select>
 </div>
+
 
 <div class="mb-3">
     <label>Konten</label>

@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
@@ -8,11 +9,61 @@ use App\Http\Controllers\MediaController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\GaleriPublikController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\InfoController;
+use App\Http\Controllers\PublicInfoController; 
+use App\Http\Controllers\SkemaPublicController;
+use App\Http\Controllers\Admin\SkemaController as AdminSkemaController;
+use App\Http\Controllers\Admin\UnitKompetensiController as AdminUnitKompetensiController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
+
+Route::prefix('admin')->group(function() {
+    Route::resource('menus', MenuController::class);
+});
+
+// ==================== FRONTEND ====================
+// Daftar skema sertifikasi
+Route::get('/home/skema_sertifikasi', [FrontendController::class, 'skemaSertifikasi'])
+    ->name('skema.index');
+
+// Detail skema sertifikasi
+Route::get('/home/skema_sertifikasi/detail/{id}', [FrontendController::class, 'skemaDetail'])
+    ->name('skema.detail');
+
+// routes/web.php
+Route::get('/skema-sertifikasi', [FrontendController::class, 'skemaIndex'])
+    ->name('frontend.skema.index');
+Route::get('/skema/{id}', [FrontendController::class, 'skemaDetail'])
+    ->name('frontend.skema.detail');
+
+Route::get('/page/{slug}', [FrontendController::class, 'page'])->name('page.show');
+
+// ==================== ADMIN ====================
+// Semua route admin di-prefix 'panell' dan pakai auth
+Route::prefix('panell')->middleware(['auth'])->name('panell.')->group(function () {
+
+    // CRUD Skema Sertifikasi
+    Route::resource('skema', AdminSkemaController::class)->except(['show']);
+
+    // CRUD Unit Kompetensi
+    Route::resource('unit', AdminUnitKompetensiController::class)->except(['show']);
+});
+
+// Admin Info (CRUD)
+Route::prefix('admin')->name('admin.')->group(function() {
+    Route::resource('info', InfoController::class);
+});
+
+// ===========================
+// ADMIN ROUTES (Harus Login)
+// ===========================
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('info', InfoController::class);
+});
 
 // ===========================
 // Halaman Utama Website
@@ -31,34 +82,21 @@ Route::get('/info/{slug}', [FrontendController::class, 'showInfo'])->name('info.
 // Halaman publik berdasarkan slug (frontend)
 Route::get('/page/{slug}', [FrontendController::class, 'showPage'])->name('page.show');
 
-// ===========================
-// Galeri Publik
-// ===========================
-Route::get('/galeri/publik', [GaleriPublikController::class, 'index'])->name('galeri.publik');
-
-// ===========================
+ // ===========================
 // Kontak Publik
 // ===========================
 Route::get('/kontak', [FrontendController::class, 'showKontak'])->name('kontak');
-Route::post('/kontak', [KontakController::class, 'submit'])->name('kontak.submit');
+Route::post('/kontak', [KontakController::class, 'store'])->name('kontak.submit');
+
+// Halaman statis (section khusus)
+Route::get('/kontak', function () {
+    return view('page.contact');
+})->name('contact-section');
 
 // ===========================
 // Media Publik
 // ===========================
 Route::get('/file-download', [MediaController::class, 'publicIndex'])->name('media.publik');
-
-
-
-// Public Info
-Route::get('/info', [FrontendInfoController::class, 'index'])->name('public.info.indexp');
-Route::get('/info/{slug}', [FrontendInfoController::class, 'show'])->name('public.info.show');
-
-// Admin Info
-Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-    Route::resource('info', InfoController::class);
-});
-Route::post('/admin/info', [InfoController::class, 'store'])->name('admin.info.store');
-Route::get('/info', [InfoController::class, 'index'])->name('info.index');
 
 // ===========================
 // Admin (Autentikasi Diperlukan)
@@ -111,5 +149,24 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // (berfungsi untuk menampilkan halaman dinamis selain /halaman/...)
 // ===========================
 Route::get('/{slug}', [FrontendController::class, 'show'])
-    ->where('slug', '^(?!halaman|admin|login|logout|dashboard|media|galeri|kontak|informasi|infos|file-download|pages).*$')
+    ->where('slug', '^(?!halaman|admin|login|logout|dashboard|media|galeri|kontak|informasi|infos|file-download|pages|publik).*$')
     ->name('slug.show');
+
+    
+//|--------------------------------------------------------------------------
+//| ROUTES UNTUK PUBLIK
+//|--------------------------------------------------------------------------
+Route::prefix('publik')->group(function () {
+    Route::get('login', [LoginController::class, 'showLoginForm'])->name('publik.login');
+    Route::post('login', [LoginController::class, 'login'])->name('publik.login.post');
+    Route::post('logout', [LoginController::class, 'logout'])->name('publik.logout');
+
+    Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('publik.register');
+    Route::post('register', [RegisterController::class, 'register'])->name('publik.register.post');
+
+    Route::get('dashboard', function () {
+        return view('publik.dashboard.dashboard'); // 👉 bikin file resources/views/publik/dashboard/dashboard.blade.php
+    })->name('publik.dashboard')->middleware('auth:publik');
+});
+
+

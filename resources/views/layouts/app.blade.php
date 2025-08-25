@@ -4,13 +4,13 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>@yield('title', 'Dashboard') | STMIK EL RAHMA</title>
+    <title>@yield('title', 'Dashboard') | LSP Trainer Kompeten Indonesia</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Laravel Admin Dashboard" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('themes/minia/assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('THEMES/minia/images/logo.bg.png') }}">
 
     <!-- CSS -->
     <link href="{{ asset('themes/minia/assets/css/bootstrap.min.css') }}" rel="stylesheet" />

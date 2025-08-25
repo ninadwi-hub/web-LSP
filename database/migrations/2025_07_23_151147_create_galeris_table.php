@@ -14,7 +14,7 @@ return new class extends Migration
     Schema::create('galeris', function (Blueprint $table) {
         $table->id();
         $table->string('title');
-        $table->string('slug')->unique();
+        $table->string('slug')->index();
         $table->text('description')->nullable();
         $table->string('image_path');
         $table->unsignedBigInteger('category_id')->nullable();
