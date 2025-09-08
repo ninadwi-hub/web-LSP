@@ -38,9 +38,6 @@ Kategori::create([
 
     return redirect()->route('kategoris.index')->with('success', 'Kategori berhasil ditambahkan.');
 }
-
-
-
     public function edit(Kategori $kategori)
     {
         return view('kategoris.edit', compact('kategori'));
@@ -61,7 +58,6 @@ Kategori::create([
 
     return redirect()->route('kategoris.index')->with('success', 'Kategori berhasil diperbarui.');
 }
-
 
     public function destroy(Kategori $kategori)
     {

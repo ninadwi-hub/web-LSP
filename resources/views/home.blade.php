@@ -12,12 +12,14 @@
     <div class="carousel-inner" role="listbox">
       @foreach ($sliderGaleri as $key => $item)
         <div class="carousel-item {{ $key == 0 ? 'active' : '' }}" style="background-image:url('{{ asset('storage/' . $item->image_path) }}')">
-          <div class="container">
-            <h2>{{ $item->title }}</h2>
-            @if($item->description)
-              <p>{{ $item->description }}</p>
-            @endif
-          </div>
+         <div class="container">
+  <div class="slider-caption">
+    <h2>{{ $item->title }}</h2>
+    @if($item->description)
+      <p>{{ $item->description }}</p>
+    @endif
+  </div>
+</div>
         </div>
       @endforeach
     </div>
@@ -48,51 +50,6 @@
     </div>
   </section><!-- End Cta Section -->
 
-  <!-- ======= Counts Section ======= -->
-  <section id="counts" class="counts">
-    <div class="container" data-aos="fade-up">
-      <div class="row no-gutters">
-
-        <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
-          <div class="count-box">
-            <i class="fa-solid fa-book-open" style="color: #2dc3c8;"></i>
-            <span data-purecounter-start="0" data-purecounter-end="5" data-purecounter-duration="1" class="purecounter"></span>
-            <p><strong>Skema Sertifikasi</strong></p>
-            <a href="#">Find out more &raquo;</a>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
-          <div class="count-box">
-            <i class="fa-solid fa-user" style="color: #2dc3c8;"></i>
-            <span data-purecounter-start="0" data-purecounter-end="19" data-purecounter-duration="1" class="purecounter"></span>
-            <p><strong>Asesor Kompetensi</strong></p>
-            <a href="#">Find out more &raquo;</a>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
-          <div class="count-box">
-            <i class="fa-solid fa-users-line" style="color: #2dc3c8;"></i>
-            <span data-purecounter-start="0" data-purecounter-end="185" data-purecounter-duration="1" class="purecounter"></span>
-            <p><strong>Pemegang Sertifikat</strong></p>
-            <a href="#">Find out more &raquo;</a>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
-          <div class="count-box">
-            <i class="fa-solid fa-diamond-turn-right" style="color: #2dc3c8;"></i>
-            <span data-purecounter-start="0" data-purecounter-end="12" data-purecounter-duration="1" class="purecounter"></span>
-            <p><strong>Tempat Uji Kompetensi</strong></p>
-            <a href="#">Find out more &raquo;</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section><!-- End Counts Section -->
-
 <!-- ======= Departments Section ======= -->
 <section id="departments" class="departments">
   <div class="container" data-aos="fade-up">
@@ -105,7 +62,7 @@
       <!-- Sidebar List -->
       <div class="col-lg-4 mb-5 mb-lg-0">
         <ul class="nav nav-tabs flex-column">
-          @forelse(($skemas ?? collect()) as $skema)
+          @forelse($skemas as $skema)
             <li class="nav-item mt-2">
               <a class="nav-link {{ $loop->first ? 'active show' : '' }}"
                  data-bs-toggle="tab"
@@ -125,30 +82,18 @@
       <!-- Tab Content -->
       <div class="col-lg-8">
         <div class="tab-content">
-          @forelse(($skemas ?? collect()) as $skema)
-            <div class="tab-pane {{ $loop->first ? 'active show' : '' }}" id="tab-{{ $skema->id }}">
+          @forelse($skemas as $skema)
+            <div class="tab-pane fade {{ $loop->first ? 'active show' : '' }}" id="tab-{{ $skema->id }}">
               <h3>{{ $skema->nama }}</h3>
-              <p class="mb-1"><strong>Kategori:</strong> {{ $skema->kategori }}</p>
               <p class="fst-italic"><strong>Kode:</strong> {{ $skema->kode }}</p>
 
-              @php
-                $thumb = $skema->thumbnail;
-                $pdf   = $skema->pdf_path ?: $skema->file_skema;
-              @endphp
-
-              @if(!empty($thumb))
-                <img src="{{ asset('storage/'.$thumb) }}"
+              @if(!empty($skema->thumbnail))
+                <img src="{{ asset('storage/'.$skema->thumbnail) }}"
                      alt="{{ $skema->nama }}"
                      class="img-fluid mb-3 rounded">
               @endif
 
               <p>{{ $skema->ringkasan }}</p>
-
-              @if(!empty($pdf))
-                <a href="{{ asset('storage/'.$pdf) }}" target="_blank" class="btn btn-primary mt-2">
-                  <i class="bi bi-file-earmark-pdf"></i> Lihat Skema (PDF)
-                </a>
-              @endif
             </div>
           @empty
             <div class="alert alert-info">Belum ada skema ditampilkan.</div>

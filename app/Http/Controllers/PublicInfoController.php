@@ -7,48 +7,60 @@ use App\Models\Kategori;
 
 class PublicInfoController extends Controller
 {
-    // Halaman list info berdasarkan kategori
     public function index()
     {
-        $infos = Info::whereHas('kategori')
+        $infos = Info::with('kategori')
+            ->where('status', 'published')
             ->latest()
             ->paginate(10);
 
-        return view('public.info.indexp', compact('infos'));
+        // view: resources/views/info/show.blade.php
+        return view('info.show', compact('infos'));
     }
 
-    // Halaman detail info (pakai layout page.show)
     public function show($slug)
     {
         $info = Info::where('slug', $slug)
+            ->where('status', 'published')
             ->with('kategori')
             ->firstOrFail();
 
+        $related = Info::where('id', '!=', $info->id)
+            ->where('status', 'published')
+            ->latest()
+            ->take(3)
+            ->get();
+
         $page = (object) [
-            'title' => $info->title,
-            'content' => $info->content,
-            'meta_description' => $info->meta_description ?? '',
-            'meta_keywords' => $info->meta_keywords ?? '',
-            'featured_image' => $info->thumbnail,
+            'title'            => $info->title,
+            'content'          => $info->content,
+            'meta_description' => $info->meta_description ?? $info->title,
+            'meta_keywords'    => $info->kategori->nama ?? '',
+            'featured_image'   => $info->thumbnail,
         ];
 
-        return view('page.show', compact('page', 'info'));
+        // view: resources/views/info/detail.blade.php
+        return view('info.detail', compact('page', 'info', 'related'));
     }
 
-    // Halaman list info per kategori
     public function kategori($slug)
     {
         $kategori = Kategori::where('slug', $slug)->firstOrFail();
-        $infos = $kategori->infos()->latest()->paginate(10);
+
+        $infos = $kategori->infos()
+            ->where('status', 'published')
+            ->latest()
+            ->paginate(10);
 
         $page = (object) [
-            'title' => 'Kategori: ' . $kategori->name,
-            'content' => '',
-            'meta_description' => 'Informasi pada kategori ' . $kategori->name,
-            'meta_keywords' => $kategori->name,
-            'featured_image' => null,
+            'title'            => 'Kategori: ' . $kategori->nama,
+            'content'          => '',
+            'meta_description' => 'Informasi pada kategori ' . $kategori->nama,
+            'meta_keywords'    => $kategori->nama,
+            'featured_image'   => null,
         ];
 
-        return view('page.show', compact('page', 'kategori', 'infos'));
+        // view: resources/views/info/show.blade.php
+        return view('info.show', compact('page', 'kategori', 'infos'));
     }
 }

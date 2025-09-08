@@ -9,7 +9,7 @@ use App\Models\Kategori;
 use App\Models\Info;
 use App\Models\Skema;
 use App\Models\UnitKompetensi;
-
+use App\Models\Download; 
 class FrontendController extends Controller
 {
 
@@ -47,8 +47,9 @@ class FrontendController extends Controller
         $galeris = Galeri::where('status', 'published')
             ->latest()
             ->paginate(6);
+        $skemas = Skema::orderBy('id')->get();
         
-        return view('home', compact('pagesByCategory', 'sliderGaleri', 'galeris'));
+        return view('home', compact('pagesByCategory', 'sliderGaleri', 'galeris','skemas'));
     }
 
     /**
@@ -102,8 +103,8 @@ class FrontendController extends Controller
     $skemaList = Skema::withCount('unitKompetensi')
         ->orderBy('nama')
         ->get();
-
-    return view('frontend.skema.index', compact('page', 'skemaList'));
+     $skemas = Skema::orderBy('nama')->get();
+    return view('frontend.skema.index', compact('page', 'skemaList','skemas'));
 }
 
 public function skemaIndex()
@@ -118,6 +119,16 @@ public function skemaDetail($id)
 
     return view('frontend.skema.detail', compact('skema'));
 }
+    /**
+     * Halaman publik daftar file download
+     */
+    public function downloads()
+    {
+        $downloads = Download::where('status', 'published')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
 
+        return view('frontend.downloads.index', compact('downloads'));
+    }
 
 }

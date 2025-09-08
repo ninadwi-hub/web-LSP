@@ -55,6 +55,23 @@ class KontakController extends Controller
 
         return response()->json(['success' => 'Pesan berhasil dikirim!']);
     }
+    public function storeAdmin(Request $request)
+{
+    $validated = $request->validate([
+        'name'    => 'required|string|max:100',
+        'email'   => 'required|email',
+        'phone'   => 'nullable|max:20',
+        'subject' => 'nullable|string|max:100',
+        'message' => 'required|string',
+        'status'  => 'required|in:baru,pending,selesai',
+    ]);
+
+    Contact::create($validated);
+
+    return redirect()
+        ->route('contacts.index')
+        ->with('success', 'Kontak berhasil ditambahkan!');
+}
 
     /**
      * Halaman manajemen kontak (admin)
@@ -112,4 +129,9 @@ class KontakController extends Controller
 
         return redirect()->route('contacts.index')->with('success', 'Pesan berhasil dihapus.');
     }
+    public function create()
+{
+    return view('contacts.create');
+}
+
 }

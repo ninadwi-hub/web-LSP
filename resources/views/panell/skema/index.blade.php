@@ -27,8 +27,8 @@
           <th>ID</th>
           <th>Nama Skema</th>
           <th>Kode</th>
-          <th>Kategori</th>
-          <th>Deskripsi</th>
+          <th>Jenis</th>
+          <th>Ringkasan</th>
           <th>PDF</th>
           <th>Aksi</th>
         </tr>
@@ -39,11 +39,11 @@
             <td class="text-center">{{ $s->id }}</td>
             <td>{{ $s->nama }}</td>
             <td class="text-center">{{ $s->kode }}</td>
-            <td class="text-center">{{ $s->kategori }}</td>
-            <td>{{ Str::limit($s->deskripsi, 100) }}</td>
+            <td class="text-center">{{ $s->jenis}}</td>
+            <td>{{ Str::limit($s->ringkasan, 50) }}</td>
             <td class="text-center">
-              @if($s->pdf_path)
-                <a target="_blank" href="{{ asset('storage/'.$s->pdf_path) }}" class="btn btn-outline-secondary btn-sm">
+              @if($s->file_skema)
+                <a target="_blank" href="{{ asset('assets/files/skema_sertifikasi/'.$s->file_skema) }}" class="btn btn-outline-secondary btn-sm">
                   <i class="bx bx-file"></i> Lihat
                 </a>
               @else

@@ -6,12 +6,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Medicio Bootstrap Template - Index</title>
+  <title>LSP Trainer Komepten Indonesia</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="/THEMES/Medicio/assets/img/favicon.png" rel="icon">
+  <link href="/THEMES/Medicio/assets/img/logo_lsp.png" rel="icon">
   <link href="/THEMES/Medicio/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->

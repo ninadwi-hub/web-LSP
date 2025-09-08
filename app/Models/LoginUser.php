@@ -24,4 +24,9 @@ class LoginUser extends Authenticatable
         'password',
         'remember_token',
     ];
+    public function biodata()
+{
+    return $this->hasOne(Biodata::class);
+}
+
 }

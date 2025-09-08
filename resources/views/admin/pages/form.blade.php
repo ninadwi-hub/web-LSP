@@ -22,11 +22,22 @@
     </select>
 </div>
 
-
 <div class="mb-3">
     <label>Konten</label>
-    <textarea name="content" class="form-control" rows="8" required>{{ old('content', $page->content ?? '') }}</textarea>
+    <textarea id="editor" name="content" class="form-control" rows="8" required>
+        {{ old('content', $page->content ?? '') }}
+    </textarea>
 </div>
+
+<!-- CKEditor 5 -->
+<script src="https://cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
 
 <div class="mb-3">
     <label>Status</label>

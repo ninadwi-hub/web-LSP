@@ -11,24 +11,37 @@ class HomeController extends Controller
 {
     public function index()
     {
+        
+        // Untuk slider hero
+        $sliderGaleri = Galeri::where('status', 'published')
+                            ->latest()
+                            ->take(5)
+                            ->get();
+
+        // Semua galeri (untuk gallery section)
         $galeris = Galeri::where('status', 'published')->latest()->get();
 
+        // Featured pages
         $featuredPages = Page::where('status', 'published')
                              ->where('is_featured', true)
                              ->latest('published_at')
                              ->take(6)
                              ->get();
 
+        // Pages per kategori
         $pagesByCategory = Page::where('status', 'published')
                                ->get()
                                ->groupBy('category');
 
-        // Ambil semua skema (tanpa kolom 'status' karena tidak ada di tabel)
+        // Skema sertifikasi
         $skemas = Skema::orderBy('id')->get();
-
-        // ⬅️ pastikan nama view sesuai file yang kamu edit!
-        return view('home', compact('galeris','featuredPages','pagesByCategory','skemas'));
-        // Kalau file view kamu memang 'home.blade.php', pakai:
-        // return view('home', compact('galeris','featuredPages','pagesByCategory','skemas'));
+        
+        return view('home', compact(
+            'sliderGaleri',
+            'galeris',
+            'featuredPages',
+            'pagesByCategory',
+            'skemas'
+        ));
     }
 }

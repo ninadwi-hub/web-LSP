@@ -20,9 +20,10 @@
                     <h5 class="card-title">{{ $galeri->title }}</h5>
                     
                     <!-- Deskripsi transparan -->
-                    <p class="card-text text-muted" style="opacity: 0.6;">
-                        {{ $galeri->description }}
-                    </p>
+                   <p class="card-text text-muted" 
+   style="background-color: rgba(255, 255, 255, 0.6); padding: 10px; border-radius: 5px;">
+    {{ $galeri->description }}
+</p>
 
                     <p class="card-text"><strong>Kategori:</strong> {{ $galeri->category->name ?? '-' }}</p>
                     <p class="card-text"><strong>Album:</strong> {{ $galeri->album->name ?? '-' }}</p>

@@ -23,11 +23,6 @@ return new class extends Migration
     $table->boolean('is_active')->default(1);
     $table->timestamps();
 });
-    Schema::table('infos', function (Blueprint $table) {
-    $table->integer('jumlah_unit')->nullable();
-    $table->string('jenis')->nullable();
-});
-
 
 }
 

@@ -51,7 +51,7 @@
                             <a href="{{ route('galeri.index') }}">Galeri</a>
                         </li>
                         <li class="{{ request()->routeIs('media.*') ? 'active' : '' }}">
-                            <a href="{{ route('media.index') }}">File Download</a>
+                            <a href="{{ route('admin.downloads.index') }}">File Download</a>
                         </li>
                     </ul>
                 </li>

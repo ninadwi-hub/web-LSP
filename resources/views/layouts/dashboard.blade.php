@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - TKI</title>
+  <title>@yield('title','Dashboard - TKI')</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
   <style>
@@ -64,18 +64,20 @@
   <!-- Sidebar -->
   <div class="sidebar">
     <div class="logo">
-      <img src="https://via.placeholder.com/150x60?text=LOGO+TKI" alt="TKI Logo" class="img-fluid">
+      <img src="/THEMES/Medicio/assets/img/logo_lsp.png" alt="TKI Logo" class="img-fluid">
     </div>
     <div class="menu-title">MAIN MENU</div>
     <nav class="nav flex-column">
-      <a href="#" class="nav-link active"><i class="bi bi-house-door"></i> Dashboard</a>
+      <a href="{{ url('/publik/dashboard') }}" class="nav-link @if(request()->is('dashboard')) active @endif">
+        <i class="bi bi-house-door"></i> Dashboard
+      </a>
       <a href="#submenuAsesi" class="nav-link" data-bs-toggle="collapse">
         <i class="bi bi-person"></i> Asesi
       </a>
-      <div class="collapse" id="submenuAsesi">
+      <div class="collapse @if(request()->is('asesi/*')) show @endif" id="submenuAsesi">
         <nav class="nav flex-column ms-3">
-          <a href="#" class="nav-link">List Asesi</a>
-          <a href="#" class="nav-link">Tambah Asesi</a>
+          <a href="{{ url('/asesi/biodata') }}" class="nav-link @if(request()->is('asesi/biodata')) active @endif">Biodata</a>
+          <a href="{{ url('/asesi/asesmen') }}" class="nav-link @if(request()->is('asesi/asesmen')) active @endif">Asesmen</a>
         </nav>
       </div>
     </nav>
@@ -87,12 +89,11 @@
     <div class="topbar">
       <button class="btn btn-light d-md-none" id="sidebarToggle"><i class="bi bi-list"></i></button>
       <div></div>
-      <img src="https://via.placeholder.com/40" alt="Profile" class="profile-img">
+      <img src="/THEMES/Medicio/assets/img/departments-5.jpg" alt="Profile" class="profile-img">
     </div>
 
-    <!-- Dashboard Content -->
-    <h2 class="fw-bold">Dashboard</h2>
-    <p class="text-muted">Dashboard for LSP Trainer Kompeten Indonesia</p>
+    <!-- Dynamic Content -->
+    @yield('content')
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
