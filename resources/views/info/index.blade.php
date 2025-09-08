@@ -22,7 +22,7 @@
     <div class="card shadow-sm">
         <div class="card-body">
             <table class="table table-bordered table-hover table-striped align-middle">
-                <thead class="bg-dark text-white">
+            <thead class="table-primary">
                     <tr>
                         <th width="5%">No</th>
                         <th>Nama Kategori</th>

@@ -8,15 +8,27 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('pages', function (Blueprint $table) {
-            $table->string('category')->default('informasi')->after('content');
-            $table->enum('status', ['published', 'draft'])->default('draft')->after('category');
+            if (!Schema::hasColumn('pages', 'category')) {
+                $table->string('category')->default('informasi')->after('content');
+            }
+            if (!Schema::hasColumn('pages', 'status')) {
+                $table->enum('status', ['published', 'draft'])->default('draft')->after('category');
+            }
         });
     }
 
     public function down(): void
     {
         Schema::table('pages', function (Blueprint $table) {
-            $table->dropColumn(['category', 'status']);
+            $dropCols = [
+                'category',
+                'status',
+            ];
+            foreach ($dropCols as $col) {
+                if (Schema::hasColumn('pages', $col)) {
+                    $table->dropColumn($col);
+                }
+            }
         });
     }
 };

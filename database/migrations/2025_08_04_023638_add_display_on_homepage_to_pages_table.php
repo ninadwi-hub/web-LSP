@@ -11,9 +11,12 @@ return new class extends Migration
      */
    public function up()
 {
-    Schema::table('pages', function (Blueprint $table) {
+   Schema::table('pages', function (Blueprint $table) {
+    if (!Schema::hasColumn('pages', 'display_on_homepage')) {
         $table->boolean('display_on_homepage')->default(false)->after('status');
-    });
+    }
+});
+
 }
 
 public function down()

@@ -11,7 +11,6 @@ class MenuController extends Controller
     public function index()
     {
        $datamenu = Menu::orderBy('order')->paginate(10); // 10 item per halaman
-             echo $datamenu ->count();
         return view('menus.index', compact('datamenu'));
     }
 

@@ -53,14 +53,14 @@
             <td class="text-center">
               <div class="btn-group" role="group">
                 <a class="btn btn-warning btn-sm" href="{{ route('panell.skema.edit', $s) }}">
-                  <i class="bx bx-edit"></i>
+                  <i class="bx bx-edit"></i>Edit
                 </a>
                 <form action="{{ route('panell.skema.destroy', $s) }}" method="POST"
                       onsubmit="return confirm('Hapus skema ini?')" class="d-inline">
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-danger btn-sm">
-                    <i class="bx bx-trash"></i>
+                    <i class="bx bx-trash"></i>Hapus
                   </button>
                 </form>
               </div>

@@ -18,22 +18,21 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <!-- Tabel -->
     <div class="card shadow-sm">
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-striped mb-0">
-                    <thead>
-                        <tr>
-                            <th width="5%">No</th>
-                            <th>Judul</th>
-                            <th>Deskripsi</th>
-                            <th>Uploader</th>
-                            <th>Status</th>
-                            <th>File</th>
-                            <th width="15%">Aksi</th>
-                        </tr>
-                    </thead>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-striped mb-0">
+                <thead class="table-primary"> <!-- warna judul tabel -->
+                    <tr>
+                        <th width="5%">No</th>
+                        <th>Judul</th>
+                        <th>Deskripsi</th>
+                        <th>Uploader</th>
+                        <th>Status</th>
+                        <th>File</th>
+                        <th width="15%">Aksi</th>
+                    </tr>
+                </thead>
                     <tbody>
                         @forelse($downloads as $key => $download)
                         <tr>

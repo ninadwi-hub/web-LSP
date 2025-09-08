@@ -44,7 +44,6 @@
     <select name="status" class="form-control">
         <option value="draft" {{ old('status', $page->status ?? '') == 'draft' ? 'selected' : '' }}>Draft</option>
         <option value="published" {{ old('status', $page->status ?? '') == 'published' ? 'selected' : '' }}>Published</option>
-        <option value="archived" {{ old('status', $page->status ?? '') == 'archived' ? 'selected' : '' }}>Archived</option>
     </select>
 </div>
 

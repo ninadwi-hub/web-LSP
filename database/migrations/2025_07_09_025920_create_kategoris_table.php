@@ -6,20 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateKategorisTable extends Migration
 {
-public function up()
-{
-Schema::create('kategoris', function (Blueprint $table) {
-$table->id();
-$table->string('nama');
-$table->text('deskripsi')->nullable();
-$table->timestamps();
-});
-}
+    public function up()
+    {
+        if (!Schema::hasTable('kategoris')) {
+            Schema::create('kategoris', function (Blueprint $table) {
+                $table->id();
+                $table->string('nama');
+                $table->text('deskripsi')->nullable();
+                $table->timestamps();
+            });
+        }
+    }
 
-public function down()
-{
-Schema::dropIfExists('kategoris');
-
+    public function down()
+    {
+        Schema::dropIfExists('kategoris');
+    }
 }
-}
-

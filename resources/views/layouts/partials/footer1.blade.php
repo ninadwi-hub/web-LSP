@@ -25,13 +25,19 @@
             </div>
           </div>
 
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">BNSP</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">KEMNAKER</a></li>
-            </ul>
-          </div>
+         <div class="col-lg-2 col-md-6 footer-links">
+    <h4>Useful Links</h4>
+    <ul>
+        <li>
+            <i class="bx bx-chevron-right"></i> 
+            <a href="https://bnsp.go.id/" target="_blank" rel="noopener noreferrer">BNSP</a>
+        </li>
+        <li>
+            <i class="bx bx-chevron-right"></i> 
+            <a href="https://kemnaker.go.id/" target="_blank" rel="noopener noreferrer">KEMNAKER</a>
+        </li>
+    </ul>
+</div>
 
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Our Services</h4>

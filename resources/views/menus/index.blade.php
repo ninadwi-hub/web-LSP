@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container mt-4">
-    <!-- Header dan tombol tambah -->
+    <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-2">
         <h4>Manajemen Menu Navigasi</h4>
     </div>
@@ -31,7 +31,6 @@
                     <th>Tipe</th>
                     <th>Parent</th>
                     <th>Status</th>
-                    <th>Urutan</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -47,25 +46,33 @@
                                 {{ $menu->is_active ? 'Aktif' : 'Nonaktif' }}
                             </span>
                         </td>
-                        <td class="text-center">{{ $menu->order }}</td>
-                        <td class="text-center">
-                            <div class="btn-group" role="group">
-                                <a href="{{ route('menus.edit', $menu->id) }}" class="btn btn-warning btn-sm">
-                                    <i class="bx bx-edit"></i> Edit
-                                </a>
-                                <form action="{{ route('menus.destroy', $menu->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger btn-sm">
-                                        <i class="bx bx-trash"></i> Hapus
-                                    </button>
+                      <td class="text-center">
+    <div class="btn-group" role="group">
+        <!-- Tombol Edit -->
+<a href="{{ route('menus.edit', $menu->id) }}" 
+   class="btn btn-warning btn-sm d-flex align-items-center justify-content-center" 
+   title="Edit" style="width:55px; height:32px;">
+    <i class="bx bx-edit"></i>
+     <span>Edit</span>
+</a>
+
+<!-- Tombol Hapus -->
+<form action="{{ route('menus.destroy', $menu->id) }}" method="POST" class="d-inline" 
+      onsubmit="return confirm('Yakin ingin menghapus?')">
+    @csrf
+    @method('DELETE')
+    <button class="btn btn-danger btn-sm d-flex align-items-center justify-content-center" 
+            title="Hapus" style="width:55px; height:32px;">
+        <i class="bx bx-trash"></i>
+         <span>Hapus</span>
+    </button>
                                 </form>
                             </div>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="text-center text-muted">Tidak ada data menu.</td>
+                        <td colspan="6" class="text-center text-muted">Tidak ada data menu.</td>
                     </tr>
                 @endforelse
             </tbody>

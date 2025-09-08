@@ -28,7 +28,7 @@ public function store(Request $request)
 $validated = $request->validate([
     'title' => 'required|string|max:255',
     'content' => 'required',
-    'status' => 'required|in:draft,published,archived',
+    'status' => 'required|in:draft,published',
     'category' => 'required|in:' . implode(',', $kategoriValid),
     'featured_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
     'meta_description' => 'nullable|string',
@@ -60,7 +60,7 @@ $validated = $request->validate([
     $validated = $request->validate([
         'title' => 'required|string|max:255',
         'content' => 'required',
-        'status' => 'required|in:draft,published,archived',
+        'status' => 'required|in:draft,published',
         'category' => 'required|in:home,profil,sertifikasi,media,informasi,kontak',
         'featured_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         'meta_description' => 'nullable|string',

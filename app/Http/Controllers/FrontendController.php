@@ -55,18 +55,19 @@ class FrontendController extends Controller
     /**
      * Menampilkan halaman Page beserta Info terkait
      */
-    public function showPage($slug)
-    {
-        $page = Page::where('slug', $slug)->firstOrFail();
+   public function showPage($slug)
+{
+    $page = Page::where('slug', $slug)
+        ->where('status', 'published')
+        ->firstOrFail();
 
-        // Ambil semua info yang terhubung ke page ini
-        $infos = Info::where('page_id', $page->id)
-            ->where('status', 'published')
-            ->latest()
-            ->get();
+    $infos = Info::where('page_id', $page->id)
+        ->where('status', 'published')
+        ->latest()
+        ->get();
 
-        return view('page.show', compact('page', 'infos'));
-    }
+    return view('page.show', compact('page', 'infos'));
+}
 
     /**
      * Menampilkan daftar kategori

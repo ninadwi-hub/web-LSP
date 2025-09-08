@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+         if (!Schema::hasTable('cache')) {
         Schema::create('cache', function (Blueprint $table) {
             $table->string('key')->primary();
             $table->mediumText('value');
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->integer('expiration');
         });
     }
+}
 
     /**
      * Reverse the migrations.

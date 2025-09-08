@@ -4,17 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
-        Schema::create('unit_kompetensis', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('skema_id')->constrained('skemas')->onDelete('cascade');
-            $table->string('kode_unit')->nullable(); // Sesuai seeder
-            $table->string('judul_unit'); // Sesuai seeder
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('unit_kompetensis')) {
+            Schema::create('unit_kompetensis', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('skema_id')->constrained('skemas')->onDelete('cascade');
+                $table->string('kode_unit')->nullable();
+                $table->string('judul_unit');
+                $table->timestamps();
+            });
+        }
     }
 
     public function down(): void
@@ -22,4 +23,3 @@ return new class extends Migration
         Schema::dropIfExists('unit_kompetensis');
     }
 };
-    
