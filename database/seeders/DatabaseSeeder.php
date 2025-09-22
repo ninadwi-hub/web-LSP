@@ -20,6 +20,15 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Jalankan seeder lain
-        $this->call(AdminUserSeeder::class);
+        $this->call(AdminSeeder::class);
+        $this->call(UsersTableSeeder::class);
+        $this->call(ContactsTableSeeder::class);
+        $this->call(DownloadsTableSeeder::class);
+        $this->call(InfosTableSeeder::class);
+        $this->call(KategorisTableSeeder::class);
+        $this->call(MenusTableSeeder::class);
+        $this->call(PagesTableSeeder::class);
+        $this->call(SkemasTableSeeder::class);
+        $this->call(UnitKompetensisTableSeeder::class);
     }
 }

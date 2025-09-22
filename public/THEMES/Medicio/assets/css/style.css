@@ -306,6 +306,7 @@ h6 {
   visibility: visible;
 }
 
+
 @media (max-width: 1366px) {
   .navbar .dropdown .dropdown ul {
     left: -90%;
@@ -454,11 +455,11 @@ h6 {
 
 #hero .container {
   text-align: center;
-  background: rgba(255, 255, 255, 0.9);
+  
   padding-top: 30px;
   padding-bottom: 30px;
   margin-bottom: 50px;
-  border-top: 4px solid #3fbbc0;
+ 
 }
 
 @media (max-width: 1200px) {
@@ -469,15 +470,17 @@ h6 {
 }
 
 #hero h2 {
-  color: #2f2f2f;
+  color: #fffefe;
   margin-bottom: 20px;
   font-size: 36px;
   font-weight: 700;
+  text-shadow: #685e5e;
 }
 
 #hero p {
   margin: 0 auto 30px auto;
-  color: #555555;
+  color: #fff7f7;
+  text-shadow: #635f5f;
 }
 
 #hero .carousel-inner .carousel-item {
@@ -516,7 +519,7 @@ h6 {
   background: rgba(63, 187, 192, 0.8);
   border-radius: 50px;
   transition: 0.3s;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgb(255, 255, 255);
   width: 54px;
   height: 54px;
   display: flex;
