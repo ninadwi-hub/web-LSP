@@ -35,14 +35,14 @@
                             <div class="w-100">
                                 <div class="d-flex flex-column h-100">
                                     <div class="mb-4 mb-md-5 text-center">
-                                        <a href="index.html" class="d-block auth-logo">
-                                           <img src="{{ asset('THEMES/minia/images/logo.png') }}" alt="" height="28">
+                                        <a href="{{  route('dashboard') }}" class="d-block auth-logo">
+                                           <img src="{{ asset('THEMES/minia/images/logo.png') }}" alt="" height="70">
                                         </a>
                                     </div>
                                     <div class="auth-content my-auto">
                                         <div class="text-center">
                                             <h5 class="mb-0">Welcome Back !</h5>
-                                            <p class="text-muted mt-2">Sign in to continue.</p>
+                                            <p class="text-muted mt-2">Sign in to LSP Trainer Kompeten Indonesia</p>
                                         </div>
                                         <form method="POST" action="{{ route('login') }}">
                                             @csrf
@@ -69,7 +69,7 @@
                                         </form>
                                     </div>
                                     <div class="mt-4 mt-md-5 text-center">
-                                        <p class="mb-0">© <script>document.write(new Date().getFullYear())</script> Minia   . LSP <i class="mdi mdi-heart text-danger"></i> Trainer Kompeten Indonesia</p>
+                                        <p class="mb-0">© <script>document.write(new Date().getFullYear())</script>   . LSP <i class="mdi mdi-heart text-danger"></i> Trainer Kompeten Indonesia</p>
                                     </div>
                                 </div>
                             </div>
