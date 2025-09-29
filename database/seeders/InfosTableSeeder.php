@@ -27,7 +27,6 @@ class InfosTableSeeder extends Seeder
                 'slug' => 'itb',
                 'title' => 'ITB',
                 'content' => 'ITB Menerima Penyerahan Dokumen Skema yang Telah Diverifikasi BNSP',
-                'description' => NULL,
                 'thumbnail' => 'thumbnails/1eenL9DqxbU1vKwKsuKBHJIqDp3OgGs1POXydhnT.jpg',
                 'views' => 0,
                 'is_active' => 1,

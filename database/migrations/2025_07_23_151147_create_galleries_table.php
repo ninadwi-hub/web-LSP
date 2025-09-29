@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        if (!Schema::hasTable('galeris')) {
-            Schema::create('galeris', function (Blueprint $table) {
+        if (!Schema::hasTable('galleries')) {
+            Schema::create('galleries', function (Blueprint $table) {
                 $table->id();
                 $table->string('title');
                 $table->string('slug')->index();

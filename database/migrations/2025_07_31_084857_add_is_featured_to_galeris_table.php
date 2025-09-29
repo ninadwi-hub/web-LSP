@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::table('galeris', function (Blueprint $table) {
-            if (!Schema::hasColumn('galeris', 'is_featured')) {
+        Schema::table('galleries', function (Blueprint $table) {
+            if (!Schema::hasColumn('galleries', 'is_featured')) {
                 $table->boolean('is_featured')->default(false);
             }
         });
@@ -16,8 +16,8 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::table('galeris', function (Blueprint $table) {
-            if (Schema::hasColumn('galeris', 'is_featured')) {
+        Schema::table('galleries', function (Blueprint $table) {
+            if (Schema::hasColumn('galleries', 'is_featured')) {
                 $table->dropColumn('is_featured');
             }
         });
