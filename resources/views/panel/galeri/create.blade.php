@@ -39,6 +39,15 @@
         </div>
 
         <div class="mb-3">
+    <label for="tipe_tampilan">Tipe Tampilan</label>
+    <select name="tipe_tampilan" class="form-control" required>
+        <option value="slider">Slider</option>
+        <option value="gallery">Gallery</option>
+        <option value="both">Keduanya</option>
+    </select>
+</div>
+
+        <div class="mb-3">
             <label>Album</label>
             <input type="number" name="album_id" class="form-control" value="{{ old('album_id') }}">
         </div>

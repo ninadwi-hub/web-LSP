@@ -3,22 +3,21 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use App\Models\LoginUser;
 
 class LoginUserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        LoginUser::create([
-            'role' => 'user',
+        DB::table('login_users')->insert([
+            'role' => 'asesi', // pakai string
             'name' => 'Nina',
             'phone' => '08123456789',
             'email' => 'nina@example.com',
-            'password' => Hash::make('123456'),
+            'password' => Hash::make('password123'),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }

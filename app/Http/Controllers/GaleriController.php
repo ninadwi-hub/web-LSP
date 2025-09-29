@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App\Http\Controllers;
 
@@ -20,38 +20,40 @@ class GaleriController extends Controller
         return view('panel.galeri.create');
     }
 
-public function store(Request $request)
-{
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'image_path' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
-        'category_id' => 'nullable|integer',
-        'album_id' => 'nullable|integer',
-        'status' => 'required|in:draft,published,archived',
-        'taken_at' => 'nullable|date',
-        'is_featured' => 'nullable|boolean',
-    ]);
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title'        => 'required|string|max:255',
+            'description'  => 'nullable|string',
+            'image_path'   => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'category_id'  => 'nullable|integer',
+            'album_id'     => 'nullable|integer',
+            'status'       => 'required|in:draft,published,archived',
+            'taken_at'     => 'nullable|date',
+            'is_featured'  => 'nullable|boolean',
+            'tipe_tampilan'=> 'required|in:slider,gallery,both',
+        ]);
 
-    // Simpan gambar
-    $imagePath = $request->file('image_path')->store('galeri', 'public');
+        // Simpan gambar
+        $imagePath = $request->file('image_path')->store('galeri', 'public');
 
-    // Simpan ke database
-    Galeri::create([
-        'title' => $request->title,
-        'slug' => Str::slug($request->title),
-        'description' => $request->description,
-        'image_path' => $imagePath,
-        'category_id' => $request->category_id ?: null,
-        'album_id' => $request->album_id,
-        'uploader' => auth()->id() ?? null,
-        'status' => $request->status,
-        'taken_at' => $request->taken_at,
-        'is_featured' => $request->has('is_featured'),
-    ]);
+        // Simpan ke database
+        Galeri::create([
+            'title'        => $request->title,
+            'slug'         => Str::slug($request->title),
+            'description'  => $request->description,
+            'image_path'   => $imagePath,
+            'category_id'  => $request->category_id ?: null,
+            'album_id'     => $request->album_id,
+            'uploader'     => auth()->id() ?? null,
+            'status'       => $request->status,
+            'taken_at'     => $request->taken_at,
+            'is_featured'  => $request->has('is_featured'),
+            'tipe_tampilan'=> $request->tipe_tampilan,
+        ]);
 
-    return redirect()->route('galeri.index')->with('success', 'Galeri berhasil ditambahkan!');
-}
+        return redirect()->route('galeri.index')->with('success', 'Galeri berhasil ditambahkan!');
+    }
 
     public function edit($id)
     {
@@ -60,31 +62,33 @@ public function store(Request $request)
     }
 
     public function update(Request $request, Galeri $galeri)
-{
-    $request->validate([
-        'title' => 'required|max:255',
-        'status' => 'required|in:draft,published,archived',
-    ]);
+    {
+        $request->validate([
+            'title'        => 'required|max:255',
+            'status'       => 'required|in:draft,published,archived',
+            'tipe_tampilan'=> 'required|in:slider,gallery,both',
+        ]);
 
-    $data = $request->only([
-        'title', 'description', 'status', 'category_id',
-        'album_id', 'taken_at', 'uploader'
-    ]);
+        $data = $request->only([
+            'title','description','status','category_id',
+            'album_id','taken_at'
+        ]);
 
-    $data['slug'] = Str::slug($request->title);
-    $data['is_featured'] = $request->has('is_featured') ? 1 : 0;
+        $data['slug']         = Str::slug($request->title);
+        $data['is_featured']  = $request->has('is_featured') ? 1 : 0;
+        $data['tipe_tampilan']= $request->tipe_tampilan;
 
-    if ($request->hasFile('image_path')) {
-        if ($galeri->image_path) {
-            Storage::disk('public')->delete($galeri->image_path);
+        if ($request->hasFile('image_path')) {
+            if ($galeri->image_path) {
+                Storage::disk('public')->delete($galeri->image_path);
+            }
+            $data['image_path'] = $request->file('image_path')->store('galeri', 'public');
         }
-        $data['image_path'] = $request->file('image_path')->store('galeri', 'public');
+
+        $galeri->update($data);
+
+        return redirect()->route('galeri.index')->with('success', 'Galeri berhasil diperbarui.');
     }
-
-    $galeri->update($data);
-
-    return redirect()->route('galeri.index')->with('success', 'Galeri berhasil diperbarui.');
-}
 
     public function destroy(Galeri $galeri)
     {
@@ -96,10 +100,24 @@ public function store(Request $request)
         return redirect()->route('galeri.index')->with('success', 'Galeri berhasil dihapus.');
     }
 
-    // Halaman publik / detail
+    // Halaman publik detail
     public function show($id)
     {
-        $galeri = Galeri::with('category', 'album')->findOrFail($id);
+        $galeri = Galeri::with('category','album')->findOrFail($id);
         return view('panel.galeri.show', compact('galeri'));
+    }
+
+    // Halaman publik utama (slider + gallery)
+    public function frontend()
+    {
+        $sliderImages = Galeri::whereIn('tipe_tampilan',['slider','both'])
+                        ->where('status','published')
+                        ->get();
+
+        $galleryImages = Galeri::whereIn('tipe_tampilan',['gallery','both'])
+                         ->where('status','published')
+                         ->get();
+
+        return view('panel.galeri.show', compact('sliderImages','galleryImages'));
     }
 }

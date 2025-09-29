@@ -36,7 +36,7 @@
       <tbody>
         @forelse($skemas as $s)
           <tr>
-            <td class="text-center">{{ $s->id }}</td>
+            <td class="text-center">{{ $loop->iteration }}</td>
             <td>{{ $s->nama }}</td>
             <td class="text-center">{{ $s->kode }}</td>
             <td class="text-center">{{ $s->jenis}}</td>

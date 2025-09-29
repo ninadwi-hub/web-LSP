@@ -31,5 +31,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SkemasTableSeeder::class);
         $this->call(UnitKompetensisTableSeeder::class);
         $this->call(GalleriesTableSeeder::class);
+        $this->call(LoginUserSeeder::class);
     }
 }

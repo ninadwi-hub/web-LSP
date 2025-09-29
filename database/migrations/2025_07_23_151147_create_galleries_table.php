@@ -18,6 +18,7 @@ return new class extends Migration {
                 $table->unsignedBigInteger('album_id')->nullable();
                 $table->string('uploader', 100)->nullable();
                 $table->enum('status', ['draft', 'published', 'archived']);
+                $table->enum('tipe_tampilan', ['slider', 'gallery', 'both'])->default('gallery');
                 $table->date('taken_at')->nullable();
                 $table->boolean('is_featured')->nullable();
                 $table->timestamps();

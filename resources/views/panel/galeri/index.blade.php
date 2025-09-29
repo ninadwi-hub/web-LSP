@@ -1,3 +1,4 @@
+```blade
 @extends('layouts.app')
 
 @section('title', 'Galeri')
@@ -21,6 +22,7 @@
                     <th style="width: 50px;">No</th>
                     <th>Judul</th>
                     <th>Gambar</th>
+                    <th>Tipe</th>
                     <th>Status</th>
                     <th>Tanggal Ambil</th>
                     <th style="width: 150px;">Aksi</th>
@@ -31,7 +33,24 @@
                     <tr>
                         <td>{{ $index + $galeris->firstItem() }}</td>
                         <td>{{ $g->title }}</td>
-                        <td><img src="{{ asset('storage/'.$g->image_path) }}" width="100" class="rounded shadow-sm"></td>
+                        <td>
+                            <img src="{{ asset('storage/'.$g->image_path) }}" width="100" class="rounded shadow-sm">
+                        </td>
+                        <td>
+                            @switch($g->tipe_tampilan)
+                                @case('slider')
+                                    Slider
+                                    @break
+                                @case('gallery')
+                                    Galeri
+                                    @break
+                                @case('both')
+                                    Keduanya
+                                    @break
+                                @default
+                                    -
+                            @endswitch
+                        </td>
                         <td>{{ ucfirst($g->status) }}</td>
                         <td>
                             {{ $g->taken_at ? \Carbon\Carbon::parse($g->taken_at)->translatedFormat('d F Y') : '-' }}
@@ -41,7 +60,6 @@
                                 <a href="{{ route('galeri.edit', $g->id) }}" class="btn btn-warning btn-sm">
                                     <i class="bx bx-edit"></i> Edit
                                 </a>
-
                                 <form action="{{ route('galeri.destroy', $g->id) }}" method="POST" class="d-inline"
                                       onsubmit="return confirm('Hapus galeri ini?')">
                                     @csrf
@@ -55,7 +73,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center">Belum ada galeri.</td>
+                        <td colspan="7" class="text-center">Belum ada galeri.</td>
                     </tr>
                 @endforelse
             </tbody>
@@ -68,3 +86,4 @@
     </div>
 </div>
 @endsection
+```
