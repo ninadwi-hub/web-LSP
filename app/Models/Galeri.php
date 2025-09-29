@@ -33,4 +33,9 @@ class Galeri extends Model
             $galeri->slug = Str::slug($galeri->title);
         });
     }
+    public function images()
+{
+    return $this->hasMany(Gallery::class)->orderBy('order');
+}
+
 }
