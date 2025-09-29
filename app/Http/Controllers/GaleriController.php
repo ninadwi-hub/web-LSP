@@ -120,4 +120,5 @@ class GaleriController extends Controller
 
         return view('panel.galeri.show', compact('sliderImages','galleryImages'));
     }
+    
 }
