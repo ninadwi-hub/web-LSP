@@ -3,15 +3,17 @@
         <div id="sidebar-menu">
             <ul class="metismenu list-unstyled" id="side-menu">
 
-                <li class="menu-title">Menu</li>
+                <li class="menu-title">Menu SuperAdmin</li>
 
-                <li class="{{ request()->routeIs('dashboard') ? 'mm-active' : '' }}">
-                    <a href="{{ route('dashboard') }}">
+                <!-- Dashboard SuperAdmin -->
+                <li class="{{ request()->routeIs('dashboardSA') ? 'mm-active' : '' }}">
+                    <a href="{{ route('dashboardSA') }}">
                         <i class="bx bx-home-circle"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
+                <!-- Pengguna -->
                 <li class="{{ request()->routeIs('users.*') ? 'mm-active' : '' }}">
                     <a href="{{ route('users.index') }}">
                         <i class="bx bx-user"></i>
@@ -19,6 +21,7 @@
                     </a>
                 </li>
 
+                <!-- Kategori -->
                 <li class="{{ request()->routeIs('kategoris.*') ? 'mm-active' : '' }}">
                     <a href="{{ route('kategoris.index') }}">
                         <i class="bx bx-folder"></i>
@@ -26,13 +29,15 @@
                     </a>
                 </li>
 
-                <li class="{{ request()->routeIs('infos.*') ? 'mm-active' : '' }}">
-                    <a href="{{ route('infos.index') }}">
+                <!-- Informasi/Artikel -->
+                <li class="{{ request()->routeIs('admin.info.*') || request()->routeIs('infos.*') ? 'mm-active' : '' }}">
+                    <a href="{{ route('admin.info.index') }}">
                         <i class="bx bx-info-circle"></i>
                         <span>Informasi</span>
                     </a>
                 </li>
 
+                <!-- Halaman Statis -->
                 <li class="{{ request()->routeIs('admin.pages.*') ? 'mm-active' : '' }}">
                     <a href="{{ route('admin.pages.index') }}">
                         <i class="bx bx-file"></i>
@@ -40,7 +45,8 @@
                     </a>
                 </li>
 
-                <li class="has-submenu {{ request()->routeIs('galeri.*') || request()->routeIs('media.*') ? 'mm-active' : '' }}">
+                <!-- Media Submenu -->
+                <li class="has-submenu {{ request()->routeIs('galeri.*') || request()->routeIs('admin.downloads.*') || request()->routeIs('admin.media.*') ? 'mm-active' : '' }}">
                     <a href="javascript:void(0);" class="waves-effect">
                         <i class="bx bx-image-alt"></i>
                         <span>Media</span>
@@ -50,12 +56,16 @@
                         <li class="{{ request()->routeIs('galeri.*') ? 'active' : '' }}">
                             <a href="{{ route('galeri.index') }}">Galeri</a>
                         </li>
-                        <li class="{{ request()->routeIs('media.*') ? 'active' : '' }}">
+                        <li class="{{ request()->routeIs('admin.media.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.media.index') }}">Media Library</a>
+                        </li>
+                        <li class="{{ request()->routeIs('admin.downloads.*') ? 'active' : '' }}">
                             <a href="{{ route('admin.downloads.index') }}">File Download</a>
                         </li>
                     </ul>
                 </li>
 
+                <!-- Kontak -->
                 <li class="{{ request()->routeIs('contacts.*') ? 'mm-active' : '' }}">
                     <a href="{{ route('contacts.index') }}">
                         <i class="bx bx-phone"></i>
@@ -63,28 +73,5 @@
                     </a>
                 </li>
 
-                <li class="{{ request()->routeIs('menus.*') ? 'mm-active' : '' }}">
-                    <a href="{{ route('menus.index') }}">
-                        <i class="bx bx-food-menu"></i>
-                        <span>Manajemen Menu</span>
-                    </a>
-                </li>
-
-                <li class="{{ request()->routeIs('panell.skema.*') ? 'mm-active' : '' }}">
-                    <a href="{{ route('panell.skema.index') }}">
-                        <i class="bx bx-award"></i>
-                        <span>Skema Sertifikasi</span>
-                    </a>
-                </li>
-
-                <li class="{{ request()->routeIs('panell.unit.*') ? 'mm-active' : '' }}">
-                    <a href="{{ route('panell.unit.index') }}">
-                        <i class="bx bx-check-square"></i>
-                        <span>Unit Kompetensi</span>
-                    </a>
-                </li>
-
-            </ul>
-        </div>
-    </div>
-</div>
+                <!-- Manajemen Menu -->
+                <li class="{{ request()->routeIs('admin.menus.*') ? 'mm-active' : '' }}">
