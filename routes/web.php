@@ -176,8 +176,16 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-Route::get('/asesor/dashboard', [AsesorController::class, 'index'])->name('asesor.dashboard');
-Route::get('/asesi/dashboard', [AsesiController::class, 'index'])->name('asesi.dashboard');
+
+// Dashboard untuk Asesor
+Route::middleware(['auth'])->group(function () {
+    Route::get('/asesor/dashboard', [AsesorController::class, 'index'])->name('asesor.dashboard');
+});
+
+// Dashboard untuk Asesi
+Route::middleware(['auth'])->group(function () {
+    Route::get('/asesi/dashboard', [AsesiController::class, 'index'])->name('asesi.dashboard');
+});
 
 // ===========================
 // Fallback Slug — jika URL tidak cocok dengan yang lain
