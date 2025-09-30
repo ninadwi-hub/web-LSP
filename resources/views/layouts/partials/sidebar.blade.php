@@ -29,14 +29,14 @@
                     </a>
                 </li>
 
-<<<<<<< HEAD
+
                 <!-- Informasi/Artikel -->
                 <li class="{{ request()->routeIs('admin.info.*') || request()->routeIs('infos.*') ? 'mm-active' : '' }}">
                     <a href="{{ route('admin.info.index') }}">
-=======
+
                 <li class="{{ request()->routeIs('infos.*') ? 'mm-active' : '' }}">
                     <a href="{{ route('admin.infos.index') }}">
->>>>>>> 7b10650a7f8560fcf8a9656db74811686325dd35
+
                         <i class="bx bx-info-circle"></i>
                         <span>Informasi</span>
                     </a>
@@ -61,16 +61,16 @@
                         <li class="{{ request()->routeIs('galeri.*') ? 'active' : '' }}">
                             <a href="{{ route('admin.galeri.index') }}">Galeri</a>
                         </li>
-<<<<<<< HEAD
+
                         <li class="{{ request()->routeIs('admin.media.*') ? 'active' : '' }}">
                             <a href="{{ route('admin.media.index') }}">Media Library</a>
                         </li>
                         <li class="{{ request()->routeIs('admin.downloads.*') ? 'active' : '' }}">
                             <a href="{{ route('admin.downloads.index') }}">File Download</a>
-=======
+
                         <li class="{{ request()->routeIs('media.*') ? 'active' : '' }}">
                             <a href="{{ route('admin.media.index') }}">File Download</a>
->>>>>>> 7b10650a7f8560fcf8a9656db74811686325dd35
+
                         </li>
                     </ul>
                 </li>
@@ -83,10 +83,10 @@
                     </a>
                 </li>
 
-<<<<<<< HEAD
+
                 <!-- Manajemen Menu -->
                 <li class="{{ request()->routeIs('admin.menus.*') ? 'mm-active' : '' }}">
-=======
+
                 <li class="{{ request()->routeIs('menus.*') ? 'mm-active' : '' }}">
                     <a href="{{ route('admin.menus.index') }}">
                         <i class="bx bx-food-menu"></i>
@@ -112,4 +112,3 @@
         </div>
     </div>
 </div>
->>>>>>> 7b10650a7f8560fcf8a9656db74811686325dd35
