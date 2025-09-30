@@ -13,7 +13,7 @@ class DashboardSAController extends Controller
     public function index()
     {
         // Pastikan hanya superadmin yang bisa akses
-        if (Auth::user()->name !== 'superadmin') {
+        if (Auth::user()->role !== 'superadmin') {
             abort(403, 'Unauthorized access');
         }
 

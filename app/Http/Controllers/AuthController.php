@@ -49,11 +49,17 @@ class AuthController extends Controller
         // =============================
         // Tambahkan logika active_role
         // =============================
-        $user = Auth::user();
+       $user = Auth::user();
         $roles = array_map('trim', explode(',', $user->role));
-        $activeRole = $roles[0] ?? $user->role; // ambil role pertama sebagai default
-        $user->update(['active_role' => $activeRole]); // simpan ke DB
-        session(['active_role' => $activeRole]); // simpan ke session
+        $activeRole = $roles[0] ?? $user->role;
+
+        // Simpan ke DB
+        $user->active_role = $activeRole;
+        $user->save(); // pastikan pakai save()
+
+        // Simpan ke session
+        session(['active_role' => $activeRole]);
+
 
         return $this->redirectToDashboard();
     }
@@ -88,7 +94,7 @@ class AuthController extends Controller
         $roles = array_map('trim', explode(',', $user->role));
 
         if (in_array('superadmin', $roles)) {
-            return redirect()->route('admin.dashboard'); // superadmin ke dashboard admin
+            return redirect()->route('dashboardSA'); // superadmin ke dashboard admin
         } elseif (in_array('admin', $roles)) {
             return redirect()->route('admin.dashboard');
         } elseif (in_array('asesi', $roles)) {

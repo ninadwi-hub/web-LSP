@@ -47,7 +47,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'superadmin@example.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'), // bisa login dengan password: password
-                'role' => 'admin',
+                'role' => 'superadmin',
                 'remember_token' => NULL,
                 'created_at' => now(),
                 'updated_at' => now(),
