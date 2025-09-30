@@ -48,7 +48,8 @@
                                             @csrf
                                            <div class="mb-3">
                                                 <label class="form-label">Username</label>
-                                                <input type="text" class="form-control" name="name" placeholder="Enter username" required>
+                                                <input type="email" class="form-control" name="email" placeholder="Enter email" required>
+
                                             </div>
                                              <div class="mb-3">
                                                 <div class="d-flex align-items-start">
@@ -100,10 +101,10 @@
 <script src="{{ asset('themes/minia/assets/libs/pace-js/pace.min.js') }}"></script>
 <script src="{{ asset('themes/minia/assets/js/pages/pass-addon.init.js') }}"></script>
 
-        <!-- pace js -->
+        {{-- <!-- pace js -->
         <script src="assets/libs/pace-js/pace.min.js"></script>
         <!-- password addon init -->
-        <script src="assets/js/pages/pass-addon.init.js"></script>
+        <script src="assets/js/pages/pass-addon.init.js"></script> --}}
 
     </body>
 

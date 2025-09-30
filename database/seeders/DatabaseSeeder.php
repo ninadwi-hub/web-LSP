@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder
 
 
         // Jalankan seeder lain
-        $this->call(AdminSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(ContactsTableSeeder::class);
         $this->call(DownloadsTableSeeder::class);
