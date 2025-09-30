@@ -10,20 +10,24 @@ class AdminSeeder extends Seeder
 {
     public function run(): void
     {
-        // Cek apakah email sudah ada
-        if (!User::where('email', 'untung@gmail.com')->exists()) {
-            User::create([
+        // Admin biasa
+        User::firstOrCreate(
+            ['email' => 'untung@gmail.com'], // cek berdasarkan email
+            [
                 'name' => 'Admin',
-                'email' => 'untung@gmail.com',
                 'password' => Hash::make('password'),
                 'role' => 'admin',
-            ]);
-            User::create([
+            ]
+        );
+
+        // Superadmin
+        User::firstOrCreate(
+            ['email' => 'admin@example.com'], // cek berdasarkan email
+            [
                 'name' => 'superadmin',
-                'email' => 'admin@example.com',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('darwinnigga'),
                 'role' => 'admin',
-            ]);
-        }
+            ]
+        );
     }
 }
