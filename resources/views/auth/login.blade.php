@@ -101,10 +101,10 @@
 <script src="{{ asset('themes/minia/assets/libs/pace-js/pace.min.js') }}"></script>
 <script src="{{ asset('themes/minia/assets/js/pages/pass-addon.init.js') }}"></script>
 
-        <!-- pace js -->
+        {{-- <!-- pace js -->
         <script src="assets/libs/pace-js/pace.min.js"></script>
         <!-- password addon init -->
-        <script src="assets/js/pages/pass-addon.init.js"></script>
+        <script src="assets/js/pages/pass-addon.init.js"></script> --}}
 
     </body>
 
