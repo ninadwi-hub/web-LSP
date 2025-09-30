@@ -19,7 +19,6 @@ return new class extends Migration
                 }
             });
         } else {
-            // Kalau users belum ada, baru buat
             Schema::create('users', function (Blueprint $table) {
                 $table->id();
                 $table->string('name');

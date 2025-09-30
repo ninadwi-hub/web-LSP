@@ -36,4 +36,20 @@ class DatabaseSeeder extends Seeder
     ]);
 }
 
+<<<<<<< HEAD
+=======
+
+        // Jalankan seeder lain
+        $this->call(UsersTableSeeder::class);
+        $this->call(ContactsTableSeeder::class);
+        $this->call(DownloadsTableSeeder::class);
+        $this->call(KategorisTableSeeder::class);
+        $this->call(InfosTableSeeder::class);
+        $this->call(PagesTableSeeder::class);
+        $this->call(MenusTableSeeder::class);
+        $this->call(SkemasTableSeeder::class);
+        $this->call(UnitKompetensisTableSeeder::class);
+        $this->call(GalleriesTableSeeder::class);
+    }
+>>>>>>> 7b10650a7f8560fcf8a9656db74811686325dd35
 }

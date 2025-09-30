@@ -15,7 +15,7 @@
 
                 <!-- Pengguna -->
                 <li class="{{ request()->routeIs('users.*') ? 'mm-active' : '' }}">
-                    <a href="{{ route('users.index') }}">
+                    <a href="{{ route('admin.users.index') }}">
                         <i class="bx bx-user"></i>
                         <span>Pengguna</span>
                     </a>
@@ -23,15 +23,20 @@
 
                 <!-- Kategori -->
                 <li class="{{ request()->routeIs('kategoris.*') ? 'mm-active' : '' }}">
-                    <a href="{{ route('kategoris.index') }}">
+                    <a href="{{ route('admin.kategoris.index') }}">
                         <i class="bx bx-folder"></i>
                         <span>Kategori</span>
                     </a>
                 </li>
 
+<<<<<<< HEAD
                 <!-- Informasi/Artikel -->
                 <li class="{{ request()->routeIs('admin.info.*') || request()->routeIs('infos.*') ? 'mm-active' : '' }}">
                     <a href="{{ route('admin.info.index') }}">
+=======
+                <li class="{{ request()->routeIs('infos.*') ? 'mm-active' : '' }}">
+                    <a href="{{ route('admin.infos.index') }}">
+>>>>>>> 7b10650a7f8560fcf8a9656db74811686325dd35
                         <i class="bx bx-info-circle"></i>
                         <span>Informasi</span>
                     </a>
@@ -54,24 +59,57 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li class="{{ request()->routeIs('galeri.*') ? 'active' : '' }}">
-                            <a href="{{ route('galeri.index') }}">Galeri</a>
+                            <a href="{{ route('admin.galeri.index') }}">Galeri</a>
                         </li>
+<<<<<<< HEAD
                         <li class="{{ request()->routeIs('admin.media.*') ? 'active' : '' }}">
                             <a href="{{ route('admin.media.index') }}">Media Library</a>
                         </li>
                         <li class="{{ request()->routeIs('admin.downloads.*') ? 'active' : '' }}">
                             <a href="{{ route('admin.downloads.index') }}">File Download</a>
+=======
+                        <li class="{{ request()->routeIs('media.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.media.index') }}">File Download</a>
+>>>>>>> 7b10650a7f8560fcf8a9656db74811686325dd35
                         </li>
                     </ul>
                 </li>
 
                 <!-- Kontak -->
                 <li class="{{ request()->routeIs('contacts.*') ? 'mm-active' : '' }}">
-                    <a href="{{ route('contacts.index') }}">
+                    <a href="{{ route('admin.contacts.index') }}">
                         <i class="bx bx-phone"></i>
                         <span>Kontak</span>
                     </a>
                 </li>
 
+<<<<<<< HEAD
                 <!-- Manajemen Menu -->
                 <li class="{{ request()->routeIs('admin.menus.*') ? 'mm-active' : '' }}">
+=======
+                <li class="{{ request()->routeIs('menus.*') ? 'mm-active' : '' }}">
+                    <a href="{{ route('admin.menus.index') }}">
+                        <i class="bx bx-food-menu"></i>
+                        <span>Manajemen Menu</span>
+                    </a>
+                </li>
+
+                <li class="{{ request()->routeIs('panell.skema.*') ? 'mm-active' : '' }}">
+                    <a href="{{ route('admin.skema.index') }}">
+                        <i class="bx bx-award"></i>
+                        <span>Skema Sertifikasi</span>
+                    </a>
+                </li>
+
+                <li class="{{ request()->routeIs('panell.unit.*') ? 'mm-active' : '' }}">
+                    <a href="{{ route('admin.unit.index') }}">
+                        <i class="bx bx-check-square"></i>
+                        <span>Unit Kompetensi</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+>>>>>>> 7b10650a7f8560fcf8a9656db74811686325dd35

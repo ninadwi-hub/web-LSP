@@ -52,6 +52,18 @@ class UsersTableSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ),
+            3 =>
+            array(
+                'id' => 4,
+                'name' => 'User Multi Role',
+                'email' => 'multi@example.com',
+                'email_verified_at' => now(),
+                'password' => bcrypt('password123'),
+                'role' => 'asesor,asesi', // multi-role
+                'remember_token' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            )
         ));
     }
 }
