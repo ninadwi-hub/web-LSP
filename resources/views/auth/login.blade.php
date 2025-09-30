@@ -50,18 +50,21 @@
                                                 <label class="form-label">Username</label>
                                                 <input type="text" class="form-control" name="name" placeholder="Enter username" required>
                                             </div>
-                                            <div class="mb-3">
+                                             <div class="mb-3">
                                                 <div class="d-flex align-items-start">
                                                     <div class="flex-grow-1">
                                                         <label class="form-label">Password</label>
                                                     </div>
                                                 </div>
-
+                                                
                                                 <div class="input-group auth-pass-inputgroup">
                                                     <input type="password" class="form-control" name="password" placeholder="Enter password" required>
                                                     <button class="btn btn-light shadow-none ms-0" type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
                                                 </div>
 
+                                            </div>
+                                            <div class="row mb-4">
+                                                
                                             </div>
                                             <div class="mb-3">
                                                 <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Log In</button>
