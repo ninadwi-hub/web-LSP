@@ -15,20 +15,34 @@ return view('auth.login');
 protected function sendFailedLoginResponse(Request $request)
 {
 return redirect()->back()
-->withInput($request->only('name'))
-->with('error', 'Username atau password salah.');
+->withInput($request->only('email'))
+->with('error', 'Email atau password salah.');
 }
 
-public function login(Request $request) {
-$credentials = $request->only('name', 'password');
+ public function login(Request $request) {
+        // gunakan email dan password untuk login
+        $credentials = $request->only('email', 'password');
 
-if (Auth::attempt($credentials)) {
-$request->session()->regenerate();
-return redirect()->intended('/admin/dashboard');
-}
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
 
-return $this->sendFailedLoginResponse($request);
-}
+            $user = Auth::user();
+
+            // cek multi role (comma-separated)
+            $roles = explode(',', $user->role);
+
+            // redirect sesuai role (prioritas admin > asesor > asesi)
+            if (in_array('admin', $roles)) {
+                return redirect()->route('admin.dashboard');
+            } elseif (in_array('asesor', $roles)) {
+                return redirect()->route('asesor.dashboard');
+            } elseif (in_array('asesi', $roles)) {
+                return redirect()->route('asesi.dashboard');
+            }
+        }
+
+        return $this->sendFailedLoginResponse($request);
+    }
 
 public function logout(Request $request) {
 Auth::logout();

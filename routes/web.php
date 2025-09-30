@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AsesorController;
+use App\Http\Controllers\AsesiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\GaleriController;
@@ -16,21 +18,6 @@ use App\Http\Controllers\PublicInfoController;
 use App\Http\Controllers\SkemaPublicController;
 use App\Http\Controllers\Admin\SkemaController as AdminSkemaController;
 use App\Http\Controllers\Admin\UnitKompetensiController as AdminUnitKompetensiController;
-
-// route untuk dashboard publik
-Route::get('/publik/dashboard', [DashboardPublikController::class, 'index'])->name('publik.dashboard');
-
-// Group hanya untuk user yang sudah login
-Route::middleware(['auth'])->prefix('asesi')->name('asesi.')->group(function () {
-    
-    // Halaman biodata
-    Route::get('/biodata', [BiodataController::class, 'index'])
-        ->name('biodata');
-
-    // Update biodata
-    Route::post('/biodata', [BiodataController::class, 'update'])
-        ->name('biodata.update');
-});
 
 // Publik - file download
 Route::get('/unduh', [FrontendController::class, 'downloads'])->name('unduh.index');
@@ -188,6 +175,9 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+Route::get('/asesor/dashboard', [AsesorController::class, 'index'])->name('asesor.dashboard');
+Route::get('/asesi/dashboard', [AsesiController::class, 'index'])->name('asesi.dashboard');
 
 // ===========================
 // Fallback Slug — jika URL tidak cocok dengan yang lain

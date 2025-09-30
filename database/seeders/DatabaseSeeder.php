@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
 
+
         // Jalankan seeder lain
         $this->call(AdminSeeder::class);
         $this->call(UsersTableSeeder::class);
