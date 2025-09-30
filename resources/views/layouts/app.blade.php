@@ -13,10 +13,10 @@
     <link rel="shortcut icon" href="{{ asset('THEMES/minia/images/logo.bg.png') }}">
 
     <!-- CSS -->
-    <link href="{{ asset('themes/minia/assets/css/bootstrap.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('themes/minia/assets/css/icons.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('themes/minia/assets/css/app.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('themes/minia/assets/css/custom.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('THEMES/minia/assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('THEMES/minia/assets/css/icons.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('THEMES/minia/assets/css/app.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('THEMES/minia/assets/css/custom.min.css') }}" rel="stylesheet" />
 
     <!-- Tambahkan purple theme (opsional override warna default) -->
     <style>
@@ -52,13 +52,13 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('themes/minia/assets/libs/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('themes/minia/assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('themes/minia/assets/libs/metismenu/metisMenu.min.js') }}"></script>
-    <script src="{{ asset('themes/minia/assets/libs/simplebar/simplebar.min.js') }}"></script>
-    <script src="{{ asset('themes/minia/assets/libs/node-waves/waves.min.js') }}"></script>
-    <script src="{{ asset('themes/minia/assets/js/layout.js') }}"></script>
-    <script src="{{ asset('themes/minia/assets/js/app.js') }}"></script>
+    <script src="{{ asset('THEMES/minia/assets/libs/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('THEMES/minia/assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('THEMES/minia/assets/libs/metismenu/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('THEMES/minia/assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('THEMES/minia/assets/libs/node-waves/waves.min.js') }}"></script>
+    <script src="{{ asset('THEMES/minia/assets/js/layout.js') }}"></script>
+    <script src="{{ asset('THEMES/minia/assets/js/app.js') }}"></script>
     <script> feather.replace(); </script>
 
     @stack('scripts')

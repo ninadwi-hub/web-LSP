@@ -15,12 +15,12 @@ return view('auth.login');
 protected function sendFailedLoginResponse(Request $request)
 {
 return redirect()->back()
-->withInput($request->only('email'))
-->with('error', 'Email atau password salah.');
+->withInput($request->only('name'))
+->with('error', 'Username atau password salah.');
 }
 
 public function login(Request $request) {
-$credentials = $request->only('email', 'password');
+$credentials = $request->only('name', 'password');
 
 if (Auth::attempt($credentials)) {
 $request->session()->regenerate();
