@@ -17,20 +17,6 @@ use App\Http\Controllers\SkemaPublicController;
 use App\Http\Controllers\Admin\SkemaController as AdminSkemaController;
 use App\Http\Controllers\Admin\UnitKompetensiController as AdminUnitKompetensiController;
 
-// route untuk dashboard publik
-Route::get('/publik/dashboard', [DashboardPublikController::class, 'index'])->name('publik.dashboard');
-
-// Group hanya untuk user yang sudah login
-Route::middleware(['auth'])->prefix('asesi')->name('asesi.')->group(function () {
-    
-    // Halaman biodata
-    Route::get('/biodata', [BiodataController::class, 'index'])
-        ->name('biodata');
-
-    // Update biodata
-    Route::post('/biodata', [BiodataController::class, 'update'])
-        ->name('biodata.update');
-});
 
 // Publik - file download
 Route::get('/unduh', [FrontendController::class, 'downloads'])->name('unduh.index');
