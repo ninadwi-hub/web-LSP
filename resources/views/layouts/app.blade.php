@@ -50,6 +50,13 @@
             @include('layouts.partials.footer')
         </div>
     </div>
+    <!-- Sidebar -->
+    @if(Auth::check() && Auth::user()->name === 'superadmin')
+        @include('layouts.partials.sidebar_superadmin')
+    @else
+        @include('layouts.partials.sidebar')
+    @endif
+
 
     <!-- Scripts -->
     <script src="{{ asset('THEMES/minia/assets/libs/jquery/jquery.min.js') }}"></script>
