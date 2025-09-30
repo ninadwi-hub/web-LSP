@@ -12,7 +12,7 @@ class AuthController extends Controller
      */
     public function showLogin()
     {
-        // Jika sudah login, redirect ke dashboard sesuai role
+        // Jika sudah login, langsung redirect ke dashboard sesuai role
         if (Auth::check()) {
             return $this->redirectToDashboard();
         }
@@ -48,7 +48,6 @@ class AuthController extends Controller
             return $this->redirectToDashboard();
         }
 
-        // Login gagal
         return $this->sendFailedLoginResponse($request);
     }
 
@@ -75,20 +74,20 @@ class AuthController extends Controller
             return redirect()->route('login');
         }
 
-        // Multi-role support: pisahkan jika ada lebih dari 1 role
+        // Multi-role: jika field role berisi lebih dari satu
         $roles = array_map('trim', explode(',', $user->role));
 
-        if (in_array('asesor', $roles)) {
+        if (in_array('superadmin', $roles)) {
+            return redirect()->route('admin.dashboard'); // superadmin ke dashboard admin
+        } elseif (in_array('admin', $roles)) {
+            return redirect()->route('admin.dashboard');
+        } elseif (in_array('asesor', $roles)) {
             return redirect()->route('asesor.dashboard');
         } elseif (in_array('asesi', $roles)) {
             return redirect()->route('asesi.dashboard');
-        } elseif (in_array('superadmin', $roles)) {
-            return redirect()->route('admin.dashboard');
-        } elseif (in_array('admin', $roles)) {
-            return redirect()->route('admin.dashboard');
         }
 
-        // fallback default
+        // fallback jika role tidak dikenali
         return redirect()->route('dashboard');
     }
 }
