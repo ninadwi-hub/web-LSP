@@ -38,9 +38,9 @@
 
         @include('layouts.partials.topbar')
         <!-- sidebar -->
-       @if(Auth::check() && Auth::user()->role === 'asesi')
+       @if(Auth::check() && Auth::user()->name === 'asesi')
             @include('layouts.partials.sidebar_asesi')
-        @elseif(Auth::check() && Auth::user()->role === 'asesor')
+        @elseif(Auth::check() && Auth::user()->name === 'asesor')
             @include('layouts.partials.sidebar_asesor')
         @elseif(Auth::check() && Auth::user()->name === 'superadmin')
             @include('layouts.partials.sidebar_superadmin')
