@@ -116,7 +116,8 @@ Route::middleware(['auth'])->group(function () {
     
 });
 Route::middleware(['auth'])->group(function () {
-    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
 
