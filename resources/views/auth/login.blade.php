@@ -48,7 +48,7 @@
                                             @csrf
                                            <div class="mb-3">
                                                 <label class="form-label">Username</label>
-                                                <input type="email" class="form-control" name="email" placeholder="Enter email" required>
+                                                <input type="text" class="form-control" name="name" placeholder="Enter Username" required>
 
                                             </div>
                                              <div class="mb-3">

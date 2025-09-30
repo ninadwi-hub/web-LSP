@@ -17,43 +17,47 @@ class AuthController extends Controller
     protected function sendFailedLoginResponse(Request $request)
     {
         return redirect()->back()
-            ->withInput($request->only('email'))
-            ->with('error', 'Email atau password salah.');
+            ->withInput($request->only('name'))
+            ->with('error', 'Username atau password salah.');
     }
 
     // Proses login
     public function login(Request $request)
-    {
-        // Validasi input
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
+{
+    // Validasi input
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'password' => 'required|string|max:255'
+    ]);
 
-        $credentials = $request->only('email', 'password');
+    $credentials = $request->only('name', 'password');
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
 
-            $user = Auth::user();
+        $user = Auth::user();
 
-            // Multi-role: hapus spasi di role
-            $roles = array_map('trim', explode(',', $user->role));
+        // Multi-role: hapus spasi di role
+        $roles = array_map('trim', explode(',', $user->role));
 
-            // Redirect sesuai prioritas role
-            if (in_array('asesor', $roles)) {
-    return redirect()->route('asesor.dashboard');
-} elseif (in_array('asesi', $roles)) {
-    return redirect()->route('asesi.dashboard');
-}
-
-            // fallback jika role tidak valid
-            Auth::logout();
-            return redirect()->back()->with('error', 'Role user tidak valid.');
+        // Redirect sesuai prioritas role
+        if (in_array('asesor', $roles)) {
+            return redirect()->route('asesor.dashboard');
+        } elseif (in_array('asesi', $roles)) {
+            return redirect()->route('asesi.dashboard');
+        } elseif (in_array('superadmin', $roles)) {
+            return redirect()->route('admin.dashboard'); // superadmin ke dashboard admin
+        } elseif (in_array('admin', $roles)) {
+            return redirect()->route('admin.dashboard'); // admin ke dashboard admin
         }
 
-        return $this->sendFailedLoginResponse($request);
+        // fallback kalau role tidak ada
+        return redirect()->route('dashboard'); 
     }
+
+    return $this->sendFailedLoginResponse($request);
+}
+
 
     // Logout
     public function logout(Request $request)
