@@ -17,6 +17,7 @@
     <link href="{{ asset('THEMES/minia/assets/css/icons.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('THEMES/minia/assets/css/app.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('THEMES/minia/assets/css/custom.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('THEMES/minia/assets/css/custom.css') }}" rel="stylesheet">
 
     <!-- Tambahkan purple theme (opsional override warna default) -->
     <style>
@@ -37,16 +38,24 @@
     <div id="layout-wrapper">
 
         @include('layouts.partials.topbar')
-    <!-- sidebar -->
+   <!-- Sidebar -->
 @if(Auth::check())
-    @if(Request::is('asesi/*'))
+    @php
+        $activeRole = session('active_role') ?? Auth::user()->role;
+    @endphp
+
+    @if(str_contains($activeRole, 'asesi'))
         @include('layouts.partials.sidebar_asesi')
-    @elseif(Request::is('asesor/*'))
+    @elseif(str_contains($activeRole, 'asesor'))
         @include('layouts.partials.sidebar_asesor')
-    @elseif(Auth::user()->role === 'superadmin')
+    @elseif(str_contains($activeRole, 'superadmin'))
         @include('layouts.partials.sidebar_superadmin')
+    @elseif(str_contains($activeRole, 'admin'))
+        @include('layouts.partials.sidebar')
     @endif
 @endif
+
+
 
         <!-- Page Content -->
         <div class="main-content">

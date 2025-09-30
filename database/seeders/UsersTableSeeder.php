@@ -59,7 +59,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'multi@example.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt('password123'),
-                'role' => 'asesor,asesi', // multi-role
+                'role' => 'asesi,asesor', // multi-role
                 'remember_token' => null,
                 'created_at' => now(),
                 'updated_at' => now(),

@@ -34,22 +34,32 @@ class AuthController extends Controller
      * Proses login
      */
     public function login(Request $request)
-    {
-        // Validasi input
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'password' => 'required|string|max:255'
-        ]);
+{
+    // Validasi input
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'password' => 'required|string|max:255'
+    ]);
 
-        $credentials = $request->only('name', 'password');
+    $credentials = $request->only('name', 'password');
 
-        if (Auth::attempt($credentials, $request->boolean('remember'))) {
-            $request->session()->regenerate();
-            return $this->redirectToDashboard();
-        }
+    if (Auth::attempt($credentials, $request->boolean('remember'))) {
+        $request->session()->regenerate();
 
-        return $this->sendFailedLoginResponse($request);
+        // =============================
+        // Tambahkan logika active_role
+        // =============================
+        $user = Auth::user();
+        $roles = array_map('trim', explode(',', $user->role));
+        $activeRole = $roles[0] ?? $user->role; // ambil role pertama sebagai default
+        $user->update(['active_role' => $activeRole]); // simpan ke DB
+        session(['active_role' => $activeRole]); // simpan ke session
+
+        return $this->redirectToDashboard();
     }
+
+    return $this->sendFailedLoginResponse($request);
+}
 
     /**
      * Logout user
@@ -81,10 +91,10 @@ class AuthController extends Controller
             return redirect()->route('admin.dashboard'); // superadmin ke dashboard admin
         } elseif (in_array('admin', $roles)) {
             return redirect()->route('admin.dashboard');
-        } elseif (in_array('asesor', $roles)) {
-            return redirect()->route('asesor.dashboard');
         } elseif (in_array('asesi', $roles)) {
             return redirect()->route('asesi.dashboard');
+        } elseif (in_array('asesor', $roles)) {
+            return redirect()->route('asesor.dashboard');
         }
 
         // fallback jika role tidak dikenali

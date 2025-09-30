@@ -1,0 +1,89 @@
+/* Custom style logo center */
+body[data-sidebar-size=sm] .navbar-brand-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    width: 70px !important;
+    text-align: center;
+}
+
+body[data-sidebar-size=sm] .navbar-brand-box .logo-sm {
+    display: inline-block !important;
+    margin: 0 auto;
+}
+/* Kotak Selamat Datang */
+.card-welcome {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px 22px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); /* Lebih kuat dari sebelumnya */
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 100px;
+    transition: box-shadow 0.3s ease;
+}
+
+/* Efek hover (opsional) */
+.card-welcome:hover {
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+
+/* Teks Selamat Datang */
+.card-welcome .welcome-text h5 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #5156be;
+}
+
+.card-welcome .welcome-text p {
+    margin: 6px 0 0 0;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+/* Badge Tanggal */
+.card-welcome .date-badge {
+    background-color: #5156be;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* Layout Flex agar teks di kiri, badge di kanan */
+.card-welcome .card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.card-welcome .welcome-text {
+    flex: 1 1 auto; /* teks tetap di kiri */
+}
+
+.card-welcome .date-badge {
+    flex: 0 0 auto; /* badge tetap di kanan */
+}
+
+/* Responsif untuk mobile */
+@media (max-width: 768px) {
+    .card-welcome {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 20px;
+    }
+
+    .card-welcome .date-badge {
+        align-self: flex-end;
+        margin-top: 10px;
+    }
+}
