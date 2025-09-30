@@ -37,7 +37,17 @@
     <div id="layout-wrapper">
 
         @include('layouts.partials.topbar')
-        @include('layouts.partials.sidebar')
+        <!-- sidebar -->
+       @if(Auth::check() && Auth::user()->role === 'asesi')
+            @include('layouts.partials.sidebar_asesi')
+        @elseif(Auth::check() && Auth::user()->role === 'asesor')
+            @include('layouts.partials.sidebar_asesor')
+        @elseif(Auth::check() && Auth::user()->name === 'superadmin')
+            @include('layouts.partials.sidebar_superadmin')
+        @else
+            @include('layouts.partials.sidebar') 
+        @endif
+
 
         <!-- Page Content -->
         <div class="main-content">
@@ -50,12 +60,6 @@
             @include('layouts.partials.footer')
         </div>
     </div>
-    <!-- Sidebar -->
-    @if(Auth::check() && Auth::user()->name === 'superadmin')
-        @include('layouts.partials.sidebar_superadmin')
-    @else
-        @include('layouts.partials.sidebar')
-    @endif
 
 
     <!-- Scripts -->
