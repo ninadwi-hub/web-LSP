@@ -142,3 +142,23 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/{slug}', [FrontendController::class, 'show'])
     ->where('slug', '^(?!halaman|admin|login|logout|dashboard|media|galeri|kontak|informasi|infos|file-download|pages|publik|unduh|skema|asesi|panel|sa).*$')
     ->name('slug.show');
+
+    /// ASESI ROUTESS
+    Route::prefix('asesi')->name('asesi.')->group(function () {
+    Route::get('/biodata', function () {
+        abort(404);
+    })->name('biodata');
+
+    Route::get('/asesmen', function () {
+        abort(404);
+    })->name('asesmen');
+
+    Route::get('/riwayat', function () {
+        abort(404);
+    })->name('riwayat');
+
+    Route::get('/praasesmen', function () {
+        abort(404);
+    })->name('praasesmen'); 
+});
+

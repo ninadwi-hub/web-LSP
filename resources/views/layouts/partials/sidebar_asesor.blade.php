@@ -7,8 +7,8 @@
                         <li class="menu-title">Menu</li>
 
                         <!-- Dashboard -->
-                        <li class="{{ request()->routeIs('dashboard') ? 'mm-active' : '' }}">
-                            <a href="{{ route('dashboard') }}">
+                        <li class="{{ request()->routeIs('asesor/dashboard') ? 'mm-active' : '' }}">
+                            <a href="{{ route('asesor.dashboard') }}">
                                 <i class="bx bx-home-circle"></i>
                                 <span>Dashboard</span>
                             </a>

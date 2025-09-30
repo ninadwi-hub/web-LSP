@@ -37,17 +37,16 @@
     <div id="layout-wrapper">
 
         @include('layouts.partials.topbar')
-        <!-- sidebar -->
-       @if(Auth::check() && Auth::user()->name === 'asesi')
-            @include('layouts.partials.sidebar_asesi')
-        @elseif(Auth::check() && Auth::user()->name === 'asesor')
-            @include('layouts.partials.sidebar_asesor')
-        @elseif(Auth::check() && Auth::user()->name === 'superadmin')
-            @include('layouts.partials.sidebar_superadmin')
-        @else
-            @include('layouts.partials.sidebar') 
-        @endif
-
+    <!-- sidebar -->
+@if(Auth::check())
+    @if(Request::is('asesi/*'))
+        @include('layouts.partials.sidebar_asesi')
+    @elseif(Request::is('asesor/*'))
+        @include('layouts.partials.sidebar_asesor')
+    @elseif(Auth::user()->role === 'superadmin')
+        @include('layouts.partials.sidebar_superadmin')
+    @endif
+@endif
 
         <!-- Page Content -->
         <div class="main-content">
