@@ -3,11 +3,10 @@
         <div id="sidebar-menu">
             <ul class="metismenu list-unstyled" id="side-menu">
 
-                <li class="menu-title">Menu SuperAdmin</li>
 
                 <!-- Dashboard SuperAdmin -->
-                <li class="{{ request()->routeIs('dashboardSA') ? 'mm-active' : '' }}">
-                    <a href="{{ route('dashboardSA') }}">
+                <li class="{{ request()->routeIs('admin.dashboard') ? 'mm-active' : '' }}">
+                    <a href="{{ route('admin.dashboard') }}">
                         <i class="bx bx-home-circle"></i>
                         <span>Dashboard</span>
                     </a>
@@ -29,19 +28,9 @@
                     </a>
                 </li>
 
-
                 <!-- Informasi/Artikel -->
-                <li class="{{ request()->routeIs('admin.info.*') || request()->routeIs('infos.*') ? 'mm-active' : '' }}">
+                <li class="{{ request()->routeIs('admin.info.*') ? 'mm-active' : '' }}">
                     <a href="{{ route('admin.info.index') }}">
-
-                <li class="{{ request()->routeIs('infos.*') ? 'mm-active' : '' }}">
-<<<<<<< HEAD
-                    <a href="{{ route('admin.infos.index') }}">
-
-=======
-                    <a href="{{ route('infos.index') }}">
->>>>>>> 7b10650a7f8560fcf8a9656db74811686325dd35
->>>>>>> d7d8787969cdebedc556031e569e585b194a5b57
                         <i class="bx bx-info-circle"></i>
                         <span>Informasi</span>
                     </a>
@@ -66,47 +55,41 @@
                         <li class="{{ request()->routeIs('galeri.*') ? 'active' : '' }}">
                             <a href="{{ route('galeri.index') }}">Galeri</a>
                         </li>
-
                         <li class="{{ request()->routeIs('admin.media.*') ? 'active' : '' }}">
                             <a href="{{ route('admin.media.index') }}">Media Library</a>
                         </li>
                         <li class="{{ request()->routeIs('admin.downloads.*') ? 'active' : '' }}">
                             <a href="{{ route('admin.downloads.index') }}">File Download</a>
-
-                        <li class="{{ request()->routeIs('media.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.media.index') }}">File Download</a>
-
                         </li>
                     </ul>
                 </li>
 
                 <!-- Kontak -->
-                <li class="{{ request()->routeIs('contacts.*') ? 'mm-active' : '' }}">
+                <li class="{{ request()->routeIs('admin.contacts.*') ? 'mm-active' : '' }}">
                     <a href="{{ route('admin.contacts.index') }}">
                         <i class="bx bx-phone"></i>
                         <span>Kontak</span>
                     </a>
                 </li>
 
-
                 <!-- Manajemen Menu -->
                 <li class="{{ request()->routeIs('admin.menus.*') ? 'mm-active' : '' }}">
-
-                <li class="{{ request()->routeIs('menus.*') ? 'mm-active' : '' }}">
                     <a href="{{ route('admin.menus.index') }}">
                         <i class="bx bx-food-menu"></i>
                         <span>Manajemen Menu</span>
                     </a>
                 </li>
 
-                <li class="{{ request()->routeIs('panell.skema.*') ? 'mm-active' : '' }}">
+                <!-- Skema Sertifikasi -->
+                <li class="{{ request()->routeIs('panel.skema.*') ? 'mm-active' : '' }}">
                     <a href="{{ route('panel.skema.index') }}">
                         <i class="bx bx-award"></i>
                         <span>Skema Sertifikasi</span>
                     </a>
                 </li>
 
-                <li class="{{ request()->routeIs('panell.unit.*') ? 'mm-active' : '' }}">
+                <!-- Unit Kompetensi -->
+                <li class="{{ request()->routeIs('panel.unit.*') ? 'mm-active' : '' }}">
                     <a href="{{ route('panel.unit.index') }}">
                         <i class="bx bx-check-square"></i>
                         <span>Unit Kompetensi</span>
