@@ -15,7 +15,7 @@
 
                 <!-- Pengguna -->
                 <li class="{{ request()->routeIs('users.*') ? 'mm-active' : '' }}">
-                    <a href="{{ route('admin.users.index') }}">
+                    <a href="{{ route('users.index') }}">
                         <i class="bx bx-user"></i>
                         <span>Pengguna</span>
                     </a>
@@ -23,7 +23,7 @@
 
                 <!-- Kategori -->
                 <li class="{{ request()->routeIs('kategoris.*') ? 'mm-active' : '' }}">
-                    <a href="{{ route('admin.kategoris.index') }}">
+                    <a href="{{ route('kategoris.index') }}">
                         <i class="bx bx-folder"></i>
                         <span>Kategori</span>
                     </a>
@@ -35,8 +35,13 @@
                     <a href="{{ route('admin.info.index') }}">
 
                 <li class="{{ request()->routeIs('infos.*') ? 'mm-active' : '' }}">
+<<<<<<< HEAD
                     <a href="{{ route('admin.infos.index') }}">
 
+=======
+                    <a href="{{ route('infos.index') }}">
+>>>>>>> 7b10650a7f8560fcf8a9656db74811686325dd35
+>>>>>>> d7d8787969cdebedc556031e569e585b194a5b57
                         <i class="bx bx-info-circle"></i>
                         <span>Informasi</span>
                     </a>
@@ -59,7 +64,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li class="{{ request()->routeIs('galeri.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.galeri.index') }}">Galeri</a>
+                            <a href="{{ route('galeri.index') }}">Galeri</a>
                         </li>
 
                         <li class="{{ request()->routeIs('admin.media.*') ? 'active' : '' }}">
@@ -95,14 +100,14 @@
                 </li>
 
                 <li class="{{ request()->routeIs('panell.skema.*') ? 'mm-active' : '' }}">
-                    <a href="{{ route('admin.skema.index') }}">
+                    <a href="{{ route('panel.skema.index') }}">
                         <i class="bx bx-award"></i>
                         <span>Skema Sertifikasi</span>
                     </a>
                 </li>
 
                 <li class="{{ request()->routeIs('panell.unit.*') ? 'mm-active' : '' }}">
-                    <a href="{{ route('admin.unit.index') }}">
+                    <a href="{{ route('panel.unit.index') }}">
                         <i class="bx bx-check-square"></i>
                         <span>Unit Kompetensi</span>
                     </a>
