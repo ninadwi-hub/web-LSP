@@ -16,10 +16,6 @@ use App\Http\Controllers\PublicInfoController;
 use App\Http\Controllers\SkemaPublicController;
 use App\Http\Controllers\Admin\SkemaController as AdminSkemaController;
 use App\Http\Controllers\Admin\UnitKompetensiController as AdminUnitKompetensiController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\BiodataController;
-use App\Http\Controllers\Auth\DashboardPublikController;
 
 // route untuk dashboard publik
 Route::get('/publik/dashboard', [DashboardPublikController::class, 'index'])->name('publik.dashboard');
@@ -201,21 +197,6 @@ Route::get('/{slug}', [FrontendController::class, 'show'])
     ->where('slug', '^(?!halaman|admin|login|logout|dashboard|media|galeri|kontak|informasi|infos|file-download|pages|publik).*$')
     ->name('slug.show');
 
-    
-//|--------------------------------------------------------------------------
-//| ROUTES UNTUK PUBLIK
-//|--------------------------------------------------------------------------
-Route::prefix('publik')->group(function () {
-    Route::get('login', [LoginController::class, 'showLoginForm'])->name('publik.login');
-    Route::post('login', [LoginController::class, 'login'])->name('publik.login.post');
-    Route::post('logout', [LoginController::class, 'logout'])->name('publik.logout');
 
-    Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('publik.register');
-    Route::post('register', [RegisterController::class, 'register'])->name('publik.register.post');
-
-    Route::get('dashboard', function () {
-        return view('publik.dashboard'); 
-    })->name('publik.dashboard')->middleware('auth:publik');
-});
 
 
