@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             InfosTableSeeder::class,
             PagesTableSeeder::class,
             MenusTableSeeder::class,
+            SkemasTableSeeder::class,
             SkemaSeeder::class,               
             UnitKompetensisTableSeeder::class,
             GalleriesTableSeeder::class,
