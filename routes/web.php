@@ -80,14 +80,14 @@ Route::middleware(['auth'])->group(function () {
     // Dashboard utama (cek role superadmin / admin)
     Route::get('/dashboard', function () {
         $user = Auth::user();
-        if ($user && $user->name === 'superadmin') {
+        if ($user && $user->role === 'superadmin') {
             return redirect()->route('dashboardSA');
         }
         return redirect()->route('admin.dashboard');
     })->name('dashboard');
 
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('/admin/dashboardSA', [DashboardSAController::class, 'index'])->name('dashboardSA');
+    Route::get('/superadmin/dashboardSA', [DashboardSAController::class, 'index'])->name('dashboardSA');
 
     // Admin Routes
     Route::prefix('admin')->name('admin.')->group(function () {
