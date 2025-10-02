@@ -21,17 +21,17 @@
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li class="{{ request()->routeIs('sa.persiapan.jadwal') ? 'active' : '' }}">
-                            <a href="#">Jadwal Asesmen</a>
+                        <li class="{{ request()->routeIs('sa.persiapan.jadwal.index') ? 'active' : '' }}">
+                            <a href="{{ route('sa.persiapan.jadwal.index') }}">Jadwal Asesmen</a>
                         </li>
-                         <li class="{{ request()->routeIs('sa.persiapan.jadwal') ? 'active' : '' }}">
+                        <li class="{{ request()->routeIs('admin.token.*') ? 'active' : '' }}">
                             <a href="#">Token</a>
                         </li>
                     </ul>
                 </li>
 
-                 <!--Sertifikasi -->
-                 <li class="has-submenu {{ request()->routeIs('#') ? 'mm-active' : '' }}">
+                <!-- Sertifikasi -->
+                <li class="has-submenu {{ request()->routeIs('sa.sertifikasi.*') ? 'mm-active' : '' }}">
                     <a href="javascript:void(0);" class="waves-effect">
                         <i data-feather="file-text"></i>
                         <span>Sertifikasi</span>
@@ -47,6 +47,9 @@
                         <li><a href="#">Berita Acara Asesmen</a></li>
                         <li><a href="#">Sertifikasi</a></li>
                     </ul>
-                    </li>
                 </li>
 
+            </ul>
+        </div>
+    </div>
+</div>
