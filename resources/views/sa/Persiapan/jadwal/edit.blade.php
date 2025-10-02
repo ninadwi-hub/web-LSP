@@ -6,8 +6,8 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h3>Edit Jadwal Asesmen</h3>
-        <a href="{{ route('admin.jadwal.index') }}" class="btn btn-secondary">
-            <i class="bi bi-arrow-left"></i> Kembali
+        <a href="{{ route('sa.persiapan.jadwal.index') }}" class="btn btn-secondary">
+            <i data-feather="arrow-left"></i> Kembali
         </a>
     </div>
 
@@ -25,14 +25,14 @@
 
     <div class="card shadow-sm">
         <div class="card-body p-4">
-            <form action="{{ route('admin.jadwal.update', $jadwal) }}" method="POST">
+            <form action="{{ route('sa.persiapan.jadwal.update', $jadwal) }}" method="POST">
                 @csrf
                 @method('PUT')
 
-                @include('admin.jadwal.form')
+                @include('sa.Persiapan.jadwal.form')
 
                 <div class="d-flex gap-2 justify-content-end mt-4">
-                    <a href="{{ route('admin.jadwal.index') }}" class="btn btn-secondary">Batal</a>
+                    <a href="{{ route('sa.persiapan.jadwal.index') }}" class="btn btn-secondary">Batal</a>
                     <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                 </div>
             </form>
