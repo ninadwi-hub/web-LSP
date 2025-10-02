@@ -24,8 +24,8 @@
                         <li class="{{ request()->routeIs('sa.persiapan.jadwal.index') ? 'active' : '' }}">
                             <a href="{{ route('sa.persiapan.jadwal.index') }}">Jadwal Asesmen</a>
                         </li>
-                        <li class="{{ request()->routeIs('admin.token.*') ? 'active' : '' }}">
-                            <a href="#">Token</a>
+                        <li class="{{ request()->routeIs('sa.tokens.index') ? 'active' : '' }}">
+                            <a href="{{ route('sa.tokens.index') }}">Token</a>
                         </li>
                     </ul>
                 </li>

@@ -20,6 +20,7 @@ use App\Http\Controllers\DashboardSAController;
 use App\Http\Controllers\AsesorController;
 use App\Http\Controllers\AsesiController;
 use App\Http\Controllers\JadwalAsesmenController;
+use App\Http\Controllers\TokenController;
 use App\Models\Download;
 
 /*
@@ -27,6 +28,7 @@ use App\Models\Download;
 | AUTH ROUTES
 |--------------------------------------------------------------------------
 */
+
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -144,8 +146,8 @@ Route::get('/{slug}', [FrontendController::class, 'show'])
     ->where('slug', '^(?!halaman|admin|login|logout|dashboard|media|galeri|kontak|informasi|infos|file-download|pages|publik|unduh|skema|asesi|panel|sa).*$')
     ->name('slug.show');
 
-    /// ASESI ROUTESS
-    Route::prefix('asesi')->name('asesi.')->group(function () {
+/// ASESI ROUTESS
+Route::prefix('asesi')->name('asesi.')->group(function () {
     Route::get('/biodata', function () {
         abort(404);
     })->name('biodata');
@@ -163,6 +165,14 @@ Route::get('/{slug}', [FrontendController::class, 'show'])
     })->name('praasesmen');
 });
 
+
+
+
+Route::prefix('sa/tokens')->name('sa.tokens.')->group(function () {
+    Route::get('/', [TokenController::class, 'index'])->name('index');
+    Route::post('/generate', [TokenController::class, 'generate'])->name('generate');
+    Route::delete('/{id}', [TokenController::class, 'destroy'])->name('destroy');
+});
 
 
 // SuperAdmin → Persiapan
