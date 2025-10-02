@@ -69,10 +69,10 @@
                             <td>{{ number_format($jadwal->harga, 0, ',', '.') }}</td>
                             <td>{{ $jadwal->kuota }}</td>
                             <td>
-                                <a href="{{ route('admin.jadwal.edit', $jadwal) }}" class="btn btn-warning btn-sm">
+                                <a href="{{ route('sa.persiapan.jadwal.edit', $jadwal) }}" class="btn btn-warning btn-sm">
                                     <i class="bi bi-pencil"></i>
                                 </a>
-                                <form action="{{ route('admin.jadwal.destroy', $jadwal) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                <form action="{{ route('sa.persiapan.jadwal.destroy', $jadwal) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">
@@ -106,14 +106,14 @@
 <div class="modal fade" id="createModal" tabindex="-1">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <form action="{{ route('admin.jadwal.store') }}" method="POST">
+            <form action="{{ route('sa.persiapan.jadwal.store') }}" method="POST">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title">Tambah Jadwal Asesmen</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    @include('admin.jadwal.form')
+                    @include('sa.Persiapan.jadwal.form')
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>

@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\JadwalAsesmen;
 use App\Models\Skema;
 use App\Models\User;
@@ -16,16 +15,20 @@ class JadwalAsesmenController extends Controller
         $jadwals = JadwalAsesmen::with(['skema', 'asesorUji', 'asesorValidator'])
                     ->orderBy('created_at', 'desc')
                     ->paginate(10);
-        
-        return view('admin.jadwal.index', compact('jadwals'));
+
+        $skemas = Skema::all();
+        $asesors = User::where('role', 'asesor')->get();
+
+        // view → sesuai folder (P besar)
+        return view('sa.Persiapan.jadwal.index', compact('jadwals', 'skemas', 'asesors'));
     }
 
     public function create()
     {
         $skemas = Skema::all();
         $asesors = User::where('role', 'asesor')->get();
-        
-        return view('admin.jadwal.create', compact('skemas', 'asesors'));
+
+        return view('sa.Persiapan.jadwal.create', compact('skemas', 'asesors'));
     }
 
     public function store(Request $request)
@@ -58,7 +61,6 @@ class JadwalAsesmenController extends Controller
                 'kuota' => $validated['kuota'],
             ]);
 
-            // Attach Asesor Uji
             foreach ($validated['asesor_uji'] as $asesor_id) {
                 $jadwal->asesorUji()->attach($asesor_id, [
                     'role' => 'uji',
@@ -66,7 +68,6 @@ class JadwalAsesmenController extends Controller
                 ]);
             }
 
-            // Attach Asesor Validator
             foreach ($validated['asesor_validator'] as $asesor_id) {
                 $jadwal->asesorValidator()->attach($asesor_id, [
                     'role' => 'validator',
@@ -75,7 +76,9 @@ class JadwalAsesmenController extends Controller
             }
 
             DB::commit();
-            return redirect()->route('admin.jadwal.index')->with('success', 'Jadwal asesmen berhasil ditambahkan');
+            // redirect pakai lowercase
+            return redirect()->route('sa.persiapan.jadwal.index')
+                             ->with('success', 'Jadwal asesmen berhasil ditambahkan');
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->with('error', 'Gagal menambahkan jadwal: ' . $e->getMessage())->withInput();
@@ -87,8 +90,8 @@ class JadwalAsesmenController extends Controller
         $jadwal->load(['skema', 'asesorUji', 'asesorValidator']);
         $skemas = Skema::all();
         $asesors = User::where('role', 'asesor')->get();
-        
-        return view('admin.jadwal.edit', compact('jadwal', 'skemas', 'asesors'));
+
+        return view('sa.Persiapan.jadwal.edit', compact('jadwal', 'skemas', 'asesors'));
     }
 
     public function update(Request $request, JadwalAsesmen $jadwal)
@@ -121,7 +124,6 @@ class JadwalAsesmenController extends Controller
                 'kuota' => $validated['kuota'],
             ]);
 
-            // Sync Asesor Uji
             $syncDataUji = [];
             foreach ($validated['asesor_uji'] as $asesor_id) {
                 $syncDataUji[$asesor_id] = [
@@ -131,7 +133,6 @@ class JadwalAsesmenController extends Controller
             }
             $jadwal->asesorUji()->sync($syncDataUji);
 
-            // Sync Asesor Validator
             $syncDataValidator = [];
             foreach ($validated['asesor_validator'] as $asesor_id) {
                 $syncDataValidator[$asesor_id] = [
@@ -142,7 +143,8 @@ class JadwalAsesmenController extends Controller
             $jadwal->asesorValidator()->sync($syncDataValidator);
 
             DB::commit();
-            return redirect()->route('admin.jadwal.index')->with('success', 'Jadwal asesmen berhasil diperbarui');
+            return redirect()->route('sa.persiapan.jadwal.index')
+                             ->with('success', 'Jadwal asesmen berhasil diperbarui');
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->with('error', 'Gagal memperbarui jadwal: ' . $e->getMessage())->withInput();
@@ -153,7 +155,8 @@ class JadwalAsesmenController extends Controller
     {
         try {
             $jadwal->delete();
-            return redirect()->route('admin.jadwal.index')->with('success', 'Jadwal asesmen berhasil dihapus');
+            return redirect()->route('sa.persiapan.jadwal.index')
+                             ->with('success', 'Jadwal asesmen berhasil dihapus');
         } catch (\Exception $e) {
             return back()->with('error', 'Gagal menghapus jadwal: ' . $e->getMessage());
         }

@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\UnitKompetensiController as AdminUnitKompetensiCo
 use App\Http\Controllers\DashboardSAController;
 use App\Http\Controllers\AsesorController;
 use App\Http\Controllers\AsesiController;
+use App\Http\Controllers\JadwalAsesmenController;
 use App\Models\Download;
 
 /*
@@ -162,3 +163,14 @@ Route::get('/{slug}', [FrontendController::class, 'show'])
     })->name('praasesmen'); 
 });
 
+
+
+// SuperAdmin → Persiapan
+Route::prefix('sa/persiapan')->name('sa.persiapan.')->group(function () {
+    Route::get('/jadwal', [JadwalAsesmenController::class, 'index'])->name('jadwal.index');
+    Route::get('/jadwal/create', [JadwalAsesmenController::class, 'create'])->name('jadwal.create');
+    Route::post('/jadwal', [JadwalAsesmenController::class, 'store'])->name('jadwal.store');
+    Route::get('/jadwal/{jadwal}/edit', [JadwalAsesmenController::class, 'edit'])->name('jadwal.edit');
+    Route::put('/jadwal/{jadwal}', [JadwalAsesmenController::class, 'update'])->name('jadwal.update');
+    Route::delete('/jadwal/{jadwal}', [JadwalAsesmenController::class, 'destroy'])->name('jadwal.destroy');
+});
