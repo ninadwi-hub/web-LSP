@@ -13,6 +13,7 @@
                     </a>
                 </li>
 
+<<<<<<< Updated upstream
                 <!-- Persiapan -->
                 <li class="has-submenu {{ request()->routeIs('sa.persiapan.*') ? 'mm-active' : '' }}">
                     <a href="javascript:void(0);" class="waves-effect">
@@ -48,6 +49,23 @@
                         <li><a href="#">Sertifikasi</a></li>
                     </ul>
                 </li>
+=======
+                <li class="has-submenu {{ request()->routeIs('sa.persiapan.jadwal.*') ? 'mm-active' : '' }}">
+    <a href="javascript:void(0);" class="waves-effect">
+        <i class="bx bx-briefcase"></i>
+        <span>Persiapan</span>
+        <span class="menu-arrow"></span>
+    </a>
+    <ul class="sub-menu" aria-expanded="false">
+        <!-- Pair ke route sa.persiapan.jadwal.index -->
+        <li class="{{ request()->routeIs('sa.persiapan.jadwal.index') ? 'active' : '' }}">
+            <a href="{{ route('sa.persiapan.jadwal.index') }}">Jadwal Asesmen</a>
+        </li>
+                <li class="{{ request()->routeIs('admin.token.*') ? 'active' : '' }}">
+            <a href="#">Token</a>
+        </li>
+    </ul>
+>>>>>>> Stashed changes
 
             </ul>
         </div>

@@ -19,7 +19,12 @@ class JadwalAsesmenController extends Controller
         $skemas = Skema::all();
         $asesors = User::where('role', 'asesor')->get();
 
+<<<<<<< Updated upstream
         return view('sa.persiapan.jadwal.index', compact('jadwals', 'skemas', 'asesors'));
+=======
+        // view → sesuai folder (P besar)
+        return view('sa.Persiapan.jadwal.index', compact('jadwals', 'skemas', 'asesors'));
+>>>>>>> Stashed changes
     }
 
     public function create()
@@ -27,7 +32,11 @@ class JadwalAsesmenController extends Controller
         $skemas = Skema::all();
         $asesors = User::where('role', 'asesor')->get();
 
+<<<<<<< Updated upstream
         return view('sa.persiapan.jadwal.create', compact('skemas', 'asesors'));
+=======
+        return view('sa.Persiapan.jadwal.create', compact('skemas', 'asesors'));
+>>>>>>> Stashed changes
     }
 
     public function store(Request $request)
@@ -75,8 +84,14 @@ class JadwalAsesmenController extends Controller
             }
 
             DB::commit();
+<<<<<<< Updated upstream
             return redirect()->route('sa.persiapan.jadwal.index')
                 ->with('success', 'Jadwal asesmen berhasil ditambahkan');
+=======
+            // redirect pakai lowercase
+            return redirect()->route('sa.persiapan.jadwal.index')
+                             ->with('success', 'Jadwal asesmen berhasil ditambahkan');
+>>>>>>> Stashed changes
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->with('error', 'Gagal menambahkan jadwal: ' . $e->getMessage())->withInput();
@@ -89,7 +104,11 @@ class JadwalAsesmenController extends Controller
         $skemas = Skema::all();
         $asesors = User::where('role', 'asesor')->get();
 
+<<<<<<< Updated upstream
         return view('sa.persiapan.jadwal.edit', compact('jadwal', 'skemas', 'asesors'));
+=======
+        return view('sa.Persiapan.jadwal.edit', compact('jadwal', 'skemas', 'asesors'));
+>>>>>>> Stashed changes
     }
 
     public function update(Request $request, JadwalAsesmen $jadwal)
@@ -142,7 +161,11 @@ class JadwalAsesmenController extends Controller
 
             DB::commit();
             return redirect()->route('sa.persiapan.jadwal.index')
+<<<<<<< Updated upstream
                 ->with('success', 'Jadwal asesmen berhasil diperbarui');
+=======
+                             ->with('success', 'Jadwal asesmen berhasil diperbarui');
+>>>>>>> Stashed changes
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->with('error', 'Gagal memperbarui jadwal: ' . $e->getMessage())->withInput();
@@ -154,7 +177,11 @@ class JadwalAsesmenController extends Controller
         try {
             $jadwal->delete();
             return redirect()->route('sa.persiapan.jadwal.index')
+<<<<<<< Updated upstream
                 ->with('success', 'Jadwal asesmen berhasil dihapus');
+=======
+                             ->with('success', 'Jadwal asesmen berhasil dihapus');
+>>>>>>> Stashed changes
         } catch (\Exception $e) {
             return back()->with('error', 'Gagal menghapus jadwal: ' . $e->getMessage());
         }
