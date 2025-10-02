@@ -7,7 +7,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h3>Jadwal Asesmen</h3>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
-            <i class="bi bi-plus-circle"></i> Tambah
+            <i data-feather="plus-circle"></i> Tambah
         </button>
     </div>
 
@@ -70,13 +70,13 @@
                             <td>{{ $jadwal->kuota }}</td>
                             <td>
                                 <a href="{{ route('sa.persiapan.jadwal.edit', $jadwal) }}" class="btn btn-warning btn-sm">
-                                    <i class="bi bi-pencil"></i>
+                                    <i data-feather="edit"></i>
                                 </a>
                                 <form action="{{ route('sa.persiapan.jadwal.destroy', $jadwal) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="bi bi-trash"></i>
+                                        <i data-feather="trash"></i>
                                     </button>
                                 </form>
                             </td>
