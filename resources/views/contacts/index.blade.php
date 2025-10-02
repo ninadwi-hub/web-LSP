@@ -7,11 +7,11 @@
     <h1>Manajemen Kontak</h1>
 
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <a href="{{ route('contacts.create') }}" class="btn btn-primary">
+        <a href="{{ route('admin.contacts.create') }}" class="btn btn-primary">
             <i class="bx bx-plus-circle"></i> Tambah
         </a>
 
-        <form method="GET" action="{{ route('contacts.index') }}" class="d-flex">
+        <form method="GET" action="{{ route('admin.contacts.index') }}" class="d-flex">
             <input type="text" name="search" class="form-control me-2" placeholder="Cari nama/email..." value="{{ request('search') }}">
             <button class="btn btn-outline-secondary" type="submit">Cari</button>
         </form>
@@ -45,11 +45,11 @@
                         <td>{{ $contact->created_at->format('d-m-Y') }}</td>
                         <td>
                             <div class="btn-group">
-                                <a href="{{ route('contacts.edit', $contact->id) }}" class="btn btn-warning btn-sm">
+                                <a href="{{ route('admin.contacts.edit', $contact->id) }}" class="btn btn-warning btn-sm">
                                     <i class="bx bx-edit"></i> Edit
                                 </a>
 
-                                <form method="POST" action="{{ route('contacts.destroy', $contact->id) }}" class="d-inline"
+                                <form method="POST" action="{{ route('admin.contacts.destroy', $contact->id) }}" class="d-inline"
                                       onsubmit="return confirm('Yakin ingin hapus?')">
                                     @csrf
                                     @method('DELETE')

@@ -11,7 +11,7 @@
 
     <!-- Tombol tambah -->
     <div class="mb-3">
-        <a href="{{ route('menus.create') }}" class="btn btn-primary">
+        <a href="{{ route('admin.menus.create') }}" class="btn btn-primary">
             <i class="bx bx-plus"></i> Tambah Menu
         </a>
     </div>
@@ -49,7 +49,7 @@
                       <td class="text-center">
     <div class="btn-group" role="group">
         <!-- Tombol Edit -->
-<a href="{{ route('menus.edit', $menu->id) }}" 
+<a href="{{ route('admin.menus.edit', $menu->id) }}" 
    class="btn btn-warning btn-sm d-flex align-items-center justify-content-center" 
    title="Edit" style="width:55px; height:32px;">
     <i class="bx bx-edit"></i>
@@ -57,7 +57,7 @@
 </a>
 
 <!-- Tombol Hapus -->
-<form action="{{ route('menus.destroy', $menu->id) }}" method="POST" class="d-inline" 
+<form action="{{ route('admin.menus.destroy', $menu->id) }}" method="POST" class="d-inline" 
       onsubmit="return confirm('Yakin ingin menghapus?')">
     @csrf
     @method('DELETE')

@@ -4,7 +4,7 @@
 <div class="container">
     <h2 class="mb-4">Manajemen File Download</h2>
 
-    <a href="{{ route('media.create') }}" class="btn btn-success mb-3">+ Tambah </a>
+    <a href="{{ route('admin.media.create') }}" class="btn btn-success mb-3">+ Tambah </a>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -30,8 +30,8 @@
                     <td>{{ ucfirst($file->status) }}</td>
                     <td>{{ $file->download_count }}</td>
                     <td>
-                        <a href="{{ route('media.edit', $file->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                        <form action="{{ route('media.destroy', $file->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus file ini?')">
+                        <a href="{{ route('admin.media.edit', $file->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                        <form action="{{ route('admin.media.destroy', $file->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus file ini?')">
                             @csrf @method('DELETE')
                             <button class="btn btn-sm btn-danger">Hapus</button>
                         </form>
