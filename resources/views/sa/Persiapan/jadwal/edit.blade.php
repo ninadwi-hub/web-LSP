@@ -7,7 +7,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h3>Edit Jadwal Asesmen</h3>
         <a href="{{ route('sa.persiapan.jadwal.index') }}" class="btn btn-secondary">
-            <i class="bi bi-arrow-left"></i> Kembali
+            <i data-feather="arrow-left"></i> Kembali
         </a>
     </div>
 
@@ -29,7 +29,7 @@
                 @csrf
                 @method('PUT')
 
-                @include('sa.persiapan.jadwal.form')
+                @include('sa.Persiapan.jadwal.form')
 
                 <div class="d-flex gap-2 justify-content-end mt-4">
                     <a href="{{ route('sa.persiapan.jadwal.index') }}" class="btn btn-secondary">Batal</a>

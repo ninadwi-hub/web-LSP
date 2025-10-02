@@ -96,7 +96,7 @@
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-danger btn-sm btn-remove-asesor">
-                                        <i class="bi bi-trash"></i>
+                                        <i class="fas fa-trash"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -146,7 +146,7 @@
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-danger btn-sm btn-remove-asesor">
-                                        <i class="bi bi-trash"></i>
+                                        <i class="fas fa-trash"></i>
                                     </button>
                                 </td>
                             </tr>
