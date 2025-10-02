@@ -33,6 +33,9 @@ class DatabaseSeeder extends Seeder
             GalleriesTableSeeder::class,
             AsesorSeeder::class,
             JadwalAsesmenSeeder::class,
+    BiodataAsesiSeeder::class,
+    DokumenAsesiSeeder::class,
+
         ]);
     }
 }

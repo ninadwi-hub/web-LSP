@@ -23,6 +23,16 @@ class User extends Authenticatable
         'active_role',
         'password',
     ];
+    public function asesi()
+{
+    return $this->hasOne(BiodataAsesi::class, 'user_id');
+}
+
+public function dokumen()
+{
+    return $this->hasOne(DokumenAsesi::class, 'user_id');
+}
+
 
     /**
      * Kolom yang disembunyikan saat serialisasi

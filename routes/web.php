@@ -120,6 +120,11 @@ Route::middleware(['auth'])->group(function () {
     // Asesor & Asesi Dashboard
     Route::get('/asesor/dashboard', [AsesorController::class, 'index'])->name('asesor.dashboard');
     Route::get('/asesi/dashboard', [AsesiController::class, 'index'])->name('asesi.dashboard');
+    Route::middleware(['auth'])->group(function () {
+    Route::get('/asesi/biodata', [AsesiController::class, 'biodataForm'])->name('asesi.biodata');
+    Route::post('/asesi/biodata', [AsesiController::class, 'storeBiodata'])->name('asesi.biodata.store');
+});
+
 
     // Resources tambahan
     Route::resource('users', UserController::class);
@@ -146,11 +151,9 @@ Route::get('/{slug}', [FrontendController::class, 'show'])
     ->where('slug', '^(?!halaman|admin|login|logout|dashboard|media|galeri|kontak|informasi|infos|file-download|pages|publik|unduh|skema|asesi|panel|sa).*$')
     ->name('slug.show');
 
-/// ASESI ROUTESS
-Route::prefix('asesi')->name('asesi.')->group(function () {
-    Route::get('/biodata', function () {
-        abort(404);
-    })->name('biodata');
+
+    /// ASESI ROUTESS
+    Route::prefix('asesi')->name('asesi.')->group(function () {
 
     Route::get('/asesmen', function () {
         abort(404);
