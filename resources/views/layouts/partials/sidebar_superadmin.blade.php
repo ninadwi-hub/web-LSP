@@ -33,7 +33,7 @@
                  <!--Sertifikasi -->
                 <li class="has-submenu {{ request()->routeIs('sa.persiapan.*') ? 'mm-active' : '' }}">
                     <a href="javascript:void(0);" class="waves-effect">
-                        <i class="bx bx-briefcase"></i>
+                        <i data-feather="file-text"></i>
                         <span>Sertifikasi</span>
                         <span class="menu-arrow"></span>
                     </a>
