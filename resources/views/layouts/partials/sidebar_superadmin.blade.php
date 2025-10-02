@@ -31,7 +31,7 @@
                 </li>
 
                 <!-- Sertifikasi -->
-                <li class="has-submenu {{ request()->routeIs('sa.sertifikasi.*') ? 'mm-active' : '' }}">
+                <li class="has-submenu {{ request()->routeIs('#*') ? 'mm-active' : '' }}">
                     <a href="javascript:void(0);" class="waves-effect">
                         <i data-feather="file-text"></i>
                         <span>Sertifikasi</span>
@@ -46,6 +46,23 @@
                         <li><a href="#">Rekomendasi Asesor</a></li>
                         <li><a href="#">Berita Acara Asesmen</a></li>
                         <li><a href="#">Sertifikasi</a></li>
+                    </ul>
+                </li>
+
+                <!-- Sertifikasi -->
+                <li class="has-submenu {{ request()->routeIs('#*') ? 'mm-active' : '' }}">
+                    <a href="javascript:void(0);" class="waves-effect">
+                        <i data-feather="layers"></i>
+                        <span>Data Dictionary</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="#">Skema Sertifikasi UJK</a></li>
+                        <li><a href="#">TUK</a></li>
+                        <li><a href="#">Asesor Kompetensi</a></li>
+                        <li><a href="#">Pertanyaan Wawancara</a></li>
+                        <li><a href="#">Dokumen Portofolio</a></li>
+                        <li><a href="#">Substansi Wawancara</a></li>
                     </ul>
                 </li>
 
