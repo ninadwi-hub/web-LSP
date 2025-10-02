@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
 
 class DashboardSAController extends Controller
 {
@@ -16,7 +18,8 @@ class DashboardSAController extends Controller
         if (Auth::user()->role !== 'superadmin') {
             abort(403, 'Unauthorized access');
         }
+        $totalUsers = User::count();
 
-        return view('admin.dashboardSA');
+        return view('admin.dashboardSA', compact('totalUsers'));
     }
 }
