@@ -38,28 +38,28 @@
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li class="{{ request()->routeIs('sa.persiapan.jadwal') ? 'active' : '' }}">
+                        <li class="{{ request()->routeIs('#') ? 'active' : '' }}">
                             <a href="#">Administrasi UJK</a>
                         </li>
-                         <li class="{{ request()->routeIs('sa.persiapan.jadwal') ? 'active' : '' }}">
+                         <li class="{{ request()->routeIs('#') ? 'active' : '' }}">
                             <a href="#">Pairing</a>
                         </li>
-                         <li class="{{ request()->routeIs('sa.persiapan.jadwal') ? 'active' : '' }}">
+                         <li class="{{ request()->routeIs('#') ? 'active' : '' }}">
                             <a href="#">Pra Asesmen</a>
                         </li>
-                         <li class="{{ request()->routeIs('sa.persiapan.jadwal') ? 'active' : '' }}">
+                         <li class="{{ request()->routeIs('#l') ? 'active' : '' }}">
                             <a href="#">Real Asasmen</a>
                         </li>
-                         <li class="{{ request()->routeIs('sa.persiapan.jadwal') ? 'active' : '' }}">
+                         <li class="{{ request()->routeIs('#') ? 'active' : '' }}">
                             <a href="#">Uji Kompetensi</a>
                         </li>
-                         <li class="{{ request()->routeIs('sa.persiapan.jadwal') ? 'active' : '' }}">
+                         <li class="{{ request()->routeIs('#') ? 'active' : '' }}">
                             <a href="#">Rekomendasi Asesor</a>
                         </li>
-                         <li class="{{ request()->routeIs('sa.persiapan.jadwal') ? 'active' : '' }}">
+                         <li class="{{ request()->routeIs('#') ? 'active' : '' }}">
                             <a href="#">Berita Acara Asesmen</a>
                         </li>
-                         <li class="{{ request()->routeIs('sa.persiapan.jadwal') ? 'active' : '' }}">
+                         <li class="{{ request()->routeIs('#') ? 'active' : '' }}">
                             <a href="#">Sertifikasi</a>
                         </li>
                     </ul>
