@@ -29,7 +29,7 @@
         <div class="card-body">
             <div class="d-flex justify-content-between mb-3">
                 <div>
-                    <label>Show 
+                    <label>Show
                         <select class="form-select form-select-sm d-inline-block w-auto">
                             <option>10</option>
                             <option>25</option>

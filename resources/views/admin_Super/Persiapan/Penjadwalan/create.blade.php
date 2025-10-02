@@ -27,7 +27,7 @@
         <div class="card-body p-4">
             <form action="{{ route('admin.jadwal.store') }}" method="POST">
                 @csrf
-                
+
                 @include('admin.jadwal.form')
 
                 <div class="d-flex gap-2 justify-content-end mt-4">

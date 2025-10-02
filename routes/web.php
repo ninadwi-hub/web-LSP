@@ -80,14 +80,14 @@ Route::middleware(['auth'])->group(function () {
     // Dashboard utama (cek role superadmin / admin)
     Route::get('/dashboard', function () {
         $user = Auth::user();
-        if ($user && $user->role === 'superadmin') {
+        if ($user && $user->name === 'superadmin') {
             return redirect()->route('dashboardSA');
         }
         return redirect()->route('admin.dashboard');
     })->name('dashboard');
 
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('/superadmin/dashboardSA', [DashboardSAController::class, 'index'])->name('dashboardSA');
+    Route::get('/admin/dashboardSA', [DashboardSAController::class, 'index'])->name('dashboardSA');
 
     // Admin Routes
     Route::prefix('admin')->name('admin.')->group(function () {
@@ -159,6 +159,6 @@ Route::get('/{slug}', [FrontendController::class, 'show'])
 
     Route::get('/praasesmen', function () {
         abort(404);
-    })->name('praasesmen'); 
+    })->name('praasesmen');
 });
 

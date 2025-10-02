@@ -29,3 +29,39 @@
                         </li>
                     </ul>
                 </li>
+
+                 <!--Sertifikasi -->
+                <li class="has-submenu {{ request()->routeIs('sa.persiapan.*') ? 'mm-active' : '' }}">
+                    <a href="javascript:void(0);" class="waves-effect">
+                        <i class="bx bx-briefcase"></i>
+                        <span>Sertifikasi</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li class="{{ request()->routeIs('sa.persiapan.jadwal') ? 'active' : '' }}">
+                            <a href="#">Administrasi UJK</a>
+                        </li>
+                         <li class="{{ request()->routeIs('sa.persiapan.jadwal') ? 'active' : '' }}">
+                            <a href="#">Pairing</a>
+                        </li>
+                         <li class="{{ request()->routeIs('sa.persiapan.jadwal') ? 'active' : '' }}">
+                            <a href="#">Pra Asesmen</a>
+                        </li>
+                         <li class="{{ request()->routeIs('sa.persiapan.jadwal') ? 'active' : '' }}">
+                            <a href="#">Real Asasmen</a>
+                        </li>
+                         <li class="{{ request()->routeIs('sa.persiapan.jadwal') ? 'active' : '' }}">
+                            <a href="#">Uji Kompetensi</a>
+                        </li>
+                         <li class="{{ request()->routeIs('sa.persiapan.jadwal') ? 'active' : '' }}">
+                            <a href="#">Rekomendasi Asesor</a>
+                        </li>
+                         <li class="{{ request()->routeIs('sa.persiapan.jadwal') ? 'active' : '' }}">
+                            <a href="#">Berita Acara Asesmen</a>
+                        </li>
+                         <li class="{{ request()->routeIs('sa.persiapan.jadwal') ? 'active' : '' }}">
+                            <a href="#">Sertifikasi</a>
+                        </li>
+                    </ul>
+                </li>
+

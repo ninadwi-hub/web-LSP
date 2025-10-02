@@ -28,7 +28,7 @@
             <form action="{{ route('admin.jadwal.update', $jadwal) }}" method="POST">
                 @csrf
                 @method('PUT')
-                
+
                 @include('admin.jadwal.form')
 
                 <div class="d-flex gap-2 justify-content-end mt-4">

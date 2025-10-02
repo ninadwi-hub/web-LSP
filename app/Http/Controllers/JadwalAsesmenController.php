@@ -16,7 +16,7 @@ class JadwalAsesmenController extends Controller
         $jadwals = JadwalAsesmen::with(['skema', 'asesorUji', 'asesorValidator'])
                     ->orderBy('created_at', 'desc')
                     ->paginate(10);
-        
+
         return view('admin.jadwal.index', compact('jadwals'));
     }
 
@@ -24,7 +24,7 @@ class JadwalAsesmenController extends Controller
     {
         $skemas = Skema::all();
         $asesors = User::where('role', 'asesor')->get();
-        
+
         return view('admin.jadwal.create', compact('skemas', 'asesors'));
     }
 
@@ -87,7 +87,7 @@ class JadwalAsesmenController extends Controller
         $jadwal->load(['skema', 'asesorUji', 'asesorValidator']);
         $skemas = Skema::all();
         $asesors = User::where('role', 'asesor')->get();
-        
+
         return view('admin.jadwal.edit', compact('jadwal', 'skemas', 'asesors'));
     }
 
