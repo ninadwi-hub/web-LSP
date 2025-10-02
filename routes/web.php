@@ -118,6 +118,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/asesor/dashboard', [AsesorController::class, 'index'])->name('asesor.dashboard');
     Route::get('/asesi/dashboard', [AsesiController::class, 'index'])->name('asesi.dashboard');
 
+    // Pendaftaran Asesmen
+    Route::resource('asesmen', App\Http\Controllers\PendaftaranAsesmenController::class);
+
     // Resources tambahan
     Route::resource('users', UserController::class);
     Route::resource('kategoris', KategoriController::class);
