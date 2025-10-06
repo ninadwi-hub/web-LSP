@@ -78,7 +78,14 @@
     <script src="{{ asset('THEMES/minia/assets/libs/node-waves/waves.min.js') }}"></script>
     <script src="{{ asset('THEMES/minia/assets/js/layout.js') }}"></script>
     <script src="{{ asset('THEMES/minia/assets/js/app.js') }}"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
     <script> feather.replace(); </script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            feather.replace();
+        });
+    </script>
 
     @stack('scripts')
 </body>

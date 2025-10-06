@@ -19,13 +19,17 @@ use App\Http\Controllers\Admin\UnitKompetensiController as AdminUnitKompetensiCo
 use App\Http\Controllers\DashboardSAController;
 use App\Http\Controllers\AsesorController;
 use App\Http\Controllers\AsesiController;
+use App\Http\Controllers\JadwalAsesmenController;
+use App\Http\Controllers\TokenController;
 use App\Models\Download;
+use App\Http\Controllers\PendaftaranAsesmenController;
 
 /*
 |--------------------------------------------------------------------------
 | AUTH ROUTES
 |--------------------------------------------------------------------------
 */
+
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -80,14 +84,14 @@ Route::middleware(['auth'])->group(function () {
     // Dashboard utama (cek role superadmin / admin)
     Route::get('/dashboard', function () {
         $user = Auth::user();
-        if ($user && $user->role === 'superadmin') {
+        if ($user && $user->name === 'superadmin') {
             return redirect()->route('dashboardSA');
         }
         return redirect()->route('admin.dashboard');
     })->name('dashboard');
 
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('/superadmin/dashboardSA', [DashboardSAController::class, 'index'])->name('dashboardSA');
+    Route::get('/admin/dashboardSA', [DashboardSAController::class, 'index'])->name('dashboardSA');
 
     // Admin Routes
     Route::prefix('admin')->name('admin.')->group(function () {
@@ -117,6 +121,10 @@ Route::middleware(['auth'])->group(function () {
     // Asesor & Asesi Dashboard
     Route::get('/asesor/dashboard', [AsesorController::class, 'index'])->name('asesor.dashboard');
     Route::get('/asesi/dashboard', [AsesiController::class, 'index'])->name('asesi.dashboard');
+    Route::middleware(['auth'])->group(function () {
+    Route::get('/asesi/biodata', [AsesiController::class, 'biodataForm'])->name('asesi.biodata');
+    Route::post('/asesi/biodata', [AsesiController::class, 'storeBiodata'])->name('asesi.biodata.store');
+});
 
     // Pendaftaran Asesmen
     Route::resource('asesmen', App\Http\Controllers\PendaftaranAsesmenController::class);
@@ -146,11 +154,9 @@ Route::get('/{slug}', [FrontendController::class, 'show'])
     ->where('slug', '^(?!halaman|admin|login|logout|dashboard|media|galeri|kontak|informasi|infos|file-download|pages|publik|unduh|skema|asesi|panel|sa).*$')
     ->name('slug.show');
 
+
     /// ASESI ROUTESS
     Route::prefix('asesi')->name('asesi.')->group(function () {
-    Route::get('/biodata', function () {
-        abort(404);
-    })->name('biodata');
 
     Route::get('/asesmen', function () {
         abort(404);
@@ -162,6 +168,25 @@ Route::get('/{slug}', [FrontendController::class, 'show'])
 
     Route::get('/praasesmen', function () {
         abort(404);
-    })->name('praasesmen'); 
+    })->name('praasesmen');
 });
 
+
+
+
+Route::prefix('sa/tokens')->name('sa.tokens.')->group(function () {
+    Route::get('/', [TokenController::class, 'index'])->name('index');
+    Route::post('/generate', [TokenController::class, 'generate'])->name('generate');
+    Route::delete('/{id}', [TokenController::class, 'destroy'])->name('destroy');
+});
+
+
+// SuperAdmin → Persiapan
+Route::prefix('sa/persiapan')->name('sa.persiapan.')->group(function () {
+    Route::get('/jadwal', [JadwalAsesmenController::class, 'index'])->name('jadwal.index');
+    Route::get('/jadwal/create', [JadwalAsesmenController::class, 'create'])->name('jadwal.create');
+    Route::post('/jadwal', [JadwalAsesmenController::class, 'store'])->name('jadwal.store');
+    Route::get('/jadwal/{jadwal}/edit', [JadwalAsesmenController::class, 'edit'])->name('jadwal.edit');
+    Route::put('/jadwal/{jadwal}', [JadwalAsesmenController::class, 'update'])->name('jadwal.update');
+    Route::delete('/jadwal/{jadwal}', [JadwalAsesmenController::class, 'destroy'])->name('jadwal.destroy');
+});

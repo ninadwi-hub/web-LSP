@@ -21,11 +21,113 @@
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li class="{{ request()->routeIs('sa.persiapan.jadwal') ? 'active' : '' }}">
-                            <a href="#">Jadwal Asesmen</a>
+                        <li class="{{ request()->routeIs('sa.persiapan.jadwal.index') ? 'active' : '' }}">
+                            <a href="{{ route('sa.persiapan.jadwal.index') }}">Jadwal Asesmen</a>
                         </li>
-                         <li class="{{ request()->routeIs('sa.persiapan.jadwal') ? 'active' : '' }}">
-                            <a href="#">Token</a>
+                        <li class="{{ request()->routeIs('sa.tokens.index') ? 'active' : '' }}">
+                            <a href="{{ route('sa.tokens.index') }}">Token</a>
                         </li>
                     </ul>
                 </li>
+
+                <!-- Sertifikasi -->
+                <li class="has-submenu {{ request()->routeIs('#*') ? 'mm-active' : '' }}">
+                    <a href="javascript:void(0);" class="waves-effect">
+                        <i data-feather="file-text"></i>
+                        <span>Sertifikasi</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="#">Administrasi UJK</a></li>
+                        <li><a href="#">Pairing</a></li>
+                        <li><a href="#">Pra Asesmen</a></li>
+                        <li><a href="#">Real Asesmen</a></li>
+                        <li><a href="#">Uji Kompetensi</a></li>
+                        <li><a href="#">Rekomendasi Asesor</a></li>
+                        <li><a href="#">Berita Acara Asesmen</a></li>
+                        <li><a href="#">Sertifikasi</a></li>
+                    </ul>
+                </li>
+
+                <!-- Data Dictionary -->
+                <li class="has-submenu {{ request()->routeIs('#*') ? 'mm-active' : '' }}">
+                    <a href="javascript:void(0);" class="waves-effect">
+                        <i data-feather="layers"></i>
+                        <span>Data Dictionary</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="#">Skema Sertifikasi UJK</a></li>
+                        <li><a href="#">TUK</a></li>
+                        <li><a href="#">Asesor Kompetensi</a></li>
+                        <li><a href="#">Pertanyaan Wawancara</a></li>
+                        <li><a href="#">Dokumen Portofolio</a></li>
+                        <li><a href="#">Substansi Wawancara</a></li>
+                    </ul>
+                </li>
+
+                <!--CMS -->
+                <li class="has-submenu {{ request()->routeIs('#*') ? 'mm-active' : '' }}">
+                    <a href="javascript:void(0);" class="waves-effect">
+                        <i data-feather="layers"></i>
+                        <span>Data CMS</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="#">Halaman</a></li>
+                        <li><a href="#">Berita</a></li>
+                        <li><a href="#">Konfigurasi</a></li>
+                        <li><a href="#">Slide</a></li>
+                        <li><a href="#">Gallery</a></li>
+                        <li><a href="#">Download</a></li>
+                    </ul>
+                </li>
+
+                 <!--Perangkat Asesmen -->
+                <li class="has-submenu {{ request()->routeIs('#*') ? 'mm-active' : '' }}">
+                    <a href="javascript:void(0);" class="waves-effect">
+                        <i data-feather="layers"></i>
+                        <span>Data Perangkat Asesmen</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="#">Master Perangkat</a></li>
+                        <li><a href="#">Detail Perangkat</a></li>
+                        <li><a href="#">Bank Soal</a></li>
+                    </ul>
+                </li>
+
+                <!--Report -->
+                <li class="has-submenu {{ request()->routeIs('#*') ? 'mm-active' : '' }}">
+                    <a href="javascript:void(0);" class="waves-effect">
+                        <i data-feather="grid"></i>
+                        <span>Report</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="#">Laporan Asesmen</a></li>
+                        <li><a href="#">Blanko Sertifikat</a></li>
+                        <li><a href="#">Monitoring Asesmen</a></li>
+                        <li><a href="#">Monitoring TUK</a></li>
+                        <li><a href="#">Kinerja Asesor</a></li>
+                        <li><a href="#">Ruang Lingkup Asesor</a></li>
+                        <li><a href="#">Pemakaian Blanko</a></li>
+                    </ul>
+                </li>
+
+                <!--Report -->
+                <li class="has-submenu {{ request()->routeIs('#*') ? 'mm-active' : '' }}">
+                    <a href="javascript:void(0);" class="waves-effect">
+                        <i data-feather="grid"></i>
+                        <span>Settings</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="#">User</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>

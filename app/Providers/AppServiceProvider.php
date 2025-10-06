@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Illuminate\Pagination\Paginator;
 use App\Models\Page;
 use App\Models\Skema;
 
@@ -20,31 +21,30 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    // app/Providers/AppServiceProvider.php
+    public function boot(): void
+    {
+        // Pakai Bootstrap 5 untuk pagination
+        Paginator::useBootstrapFive();
 
-public function boot()
-{
-    View::composer('*', function ($view) {
-        $categories = ['home','profil', 'sertifikasi', 'media', 'informasi','kontak'];
+        // Kirim data pagesByCategory ke semua view
+        View::composer('*', function ($view) {
+            $categories = ['home', 'profil', 'sertifikasi', 'media', 'informasi', 'kontak'];
 
-        $pagesByCategory = [];
+            $pagesByCategory = [];
 
-        foreach ($categories as $category) {
-            $pagesByCategory[$category] = Page::where('category', $category)
-                ->where('status', 'published')
-                ->orderBy('title')
-                ->get();
-        }
+            foreach ($categories as $category) {
+                $pagesByCategory[$category] = Page::where('category', $category)
+                    ->where('status', 'published')
+                    ->orderBy('title')
+                    ->get();
+            }
 
-        $view->with('pagesByCategory', $pagesByCategory);
-    });
-{
-    // Kirim data skema ke semua view
-    view()->composer('layouts.website', function ($view) {
-        $view->with('menuSkema', Skema::orderBy('nama')->get());
-    });
-}
-}
+            $view->with('pagesByCategory', $pagesByCategory);
+        });
 
-
+        // Kirim data skema ke layouts.website
+        View::composer('layouts.website', function ($view) {
+            $view->with('menuSkema', Skema::orderBy('nama')->get());
+        });
+    }
 }

@@ -15,15 +15,19 @@ class PendaftaranAsesmenController extends Controller
         return view('asesi.asesmen.index', compact('asesmens'));
     }
 
-    public function create()
-    {
-        // Ambil biodata & dokumen user yang login
-        $biodata = BiodataAsesi::where('user_id', auth()->id())->first();
-        $dokumen = DokumenAsesi::where('user_id', auth()->id())->first();
-        $units   = UnitKompetensi::all();
+   public function create()
+{
+    $biodata = BiodataAsesi::where('user_id', auth()->id())->first();
+    $dokumen = DokumenAsesi::where('user_id', auth()->id())->first();
+    $units   = UnitKompetensi::all();
 
-        return view('asesi.asesmen.form', compact('biodata','dokumen','units'));
+    if (!$biodata) {
+        return redirect()->route('asesi.biodata')
+            ->with('error', 'Silakan lengkapi biodata terlebih dahulu sebelum mendaftar asesmen.');
     }
+
+    return view('asesi.asesmen.form', compact('biodata','dokumen','units'));
+}
 
     public function store(Request $request)
     {
@@ -62,13 +66,14 @@ class PendaftaranAsesmenController extends Controller
     }
 
     public function edit(PendaftaranAsesmen $asesmen)
-    {
-        $biodata = $asesmen->biodata;
-        $dokumen = $asesmen->dokumen;
-        $units   = UnitKompetensi::all();
+{
+    $asesmen->load('units');
+    $biodata = $asesmen->biodata;   // relasi
+    $dokumen = $asesmen->dokumen;   // relasi
+    $units   = UnitKompetensi::all();
 
-        return view('asesi.asesmen.form', compact('asesmen','biodata','dokumen','units'));
-    }
+    return view('asesi.asesmen.form', compact('asesmen','biodata','dokumen','units'));
+}
 
     public function update(Request $request, PendaftaranAsesmen $asesmen)
     {

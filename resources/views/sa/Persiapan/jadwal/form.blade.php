@@ -2,21 +2,21 @@
     <div class="col-md-6">
         <div class="mb-3">
             <label class="form-label">NO. SK <span class="text-danger">*</span></label>
-            <input type="text" name="no_sk" class="form-control @error('no_sk') is-invalid @enderror" 
+            <input type="text" name="no_sk" class="form-control @error('no_sk') is-invalid @enderror"
                    value="{{ old('no_sk', $jadwal->no_sk ?? '') }}" placeholder="Kode" required>
             @error('no_sk') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">TANGGAL TERBIT SK <span class="text-danger">*</span></label>
-            <input type="date" name="tgl_terbit_sk" class="form-control @error('tgl_terbit_sk') is-invalid @enderror" 
+            <input type="date" name="tgl_terbit_sk" class="form-control @error('tgl_terbit_sk') is-invalid @enderror"
                    value="{{ old('tgl_terbit_sk', $jadwal->tgl_terbit_sk ?? '') }}" required>
             @error('tgl_terbit_sk') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">TANGGAL ASESMEN <span class="text-danger">*</span></label>
-            <input type="date" name="tanggal_asesmen" class="form-control @error('tanggal_asesmen') is-invalid @enderror" 
+            <input type="date" name="tanggal_asesmen" class="form-control @error('tanggal_asesmen') is-invalid @enderror"
                    value="{{ old('tanggal_asesmen', $jadwal->tanggal_asesmen ?? date('Y-m-d')) }}" required>
             @error('tanggal_asesmen') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
@@ -46,14 +46,14 @@
 
         <div class="mb-3">
             <label class="form-label">HARGA</label>
-            <input type="number" name="harga" class="form-control @error('harga') is-invalid @enderror" 
+            <input type="number" name="harga" class="form-control @error('harga') is-invalid @enderror"
                    value="{{ old('harga', $jadwal->harga ?? 0) }}" min="0" step="1">
             @error('harga') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label">KUOTA</label>
-            <input type="number" name="kuota" class="form-control @error('kuota') is-invalid @enderror" 
+            <input type="number" name="kuota" class="form-control @error('kuota') is-invalid @enderror"
                    value="{{ old('kuota', $jadwal->kuota ?? 0) }}" min="0">
             @error('kuota') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
@@ -89,14 +89,14 @@
                                 </td>
                                 <td>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="lead_uji" value="{{ $asesor->id }}" 
+                                        <input class="form-check-input" type="radio" name="lead_uji" value="{{ $asesor->id }}"
                                                {{ $oldLeadUji == $asesor->id ? 'checked' : '' }}>
                                         <label class="form-check-label">Lead</label>
                                     </div>
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-danger btn-sm btn-remove-asesor">
-                                        <i class="bi bi-trash"></i>
+                                        <i class="fas fa-trash"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -139,14 +139,14 @@
                                 </td>
                                 <td>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="lead_validator" value="{{ $asesor->id }}" 
+                                        <input class="form-check-input" type="radio" name="lead_validator" value="{{ $asesor->id }}"
                                                {{ $oldLeadValidator == $asesor->id ? 'checked' : '' }}>
                                         <label class="form-check-label">Lead</label>
                                     </div>
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-danger btn-sm btn-remove-asesor">
-                                        <i class="bi bi-trash"></i>
+                                        <i class="fas fa-trash"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -175,7 +175,7 @@
                     @foreach($asesors as $asesor)
                     <a href="#" class="list-group-item list-group-item-action add-asesor-uji" data-id="{{ $asesor->id }}" data-name="{{ $asesor->name }}">
                         <div class="d-flex align-items-center">
-                            <img src="{{ $asesor->avatar ?? 'https://ui-avatars.com/api/?name=' . urlencode($asesor->name) }}" 
+                            <img src="{{ $asesor->avatar ?? 'https://ui-avatars.com/api/?name=' . urlencode($asesor->name) }}"
                                  class="rounded-circle me-3" width="40" height="40" alt="{{ $asesor->name }}">
                             <div>
                                 <strong>{{ $asesor->name }}</strong><br>
@@ -203,7 +203,7 @@
                     @foreach($asesors as $asesor)
                     <a href="#" class="list-group-item list-group-item-action add-asesor-validator" data-id="{{ $asesor->id }}" data-name="{{ $asesor->name }}">
                         <div class="d-flex align-items-center">
-                            <img src="{{ $asesor->avatar ?? 'https://ui-avatars.com/api/?name=' . urlencode($asesor->name) }}" 
+                            <img src="{{ $asesor->avatar ?? 'https://ui-avatars.com/api/?name=' . urlencode($asesor->name) }}"
                                  class="rounded-circle me-3" width="40" height="40" alt="{{ $asesor->name }}">
                             <div>
                                 <strong>{{ $asesor->name }}</strong><br>
@@ -227,17 +227,17 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const id = this.dataset.id;
             const name = this.dataset.name;
-            
+
             // Check if already exists
             if (document.querySelector(`#asesor-uji-list input[value="${id}"]`)) {
                 alert('Asesor sudah ditambahkan');
                 return;
             }
-            
+
             const tbody = document.getElementById('asesor-uji-list');
             const index = tbody.children.length + 1;
             const isFirst = index === 1;
-            
+
             const row = `
                 <tr>
                     <td>${index}</td>
@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </tr>
             `;
             tbody.insertAdjacentHTML('beforeend', row);
-            
+
             // Close modal
             bootstrap.Modal.getInstance(document.getElementById('selectAsesorUjiModal')).hide();
         });
@@ -271,17 +271,17 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const id = this.dataset.id;
             const name = this.dataset.name;
-            
+
             // Check if already exists
             if (document.querySelector(`#asesor-validator-list input[value="${id}"]`)) {
                 alert('Asesor sudah ditambahkan');
                 return;
             }
-            
+
             const tbody = document.getElementById('asesor-validator-list');
             const index = tbody.children.length + 1;
             const isFirst = index === 1;
-            
+
             const row = `
                 <tr>
                     <td>${index}</td>
@@ -303,7 +303,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </tr>
             `;
             tbody.insertAdjacentHTML('beforeend', row);
-            
+
             // Close modal
             bootstrap.Modal.getInstance(document.getElementById('selectAsesorValidatorModal')).hide();
         });
@@ -315,14 +315,14 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const row = e.target.closest('tr');
             const tbody = row.parentElement;
-            
+
             row.remove();
-            
+
             // Reindex rows
             Array.from(tbody.children).forEach((tr, index) => {
                 tr.children[0].textContent = index + 1;
             });
-            
+
             // Auto-select first as lead if current lead was removed
             const radioName = tbody.id === 'asesor-uji-list' ? 'lead_uji' : 'lead_validator';
             if (!document.querySelector(`input[name="${radioName}"]:checked`) && tbody.children.length > 0) {
