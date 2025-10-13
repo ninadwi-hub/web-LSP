@@ -43,7 +43,7 @@
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger btn-sm" onclick="return confirm('Hapus data ini?')">
-                                <i class="bi bi-trash"></i>
+                                <i class="fas fa-trash"></i>
                             </button>
                         </form>
                     </td>
