@@ -1,0 +1,22 @@
+[
+  { "id": 1101, "nama": "Kabupaten Simeulue", "provinsi_id": 11 },
+  { "id": 1102, "nama": "Kabupaten Aceh Singkil", "provinsi_id": 11 },
+  { "id": 3201, "nama": "Kabupaten Bogor", "provinsi_id": 32 },
+  { "id": 3202, "nama": "Kabupaten Sukabumi", "provinsi_id": 32 },
+  { "id": 3203, "nama": "Kabupaten Cianjur", "provinsi_id": 32 },
+  { "id": 3301, "nama": "Kabupaten Cilacap", "provinsi_id": 33 },
+  { "id": 3302, "nama": "Kabupaten Banyumas", "provinsi_id": 33 },
+  { "id": 3303, "nama": "Kabupaten Purbalingga", "provinsi_id": 33 },
+  { "id": 3304, "nama": "Kabupaten Banjarnegara", "provinsi_id": 33 },
+  { "id": 3305, "nama": "Kabupaten Kebumen", "provinsi_id": 33 },
+  { "id": 3306, "nama": "Kabupaten Purworejo", "provinsi_id": 33 },
+  { "id": 3371, "nama": "Kota Semarang", "provinsi_id": 33 },
+  { "id": 3372, "nama": "Kota Surakarta", "provinsi_id": 33 },
+  { "id": 3373, "nama": "Kota Salatiga", "provinsi_id": 33 },
+  { "id": 3374, "nama": "Kota Magelang", "provinsi_id": 33 },
+  { "id": 3501, "nama": "Kabupaten Pacitan", "provinsi_id": 35 },
+  { "id": 3502, "nama": "Kabupaten Ponorogo", "provinsi_id": 35 },
+  { "id": 3503, "nama": "Kabupaten Trenggalek", "provinsi_id": 35 },
+  { "id": 3578, "nama": "Kota Surabaya", "provinsi_id": 35 },
+  { "id": 3579, "nama": "Kota Batu", "provinsi_id": 35 }
+]

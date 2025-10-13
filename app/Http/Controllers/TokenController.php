@@ -10,8 +10,7 @@ class TokenController extends Controller
 {
     public function index()
     {
-        $tokens = Token::latest()->paginate(15);
-        // arahkan ke sa/Tokens/index.blade.php
+        $tokens = Token::orderBy('created_at', 'desc')->paginate(15);
         return view('sa.tokens.index', compact('tokens'));
     }
 
