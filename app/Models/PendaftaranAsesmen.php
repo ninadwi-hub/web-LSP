@@ -14,6 +14,13 @@ class PendaftaranAsesmen extends Model
         'jadwal_uji',
         'metode_uji',
         'keterangan_teknis',
+         'jumlah_pembayaran',
+    'sumber_pendanaan',
+    'metode_pembayaran',
+    'no_rekening',
+    'nama_rekening',
+    'tanggal_pembayaran',
+    'bukti_pembayaran',
     ];
 
     // Relasi
@@ -24,6 +31,12 @@ class PendaftaranAsesmen extends Model
     public function dokumen() {
         return $this->belongsTo(DokumenAsesi::class, 'dokumen_id');
     }
+
+    public function jadwal()
+{
+    return $this->belongsTo(JadwalAsesmen::class, 'jadwal_id');
+}
+
 
     // Relasi ke unit kompetensi (step 6)
     public function units() {

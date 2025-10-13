@@ -6,7 +6,7 @@
 <div class="container">
     <h4 class="mb-3">Pendaftaran Asesmen / Uji Kompetensi</h4>
 
-    <a href="{{ route('asesmen.create') }}" class="btn btn-primary mb-3">+ Tambah</a>
+    <a href="{{ route('asesmen.list_jadwal') }}" class="btn btn-primary mb-3">+ Tambah</a>
 
     <table class="table table-bordered table-striped">
         <thead>
@@ -24,7 +24,11 @@
     <tr>
         <td>{{ $asesmens->firstItem() + $i }}</td>
         <td>{{ \Carbon\Carbon::parse($asesmen->jadwal_uji)->format('d-m-Y') }}</td>
-        <td>{{ $asesmen->tujuan_asesmen }}</td>
+        <td>
+    {{ $asesmen->jadwal && $asesmen->jadwal->skema 
+        ? $asesmen->jadwal->skema->nama 
+        : 'Tidak ada skema' }}
+</td>
         <td>{{ $asesmen->tuk }}</td>
         <td>
             @if($asesmen->status == 'Administrasi Selesai')
@@ -36,13 +40,7 @@
             @endif
         </td>
         <td>
-            <a href="{{ route('asesmen.show', $asesmen->id) }}" class="btn btn-sm btn-warning">👁</a>
-            <a href="{{ route('asesmen.edit', $asesmen->id) }}" class="btn btn-sm btn-info">✏️</a>
-            <form action="{{ route('asesmen.destroy', $asesmen->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus data?')">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-sm btn-danger">🗑</button>
-            </form>
+            <a href="{{ route('asesmen.edit', $asesmen->id) }}" class="btn btn-sm btn-info">👁</a>
         </td>
     </tr>
     @empty
