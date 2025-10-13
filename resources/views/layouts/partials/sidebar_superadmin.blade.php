@@ -24,8 +24,8 @@
                         <li class="{{ request()->routeIs('sa.persiapan.jadwal.index') ? 'active' : '' }}">
                             <a href="{{ route('sa.persiapan.jadwal.index') }}">Jadwal Asesmen</a>
                         </li>
-                        <li class="{{ request()->routeIs('sa.tokens.index') ? 'active' : '' }}">
-                            <a href="{{ route('sa.tokens.index') }}">Token</a>
+                        <li class="{{ request()->routeIs('admin.token.*') ? 'active' : '' }}">
+                            <a href="#">Token</a>
                         </li>
                     </ul>
                 </li>
@@ -58,7 +58,9 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="#">Skema Sertifikasi UJK</a></li>
-                        <li><a href="#">TUK</a></li>
+                        <li>
+                            <a href="{{ route('tuk.index') }}">TUK</a>
+                        </li>
                         <li><a href="#">Asesor Kompetensi</a></li>
                         <li><a href="#">Pertanyaan Wawancara</a></li>
                         <li><a href="#">Dokumen Portofolio</a></li>
@@ -83,7 +85,7 @@
                     </ul>
                 </li>
 
-                 <!--Perangkat Asesmen -->
+                <!--Perangkat Asesmen -->
                 <li class="has-submenu {{ request()->routeIs('#*') ? 'mm-active' : '' }}">
                     <a href="javascript:void(0);" class="waves-effect">
                         <i data-feather="layers"></i>

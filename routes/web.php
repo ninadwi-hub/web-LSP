@@ -21,7 +21,9 @@ use App\Http\Controllers\AsesorController;
 use App\Http\Controllers\AsesiController;
 use App\Http\Controllers\JadwalAsesmenController;
 use App\Http\Controllers\TokenController;
+use App\Http\Controllers\TukController;
 use App\Models\Download;
+use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\PendaftaranAsesmenController;
 
 /*
@@ -43,6 +45,12 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // Home
 Route::get('/', [FrontendController::class, 'home'])->name('home');
 Route::get('/beranda', fn() => redirect()->route('home'))->name('website');
+
+//kab and prov
+Route::get('/get-kabupaten/{id}', function ($id) {
+    $response = Http::get("https://ibnux.github.io/data-indonesia/kabupaten/$id.json");
+    return $response->json();
+});
 
 // Kontak Publik
 Route::get('/kontak', [FrontendController::class, 'showKontak'])->name('kontak');
@@ -119,36 +127,39 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
+    Route::get('/tuk', [TukController::class, 'index'])->name('tuk.index');
+    Route::post('/tuk', [TukController::class, 'store'])->name('tuk.store');
+    Route::delete('/tuk/{tuk}', [TukController::class, 'destroy'])->name('tuk.destroy');
 
-/*
+    /*
  * === DASHBOARD ===
  */
-Route::get('/asesi/dashboard', [AsesiController::class, 'index'])
-    ->name('asesi.dashboard');
+    Route::get('/asesi/dashboard', [AsesiController::class, 'index'])
+        ->name('asesi.dashboard');
 
-Route::get('/asesor/dashboard', [AsesiController::class, 'index'])
-    ->name('asesor.dashboard');
+    Route::get('/asesor/dashboard', [AsesiController::class, 'index'])
+        ->name('asesor.dashboard');
 
-/*
+    /*
  * === FORM BIODATA (single controller, multi-route aliases) ===
  */
 
-// Compatibility / alias routes — banyak view/calls mungkin pakai nama ini:
-Route::get('/asesi/biodata', [AsesiController::class, 'biodataForm'])
-    ->name('asesi.biodata');
-Route::post('/asesi/biodata', [AsesiController::class, 'storeBiodata'])
-    ->name('asesi.biodata.store');
+    // Compatibility / alias routes — banyak view/calls mungkin pakai nama ini:
+    Route::get('/asesi/biodata', [AsesiController::class, 'biodataForm'])
+        ->name('asesi.biodata');
+    Route::post('/asesi/biodata', [AsesiController::class, 'storeBiodata'])
+        ->name('asesi.biodata.store');
 
-Route::get('/asesor/biodata', [AsesiController::class, 'biodataForm'])
-    ->name('asesor.biodata');
-Route::post('/asesor/biodata', [AsesiController::class, 'storeBiodata'])
-    ->name('asesor.biodata.store');
+    Route::get('/asesor/biodata', [AsesiController::class, 'biodataForm'])
+        ->name('asesor.biodata');
+    Route::post('/asesor/biodata', [AsesiController::class, 'storeBiodata'])
+        ->name('asesor.biodata.store');
 
-/*
+    /*
  * === SWITCH ROLE ===
  */
-Route::get('/switch-role/{role}', [AsesiController::class, 'switchRole'])
-    ->name('switch.role');
+    Route::get('/switch-role/{role}', [AsesiController::class, 'switchRole'])
+        ->name('switch.role');
 
     // Pendaftaran Asesmen
     Route::resource('asesmen', App\Http\Controllers\PendaftaranAsesmenController::class);
@@ -182,8 +193,8 @@ Route::get('/{slug}', [FrontendController::class, 'show'])
     ->name('slug.show');
 
 
-    /// ASESI ROUTESS
-    Route::prefix('asesi')->name('asesi.')->group(function () {
+/// ASESI ROUTESS
+Route::prefix('asesi')->name('asesi.')->group(function () {
 
     Route::get('/asesmen', function () {
         abort(404);
@@ -198,7 +209,7 @@ Route::get('/{slug}', [FrontendController::class, 'show'])
     })->name('praasesmen');
 });
 /// Asesor ROUTESS
-    Route::prefix('asesor')->name('asesor.')->group(function () {
+Route::prefix('asesor')->name('asesor.')->group(function () {
 
     Route::get('/asesmen', function () {
         abort(404);
@@ -212,6 +223,7 @@ Route::get('/{slug}', [FrontendController::class, 'show'])
         abort(404);
     })->name('praasesmen');
 });
+
 
 
 
