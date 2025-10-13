@@ -12,7 +12,7 @@ class TukController extends Controller
      */
     public function index()
     {
-        $tuks = Tuk::all();
+       $tuks = Tuk::paginate(10);
         return view('tuk.index', compact('tuks'));
     }
 

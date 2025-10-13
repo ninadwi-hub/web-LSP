@@ -51,11 +51,6 @@
             </tbody>
         </table>
 
-        <div class="mt-3">
-            {{ $tokens->links('pagination::bootstrap-5') }}
-        </div>
-
-
         {{-- pagination links --}}
         <div class="d-flex justify-content-center">
             {{ $tokens->links() }}

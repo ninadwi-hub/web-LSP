@@ -29,13 +29,14 @@ class DatabaseSeeder extends Seeder
             PagesTableSeeder::class,
             MenusTableSeeder::class,
             SkemasTableSeeder::class,
-            SkemaSeeder::class,               
+            SkemaSeeder::class,
             UnitKompetensisTableSeeder::class,
             GalleriesTableSeeder::class,
             AsesorSeeder::class,
             JadwalAsesmenSeeder::class,
-    BiodataAsesiSeeder::class,
-    DokumenAsesiSeeder::class,
+            BiodataAsesiSeeder::class,
+            DokumenAsesiSeeder::class,
+            TukSeeder::class,
 
         ]);
     }
