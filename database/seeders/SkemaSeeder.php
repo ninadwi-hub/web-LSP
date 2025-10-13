@@ -14,7 +14,6 @@ class SkemaSeeder extends Seeder
             [
                 'kode' => 'IJ',
                 'nama' => 'Instruktur Junior',
-                'slug' => Str::slug('Instruktur Junior'),
                 'jenis' => 'KKNI Level 6',
                 'kategori' => 'Okupasi',
                 'ringkasan' => 'Skema sertifikasi untuk instruktur junior yang bertanggung jawab dalam melaksanakan pelatihan dasar',
@@ -25,7 +24,6 @@ class SkemaSeeder extends Seeder
             [
                 'kode' => 'PP',
                 'nama' => 'Penyelenggara Pelatihan',
-                'slug' => Str::slug('Penyelenggara Pelatihan'),
                 'jenis' => 'KKNI Level 6',
                 'kategori' => 'Okupasi',
                 'ringkasan' => 'Skema sertifikasi untuk penyelenggara pelatihan kerja',
@@ -36,7 +34,6 @@ class SkemaSeeder extends Seeder
             [
                 'kode' => 'PLK',
                 'nama' => 'Pelatih di Tempat Kerja',
-                'slug' => Str::slug('Pelatih di Tempat Kerja'),
                 'jenis' => 'KKNI Level 5',
                 'kategori' => 'Okupasi',
                 'ringkasan' => 'Skema sertifikasi untuk pelatih yang bekerja di lingkungan kerja',
@@ -47,7 +44,6 @@ class SkemaSeeder extends Seeder
             [
                 'kode' => 'PP-TK',
                 'nama' => 'Perancang Program Pelatihan Kerja',
-                'slug' => Str::slug('Perancang Program Pelatihan Kerja'),
                 'jenis' => 'KKNI Level 7',
                 'kategori' => 'Okupasi',
                 'ringkasan' => 'Skema sertifikasi untuk perancang dan pengembang program pelatihan kerja',
@@ -58,6 +54,21 @@ class SkemaSeeder extends Seeder
         ];
 
         foreach ($skemas as $skema) {
+            // buat slug awal
+            $originalSlug = Str::slug($skema['nama']);
+            $slug = $originalSlug;
+            $counter = 1;
+
+            // cek apakah slug sudah ada, jika ya tambahkan angka
+            while (Skema::where('slug', $slug)->exists()) {
+                $slug = $originalSlug . '-' . $counter;
+                $counter++;
+            }
+
+            // set slug unik ke data
+            $skema['slug'] = $slug;
+
+            // simpan ke database (update jika kode sudah ada, buat baru jika belum)
             Skema::updateOrCreate(
                 ['kode' => $skema['kode']],
                 $skema

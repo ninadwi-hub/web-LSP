@@ -32,21 +32,10 @@ return new class extends Migration
             // di tabel ini cukup flag bahwa dia sudah mendaftar
             $table->timestamps();
         });
-
-        // Pivot table untuk Step 6 (banyak unit kompetensi)
-        Schema::create('pendaftaran_unit', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('pendaftaran_id');
-            $table->unsignedBigInteger('unit_kompetensi_id');
-
-            $table->foreign('pendaftaran_id')->references('id')->on('pendaftaran_asesmens')->onDelete('cascade');
-            $table->foreign('unit_kompetensi_id')->references('id')->on('unit_kompetensis')->onDelete('cascade');
-        });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('pendaftaran_unit');
         Schema::dropIfExists('pendaftaran_asesmens');
     }
 };
