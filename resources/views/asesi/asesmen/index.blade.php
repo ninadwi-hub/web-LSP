@@ -6,7 +6,7 @@
 <div class="container">
     <h4 class="mb-3">Pendaftaran Asesmen / Uji Kompetensi</h4>
 
-    <a href="{{ route('asesmen.create') }}" class="btn btn-primary mb-3">+ Tambah</a>
+    <a href="{{ route('asesmen.list_jadwal') }}" class="btn btn-primary mb-3">+ Tambah</a>
 
     {{-- 🔽 Tombol FR (APL.01, APL.02, dll) — muncul setelah baris diklik --}}
     <div id="fr-buttons" class="d-none mb-3">
@@ -59,6 +59,36 @@
         </tr>
         @endforelse
         </tbody>
+    @forelse($asesmens as $i => $asesmen)
+    <tr>
+        <td>{{ $asesmens->firstItem() + $i }}</td>
+        <td>{{ \Carbon\Carbon::parse($asesmen->jadwal_uji)->format('d-m-Y') }}</td>
+        <td>
+    {{ $asesmen->jadwal && $asesmen->jadwal->skema 
+        ? $asesmen->jadwal->skema->nama 
+        : 'Tidak ada skema' }}
+</td>
+        <td>{{ $asesmen->tuk }}</td>
+        <td>
+            @if($asesmen->status == 'Administrasi Selesai')
+                <span class="badge bg-success">{{ $asesmen->status }}</span>
+            @elseif($asesmen->status == 'Menunggu')
+                <span class="badge bg-warning text-dark">{{ $asesmen->status }}</span>
+            @else
+                <span class="badge bg-danger">{{ $asesmen->status ?? 'Belum Diproses' }}</span>
+            @endif
+        </td>
+        <td>
+            <a href="{{ route('asesmen.edit', $asesmen->id) }}" class="btn btn-sm btn-info">👁</a>
+        </td>
+    </tr>
+    @empty
+    <tr>
+        <td colspan="6">Belum ada data</td>
+    </tr>
+    @endforelse
+</tbody>
+>>>>>>> 54b8a1c48cfb68a02aac8fc83736a73712f9ae06
     </table>
 
     {{ $asesmens->links() }}

@@ -163,6 +163,9 @@ Route::middleware(['auth'])->group(function () {
 
     // Pendaftaran Asesmen
     Route::resource('asesmen', App\Http\Controllers\PendaftaranAsesmenController::class);
+    Route::get('/asesi/asesmen/list_jadwal', [PendaftaranAsesmenController::class, 'listJadwal'])
+    ->name('asesmen.list_jadwal');
+
 
     // Resources tambahan
     Route::resource('users', UserController::class);
