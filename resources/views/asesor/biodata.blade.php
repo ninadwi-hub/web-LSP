@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <form action="{{ route('asesi.biodata.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('asesor.biodata.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         {{-- Data Pribadi --}}
@@ -12,7 +12,7 @@
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">Biodata Pengguna</h5>
 
-                {{-- Tombol Login Sebagai (hanya muncul untuk multi-role) --}}
+                {{-- Tombol Login Sebagai (multi-role) --}}
                 @if(!empty($roles) && count($roles) > 1)
                 <div class="dropdown">
                     <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="loginAsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -108,117 +108,61 @@
             </div>
         </div>
 
-        {{-- Pendidikan & Pekerjaan --}}
-        <div class="card mb-4 shadow-sm">
-            <div class="card-header"><h5>Data Pendidikan & Pekerjaan</h5></div>
-            <div class="card-body">
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label class="form-label">Pendidikan</label>
-                        <select name="pendidikan" id="pendidikan_select" class="form-control">
-                            <option value="">-- Pilih --</option>
-                            <option value="SMA/SMK">SMA/SMK</option>
-                            <option value="D3">D3</option>
-                            <option value="S1">S1</option>
-                            <option value="S2">S2</option>
-                            <option value="lainnya">Lainnya...</option>
-                        </select>
-                        <input type="text" name="pendidikan" id="pendidikan_input" class="form-control mt-2" placeholder="Masukkan pendidikan" style="display:none;" value="{{ $biodata->pendidikan ?? '' }}">
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Nama Perguruan Tinggi</label>
-                        <input type="text" name="nama_perguruan_tinggi" class="form-control" value="{{ $biodata->nama_perguruan_tinggi ?? '' }}">
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Program Studi</label>
-                        <input type="text" name="program_studi" class="form-control" value="{{ $biodata->program_studi ?? '' }}">
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label class="form-label">Pekerjaan</label>
-                        <select name="pekerjaan" id="pekerjaan_select" class="form-control">
-                            <option value="">-- Pilih --</option>
-                            <option value="Karyawan">Karyawan</option>
-                            <option value="Wiraswasta">Wiraswasta</option>
-                            <option value="Pelajar/Mahasiswa">Pelajar/Mahasiswa</option>
-                            <option value="lainnya">Lainnya...</option>
-                        </select>
-                        <input type="text" name="pekerjaan" id="pekerjaan_input" class="form-control mt-2" placeholder="Masukkan pekerjaan" style="display:none;" value="{{ $biodata->pekerjaan ?? '' }}">
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Nama Perusahaan</label>
-                        <input type="text" name="nama_perusahaan" class="form-control" value="{{ $biodata->nama_perusahaan ?? '' }}">
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Alamat Perusahaan</label>
-                        <input type="text" name="alamat_perusahaan" class="form-control" value="{{ $biodata->alamat_perusahaan ?? '' }}">
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label class="form-label">Telp Perusahaan</label>
-                        <input type="text" name="no_telp_perusahaan" class="form-control" value="{{ $biodata->no_telp_perusahaan ?? '' }}">
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Email Perusahaan</label>
-                        <input type="text" name="email_perusahaan" class="form-control" value="{{ $biodata->email_perusahaan ?? '' }}">
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Jabatan di Perusahaan</label>
-                        <input type="text" name="jabatan_perusahaan" class="form-control" value="{{ $biodata->jabatan_perusahaan ?? '' }}">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {{-- Dokumen --}}
+        {{-- Data Dokumen --}}
         <div class="card mb-4 shadow-sm">
             <div class="card-header"><h5>Data Dokumen</h5></div>
             <div class="card-body">
-                @php
-                    $dokumenFields = [
-                        'foto' => 'Foto 3x4',
-                        'ktp_sim_paspor' => 'KTP/SIM/Paspor',
-                        'ijazah' => 'Ijazah Terakhir',
-                        'sertifikat' => 'Sertifikat Pelatihan',
-                        'cv' => 'CV / Surat Pengalaman',
-                    ];
-                @endphp
 
-                @foreach($dokumenFields as $field => $label)
-                    <div class="mb-3">
-                        <label class="form-label">{{ $label }}</label>
-                        <input type="file" name="{{ $field }}" class="form-control">
-                        @if(!empty($dokumen->$field))
-                            <small class="text-muted">
-                                File saat ini:
-                                <a href="{{ asset('storage/' . $dokumen->$field) }}" target="_blank">Lihat</a>
-                            </small>
-                        @endif
-                    </div>
-                @endforeach
-
-                {{-- Tanda tangan digital --}}
-                <div class="mb-3">
+                <div class="row align-items-start">
+                    {{-- Kolom Upload --}}
+                    <div class="col-md-4">
+                        <div class="mb-3">
                     <label class="form-label">Tanda Tangan</label>
                     <div class="border rounded bg-white mb-2" style="width: 300px; height: 150px;">
                         <canvas id="signature-pad" width="300" height="150"></canvas>
                     </div>
                     <input type="hidden" name="tanda_tangan" id="tanda_tangan">
-                    @if(!empty($dokumen->tanda_tangan))
-                        <div>
-                            <small class="text-muted">
-                                File saat ini:
-                                <a href="{{ asset('storage/' . $dokumen->tanda_tangan) }}" target="_blank">Lihat</a>
-                            </small>
-                        </div>
-                    @endif
                     <button type="button" class="btn btn-sm btn-secondary mt-2" id="clear-signature">
                         Hapus Tanda Tangan
                     </button>
+                </div>
+
+                        <div class="mb-4">
+                            <label class="form-label text-uppercase small fw-bold text-muted">Foto Profile</label>
+                            <label for="foto" class="btn btn-primary btn-sm w-100 mb-2">
+                                <i class="bi bi-upload"></i> Upload Foto Profile
+                            </label>
+                            <input type="file" id="foto" name="foto" class="d-none" onchange="previewImage(event)">
+                        </div>
+                    </div>
+
+                    {{-- Kolom Preview --}}
+                    <div class="col-md-8 d-flex flex-column align-items-center">
+                        {{-- Preview Tanda Tangan --}}
+                        @if(!empty($dokumen->tanda_tangan))
+                            <img src="{{ asset('storage/' . $dokumen->tanda_tangan) }}"
+                                 alt="Tanda Tangan"
+                                 class="img-fluid mb-4 border rounded"
+                                 style="max-height: 180px;">
+                        @else
+                            <img id="preview-signature" class="img-fluid mb-4 border rounded d-none" style="max-height: 180px;">
+                        @endif
+
+                        {{-- Preview Foto --}}
+                        @if(!empty($dokumen->foto))
+                            <img id="preview-foto"
+                                 src="{{ asset('storage/' . $dokumen->foto) }}"
+                                 alt="Foto Profile"
+                                 class="img-fluid border rounded"
+                                 style="max-height: 250px;">
+                        @else
+                            <img id="preview-foto"
+                                 src=""
+                                 alt="Preview Foto"
+                                 class="img-fluid border rounded d-none"
+                                 style="max-height: 250px;">
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
@@ -229,7 +173,7 @@
     </form>
 </div>
 
-{{-- Script --}}
+{{-- Script Dropdown + Canvas + Preview --}}
 <script>
 function setupEditableDropdown(selectId, inputId) {
     const select = document.getElementById(selectId);
@@ -312,6 +256,21 @@ function setupEditableDropdown(selectId, inputId) {
     setupEditableDropdown(id + '_select', id + '_input')
 );
 
+// === Preview Foto ===
+function previewImage(event) {
+    const input = event.target;
+    const preview = document.getElementById('preview-foto');
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.classList.remove('d-none');
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+// === Tanda tangan digital ===
 document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.getElementById('signature-pad');
     const ctx = canvas.getContext('2d');
@@ -352,4 +311,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
 @endsection

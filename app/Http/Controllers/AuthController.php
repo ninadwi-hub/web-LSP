@@ -106,4 +106,5 @@ class AuthController extends Controller
         // fallback jika role tidak dikenali
         return redirect()->route('dashboard');
     }
+    
 }

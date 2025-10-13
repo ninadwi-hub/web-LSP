@@ -118,13 +118,37 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('unit', AdminUnitKompetensiController::class)->except(['show']);
     });
 
-    // Asesor & Asesi Dashboard
-    Route::get('/asesor/dashboard', [AsesorController::class, 'index'])->name('asesor.dashboard');
-    Route::get('/asesi/dashboard', [AsesiController::class, 'index'])->name('asesi.dashboard');
-    Route::middleware(['auth'])->group(function () {
-    Route::get('/asesi/biodata', [AsesiController::class, 'biodataForm'])->name('asesi.biodata');
-    Route::post('/asesi/biodata', [AsesiController::class, 'storeBiodata'])->name('asesi.biodata.store');
-});
+
+
+/*
+ * === DASHBOARD ===
+ */
+Route::get('/asesi/dashboard', [AsesiController::class, 'index'])
+    ->name('asesi.dashboard');
+
+Route::get('/asesor/dashboard', [AsesiController::class, 'index'])
+    ->name('asesor.dashboard');
+
+/*
+ * === FORM BIODATA (single controller, multi-route aliases) ===
+ */
+
+// Compatibility / alias routes — banyak view/calls mungkin pakai nama ini:
+Route::get('/asesi/biodata', [AsesiController::class, 'biodataForm'])
+    ->name('asesi.biodata');
+Route::post('/asesi/biodata', [AsesiController::class, 'storeBiodata'])
+    ->name('asesi.biodata.store');
+
+Route::get('/asesor/biodata', [AsesiController::class, 'biodataForm'])
+    ->name('asesor.biodata');
+Route::post('/asesor/biodata', [AsesiController::class, 'storeBiodata'])
+    ->name('asesor.biodata.store');
+
+/*
+ * === SWITCH ROLE ===
+ */
+Route::get('/switch-role/{role}', [AsesiController::class, 'switchRole'])
+    ->name('switch.role');
 
     // Pendaftaran Asesmen
     Route::resource('asesmen', App\Http\Controllers\PendaftaranAsesmenController::class);
@@ -157,6 +181,21 @@ Route::get('/{slug}', [FrontendController::class, 'show'])
 
     /// ASESI ROUTESS
     Route::prefix('asesi')->name('asesi.')->group(function () {
+
+    Route::get('/asesmen', function () {
+        abort(404);
+    })->name('asesmen');
+
+    Route::get('/riwayat', function () {
+        abort(404);
+    })->name('riwayat');
+
+    Route::get('/praasesmen', function () {
+        abort(404);
+    })->name('praasesmen');
+});
+/// Asesor ROUTESS
+    Route::prefix('asesor')->name('asesor.')->group(function () {
 
     Route::get('/asesmen', function () {
         abort(404);

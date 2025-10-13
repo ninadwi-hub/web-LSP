@@ -21,7 +21,7 @@
                                 <span>Asesor</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="{{ route('asesi.biodata') }}">Biodata</a></li>
+                                <li><a href="{{ route('asesor.biodata') }}">Biodata</a></li>
                                 <li><a href="{{ route('asesi.praasesmen') }}">Pra Asesmen</a></li>
                                  <li><a href="{{ route('asesi.asesmen') }}">Asesmen</a></li>
                                 <li><a href="{{ route('asesi.riwayat') }}">Riwayat Asesmen</a></li>
