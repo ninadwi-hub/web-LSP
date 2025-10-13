@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
             BiodataAsesiSeeder::class,
             DokumenAsesiSeeder::class,
             TukSeeder::class,
+            AsesorKompetensiSeeder::class,
 
         ]);
     }
