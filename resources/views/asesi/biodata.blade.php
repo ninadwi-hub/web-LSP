@@ -308,9 +308,11 @@ function setupEditableDropdown(selectId, inputId) {
 }
 
 // Aktifkan untuk semua dropdown editable
-['jenis_kelamin', 'provinsi', 'kabupaten'].forEach(id => 
+// Aktifkan untuk semua dropdown editable (tambahkan pendidikan & pekerjaan)
+['jenis_kelamin', 'provinsi', 'kabupaten', 'pendidikan', 'pekerjaan'].forEach(id => 
     setupEditableDropdown(id + '_select', id + '_input')
 );
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.getElementById('signature-pad');
