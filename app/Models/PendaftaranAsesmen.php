@@ -6,31 +6,33 @@ use Illuminate\Database\Eloquent\Model;
 class PendaftaranAsesmen extends Model
 {
     protected $table = 'pendaftaran_asesmens';
-    protected $fillable = [
-        'biodata_id',
-        'dokumen_id',
-        'tujuan_asesmen',
-        'tuk',
-        'jadwal_uji',
-        'metode_uji',
-        'keterangan_teknis',
-         'jumlah_pembayaran',
+   protected $fillable = [
+    'biodata_asesi_id',
+    'dokumen_asesi_id',
+    'tujuan_asesmen',
+    'tuk',
+    'jadwal_uji',
+    'metode_uji',
+    'keterangan_teknis',
+    'jumlah_pembayaran',
     'sumber_pendanaan',
     'metode_pembayaran',
     'no_rekening',
     'nama_rekening',
     'tanggal_pembayaran',
     'bukti_pembayaran',
-    ];
+];
+
 
     // Relasi
     public function biodata() {
-        return $this->belongsTo(BiodataAsesi::class, 'biodata_id');
-    }
+    return $this->belongsTo(BiodataAsesi::class, 'biodata_asesi_id');
+}
 
-    public function dokumen() {
-        return $this->belongsTo(DokumenAsesi::class, 'dokumen_id');
-    }
+public function dokumen() {
+    return $this->belongsTo(DokumenAsesi::class, 'dokumen_asesi_id');
+}
+
 
     public function jadwal()
 {

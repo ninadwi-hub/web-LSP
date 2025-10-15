@@ -16,7 +16,6 @@
     <link href="{{ asset('THEMES/minia/assets/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('THEMES/minia/assets/css/icons.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('THEMES/minia/assets/css/app.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('THEMES/minia/assets/css/custom.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('THEMES/minia/assets/css/custom.css') }}" rel="stylesheet">
     
 
@@ -78,9 +77,8 @@
     <script src="{{ asset('THEMES/minia/assets/libs/metismenu/metisMenu.min.js') }}"></script>
     <script src="{{ asset('THEMES/minia/assets/libs/simplebar/simplebar.min.js') }}"></script>
     <script src="{{ asset('THEMES/minia/assets/libs/node-waves/waves.min.js') }}"></script>
-    <script src="{{ asset('THEMES/minia/assets/js/layout.js') }}"></script>
-    <script src="{{ asset('THEMES/minia/assets/js/app.js') }}"></script>
     <script src="https://unpkg.com/feather-icons"></script>
+    <script src="{{ asset('THEMES/minia/assets/js/app.js') }}"></script>
     <script> feather.replace(); </script>
     <script src="https://unpkg.com/feather-icons"></script>
     <script>

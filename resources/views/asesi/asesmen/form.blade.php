@@ -5,23 +5,23 @@
 @section('content')
 <div class="container">
     {{-- Notifikasi Success --}}
-@if(session('success'))
+    @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Berhasil!</strong> {{ session('success') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-@endif
+    @endif
 
-{{-- Notifikasi Error --}}
-@if(session('error'))
+    {{-- Notifikasi Error --}}
+    @if(session('error'))
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>Gagal!</strong> {{ session('error') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-@endif
+    @endif
 
-{{-- Validasi Error --}}
-@if($errors->any())
+    {{-- Validasi Error --}}
+    @if($errors->any())
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>Terjadi kesalahan:</strong>
         <ul class="mb-0 mt-1">
@@ -31,14 +31,21 @@
         </ul>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-@endif
-<form 
-action="{{ isset($asesmen) && $asesmen->id ? route('asesmen.update', $asesmen->id) : route('asesmen.store') }}" 
-      method="POST" enctype="multipart/form-data">
-    @csrf
-    @if(isset($asesmen) && $asesmen->id)
-        @method('PUT')
     @endif
+
+    <form 
+        action="{{ isset($asesmen) && $asesmen->id ? route('asesmen.update', $asesmen->id) : route('asesmen.store') }}" 
+        method="POST" enctype="multipart/form-data">
+        @csrf
+        @if(isset($asesmen) && $asesmen->id)
+            @method('PUT')
+        @endif
+
+        <!-- Hidden input agar controller tahu data mana yang digunakan -->
+        <input type="hidden" name="biodata_asesi_id" value="{{ $biodata->id }}">
+<input type="hidden" name="dokumen_asesi_id" value="{{ $dokumen->id ?? '' }}">
+
+
         <!-- STEP NAVIGASI -->
         <ul class="nav nav-pills justify-content-center mb-4" id="stepper">
             <li class="nav-item"><a class="nav-link active" data-step="1">1. Data Pribadi</a></li>
@@ -52,251 +59,224 @@ action="{{ isset($asesmen) && $asesmen->id ? route('asesmen.update', $asesmen->i
 
         <!-- STEP CONTENT -->
         <div class="step-content">
+            {{-- STEP 1 --}}
+            <div class="step-pane active" data-step="1">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header">
+                        <h5>Data Pribadi</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Nama Lengkap</strong></label>
+                            <input type="text" name="nama_lengkap" class="form-control" 
+                                   value="{{ Auth::user()->name }}" readonly>
+                        </div>
 
-          {{-- STEP 1 --}}
-<div class="step-pane active" data-step="1">
-    <div class="card mb-4 shadow-sm">
-        <div class="card-header">
-            <h5>Data Pribadi</h5>
-        </div>
-        <div class="card-body">
-            <div class="mb-3">
-                <label class="form-label"><strong>Nama Lengkap</strong></label>
-                <input type="text" name="nama_lengkap" class="form-control" 
-                       value="{{ old('nama_lengkap', $biodata->nama_lengkap) }}" required>
-            </div>
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Email</strong></label>
+                            <input type="email" name="email" class="form-control" 
+                                value="{{ Auth::user()->email }}" readonly>
+                        </div>
 
-            <div class="mb-3">
-                <label class="form-label"><strong>Email</strong></label>
-                <input type="email" name="email" class="form-control" 
-                       value="{{ old('email', $biodata->email) }}" required>
-            </div>
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Jenis Kelamin</strong></label>
+                            <select name="jk" class="form-select" required>
+                                <option value="L" {{ old('jk', $biodata->jk) == 'L' ? 'selected' : '' }}>Laki-laki</option>
+                                <option value="P" {{ old('jk', $biodata->jk) == 'P' ? 'selected' : '' }}>Perempuan</option>
+                            </select>
+                        </div>
 
-            <div class="mb-3">
-                <label class="form-label"><strong>Jenis Kelamin</strong></label>
-                <select name="jk" class="form-select" required>
-                    <option value="L" {{ old('jk', $biodata->jk) == 'L' ? 'selected' : '' }}>Laki-laki</option>
-                    <option value="P" {{ old('jk', $biodata->jk) == 'P' ? 'selected' : '' }}>Perempuan</option>
-                </select>
-            </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label"><strong>Tempat Lahir</strong></label>
+                                <input type="text" name="tempat_lahir" class="form-control" 
+                                       value="{{ old('tempat_lahir', $biodata->tempat_lahir) }}" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label"><strong>Tanggal Lahir</strong></label>
+                                <input type="date" name="tanggal_lahir" class="form-control" 
+                                       value="{{ old('tanggal_lahir', $biodata->tanggal_lahir) }}" required>
+                            </div>
+                        </div>
 
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label class="form-label"><strong>Tempat Lahir</strong></label>
-                    <input type="text" name="tempat_lahir" class="form-control" 
-                           value="{{ old('tempat_lahir', $biodata->tempat_lahir) }}" required>
+                        <div class="mb-3">
+                            <label class="form-label"><strong>No. Identitas</strong></label>
+                            <input type="text" name="no_identitas" class="form-control" 
+                                   value="{{ old('no_identitas', $biodata->no_identitas) }}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Alamat</strong></label>
+                            <textarea name="alamat" class="form-control" rows="3" required>{{ old('alamat', $biodata->alamat) }}</textarea>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6 mb-3">
-                    <label class="form-label"><strong>Tanggal Lahir</strong></label>
-                    <input type="date" name="tanggal_lahir" class="form-control" 
-                           value="{{ old('tanggal_lahir', $biodata->tanggal_lahir) }}" required>
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-primary next-step">Selanjutnya</button>
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label"><strong>No. Identitas</strong></label>
-                <input type="text" name="no_identitas" class="form-control" 
-                       value="{{ old('no_identitas', $biodata->no_identitas) }}" required>
+            {{-- STEP 2 --}}
+            <div class="step-pane" data-step="2">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header">
+                        <h5>Pendidikan & Pekerjaan</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Pendidikan Terakhir</strong></label>
+                            <input type="text" name="pendidikan" class="form-control" 
+                                   value="{{ old('pendidikan', $biodata->pendidikan) }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Perguruan Tinggi</strong></label>
+                            <input type="text" name="nama_perguruan_tinggi" class="form-control" 
+                                   value="{{ old('nama_perguruan_tinggi', $biodata->nama_perguruan_tinggi) }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Program Studi</strong></label>
+                            <input type="text" name="program_studi" class="form-control" 
+                                   value="{{ old('program_studi', $biodata->program_studi) }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Pekerjaan</strong></label>
+                            <input type="text" name="pekerjaan" class="form-control" 
+                                   value="{{ old('pekerjaan', $biodata->pekerjaan) }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Perusahaan</strong></label>
+                            <input type="text" name="nama_perusahaan" class="form-control" 
+                                   value="{{ old('nama_perusahaan', $biodata->nama_perusahaan) }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary prev-step">Kembali</button>
+                    <button type="button" class="btn btn-primary next-step">Selanjutnya</button>
+                </div>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label"><strong>Alamat</strong></label>
-                <textarea name="alamat" class="form-control" rows="3" required>{{ old('alamat', $biodata->alamat) }}</textarea>
-            </div>
-        </div>
-    </div>
-    <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-primary next-step">Selanjutnya</button>
-    </div>
-</div>
+            {{-- STEP 3 --}}
+            <div class="step-pane" data-step="3">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header"><h5>Data Pendukung</h5></div>
+                    <div class="card-body">
+                        {{-- Upload file --}}
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="fw-bold">Pasfoto</label>
+                                <div class="upload-box text-center p-3 border border-success border-2 rounded" style="border-style: dashed !important;">
+                                    @if(!empty($dokumen->foto))
+                                        <img src="{{ asset('storage/'.$dokumen->foto) }}" alt="Pasfoto" class="img-fluid mb-2" style="max-height:150px;">
+                                        <p><a href="{{ asset('storage/'.$dokumen->foto) }}" target="_blank" class="btn btn-sm btn-outline-primary">Lihat Foto</a></p>
+                                    @else
+                                        <p class="text-muted">Belum ada file</p>
+                                    @endif
+                                    <input type="file" name="foto" class="form-control mt-2">
+                                </div>
+                            </div>
 
-{{-- STEP 2 --}}
-<div class="step-pane" data-step="2">
-    <div class="card mb-4 shadow-sm">
-        <div class="card-header">
-            <h5>Pendidikan & Pekerjaan</h5>
-        </div>
-        <div class="card-body">
-            <div class="mb-3">
-                <label class="form-label"><strong>Pendidikan Terakhir</strong></label>
-                <input type="text" name="pendidikan" class="form-control" 
-                       value="{{ old('pendidikan', $biodata->pendidikan) }}">
-            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="fw-bold">Identitas Pribadi (KTP/SIM/Passport)</label>
+                                <div class="upload-box text-center p-3 border border-success border-2 rounded" style="border-style: dashed !important;">
+                                    @if(!empty($dokumen->ktp_sim_paspor))
+                                        <img src="{{ asset('storage/'.$dokumen->ktp_sim_paspor) }}" alt="KTP" class="img-fluid mb-2" style="max-height:150px;">
+                                        <p><a href="{{ asset('storage/'.$dokumen->ktp_sim_paspor) }}" target="_blank" class="btn btn-sm btn-outline-primary">Lihat KTP</a></p>
+                                    @else
+                                        <p class="text-muted">Belum ada file</p>
+                                    @endif
+                                    <input type="file" name="ktp_sim_paspor" class="form-control mt-2">
+                                </div>
+                            </div>
+                        </div>
 
-            <div class="mb-3">
-                <label class="form-label"><strong>Nama Perguruan Tinggi</strong></label>
-                <input type="text" name="perguruan_tinggi" class="form-control" 
-                       value="{{ old('perguruan_tinggi', $biodata->perguruan_tinggi) }}">
-            </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="fw-bold">Ijazah Pendidikan Terakhir</label>
+                                <div class="upload-box text-center p-3 border border-success border-2 rounded" style="border-style: dashed !important;">
+                                    @if(!empty($dokumen->ijazah))
+                                        <span class="text-success">✔ File berhasil terunggah</span><br>
+                                        <a href="{{ asset('storage/'.$dokumen->ijazah) }}" target="_blank" class="btn btn-sm btn-outline-primary mt-2">Lihat File</a>
+                                    @else
+                                        <p class="text-muted">Belum ada file</p>
+                                    @endif
+                                    <input type="file" name="ijazah" class="form-control mt-2">
+                                </div>
+                            </div>
 
-            <div class="mb-3">
-                <label class="form-label"><strong>Program Studi</strong></label>
-                <input type="text" name="program_studi" class="form-control" 
-                       value="{{ old('program_studi', $biodata->program_studi) }}">
-            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="fw-bold">CV (Daftar Riwayat Hidup)</label>
+                                <div class="upload-box text-center p-3 border border-success border-2 rounded" style="border-style: dashed !important;">
+                                    @if(!empty($dokumen->cv))
+                                        <span class="text-success">✔ File berhasil terunggah</span><br>
+                                        <a href="{{ asset('storage/'.$dokumen->cv) }}" target="_blank" class="btn btn-sm btn-outline-primary mt-2">Lihat File</a>
+                                    @else
+                                        <p class="text-muted">Belum ada file</p>
+                                    @endif
+                                    <input type="file" name="cv" class="form-control mt-2">
+                                </div>
+                            </div>
+                        </div>
 
-            <div class="mb-3">
-                <label class="form-label"><strong>Pekerjaan</strong></label>
-                <input type="text" name="pekerjaan" class="form-control" 
-                       value="{{ old('pekerjaan', $biodata->pekerjaan) }}">
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label"><strong>Perusahaan</strong></label>
-                <input type="text" name="perusahaan" class="form-control" 
-                       value="{{ old('perusahaan', $biodata->perusahaan) }}">
-            </div>
-        </div>
-    </div>
-    <div class="d-flex justify-content-between">
-        <button type="button" class="btn btn-secondary prev-step">Kembali</button>
-        <button type="button" class="btn btn-primary next-step">Selanjutnya</button>
-    </div>
-</div>
-
-           {{-- STEP 3 --}}
-<div class="step-pane" data-step="3">
-    <div class="card mb-4 shadow-sm">
-        <div class="card-header"><h5>Data Pendukung</h5></div>
-        <div class="card-body">
-            <div class="row">
-                {{-- Foto --}}
-                <div class="col-md-6 mb-3">
-                    <label class="fw-bold">Pasfoto</label>
-                    <div class="upload-box text-center p-3 border border-success border-2 rounded" style="border-style: dashed !important;">
-                        @if(!empty($dokumen->foto))
-                            <img src="{{ asset('storage/'.$dokumen->foto) }}" alt="Pasfoto" class="img-fluid mb-2" style="max-height:150px;">
-                            <p><a href="{{ asset('storage/'.$dokumen->foto) }}" target="_blank" class="btn btn-sm btn-outline-primary">Lihat Foto</a></p>
-                        @else
-                            <p class="text-muted">Belum ada file</p>
-                        @endif
-                        <input type="file" name="foto" class="form-control mt-2">
+                        <div class="col-md-6 mb-3">
+                            <label class="fw-bold">Sertifikat Pelatihan Bidang</label>
+                            <div class="upload-box text-center p-3 border border-success border-2 rounded" style="border-style: dashed !important;">
+                                @if(!empty($dokumen->sertifikat))
+                                    <span class="text-success">✔ File berhasil terunggah</span><br>
+                                    <a href="{{ asset('storage/'.$dokumen->sertifikat) }}" target="_blank" class="btn btn-sm btn-outline-primary mt-2">Lihat Sertifikat</a>
+                                @else
+                                    <p class="text-muted">Belum ada file</p>
+                                @endif
+                                <input type="file" name="sertifikat" class="form-control mt-2">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                {{-- KTP --}}
-                <div class="col-md-6 mb-3">
-                    <label class="fw-bold">Identitas Pribadi (KTP/SIM/Passport)</label>
-                    <div class="upload-box text-center p-3 border border-success border-2 rounded" style="border-style: dashed !important;">
-                        @if(!empty($dokumen->ktp))
-                            <img src="{{ asset('storage/'.$dokumen->ktp) }}" alt="KTP" class="img-fluid mb-2" style="max-height:150px;">
-                            <p><a href="{{ asset('storage/'.$dokumen->ktp) }}" target="_blank" class="btn btn-sm btn-outline-primary">Lihat KTP</a></p>
-                        @else
-                            <p class="text-muted">Belum ada file</p>
-                        @endif
-                        <input type="file" name="ktp" class="form-control mt-2">
-                    </div>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary prev-step">Kembali</button>
+                    <button type="button" class="btn btn-primary next-step">Selanjutnya</button>
                 </div>
             </div>
 
-            <div class="row">
-                {{-- Ijazah --}}
-                <div class="col-md-6 mb-3">
-                    <label class="fw-bold">Ijazah Pendidikan Terakhir</label>
-                    <div class="upload-box text-center p-3 border border-success border-2 rounded" style="border-style: dashed !important;">
-                        @if(!empty($dokumen->ijazah))
-                            <span class="text-success">✔ File berhasil terunggah</span><br>
-                            <a href="{{ asset('storage/'.$dokumen->ijazah) }}" target="_blank" class="btn btn-sm btn-outline-primary mt-2">Lihat File</a>
-                        @else
-                            <p class="text-muted">Belum ada file</p>
-                        @endif
-                        <input type="file" name="ijazah" class="form-control mt-2">
+            {{-- STEP 4 --}}
+            <div class="step-pane" data-step="4">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header"><h5>Tujuan Asesmen</h5></div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Tujuan Asesmen</th>
+                                    <th class="text-center">Ceklis</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                    $tujuan = old('tujuan_asesmen', $asesmen->tujuan_asesmen ?? '');
+                                @endphp
+                                @foreach(['Sertifikasi','Pengakuan Kompetensi Terkini (PKT)','Rekognisi Pembelajaran Lampau (RPL)','Lainnya'] as $option)
+                                <tr>
+                                    <td>{{ $option }}</td>
+                                    <td class="text-center">
+                                        <input class="form-check-input" type="radio" name="tujuan_asesmen" 
+                                               value="{{ $option }}" {{ $tujuan == $option ? 'checked' : '' }}>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
-                {{-- CV --}}
-                <div class="col-md-6 mb-3">
-                    <label class="fw-bold">CV (Daftar Riwayat Hidup)</label>
-                    <div class="upload-box text-center p-3 border border-success border-2 rounded" style="border-style: dashed !important;">
-                        @if(!empty($dokumen->cv))
-                            <span class="text-success">✔ File berhasil terunggah</span><br>
-                            <a href="{{ asset('storage/'.$dokumen->cv) }}" target="_blank" class="btn btn-sm btn-outline-primary mt-2">Lihat File</a>
-                        @else
-                            <p class="text-muted">Belum ada file</p>
-                        @endif
-                        <input type="file" name="cv" class="form-control mt-2">
-                    </div>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary prev-step">Kembali</button>
+                    <button type="button" class="btn btn-primary next-step">Selanjutnya</button>
                 </div>
             </div>
-            {{-- Sertifikat Pelatihan Bidang --}}
-            <div class="col-md-6 mb-3">
-                <label class="fw-bold">Sertifikat Pelatihan Bidang</label>
-                <div class="upload-box text-center p-3 border border-success border-2 rounded" style="border-style: dashed !important;">
-             @if(!empty($dokumen->sertifikat))
-            <span class="text-success">✔ File berhasil terunggah</span><br>
-            <a href="{{ asset('storage/'.$dokumen->sertifikat) }}" target="_blank" class="btn btn-sm btn-outline-primary mt-2">Lihat Sertifikat</a>
-             @else
-            <p class="text-muted">Belum ada file</p>
-             @endif
-             <input type="file" name="sertifikat" class="form-control mt-2">
-    </div>
-</div>
-        </div>
-    </div>
-
-    <div class="d-flex justify-content-between">
-        <button type="button" class="btn btn-secondary prev-step">Kembali</button>
-        <button type="button" class="btn btn-primary next-step">Selanjutnya</button>
-    </div>
-</div>
-
-           {{-- STEP 4 --}}
-<div class="step-pane" data-step="4">
-    <div class="card mb-4 shadow-sm">
-        <div class="card-header">
-            <h5 class="mb-0">Tujuan Asesmen</h5>
-        </div>
-        <div class="card-body">
-            <table class="table table-bordered">
-                <thead class="table-light">
-                    <tr>
-                        <th>Tujuan Asesmen</th>
-                        <th class="text-center">Ceklis</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Sertifikasi</td>
-                        <td class="text-center">
-                            <input class="form-check-input" type="radio" name="tujuan_asesmen" 
-                                   value="Sertifikasi"
-                                   {{ old('tujuan_asesmen', $asesmen->tujuan_asesmen ?? '') == 'Sertifikasi' ? 'checked' : '' }} required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Pengakuan Kompetensi Terkini (PKT)</td>
-                        <td class="text-center">
-                            <input class="form-check-input" type="radio" name="tujuan_asesmen" 
-                                   value="Pengakuan Kompetensi Terkini (PKT)"
-                                   {{ old('tujuan_asesmen', $asesmen->tujuan_asesmen ?? '') == 'Pengakuan Kompetensi Terkini (PKT)' ? 'checked' : '' }}>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Rekognisi Pembelajaran Lampau (RPL)</td>
-                        <td class="text-center">
-                            <input class="form-check-input" type="radio" name="tujuan_asesmen" 
-                                   value="Rekognisi Pembelajaran Lampau (RPL)"
-                                   {{ old('tujuan_asesmen', $asesmen->tujuan_asesmen ?? '') == 'Rekognisi Pembelajaran Lampau (RPL)' ? 'checked' : '' }}>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Lainnya</td>
-                        <td class="text-center">
-                            <input class="form-check-input" type="radio" name="tujuan_asesmen" 
-                                   value="Lainnya"
-                                   {{ old('tujuan_asesmen', $asesmen->tujuan_asesmen ?? '') == 'Lainnya' ? 'checked' : '' }}>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="d-flex justify-content-between">
-        <button type="button" class="btn btn-secondary prev-step">Kembali</button>
-        <button type="button" class="btn btn-primary next-step">Selanjutnya</button>
-    </div>
-</div>
 
          {{-- STEP 5 --}}
 <div class="step-pane" data-step="5">
@@ -396,8 +376,7 @@ action="{{ isset($asesmen) && $asesmen->id ? route('asesmen.update', $asesmen->i
            name="tuk" 
            class="form-control" 
            placeholder="Masukkan nama TUK"
-           value="{{ old('tuk', $asesmen->tuk ?? '') }}" 
-           required>
+           value="{{ old('tuk', $asesmen->tuk ?? '') }}" >
 </div>
 
 
@@ -450,6 +429,7 @@ action="{{ isset($asesmen) && $asesmen->id ? route('asesmen.update', $asesmen->i
                 <div class="d-flex justify-content-between mt-3">
     <button type="button" class="btn btn-secondary prev-step">Kembali</button>
     <button type="button" class="btn btn-primary next-step">Selanjutnya</button>
+</div>
 </div>
 
 
@@ -522,8 +502,6 @@ action="{{ isset($asesmen) && $asesmen->id ? route('asesmen.update', $asesmen->i
                     <button type="submit" class="btn btn-success">Kirim Pendaftaran</button>
                 </div>
             </div>
-
-        </div>
     </form>
 </div>
 
@@ -577,8 +555,8 @@ action="{{ isset($asesmen) && $asesmen->id ? route('asesmen.update', $asesmen->i
             });
         });
     });
+    
 </script>
-
 <style>
     .step-pane { display: none; }
     .step-pane.active { display: block; }

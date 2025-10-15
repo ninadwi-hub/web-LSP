@@ -15,7 +15,7 @@ class PendaftaranAsesmenController extends Controller
 {
     public function index()
     {
-        $asesmens = PendaftaranAsesmen::with(['biodata', 'dokumen', 'units', 'jadwal', 'tuk'])
+        $asesmens = PendaftaranAsesmen::with(['biodata', 'dokumen', 'units', 'jadwal'])
             ->latest()
             ->paginate(10);
 
@@ -41,28 +41,29 @@ class PendaftaranAsesmenController extends Controller
 public function store(Request $request)
 {
     $request->validate([
-        'biodata_id'        => 'required|exists:biodata_asesi,id',
-        'dokumen_id'        => 'nullable|exists:dokumen_asesi,id',
-        'tujuan_asesmen'    => 'required|string',
-        'tuk'               => 'required|string|max:150', // wajib diisi manual
-        'jadwal_uji'        => 'nullable|date',
-        'metode_uji'        => 'nullable|string',
-        'keterangan_teknis' => 'nullable|string',
-        'unit_ids'          => 'required|array',
-        'jumlah_pembayaran' => 'nullable|numeric',
-        'sumber_pendanaan'  => 'nullable|string',
-        'metode_pembayaran' => 'nullable|string',
-        'no_rekening'       => 'nullable|string|max:50',
-        'nama_rekening'     => 'nullable|string|max:100',
-        'tanggal_pembayaran'=> 'nullable|date',
-        'bukti_pembayaran'  => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+        'biodata_asesi_id'   => 'required|exists:biodata_asesi,id',
+        'dokumen_asesi_id'   => 'nullable|exists:dokumen_asesi,id',
+        'tujuan_asesmen'     => 'required|string',
+        'tuk'                => 'required|string|max:150',
+        'jadwal_uji'         => 'nullable|date',
+        'metode_uji'         => 'nullable|string',
+        'keterangan_teknis'  => 'nullable|string',
+        'unit_ids'           => 'required|array',
+        'jumlah_pembayaran'  => 'nullable|numeric',
+        'sumber_pendanaan'   => 'nullable|string',
+        'metode_pembayaran'  => 'nullable|string',
+        'no_rekening'        => 'nullable|string|max:50',
+        'nama_rekening'      => 'nullable|string|max:100',
+        'tanggal_pembayaran' => 'nullable|date',
+        'bukti_pembayaran'   => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
     ]);
 
+    // Ambil data yang bisa diisi
     $data = $request->only([
-        'biodata_id',
-        'dokumen_id',
+        'biodata_asesi_id',
+        'dokumen_asesi_id',
         'tujuan_asesmen',
-        'tuk', // langsung dari input manual
+        'tuk',
         'jadwal_uji',
         'metode_uji',
         'keterangan_teknis',
@@ -74,6 +75,7 @@ public function store(Request $request)
         'tanggal_pembayaran',
     ]);
 
+    // Upload file jika ada
     if ($request->hasFile('bukti_pembayaran')) {
         $file = $request->file('bukti_pembayaran');
         $filename = time() . '_' . $file->getClientOriginalName();
@@ -81,17 +83,23 @@ public function store(Request $request)
         $data['bukti_pembayaran'] = 'bukti_pembayaran/' . $filename;
     }
 
+    // Simpan record utama
     $asesmen = PendaftaranAsesmen::create($data);
-    $asesmen->units()->sync($request->unit_ids);
+
+    // Cek ID sebelum sync pivot
+    if($asesmen && $asesmen->id){
+        $asesmen->units()->sync($request->unit_ids);
+    } else {
+        return back()->with('error', 'Gagal menyimpan pendaftaran asesmen.');
+    }
 
     return redirect()->route('asesi.asesmen.index')
         ->with('success', 'Pendaftaran asesmen berhasil ditambahkan.');
 }
 
-
     public function show(PendaftaranAsesmen $asesmen)
     {
-        $asesmen->load(['biodata', 'dokumen', 'units', 'jadwal', 'tuk']);
+        $asesmen->load(['biodata', 'dokumen', 'units', 'jadwal']);
         return view('asesi.asesmen.show', compact('asesmen'));
     }
 
@@ -113,54 +121,64 @@ public function edit(PendaftaranAsesmen $asesman)
 
 
     public function update(Request $request, PendaftaranAsesmen $asesmen)
-    {
-        $request->validate([
-            'tujuan_asesmen'    => 'required|string',
-            'tuk'               => 'nullable|string',
-            'jadwal_uji'        => 'nullable|date',
-            'metode_uji'        => 'nullable|string',
-            'keterangan_teknis' => 'nullable|string',
-            'unit_ids'          => 'required|array',
-            'jumlah_pembayaran' => 'nullable|numeric',
-            'sumber_pendanaan'  => 'nullable|string',
-            'metode_pembayaran' => 'nullable|string',
-            'no_rekening'       => 'nullable|string|max:50',
-            'nama_rekening'     => 'nullable|string|max:100',
-            'tanggal_pembayaran'=> 'nullable|date',
-            'bukti_pembayaran'  => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
-        ]);
+{
+    $request->validate([
+        'biodata_asesi_id'   => 'required|exists:biodata_asesi,id',
+        'dokumen_asesi_id'   => 'nullable|exists:dokumen_asesi,id',
+        'tujuan_asesmen'     => 'required|string',
+        'tuk'                => 'nullable|string|max:150',
+        'jadwal_uji'         => 'nullable|date',
+        'metode_uji'         => 'nullable|string',
+        'keterangan_teknis'  => 'nullable|string',
+        'unit_ids'           => 'required|array',
+        'jumlah_pembayaran'  => 'nullable|numeric',
+        'sumber_pendanaan'   => 'nullable|string',
+        'metode_pembayaran'  => 'nullable|string',
+        'no_rekening'        => 'nullable|string|max:50',
+        'nama_rekening'      => 'nullable|string|max:100',
+        'tanggal_pembayaran' => 'nullable|date',
+        'bukti_pembayaran'   => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+    ]);
 
-        $data = $request->only([
-            'tujuan_asesmen',
-            'tuk',
-            'jadwal_uji',
-            'metode_uji',
-            'keterangan_teknis',
-            'jumlah_pembayaran',
-            'sumber_pendanaan',
-            'metode_pembayaran',
-            'no_rekening',
-            'nama_rekening',
-            'tanggal_pembayaran',
-        ]);
+    $data = $request->only([
+        'biodata_asesi_id',
+        'dokumen_asesi_id',
+        'tujuan_asesmen',
+        'tuk',
+        'jadwal_uji',
+        'metode_uji',
+        'keterangan_teknis',
+        'jumlah_pembayaran',
+        'sumber_pendanaan',
+        'metode_pembayaran',
+        'no_rekening',
+        'nama_rekening',
+        'tanggal_pembayaran',
+    ]);
 
-        // Jika ada file baru, hapus lama & upload baru
-        if ($request->hasFile('bukti_pembayaran')) {
-            if ($asesmen->bukti_pembayaran && Storage::disk('public')->exists($asesmen->bukti_pembayaran)) {
-                Storage::disk('public')->delete($asesmen->bukti_pembayaran);
-            }
-            $file = $request->file('bukti_pembayaran');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->storeAs('bukti_pembayaran', $filename, 'public');
-            $data['bukti_pembayaran'] = 'bukti_pembayaran/' . $filename;
+
+    // Upload file baru & hapus lama jika ada
+    if ($request->hasFile('bukti_pembayaran')) {
+        if ($asesmen->bukti_pembayaran && Storage::disk('public')->exists($asesmen->bukti_pembayaran)) {
+            Storage::disk('public')->delete($asesmen->bukti_pembayaran);
         }
-
-        $asesmen->update($data);
-        $asesmen->units()->sync($request->unit_ids);
-
-        return redirect()->route('asesi.asesmen.index')
-            ->with('success', 'Pendaftaran asesmen berhasil diperbarui.');
+        $file = $request->file('bukti_pembayaran');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->storeAs('bukti_pembayaran', $filename, 'public');
+        $data['bukti_pembayaran'] = 'bukti_pembayaran/' . $filename;
     }
+
+    // Update record utama
+    $asesmen->update($data);
+
+    // Sync pivot units (pastikan $asesmen->id ada)
+    if($asesmen && $asesmen->id){
+        $asesmen->units()->sync($request->unit_ids);
+    }
+
+    return redirect()->route('asesi.asesmen.index')
+        ->with('success', 'Pendaftaran asesmen berhasil diperbarui.');
+}
 
     public function destroy(PendaftaranAsesmen $asesmen)
     {

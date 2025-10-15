@@ -162,6 +162,10 @@ Route::middleware(['auth'])->group(function () {
         ->name('switch.role');
 
     // Pendaftaran Asesmen
+    Route::prefix('asesi')->name('asesi.')->middleware(['auth'])->group(function () {
+    Route::resource('asesmen', PendaftaranAsesmenController::class);
+});
+
     Route::resource('asesmen', App\Http\Controllers\PendaftaranAsesmenController::class);
     Route::get('/asesi/asesmen/list_jadwal', [PendaftaranAsesmenController::class, 'listJadwal'])
     ->name('asesmen.list_jadwal');
@@ -196,17 +200,10 @@ Route::get('/{slug}', [FrontendController::class, 'show'])
 /// ASESI ROUTESS
 Route::prefix('asesi')->name('asesi.')->group(function () {
 
-    Route::get('/asesmen', function () {
-        abort(404);
-    })->name('asesmen');
-
     Route::get('/riwayat', function () {
         abort(404);
     })->name('riwayat');
 
-    Route::get('/praasesmen', function () {
-        abort(404);
-    })->name('praasesmen');
 });
 /// Asesor ROUTESS
 Route::prefix('asesor')->name('asesor.')->group(function () {
