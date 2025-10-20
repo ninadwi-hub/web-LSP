@@ -24,6 +24,7 @@ use App\Http\Controllers\TokenController;
 use App\Http\Controllers\TukController;
 use App\Models\Download;
 use Illuminate\Support\Facades\Http;
+use App\Http\Controllers\AsesorKompetensiController;
 use App\Http\Controllers\PendaftaranAsesmenController;
 
 /*
@@ -41,6 +42,13 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 | PUBLIC ROUTES
 |--------------------------------------------------------------------------
 */
+
+
+
+Route::prefix('sa')->name('sa.')->group(function () {
+    Route::resource('asesor_kompetensi', \App\Http\Controllers\AsesorKompetensiController::class);
+});
+
 
 // Home
 Route::get('/', [FrontendController::class, 'home'])->name('home');
