@@ -54,7 +54,7 @@
                         <td>{{ \Carbon\Carbon::parse($a->created_at)->format('d-m-Y') }}</td>
                         <td>{{ $a->skema ?? '-' }}</td>
                         <td>{{ $a->biodata->nama_lengkap ?? '-' }}</td>
-                        <td>{{ $a->tanggal_pembayaran ? 'Selesai' : 'Belum' }}</td>
+                        <td>{{ $a->status_administrasi ?? 'Belum' }}</td>
                         <td>{{ $a->sumber_dana ?? '-' }}</td>
                         <td>{{ $a->jumlah_bayar ?? '0' }}</td>
                         <td>

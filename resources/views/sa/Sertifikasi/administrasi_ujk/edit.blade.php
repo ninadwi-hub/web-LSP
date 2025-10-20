@@ -8,7 +8,7 @@
 
     <div class="card shadow-sm border-0">
         <div class="card-body">
-            <form action="{{ route('sa.sertifikasi.administrasi_ujk.update', $data->id) }}" method="POST" enctype="multipart form-data">
+            <form action="{{ route('sa.sertifikasi.administrasi_ujk.update', $data->id) }}" method="POST" enctype="multipart/form-data">
 
                 @csrf
                 @method('PUT')

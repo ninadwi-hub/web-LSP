@@ -14,6 +14,7 @@ class PendaftaranAsesmen extends Model
     'jadwal_uji',
     'metode_uji',
     'keterangan_teknis',
+    'status_administrasi',
     'jumlah_pembayaran',
     'sumber_pendanaan',
     'metode_pembayaran',
