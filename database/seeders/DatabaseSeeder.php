@@ -38,6 +38,8 @@ class DatabaseSeeder extends Seeder
             DokumenAsesiSeeder::class,
             TukSeeder::class,
             AsesorKompetensiSeeder::class,
+            PendaftaranAsesmenSeeder::class,
+            PendaftaranUnitSeeder::class,
 
         ]);
     }
