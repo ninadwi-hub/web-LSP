@@ -60,7 +60,7 @@
                                                 
                                                 <div class="input-group auth-pass-inputgroup">
                                                     <input type="password" class="form-control" name="password" placeholder="Enter password" required>
-                                                    <button class="btn btn-light shadow-none ms-0" type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
+                                                    <button class="btn btn-light shadow-none ms-0" type="button" id="password-addon"><i class="fa fa-eye"></i></button>
                                                 </div>
 
                                             </div>
