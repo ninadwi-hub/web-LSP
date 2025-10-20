@@ -21,7 +21,7 @@ return new class extends Migration
 
              // Step 4 - Tujuan Asesmen
             $table->string('tujuan_asesmen')->nullable(); // misal: Sertifikasi, RPL, PKT, dll
-            
+
             // Step 5 - Persyaratan Teknis
             $table->string('tuk')->nullable();            // tempat uji kompetensi
             $table->date('jadwal_uji')->nullable();       // tanggal uji

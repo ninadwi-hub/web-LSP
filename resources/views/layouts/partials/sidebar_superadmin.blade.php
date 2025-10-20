@@ -31,14 +31,16 @@
                 </li>
 
                 <!-- Sertifikasi -->
-                <li class="has-submenu {{ request()->routeIs('#*') ? 'mm-active' : '' }}">
+                <li class="has-submenu {{ request()->routeIs('sa.sertifikasi.*') ? 'mm-active' : '' }}">
                     <a href="javascript:void(0);" class="waves-effect">
                         <i data-feather="file-text"></i>
                         <span>Sertifikasi</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="#">Administrasi UJK</a></li>
+                        <li class="{{ request()->routeIs('sa.sertifikasi.administrasi_ujk.*') ? 'active' : '' }}">
+                            <a href="{{ route('sa.sertifikasi.administrasi_ujk.index') }}">Administrasi UJK</a>
+                        </li>
                         <li><a href="#">Pairing</a></li>
                         <li><a href="#">Pra Asesmen</a></li>
                         <li><a href="#">Real Asesmen</a></li>
@@ -48,6 +50,7 @@
                         <li><a href="#">Sertifikasi</a></li>
                     </ul>
                 </li>
+
 
                 <!-- Data Dictionary -->
                 <li class="has-submenu {{ request()->routeIs('#*') ? 'mm-active' : '' }}">

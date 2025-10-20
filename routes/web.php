@@ -191,6 +191,29 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+    // ========== ADMINISTRASI UJK (SuperAdmin) ==========
+    use App\Http\Controllers\Sa\AdministrasiUjkController;
+
+    Route::prefix('sa/sertifikasi')->name('sa.sertifikasi.')->group(function () {
+        Route::get('/administrasi_ujk', [AdministrasiUjkController::class, 'index'])->name('administrasi_ujk.index');
+    });
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | SUPERADMIN - SERTIFIKASI
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('sa/sertifikasi')->name('sa.sertifikasi.')->group(function () {
+        // Administrasi UJK
+        Route::get('/administrasi_ujk', [AdministrasiUjkController::class, 'index'])
+            ->name('administrasi_ujk.index');
+        Route::get('/administrasi_ujk/{id}/edit', [AdministrasiUjkController::class, 'edit'])
+            ->name('administrasi_ujk.edit');
+        Route::get('/administrasi_ujk/export', [AdministrasiUjkController::class, 'exportExcel'])
+            ->name('administrasi_ujk.export');
+    });
+
 /*
 |--------------------------------------------------------------------------
 | FALLBACK ROUTE

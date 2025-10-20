@@ -17,7 +17,7 @@
     <link href="{{ asset('THEMES/minia/assets/css/icons.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('THEMES/minia/assets/css/app.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('THEMES/minia/assets/css/custom.css') }}" rel="stylesheet">
-    
+
 
     <!-- Tambahkan purple theme (opsional override warna default) -->
     <style>
