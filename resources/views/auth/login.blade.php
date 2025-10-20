@@ -21,7 +21,9 @@
 <link href="{{ asset('THEMES/minia/images/logo.bg.png') }}" rel="stylesheet" type="text/css" />
 <!-- App Css-->
 <link href="{{ asset('themes/minia/assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- Material Design Icons -->
+<link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css" rel="stylesheet">
 
 
     </head>
@@ -62,7 +64,7 @@
                                                 
                                                 <div class="input-group auth-pass-inputgroup">
                                                     <input type="password" class="form-control" name="password" placeholder="Enter password" required>
-                                                    <button class="btn btn-light shadow-none ms-0" type="button" id="password-addon"><i class="bi bi-eye"></i></button>
+                                                    <button class="btn btn-light shadow-none ms-0" type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
                                                 </div>
 
                                             </div>
@@ -102,26 +104,11 @@
 <script src="{{ asset('themes/minia/assets/libs/feather-icons/feather.min.js') }}"></script>
 <script src="{{ asset('themes/minia/assets/libs/pace-js/pace.min.js') }}"></script>
 <script src="{{ asset('themes/minia/assets/js/pages/pass-addon.init.js') }}"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const toggleBtn = document.getElementById("password-addon");
-        const passwordInput = document.querySelector('input[name="password"]');
-        const icon = toggleBtn.querySelector("i");
-    
-        toggleBtn.addEventListener("click", function () {
-            const isPassword = passwordInput.type === "password";
-            passwordInput.type = isPassword ? "text" : "password";
-            icon.classList.toggle("bi-eye");
-            icon.classList.toggle("bi-eye-slash");
-        });
-    });
-    </script>
-    
 
-        {{-- <!-- pace js -->
+        <!-- pace js -->
         <script src="assets/libs/pace-js/pace.min.js"></script>
         <!-- password addon init -->
-        <script src="assets/js/pages/pass-addon.init.js"></script> --}}
+        <script src="assets/js/pages/pass-addon.init.js"></script>
 
     </body>
 
