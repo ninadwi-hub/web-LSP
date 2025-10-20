@@ -26,7 +26,7 @@ use App\Models\Download;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\AsesorKompetensiController;
 use App\Http\Controllers\PendaftaranAsesmenController;
-
+use App\Http\Controllers\Sa\AdministrasiUjkController;
 /*
 |--------------------------------------------------------------------------
 | AUTH ROUTES
@@ -200,11 +200,19 @@ Route::middleware(['auth'])->group(function () {
 });
 
     // ========== ADMINISTRASI UJK (SuperAdmin) ==========
-    use App\Http\Controllers\Sa\AdministrasiUjkController;
+
 
     Route::prefix('sa/sertifikasi')->name('sa.sertifikasi.')->group(function () {
-        Route::get('/administrasi_ujk', [AdministrasiUjkController::class, 'index'])->name('administrasi_ujk.index');
+        Route::get('/administrasi_ujk', [AdministrasiUjkController::class, 'index'])
+            ->name('administrasi_ujk.index');
+        Route::get('/administrasi_ujk/{id}/edit', [AdministrasiUjkController::class, 'edit'])
+            ->name('administrasi_ujk.edit');
+        Route::put('/administrasi_ujk/{id}', [AdministrasiUjkController::class, 'update'])
+            ->name('administrasi_ujk.update');
+        Route::get('/administrasi_ujk/export', [AdministrasiUjkController::class, 'exportExcel'])
+            ->name('administrasi_ujk.export');
     });
+    
 
 
     /*
