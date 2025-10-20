@@ -63,6 +63,18 @@ class UsersTableSeeder extends Seeder
                 'remember_token' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
+            ),
+             4 =>
+            array(
+                'id' => 5,
+                'name' => 'saya',
+                'email' => 'doll@example.com',
+                'email_verified_at' => now(),
+                'password' => bcrypt('pasword'),
+                'role' => 'asesi',
+                'remember_token' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
             )
         ));
     }

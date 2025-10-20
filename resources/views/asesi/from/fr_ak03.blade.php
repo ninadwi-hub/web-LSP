@@ -6,34 +6,73 @@
 <div class="container">
     <div class="card shadow-sm mb-4">
         <div class="card-body">
-            <h5 class="mb-3 fw-bold">FR.AK.03 Umpan Balik Peserta</h5>
+            
+            {{-- Judul Utama --}}
+            <div class=" mb-3 pb-3 border-bottom border-2">
+                <h5 class="fw-bold text-uppercase mb-1">
+                    FR.AK.03. UMPAN BALIK PESERTA
+                </h5>
+            </div>
+            {{-- Informasi Asesmen --}}
+        <div class="table-responsive mb-2">
+            <table class="table table-bordered align-middle">
+                <tbody>
+                    {{-- Skema, Judul, Nomor --}}
+                    <tr>
+                        <th class="w-25 align-middle">Skema Sertifikasi Klaster/Asesmen</th>
+                        <td class="w-75" colspan="4" style="padding: 8px 12px;">
+                            <div class="row align-items-center mb-2">
+                                <label class="col-sm-2 col-form-label fw-bold" style="padding: 4px 15px;">Judul</label>
+                                <div class="col-sm-10" style="padding: 4px 0;">
+                                    : {{ $asesi->judul ?? '-' }}
+                                </div>
+                            </div>
+                            <hr class="my-1 border-dark">
+                            <div class="row align-items-center">
+                                <label class="col-sm-2 col-form-label fw-bold" style="padding: 4px 15px;">Nomor</label>
+                                <div class="col-sm-10" style="padding: 4px 0;">
+                                    : {{ $asesi->nomor_skema ?? '-' }}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
 
-            <table class="table table-bordered mb-4">
-                <tr>
-                    <th>Skema Sertifikasi/Klaster Asesmen</th>
-                    <td>:</td>
-                    <td>{{ $asesi->skema ?? '-' }}</td>
-                    <th>Judul</th>
-                    <td>:</td>
-                    <td>{{ $asesi->judul ?? '-' }}</td>
-                </tr>
-                <tr>
-                    <th>TUK</th>
-                    <td>:</td>
-                    <td>{{ $asesi->tuk ?? 'TUK Sewaktu Cepit' }}</td>
-                    <th>Nama Asesor</th>
-                    <td>:</td>
-                    <td>{{ $asesor->nama ?? '-' }}</td>
-                </tr>
-                <tr>
-                    <th>Nama Peserta</th>
-                    <td>:</td>
-                    <td>{{ $asesi->nama ?? '-' }}</td>
-                    <th>Tanggal</th>
-                    <td>:</td>
-                    <td>{{ now()->format('Y-m-d') }}</td>
-                </tr>
+                    {{-- TUK --}}
+                    <tr>
+                        <th>TUK</th>
+                        <td colspan="4">
+                            :
+                            <div class="form-check form-check-inline ms-2">
+                                <input type="radio" name="tempat" id="sewaktu" class="form-check-input">
+                                <label for="sewaktu" class="form-check-label">Sewaktu</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" name="tempat" id="tempatKerja" class="form-check-input">
+                                <label for="tempatKerja" class="form-check-label">Tempat Kerja</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" name="tempat" id="mandiri" class="form-check-input">
+                                <label for="mandiri" class="form-check-label">Mandiri</label>
+                            </div>
+                        </td>
+                    </tr>
+
+                    {{-- Nama Asesor & Peserta --}}
+                    <tr>
+                        <th>Nama Asesor</th>
+                        <td colspan="4">: {{ $asesor->nama ?? '-' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nama Peserta</th>
+                        <td colspan="4">: {{ $asesi->nama ?? '-' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Tanggal</th>
+                        <td colspan="4">: {{ $asesi->nama ?? '-' }}</td>
+                    </tr>
+                </tbody>
             </table>
+        </div>
 
             <p><strong>Peserta diminta untuk:</strong> Memberikan umpan balik setelah asesmen dilakukan.</p>
 
@@ -71,8 +110,8 @@
                 <textarea class="form-control" name="catatan_lainnya" rows="3"></textarea>
             </div>
 
-            <div class="text-end">
-                <button class="btn btn-primary">Simpan</button>
+             <div class="text-end mt-4">
+                <button class="btn btn-success px-4"><i class="fa fa-save"></i> Simpan</button>
             </div>
         </div>
     </div>

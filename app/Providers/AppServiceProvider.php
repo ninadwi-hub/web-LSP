@@ -2,11 +2,14 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Pagination\Paginator;
 use App\Models\Page;
 use App\Models\Skema;
+use App\Models\DokumenAsesi;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -46,5 +49,11 @@ class AppServiceProvider extends ServiceProvider
         View::composer('layouts.website', function ($view) {
             $view->with('menuSkema', Skema::orderBy('nama')->get());
         });
+         View::composer('*', function ($view) {
+        if (Auth::check()) {
+            $dokumen = DokumenAsesi::where('user_id', Auth::id())->first();
+            $view->with('dokumen', $dokumen);
+        }
+    });
     }
 }

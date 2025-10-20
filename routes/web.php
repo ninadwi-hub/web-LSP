@@ -161,14 +161,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/switch-role/{role}', [AsesiController::class, 'switchRole'])
         ->name('switch.role');
 
-    // Pendaftaran Asesmen
-    Route::prefix('asesi')->name('asesi.')->middleware(['auth'])->group(function () {
-    Route::resource('asesmen', PendaftaranAsesmenController::class);
-});
+  Route::middleware(['auth'])->prefix('asesi/asesmen')->name('asesi.asesmen.')->group(function () {
+    Route::get('/', [PendaftaranAsesmenController::class, 'index'])->name('index');
+    Route::get('/create', [PendaftaranAsesmenController::class, 'create'])->name('create');
+    Route::post('/', [PendaftaranAsesmenController::class, 'store'])->name('store');
+    Route::get('/list_jadwal', [PendaftaranAsesmenController::class, 'listJadwal'])->name('list_jadwal');
 
-    Route::resource('asesmen', App\Http\Controllers\PendaftaranAsesmenController::class);
-    Route::get('/asesi/asesmen/list_jadwal', [PendaftaranAsesmenController::class, 'listJadwal'])
-    ->name('asesmen.list_jadwal');
+    // Pindahkan ke bawah setelah semua yang spesifik
+    Route::get('/{asesmen}/edit', [PendaftaranAsesmenController::class, 'edit'])->name('edit');
+    Route::put('/{asesmen}', [PendaftaranAsesmenController::class, 'update'])->name('update');
+    Route::delete('/{asesmen}', [PendaftaranAsesmenController::class, 'destroy'])->name('destroy');
+    Route::get('/{asesmen}', [PendaftaranAsesmenController::class, 'show'])->name('show');
+});
 
 
     // Resources tambahan
@@ -203,18 +207,16 @@ Route::prefix('asesi')->name('asesi.')->group(function () {
     Route::get('/riwayat', function () {
         abort(404);
     })->name('riwayat');
-
 });
 /// Asesor ROUTESS
 Route::prefix('asesor')->name('asesor.')->group(function () {
 
-    Route::get('/asesmen', function () {
-        abort(404);
-    })->name('asesmen');
-
     Route::get('/riwayat', function () {
         abort(404);
     })->name('riwayat');
+     Route::get('/asesmen', function () {
+        abort(404);
+    })->name('asesmen');
 
     Route::get('/praasesmen', function () {
         abort(404);
@@ -240,4 +242,10 @@ Route::prefix('sa/persiapan')->name('sa.persiapan.')->group(function () {
     Route::get('/jadwal/{jadwal}/edit', [JadwalAsesmenController::class, 'edit'])->name('jadwal.edit');
     Route::put('/jadwal/{jadwal}', [JadwalAsesmenController::class, 'update'])->name('jadwal.update');
     Route::delete('/jadwal/{jadwal}', [JadwalAsesmenController::class, 'destroy'])->name('jadwal.destroy');
+});
+Route::middleware(['auth'])->prefix('asesi')->name('asesi.')->group(function () {
+    // 1 route untuk semua FR (APL.01, APL.02, AK.01, AK.03)
+    Route::get('/{form}/{asesmen}', [App\Http\Controllers\FormFRController::class, 'show'])
+        ->where('form', 'apl01|apl02|ak01|ak03')
+        ->name('fr.show');
 });

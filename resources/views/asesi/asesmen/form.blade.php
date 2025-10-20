@@ -34,7 +34,7 @@
     @endif
 
     <form 
-        action="{{ isset($asesmen) && $asesmen->id ? route('asesmen.update', $asesmen->id) : route('asesmen.store') }}" 
+        action="{{ isset($asesmen) && $asesmen->id ? route('asesi.asesmen.update', $asesmen->id) : route('asesi.asesmen.store') }}" 
         method="POST" enctype="multipart/form-data">
         @csrf
         @if(isset($asesmen) && $asesmen->id)
@@ -68,22 +68,23 @@
                     <div class="card-body">
                         <div class="mb-3">
                             <label class="form-label"><strong>Nama Lengkap</strong></label>
-                            <input type="text" name="nama_lengkap" class="form-control" 
-                                   value="{{ Auth::user()->name }}" readonly>
+                           <input type="text" name="nama_lengkap" class="form-control" 
+       value="{{ old('nama_lengkap', $biodata->user->name ?? '') }}" readonly>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label"><strong>Email</strong></label>
                             <input type="email" name="email" class="form-control" 
-                                value="{{ Auth::user()->email }}" readonly>
+       value="{{ old('email', $biodata->user->email ?? '') }}" readonly>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label"><strong>Jenis Kelamin</strong></label>
-                            <select name="jk" class="form-select" required>
-                                <option value="L" {{ old('jk', $biodata->jk) == 'L' ? 'selected' : '' }}>Laki-laki</option>
-                                <option value="P" {{ old('jk', $biodata->jk) == 'P' ? 'selected' : '' }}>Perempuan</option>
+                           <select name="jenis_kelamin" class="form-select" required>
+                                <option value="Laki-Laki" {{ old('jenis_kelamin', $biodata->jenis_kelamin) == 'Laki-Laki' ? 'selected' : '' }}>Laki-laki</option>
+                                <option value="Perempuan" {{ old('jenis_kelamin', $biodata->jenis_kelamin) == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                             </select>
+
                         </div>
 
                         <div class="row">
@@ -366,9 +367,9 @@
                 <div class="col-md-3">
                     <label class="form-label">Tanggal Asesmen</label>
                     {{-- relasi otomatis ke jadwal --}}
-                    <input type="date" name="jadwal_uji" class="form-control" 
-                           value="{{ old('jadwal_uji', $asesmen->jadwal->tanggal_asesmen ?? '') }}" readonly>
-                </div>
+                    <input type="date" name="jadwal_uji" class="form-control"
+                        value="{{ \Carbon\Carbon::today()->format('Y-m-d') }}" readonly>
+                    </div>
 
                 <div class="col-md-5">
     <label class="form-label">Tempat Uji Kompetensi (TUK)</label>

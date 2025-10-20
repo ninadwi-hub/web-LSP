@@ -103,21 +103,19 @@ public function store(Request $request)
         return view('asesi.asesmen.show', compact('asesmen'));
     }
 
-public function edit(PendaftaranAsesmen $asesman)
+public function edit(PendaftaranAsesmen $asesmen)
 {
-    $asesman->load(['units', 'jadwal']); // kalau ada relasi
-    $biodata = $asesman->biodata;
-    $dokumen = $asesman->dokumen;
-    $units   = UnitKompetensi::all();
+    $asesmen->load(['units', 'jadwal']);
 
-    // kirim ke view
-    return view('asesi.asesmen.form', [
-        'asesmen' => $asesman, // ini penting, bukan new PendaftaranAsesmen()
-        'biodata' => $biodata,
-        'dokumen' => $dokumen,
-        'units'   => $units,
-    ]);
+    // Ambil biodata & dokumen milik user
+    $biodata = $asesmen->biodata ?? BiodataAsesi::where('user_id', auth()->id())->first();
+    $dokumen = $asesmen->dokumen ?? DokumenAsesi::where('user_id', auth()->id())->first();
+    $units   = UnitKompetensi::all();
+    $jadwal  = JadwalAsesmen::all(); // tambahkan ini jika jadwal dipilih dari dropdown
+
+    return view('asesi.asesmen.form', compact('asesmen', 'biodata', 'dokumen', 'units', 'jadwal'));
 }
+
 
 
     public function update(Request $request, PendaftaranAsesmen $asesmen)

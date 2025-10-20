@@ -6,7 +6,7 @@
 <div class="container">
     <h4 class="mb-3">Pendaftaran Asesmen / Uji Kompetensi</h4>
 
-    <a href="{{ route('asesmen.list_jadwal') }}" class="btn btn-primary mb-3">+ Tambah</a>
+    <a href="{{ route('asesi.asesmen.list_jadwal') }}" class="btn btn-primary mb-3">+ Tambah</a>
 
     {{-- 🔽 Tombol FR (APL.01, APL.02, dll) — muncul setelah baris diklik --}}
     <div id="fr-buttons" class="d-none mb-3">
@@ -24,7 +24,7 @@
                 <th>Skema Sertifikasi</th>
                 <th>Kategori/TUK</th>
                 <th>Status</th>
-                <th>Aksi</th>
+                <th width="140px" >Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -48,13 +48,15 @@
                     @endif
                 </td>
                 <td>
-                    <a href="{{ route('asesmen.show', $asesmen->id) }}" class="btn btn-sm btn-warning">👁</a>
-                    <a href="{{ route('asesmen.edit', $asesmen->id) }}" class="btn btn-sm btn-info">✏️</a>
-                    <form action="{{ route('asesmen.destroy', $asesmen->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus data?')">
+                    <div class="btn btn-group">
+                    <a href="{{ route('asesi.asesmen.show', $asesmen->id) }}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
+                    <a href="{{ route('asesi.asesmen.edit', $asesmen->id) }}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                    <form action="{{ route('asesi.asesmen.destroy', $asesmen->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus data?')">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-sm btn-danger">🗑</button>
+                        <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                     </form>
+                    </div>
                 </td>
             </tr>
         @empty

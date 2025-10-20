@@ -32,26 +32,29 @@
             </form>
         </div>
 
-        <!-- Kanan: User Dropdown -->
-        <div class="d-flex align-items-center">
-            <div class="dropdown d-inline-block">
-               <button type="button" class="btn header-item bg-light-subtle border-start border-end" id="page-header-user-dropdown"
-                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="rounded-circle header-profile-user" src="{{ asset('themes/minia/assets/images/users/avatar-1.jpg') }}"
-                         alt="Header Avatar">
-                    <span class="d-none d-xl-inline-block ms-1">{{ Auth::user()->name ?? 'User' }}</span>
-                    <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+       <!-- Kanan: User Dropdown -->
+<div class="d-flex align-items-center">
+    <div class="dropdown d-inline-block">
+        <button type="button" class="btn header-item bg-light-subtle border-start border-end" id="page-header-user-dropdown"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="rounded-circle header-profile-user"
+                 src="{{ isset($dokumen->foto) && $dokumen->foto ? asset('storage/' . $dokumen->foto) : asset('themes/minia/assets/images/users/avatar-1.jpg') }}"
+                 alt="Header Avatar"
+                 style="width: 40px; height: 40px;">
+            <span class="d-none d-xl-inline-block ms-1">{{ Auth::user()->name ?? 'User' }}</span>
+            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-end">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="dropdown-item">
+                    <i class="mdi mdi-logout me-1"></i> Keluar
                 </button>
-                <div class="dropdown-menu dropdown-menu-end">
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="dropdown-item">
-                            <i class="mdi mdi-logout me-1"></i> Keluar
-                        </button>
-                    </form>
-                </div>
-            </div>
+            </form>
         </div>
+    </div>
+</div>
+
 
     </div>
 </header>

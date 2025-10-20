@@ -4,6 +4,16 @@
 
 @section('content')
 <div class="container">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
     <form action="{{ route('asesor.biodata.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
@@ -48,13 +58,15 @@
                 <div class="row mb-3">
                     <div class="col-md-3">
                         <label class="form-label">Jenis Kelamin</label>
-                        <select name="jenis_kelamin" id="jenis_kelamin_select" class="form-control">
+                        <select id="jenis_kelamin_select" class="form-control">
                             <option value="">-- Pilih --</option>
-                            <option value="Laki-Laki">Laki-Laki</option>
-                            <option value="Perempuan">Perempuan</option>
+                            <option value="Laki-Laki" {{ ($biodata->jenis_kelamin ?? '')=='Laki-Laki'?'selected':'' }}>Laki-Laki</option>
+                            <option value="Perempuan" {{ ($biodata->jenis_kelamin ?? '')=='Perempuan'?'selected':'' }}>Perempuan</option>
                             <option value="lainnya">Lainnya...</option>
                         </select>
+
                         <input type="text" name="jenis_kelamin" id="jenis_kelamin_input" class="form-control mt-2" placeholder="Masukkan jenis kelamin" style="display:none;" value="{{ $biodata->jenis_kelamin ?? '' }}">
+
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">No. HP</label>
@@ -251,26 +263,12 @@ function setupEditableDropdown(selectId, inputId) {
     }
 }
 
-// Aktifkan untuk semua dropdown editable
+
 ['jenis_kelamin', 'provinsi', 'kabupaten'].forEach(id => 
     setupEditableDropdown(id + '_select', id + '_input')
 );
 
-// === Preview Foto ===
-function previewImage(event) {
-    const input = event.target;
-    const preview = document.getElementById('preview-foto');
-    if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            preview.src = e.target.result;
-            preview.classList.remove('d-none');
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
 
-// === Tanda tangan digital ===
 document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.getElementById('signature-pad');
     const ctx = canvas.getContext('2d');

@@ -44,7 +44,7 @@
                         </ul>
 
                         {{-- Tombol Daftar --}}
-                        <a href="{{ route('asesmen.create', $jadwal->id) }}" 
+                        <a href="{{ route('asesi.asesmen.create', $jadwal->id) }}" 
                            class="btn btn-outline-primary rounded-pill px-4">
                             Daftar
                         </a>
