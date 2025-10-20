@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\SkemaController as AdminSkemaController;
 use App\Http\Controllers\Admin\UnitKompetensiController as AdminUnitKompetensiController;
 use App\Http\Controllers\DashboardSAController;
 use App\Http\Controllers\AsesorController;
+use App\Http\Controllers\Sa\SkemaController as SaSkemaController;
 use App\Http\Controllers\AsesiController;
 use App\Http\Controllers\JadwalAsesmenController;
 use App\Http\Controllers\TokenController;
@@ -48,6 +49,17 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::prefix('sa')->name('sa.')->group(function () {
     Route::resource('asesor_kompetensi', \App\Http\Controllers\AsesorKompetensiController::class);
 });
+
+
+
+
+
+Route::prefix('sa')->name('sa.')->group(function () {
+    Route::resource('skema', SaSkemaController::class)->except(['show']);
+});
+
+
+
 
 
 // Home
@@ -238,6 +250,7 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/{slug}', [FrontendController::class, 'show'])
     ->where('slug', '^(?!halaman|admin|login|logout|dashboard|media|galeri|kontak|informasi|infos|file-download|pages|publik|unduh|skema|asesi|panel|sa).*$')
     ->name('slug.show');
+
 
 
 /// ASESI ROUTESS

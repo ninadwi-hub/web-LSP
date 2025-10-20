@@ -60,7 +60,7 @@
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="#">Skema Sertifikasi UJK</a></li>
+                        <li><a href="{{ route('sa.skema.index') }}">Skema Sertifikasi UJK</a></li>
                         <li>
                             <a href="{{ route('tuk.index') }}">TUK</a>
                         </li>
