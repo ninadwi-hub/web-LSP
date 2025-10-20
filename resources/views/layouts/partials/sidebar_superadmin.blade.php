@@ -61,7 +61,7 @@
                         <li>
                             <a href="{{ route('tuk.index') }}">TUK</a>
                         </li>
-                        <li><a href="#">Asesor Kompetensi</a></li>
+                        <li><a href="{{ route('sa.asesor_kompetensi.index') }}">Asesor Kompetensi</a></li>
                         <li><a href="#">Pertanyaan Wawancara</a></li>
                         <li><a href="#">Dokumen Portofolio</a></li>
                         <li><a href="#">Substansi Wawancara</a></li>
