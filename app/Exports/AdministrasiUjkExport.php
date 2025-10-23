@@ -20,21 +20,24 @@ class AdministrasiUjkExport implements FromCollection, WithHeadings
      */
     public function collection()
     {
-        $query = PendaftaranAsesmen::query();
+        $query = PendaftaranAsesmen::with('biodata'); // ✅ ikutkan relasi
 
         if ($this->status) {
-            $query->where('status', $this->status);
+            $query->where('status_administrasi', $this->status);
         }
 
-        return $query->get([
-            'id',
-            'nama_lengkap',
-            'email',
-            'no_hp',
-            'skema',
-            'status',
-            'created_at',
-        ]);
+        // ✅ gunakan map agar bisa ambil data dari tabel relasi
+        return $query->get()->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'nama_lengkap' => $item->biodata->nama_lengkap ?? '-', // ambil dari relasi
+                'email' => $item->biodata->email ?? '-',               // bisa juga email dari biodata
+                'no_hp' => $item->biodata->no_hp ?? '-',
+                'skema' => $item->jadwal->skema->nama_skkni ?? '-',   // optional kalau ada relasi ke skema
+                'status' => $item->status_administrasi ?? '-',
+                'created_at' => $item->created_at?->format('Y-m-d H:i:s') ?? '-',
+            ];
+        });
     }
 
     /**
