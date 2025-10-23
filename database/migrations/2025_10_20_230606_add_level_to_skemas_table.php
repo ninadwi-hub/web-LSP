@@ -6,21 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up()
+    public function up(): void
     {
         Schema::table('skemas', function (Blueprint $table) {
-            $table->date('tanggal_mulai')->nullable()->after('nama');
-            $table->date('tanggal_selesai')->nullable()->after('tanggal_mulai');
+            $table->string('level')->nullable()->after('kategori');
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::table('skemas', function (Blueprint $table) {
-            $table->dropColumn(['tanggal_mulai', 'tanggal_selesai']);
+            $table->dropColumn('level');
         });
     }
 };
