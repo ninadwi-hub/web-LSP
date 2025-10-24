@@ -464,8 +464,8 @@
 
                 <div class="col-md-4">
                     <label class="form-label">Video Verifikasi TUK</label>
-                    <input type="text" name="video_tuk" class="form-control" 
-                           value="{{ old('video_tuk', $asesmen->video_tuk ?? '') }}">
+                    <input type="text" name="metode_uji" class="form-control" 
+                           value="{{ old('metode_uji', $asesmen->metode_uji ?? '') }}">
                 </div>
             </div>
 
