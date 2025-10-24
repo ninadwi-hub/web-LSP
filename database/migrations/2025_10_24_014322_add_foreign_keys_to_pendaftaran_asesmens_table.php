@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::table('pendaftaran_asesmens', function (Blueprint $table) {
             $table->foreign(['biodata_asesi_id'])->references(['id'])->on('biodata_asesi')->onUpdate('no action')->onDelete('cascade');
             $table->foreign(['dokumen_asesi_id'])->references(['id'])->on('dokumen_asesi')->onUpdate('no action')->onDelete('set null');
+            $table->foreign(['jadwal_id'])->references(['id'])->on('jadwal_asesmens')->onUpdate('no action')->onDelete('set null');
         });
     }
 
@@ -25,6 +26,7 @@ return new class extends Migration
         Schema::table('pendaftaran_asesmens', function (Blueprint $table) {
             $table->dropForeign('pendaftaran_asesmens_biodata_asesi_id_foreign');
             $table->dropForeign('pendaftaran_asesmens_dokumen_asesi_id_foreign');
+            $table->dropForeign('pendaftaran_asesmens_jadwal_id_foreign');
         });
     }
 };

@@ -13,24 +13,24 @@ class SkemaController extends Controller
     // Tampilkan daftar skema dengan pagination
     public function index()
 {
-    $skemas = Skema::orderBy('created_at', 'desc')->get();
+    // ambil data langsung dengan paginate
+    $skemas = Skema::orderBy('created_at', 'desc')->paginate(10);
 
+    // update status tiap item tanpa memengaruhi paginasi
     foreach ($skemas as $skema) {
         $mulai = $skema->tanggal_mulai ? Carbon::parse($skema->tanggal_mulai) : null;
         $selesai = $skema->tanggal_selesai ? Carbon::parse($skema->tanggal_selesai) : null;
 
-        $skema->status = ($mulai && $selesai && Carbon::now()->between($mulai, $selesai)) 
-            ? 'aktif' 
+        $skema->status = ($mulai && $selesai && Carbon::now()->between($mulai, $selesai))
+            ? 'aktif'
             : 'nonaktif';
 
-        $skema->saveQuietly(); // update tanpa trigger event atau timestamps
+        $skema->saveQuietly();
     }
-
-    // pagination manual
-    $skemas = $skemas->sortByDesc('created_at')->paginate(10);
 
     return view('sa.skema.index', compact('skemas'));
 }
+
 
 
     // Form tambah skema baru

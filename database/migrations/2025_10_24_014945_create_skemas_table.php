@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('tanggal_selesai')->nullable();
             $table->string('jenis')->nullable();
             $table->string('kategori')->default('Okupasi');
+            $table->string('level')->nullable();
             $table->string('slug')->unique();
             $table->string('thumbnail')->nullable();
             $table->string('pdf_path')->nullable();
@@ -26,7 +27,9 @@ return new class extends Migration
             $table->string('file_skema')->nullable();
             $table->timestamps();
             $table->integer('kuota')->default(0);
-            $table->boolean('status')->default(true);
+
+            // 🔄 ubah dari boolean ke string agar bisa simpan 'aktif' / 'nonaktif'
+            $table->string('status')->default('aktif');
         });
     }
 

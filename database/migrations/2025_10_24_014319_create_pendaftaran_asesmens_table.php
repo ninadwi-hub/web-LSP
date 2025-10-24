@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('biodata_asesi_id')->index('pendaftaran_asesmens_biodata_asesi_id_foreign');
             $table->unsignedBigInteger('dokumen_asesi_id')->nullable()->index('pendaftaran_asesmens_dokumen_asesi_id_foreign');
+            $table->unsignedBigInteger('jadwal_id')->nullable()->index('pendaftaran_asesmens_jadwal_id_foreign');
             $table->string('tujuan_asesmen')->nullable();
             $table->string('tuk')->nullable();
             $table->date('jadwal_uji')->nullable();
