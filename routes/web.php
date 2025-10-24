@@ -23,12 +23,15 @@ use App\Http\Controllers\AsesiController;
 use App\Http\Controllers\JadwalAsesmenController;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\Sa\PertanyaanWawancaraController;
+use App\Http\Controllers\Sa\DokumenPortofolioController;
 use App\Http\Controllers\TukController;
 use App\Models\Download;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\AsesorKompetensiController;
 use App\Http\Controllers\PendaftaranAsesmenController;
 use App\Http\Controllers\Sa\AdministrasiUjkController;
+
+
 /*
 |--------------------------------------------------------------------------
 | AUTH ROUTES
@@ -44,6 +47,10 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 | PUBLIC ROUTES
 |--------------------------------------------------------------------------
 */
+Route::prefix('sa')->name('sa.')->group(function () {
+    Route::resource('dokumen_portofolio', DokumenPortofolioController::class);
+});
+
 
 
 Route::prefix('sa')->name('sa.')->group(function () {

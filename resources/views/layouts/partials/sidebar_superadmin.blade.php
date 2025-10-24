@@ -66,7 +66,7 @@
                         </li>
                         <li><a href="{{ route('sa.asesor_kompetensi.index') }}">Asesor Kompetensi</a></li>
                         <li><a href="{{ route('sa.pertanyaan_wawancara.index') }}">Pertanyaan Wawancara</a></li>
-                        <li><a href="#">Dokumen Portofolio</a></li>
+                        <li><a href="{{ route('sa.dokumen_portofolio.index') }}">Dokumen Portofolio</a></li>
                         <li><a href="#">Substansi Wawancara</a></li>
                     </ul>
                 </li>
