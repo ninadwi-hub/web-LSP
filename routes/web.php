@@ -24,6 +24,7 @@ use App\Http\Controllers\JadwalAsesmenController;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\Sa\PertanyaanWawancaraController;
 use App\Http\Controllers\Sa\DokumenPortofolioController;
+use App\Http\Controllers\Sa\SubstansiWawancaraController;
 use App\Http\Controllers\TukController;
 use App\Models\Download;
 use Illuminate\Support\Facades\Http;
@@ -52,6 +53,9 @@ Route::prefix('sa')->name('sa.')->group(function () {
 });
 
 
+Route::prefix('sa')->name('sa.')->group(function () {
+    Route::resource('substansi_wawancara', SubstansiWawancaraController::class);
+});
 
 Route::prefix('sa')->name('sa.')->group(function () {
     Route::resource('pertanyaan_wawancara', PertanyaanWawancaraController::class);
