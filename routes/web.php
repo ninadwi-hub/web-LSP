@@ -22,6 +22,7 @@ use App\Http\Controllers\Sa\SkemaController as SaSkemaController;
 use App\Http\Controllers\AsesiController;
 use App\Http\Controllers\JadwalAsesmenController;
 use App\Http\Controllers\TokenController;
+use App\Http\Controllers\Sa\PertanyaanWawancaraController;
 use App\Http\Controllers\TukController;
 use App\Models\Download;
 use Illuminate\Support\Facades\Http;
@@ -43,6 +44,11 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 | PUBLIC ROUTES
 |--------------------------------------------------------------------------
 */
+
+
+Route::prefix('sa')->name('sa.')->group(function () {
+    Route::resource('pertanyaan_wawancara', PertanyaanWawancaraController::class);
+});
 
 
 

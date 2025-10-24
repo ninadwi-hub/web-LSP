@@ -27,8 +27,6 @@ return new class extends Migration
             $table->string('file_skema')->nullable();
             $table->timestamps();
             $table->integer('kuota')->default(0);
-
-            // 🔄 ubah dari boolean ke string agar bisa simpan 'aktif' / 'nonaktif'
             $table->string('status')->default('aktif');
         });
     }
