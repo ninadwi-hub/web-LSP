@@ -7,47 +7,71 @@ use App\Models\BiodataAsesi;
 use App\Models\DokumenAsesi;
 use App\Models\UnitKompetensi;
 use App\Models\JadwalAsesmen;
+use App\Models\Tuk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class PendaftaranAsesmenController extends Controller
 {
     public function index()
     {
-        $asesmens = PendaftaranAsesmen::with(['biodata', 'dokumen', 'units', 'jadwal'])
+        $asesmens = PendaftaranAsesmen::with(['biodata', 'dokumen', 'units', 'jadwal.skema'])
+            ->whereHas('biodata', function ($q) {
+                $q->where('user_id', Auth::id());
+            })
             ->latest()
             ->paginate(10);
 
         return view('asesi.asesmen.index', compact('asesmens'));
     }
 
-   public function create()
+   public function create($jadwal_id = null)
 {
     $biodata = BiodataAsesi::where('user_id', auth()->id())->first();
     $dokumen = DokumenAsesi::where('user_id', auth()->id())->first();
     $units   = UnitKompetensi::all();
-    $asesmen = new PendaftaranAsesmen(); // <-- tambahkan ini
+    $tuks    = Tuk::all();
+
+    // ✅ Ambil semua jadwal (untuk dropdown misalnya)
+    $jadwals = JadwalAsesmen::with('skema')->get();
+
+    // ✅ Jika user datang lewat /create/{jadwal_id}, ambil data spesifik jadwal itu
+    $selectedJadwal = null;
+    if ($jadwal_id) {
+        $selectedJadwal = JadwalAsesmen::with('skema')->find($jadwal_id);
+    }
+
+    $asesmen = new PendaftaranAsesmen();
 
     if (!$biodata) {
         return redirect()->route('asesi.biodata')
             ->with('error', 'Silakan lengkapi biodata terlebih dahulu sebelum mendaftar asesmen.');
     }
 
-    // untuk sekarang tidak ada auto TUK
-    return view('asesi.asesmen.form', compact('biodata', 'dokumen', 'units', 'asesmen'));
+    return view('asesi.asesmen.form', compact(
+        'biodata',
+        'dokumen',
+        'units',
+        'tuks',
+        'jadwals',
+        'selectedJadwal',
+        'asesmen'
+    ));
 }
 
-public function store(Request $request)
+
+   public function store(Request $request)
 {
     $request->validate([
         'biodata_asesi_id'   => 'required|exists:biodata_asesi,id',
         'dokumen_asesi_id'   => 'nullable|exists:dokumen_asesi,id',
+        'jadwal_id'          => 'required|exists:jadwal_asesmens,id',
         'tujuan_asesmen'     => 'required|string',
         'tuk'                => 'required|string|max:150',
         'jadwal_uji'         => 'nullable|date',
         'metode_uji'         => 'nullable|string',
-        'keterangan_teknis'  => 'nullable|string',
         'unit_ids'           => 'required|array',
         'jumlah_pembayaran'  => 'nullable|numeric',
         'sumber_pendanaan'   => 'nullable|string',
@@ -58,15 +82,26 @@ public function store(Request $request)
         'bukti_pembayaran'   => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
     ]);
 
-    // Ambil data yang bisa diisi
+    // 🔹 Simpan data teknis sebagai JSON
+    $keteranganTeknis = [
+    'ruang_uji' => $request->ruang_uji,
+    'meja' => $request->meja,
+    'kursi' => $request->kursi,
+    'suhu' => $request->suhu,
+    'lampu' => $request->lampu,
+    'pc' => $request->pc,
+    'aplikasi' => $request->aplikasi,
+    'hp' => $request->hp,
+];
+
     $data = $request->only([
         'biodata_asesi_id',
         'dokumen_asesi_id',
+        'jadwal_id',
         'tujuan_asesmen',
         'tuk',
         'jadwal_uji',
         'metode_uji',
-        'keterangan_teknis',
         'jumlah_pembayaran',
         'sumber_pendanaan',
         'metode_pembayaran',
@@ -75,7 +110,9 @@ public function store(Request $request)
         'tanggal_pembayaran',
     ]);
 
-    // Upload file jika ada
+    $data['keterangan_teknis'] = json_encode($keteranganTeknis, JSON_UNESCAPED_UNICODE);
+    $data['status'] = 'Pra Asesmen';
+
     if ($request->hasFile('bukti_pembayaran')) {
         $file = $request->file('bukti_pembayaran');
         $filename = time() . '_' . $file->getClientOriginalName();
@@ -83,51 +120,42 @@ public function store(Request $request)
         $data['bukti_pembayaran'] = 'bukti_pembayaran/' . $filename;
     }
 
-    // Simpan record utama
     $asesmen = PendaftaranAsesmen::create($data);
-
-    // Cek ID sebelum sync pivot
-    if($asesmen && $asesmen->id){
-        $asesmen->units()->sync($request->unit_ids);
-    } else {
-        return back()->with('error', 'Gagal menyimpan pendaftaran asesmen.');
-    }
+    $asesmen->units()->sync($request->unit_ids);
 
     return redirect()->route('asesi.asesmen.index')
         ->with('success', 'Pendaftaran asesmen berhasil ditambahkan.');
 }
 
+
     public function show(PendaftaranAsesmen $asesmen)
     {
-        $asesmen->load(['biodata', 'dokumen', 'units', 'jadwal']);
+        $asesmen->load(['biodata', 'dokumen', 'units', 'jadwal.skema']);
         return view('asesi.asesmen.show', compact('asesmen'));
     }
 
-public function edit(PendaftaranAsesmen $asesmen)
-{
-    $asesmen->load(['units', 'jadwal']);
+    public function edit(PendaftaranAsesmen $asesmen)
+    {
+        $asesmen->load(['units', 'jadwal']);
+        $biodata = $asesmen->biodata ?? BiodataAsesi::where('user_id', auth()->id())->first();
+        $dokumen = $asesmen->dokumen ?? DokumenAsesi::where('user_id', auth()->id())->first();
+        $units   = UnitKompetensi::all();
+        $jadwals = JadwalAsesmen::with('skema')->get();
+        $tuks    = Tuk::all();
 
-    // Ambil biodata & dokumen milik user
-    $biodata = $asesmen->biodata ?? BiodataAsesi::where('user_id', auth()->id())->first();
-    $dokumen = $asesmen->dokumen ?? DokumenAsesi::where('user_id', auth()->id())->first();
-    $units   = UnitKompetensi::all();
-    $jadwal  = JadwalAsesmen::all(); // tambahkan ini jika jadwal dipilih dari dropdown
-
-    return view('asesi.asesmen.form', compact('asesmen', 'biodata', 'dokumen', 'units', 'jadwal'));
-}
-
-
+        return view('asesi.asesmen.form', compact('asesmen', 'biodata', 'dokumen', 'units', 'jadwals', 'tuks'));
+    }
 
     public function update(Request $request, PendaftaranAsesmen $asesmen)
 {
     $request->validate([
         'biodata_asesi_id'   => 'required|exists:biodata_asesi,id',
         'dokumen_asesi_id'   => 'nullable|exists:dokumen_asesi,id',
+        'jadwal_id'          => 'required|exists:jadwal_asesmens,id',
         'tujuan_asesmen'     => 'required|string',
         'tuk'                => 'nullable|string|max:150',
         'jadwal_uji'         => 'nullable|date',
         'metode_uji'         => 'nullable|string',
-        'keterangan_teknis'  => 'nullable|string',
         'unit_ids'           => 'required|array',
         'jumlah_pembayaran'  => 'nullable|numeric',
         'sumber_pendanaan'   => 'nullable|string',
@@ -138,14 +166,27 @@ public function edit(PendaftaranAsesmen $asesmen)
         'bukti_pembayaran'   => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
     ]);
 
+    // 🔹 Simpan data teknis sebagai JSON
+   $keteranganTeknis = [
+    'ruang_uji' => $request->ruang_uji,
+    'meja' => $request->meja,
+    'kursi' => $request->kursi,
+    'suhu' => $request->suhu,
+    'lampu' => $request->lampu,
+    'pc' => $request->pc,
+    'aplikasi' => $request->aplikasi,
+    'hp' => $request->hp,
+];
+
+
     $data = $request->only([
         'biodata_asesi_id',
         'dokumen_asesi_id',
+        'jadwal_id',
         'tujuan_asesmen',
         'tuk',
         'jadwal_uji',
         'metode_uji',
-        'keterangan_teknis',
         'jumlah_pembayaran',
         'sumber_pendanaan',
         'metode_pembayaran',
@@ -154,8 +195,8 @@ public function edit(PendaftaranAsesmen $asesmen)
         'tanggal_pembayaran',
     ]);
 
+    $data['keterangan_teknis'] = json_encode($keteranganTeknis, JSON_UNESCAPED_UNICODE);
 
-    // Upload file baru & hapus lama jika ada
     if ($request->hasFile('bukti_pembayaran')) {
         if ($asesmen->bukti_pembayaran && Storage::disk('public')->exists($asesmen->bukti_pembayaran)) {
             Storage::disk('public')->delete($asesmen->bukti_pembayaran);
@@ -166,17 +207,13 @@ public function edit(PendaftaranAsesmen $asesmen)
         $data['bukti_pembayaran'] = 'bukti_pembayaran/' . $filename;
     }
 
-    // Update record utama
     $asesmen->update($data);
-
-    // Sync pivot units (pastikan $asesmen->id ada)
-    if($asesmen && $asesmen->id){
-        $asesmen->units()->sync($request->unit_ids);
-    }
+    $asesmen->units()->sync($request->unit_ids);
 
     return redirect()->route('asesi.asesmen.index')
         ->with('success', 'Pendaftaran asesmen berhasil diperbarui.');
 }
+
 
     public function destroy(PendaftaranAsesmen $asesmen)
     {
@@ -195,7 +232,7 @@ public function edit(PendaftaranAsesmen $asesmen)
         $today = Carbon::today()->toDateString();
 
         $jadwals = JadwalAsesmen::with('skema')
-            ->whereDate('tanggal_asesmen', $today)
+            ->whereDate('tanggal_asesmen', '>=', $today)
             ->orderBy('tanggal_asesmen', 'asc')
             ->get();
 

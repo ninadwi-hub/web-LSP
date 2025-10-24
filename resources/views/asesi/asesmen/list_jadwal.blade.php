@@ -44,10 +44,10 @@
                         </ul>
 
                         {{-- Tombol Daftar --}}
-                        <a href="{{ route('asesi.asesmen.create', $jadwal->id) }}" 
-                           class="btn btn-outline-primary rounded-pill px-4">
+                       <a href="{{ route('asesi.asesmen.create', $jadwal->id) }}" 
+                            class="btn btn-outline-primary rounded-pill px-4">
                             Daftar
-                        </a>
+                            </a>
                     </div>
                 </div>
             </div>

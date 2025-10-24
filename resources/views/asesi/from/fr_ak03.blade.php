@@ -18,24 +18,20 @@
             <table class="table table-bordered align-middle">
                 <tbody>
                     {{-- Skema, Judul, Nomor --}}
-                    <tr>
-                        <th class="w-25 align-middle">Skema Sertifikasi Klaster/Asesmen</th>
-                        <td class="w-75" colspan="4" style="padding: 8px 12px;">
-                            <div class="row align-items-center mb-2">
-                                <label class="col-sm-2 col-form-label fw-bold" style="padding: 4px 15px;">Judul</label>
-                                <div class="col-sm-10" style="padding: 4px 0;">
-                                    : {{ $asesi->judul ?? '-' }}
+                   <tr>
+                            <th>Skema Sertifikasi Klaster/Asesmen</th>
+                                <td class="w-75" colspan="2" style="padding: 4px 10px;">
+                                <div class="row align-items-center">
+                                    <label class="col-sm-2 col-form-label fw-bold">Judul</label>
+                                    <div class="col-sm-10">: {{ $asesmen->jadwal->skema->nama ?? '-' }}</div>
                                 </div>
-                            </div>
-                            <hr class="my-1 border-dark">
-                            <div class="row align-items-center">
-                                <label class="col-sm-2 col-form-label fw-bold" style="padding: 4px 15px;">Nomor</label>
-                                <div class="col-sm-10" style="padding: 4px 0;">
-                                    : {{ $asesi->nomor_skema ?? '-' }}
+                        
+                                <div class="row align-items-center">
+                                    <label class="col-sm-2 col-form-label fw-bold">Nomor</label>
+                                    <div class="col-sm-10">: {{ $asesmen->jadwal->skema->kode ?? '-' }}</div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
 
                     {{-- TUK --}}
                     <tr>
@@ -64,7 +60,7 @@
                     </tr>
                     <tr>
                         <th>Nama Peserta</th>
-                        <td colspan="4">: {{ $asesi->nama ?? '-' }}</td>
+                            <td colspan="4">: {{ $asesmen->biodata->user->name ?? '-' }}</td>
                     </tr>
                     <tr>
                         <th>Tanggal</th>

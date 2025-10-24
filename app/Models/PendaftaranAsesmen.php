@@ -9,6 +9,7 @@ class PendaftaranAsesmen extends Model
    protected $fillable = [
     'biodata_asesi_id',
     'dokumen_asesi_id',
+    'jadwal_id', // <--- tambahkan ini
     'tujuan_asesmen',
     'tuk',
     'jadwal_uji',
@@ -23,7 +24,6 @@ class PendaftaranAsesmen extends Model
     'tanggal_pembayaran',
     'bukti_pembayaran',
 ];
-
 
     // Relasi
     public function biodata() {
@@ -41,8 +41,19 @@ public function dokumen() {
 }
 
 
-    // Relasi ke unit kompetensi (step 6)
-    public function units() {
-        return $this->belongsToMany(UnitKompetensi::class, 'pendaftaran_unit', 'pendaftaran_id', 'unit_id');
-    }
+   public function units()
+{
+    return $this->belongsToMany(UnitKompetensi::class, 'pendaftaran_unit', 'pendaftaran_id', 'unit_id')
+                ->withPivot([
+                    'observasi',
+                    'portofolio',
+                    'wawancara',
+                    'pertanyaan_lisan',
+                    'pertanyaan_tertulis',
+                    'tes_praktik',
+                    'projek_kerja',
+                    'lainnya'
+                ]);
+}
+
 }

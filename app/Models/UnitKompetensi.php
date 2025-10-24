@@ -16,4 +16,10 @@ class UnitKompetensi extends Model
     {
         return $this->belongsTo(Skema::class, 'skema_id', 'id');
     }
+    public function asesmen()
+{
+    return $this->belongsToMany(PendaftaranAsesmen::class, 'asesmen_units', 'unit_id', 'asesmen_id')
+                ->withPivot(['observasi', 'portofolio', 'wawancara', 'pertanyaan_lisan', 'pertanyaan_tertulis', 'tes_praktik', 'projek_kerja', 'lainnya']);
+}
+
 }

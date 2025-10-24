@@ -22,10 +22,10 @@ class JadwalAsesmen extends Model
         'harga' => 'decimal:0',
     ];
 
-    public function skema()
-    {
-        return $this->belongsTo(Skema::class);
-    }
+   
+    public function skema() {
+    return $this->belongsTo(Skema::class, 'skema_id');
+}
 
     public function asesorUji()
     {

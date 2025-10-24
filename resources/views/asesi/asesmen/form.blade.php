@@ -37,9 +37,25 @@
         action="{{ isset($asesmen) && $asesmen->id ? route('asesi.asesmen.update', $asesmen->id) : route('asesi.asesmen.store') }}" 
         method="POST" enctype="multipart/form-data">
         @csrf
+      {{-- Pastikan jadwal_id selalu terkirim, baik saat create maupun edit --}}
+    @if(isset($asesmen) && $asesmen->jadwal_id)
+        <input type="hidden" name="jadwal_id" value="{{ $asesmen->jadwal_id }}">
+    @elseif(isset($selectedJadwal))
+        <input type="hidden" name="jadwal_id" value="{{ $selectedJadwal->id }}">
+    @endif
+
+    @if(isset($asesmen->jadwal))
+        <div class="alert alert-info mb-3">
+            Jadwal Asesmen:
+            <strong>{{ $asesmen->jadwal->nama ?? 'Tidak diketahui' }}</strong>
+        </div>
+    @endif
+
+
         @if(isset($asesmen) && $asesmen->id)
             @method('PUT')
         @endif
+        
 
         <!-- Hidden input agar controller tahu data mana yang digunakan -->
         <input type="hidden" name="biodata_asesi_id" value="{{ $biodata->id }}">
@@ -280,12 +296,19 @@
             </div>
 
          {{-- STEP 5 --}}
+@php
+    // Decode JSON dari kolom keterangan_teknis
+    $teknis = json_decode($asesmen->keterangan_teknis ?? '{}', true);
+@endphp
+
 <div class="step-pane" data-step="5">
     <div class="card mb-4 shadow-sm">
-        <div class="card-header"><h5>Persyaratan Teknis</h5></div>
+        <div class="card-header">
+            <h5>Persyaratan Teknis</h5>
+        </div>
         <div class="card-body">
 
-            {{-- Tabel Peralatan --}}
+            {{-- Tabel Persyaratan Teknis --}}
             <table class="table table-bordered">
                 <thead class="table-light">
                     <tr>
@@ -299,69 +322,123 @@
                         <td>Ruang Uji</td>
                         <td>Minimal 2x3 meter</td>
                         <td class="text-center">
-                            <label class="me-3"><input type="radio" name="ruang_uji" value="Ada" {{ old('ruang_uji', $asesmen->ruang_uji ?? '') == 'Ada' ? 'checked' : '' }}> Ada</label>
-                            <label><input type="radio" name="ruang_uji" value="Tidak Ada" {{ old('ruang_uji', $asesmen->ruang_uji ?? '') == 'Tidak Ada' ? 'checked' : '' }}> Tidak Ada</label>
+                            <label class="me-3">
+                                <input type="radio" name="ruang_uji" value="Ada"
+                                    {{ ($teknis['ruang_uji'] ?? '') == 'Ada' ? 'checked' : '' }}> Ada
+                            </label>
+                            <label>
+                                <input type="radio" name="ruang_uji" value="Tidak Ada"
+                                    {{ ($teknis['ruang_uji'] ?? '') == 'Tidak Ada' ? 'checked' : '' }}> Tidak Ada
+                            </label>
                         </td>
                     </tr>
+
                     <tr>
                         <td>Meja</td>
                         <td>Minimal 60x100 cm</td>
                         <td class="text-center">
-                            <label class="me-3"><input type="radio" name="minimal" value="Ada" {{ old('minimal', $asesmen->minimal ?? '') == 'Ada' ? 'checked' : '' }}> Ada</label>
-                            <label><input type="radio" name="minimal" value="Tidak Ada" {{ old('minimal', $asesmen->minimal ?? '') == 'Tidak Ada' ? 'checked' : '' }}> Tidak Ada</label>
+                            <label class="me-3">
+                                <input type="radio" name="meja" value="Ada"
+                                    {{ ($teknis['meja'] ?? '') == 'Ada' ? 'checked' : '' }}> Ada
+                            </label>
+                            <label>
+                                <input type="radio" name="meja" value="Tidak Ada"
+                                    {{ ($teknis['meja'] ?? '') == 'Tidak Ada' ? 'checked' : '' }}> Tidak Ada
+                            </label>
                         </td>
                     </tr>
+
                     <tr>
                         <td>Kursi</td>
                         <td>Minimal 45 x 45 x 45 cm</td>
                         <td class="text-center">
-                            <label class="me-3"><input type="radio" name="kursi" value="Ada" {{ old('kursi', $asesmen->kursi ?? '') == 'Ada' ? 'checked' : '' }}> Ada</label>
-                            <label><input type="radio" name="kursi" value="Tidak Ada" {{ old('kursi', $asesmen->kursi ?? '') == 'Tidak Ada' ? 'checked' : '' }}> Tidak Ada</label>
+                            <label class="me-3">
+                                <input type="radio" name="kursi" value="Ada"
+                                    {{ ($teknis['kursi'] ?? '') == 'Ada' ? 'checked' : '' }}> Ada
+                            </label>
+                            <label>
+                                <input type="radio" name="kursi" value="Tidak Ada"
+                                    {{ ($teknis['kursi'] ?? '') == 'Tidak Ada' ? 'checked' : '' }}> Tidak Ada
+                            </label>
                         </td>
                     </tr>
+
                     <tr>
                         <td>Pengatur Suhu Ruangan</td>
                         <td>Minimal Kipas Angin</td>
                         <td class="text-center">
-                            <label class="me-3"><input type="radio" name="suhu" value="Ada" {{ old('suhu', $asesmen->suhu ?? '') == 'Ada' ? 'checked' : '' }}> Ada</label>
-                            <label><input type="radio" name="suhu" value="Tidak Ada" {{ old('suhu', $asesmen->suhu ?? '') == 'Tidak Ada' ? 'checked' : '' }}> Tidak Ada</label>
+                            <label class="me-3">
+                                <input type="radio" name="suhu" value="Ada"
+                                    {{ ($teknis['suhu'] ?? '') == 'Ada' ? 'checked' : '' }}> Ada
+                            </label>
+                            <label>
+                                <input type="radio" name="suhu" value="Tidak Ada"
+                                    {{ ($teknis['suhu'] ?? '') == 'Tidak Ada' ? 'checked' : '' }}> Tidak Ada
+                            </label>
                         </td>
                     </tr>
+
                     <tr>
                         <td>Lampu Penerangan</td>
                         <td>Minimal 250 Lux (LED 10 Watt)</td>
                         <td class="text-center">
-                            <label class="me-3"><input type="radio" name="lampu" value="Ada" {{ old('lampu', $asesmen->lampu ?? '') == 'Ada' ? 'checked' : '' }}> Ada</label>
-                            <label><input type="radio" name="lampu" value="Tidak Ada" {{ old('lampu', $asesmen->lampu ?? '') == 'Tidak Ada' ? 'checked' : '' }}> Tidak Ada</label>
+                            <label class="me-3">
+                                <input type="radio" name="lampu" value="Ada"
+                                    {{ ($teknis['lampu'] ?? '') == 'Ada' ? 'checked' : '' }}> Ada
+                            </label>
+                            <label>
+                                <input type="radio" name="lampu" value="Tidak Ada"
+                                    {{ ($teknis['lampu'] ?? '') == 'Tidak Ada' ? 'checked' : '' }}> Tidak Ada
+                            </label>
                         </td>
                     </tr>
+
                     <tr>
                         <td>PC & Kamera Laptop</td>
                         <td>Minimal layar 14", i3, RAM 6GB</td>
                         <td class="text-center">
-                            <label class="me-3"><input type="radio" name="pc" value="Ada" {{ old('pc', $asesmen->pc ?? '') == 'Ada' ? 'checked' : '' }}> Ada</label>
-                            <label><input type="radio" name="pc" value="Tidak Ada" {{ old('pc', $asesmen->pc ?? '') == 'Tidak Ada' ? 'checked' : '' }}> Tidak Ada</label>
+                            <label class="me-3">
+                                <input type="radio" name="pc" value="Ada"
+                                    {{ ($teknis['pc'] ?? '') == 'Ada' ? 'checked' : '' }}> Ada
+                            </label>
+                            <label>
+                                <input type="radio" name="pc" value="Tidak Ada"
+                                    {{ ($teknis['pc'] ?? '') == 'Tidak Ada' ? 'checked' : '' }}> Tidak Ada
+                            </label>
                         </td>
                     </tr>
+
                     <tr>
                         <td>Aplikasi Video Conference</td>
                         <td>Zoom / Microsoft Teams</td>
                         <td class="text-center">
-                            <label class="me-3"><input type="radio" name="aplikasi" value="Ada" {{ old('aplikasi', $asesmen->aplikasi ?? '') == 'Ada' ? 'checked' : '' }}> Ada</label>
-                            <label><input type="radio" name="aplikasi" value="Tidak Ada" {{ old('aplikasi', $asesmen->aplikasi ?? '') == 'Tidak Ada' ? 'checked' : '' }}> Tidak Ada</label>
+                            <label class="me-3">
+                                <input type="radio" name="aplikasi" value="Ada"
+                                    {{ ($teknis['aplikasi'] ?? '') == 'Ada' ? 'checked' : '' }}> Ada
+                            </label>
+                            <label>
+                                <input type="radio" name="aplikasi" value="Tidak Ada"
+                                    {{ ($teknis['aplikasi'] ?? '') == 'Tidak Ada' ? 'checked' : '' }}> Tidak Ada
+                            </label>
                         </td>
                     </tr>
+
                     <tr>
                         <td>Telepon Genggam</td>
                         <td>Minimal Android 10 atau iOS 15</td>
                         <td class="text-center">
-                            <label class="me-3"><input type="radio" name="hp" value="Ada" {{ old('hp', $asesmen->hp ?? '') == 'Ada' ? 'checked' : '' }}> Ada</label>
-                            <label><input type="radio" name="hp" value="Tidak Ada" {{ old('hp', $asesmen->hp ?? '') == 'Tidak Ada' ? 'checked' : '' }}> Tidak Ada</label>
+                            <label class="me-3">
+                                <input type="radio" name="hp" value="Ada"
+                                    {{ ($teknis['hp'] ?? '') == 'Ada' ? 'checked' : '' }}> Ada
+                            </label>
+                            <label>
+                                <input type="radio" name="hp" value="Tidak Ada"
+                                    {{ ($teknis['hp'] ?? '') == 'Tidak Ada' ? 'checked' : '' }}> Tidak Ada
+                            </label>
                         </td>
                     </tr>
                 </tbody>
             </table>
-
             {{-- Input tambahan --}}
             <div class="row mt-3">
                 <div class="col-md-3">
@@ -371,13 +448,17 @@
                         value="{{ \Carbon\Carbon::today()->format('Y-m-d') }}" readonly>
                     </div>
 
-                <div class="col-md-5">
+               <div class="col-md-5">
     <label class="form-label">Tempat Uji Kompetensi (TUK)</label>
-    <input type="text" 
-           name="tuk" 
-           class="form-control" 
-           placeholder="Masukkan nama TUK"
-           value="{{ old('tuk', $asesmen->tuk ?? '') }}" >
+    <select name="tuk" class="form-select">
+        <option value="">-- Pilih TUK --</option>
+        @foreach($tuks as $tuk)
+            <option value="{{ $tuk->nama }}"
+                {{ old('tuk', $asesmen->tuk ?? '') == $tuk->nama ? 'selected' : '' }}>
+                {{ $tuk->nama }}
+            </option>
+        @endforeach
+    </select>
 </div>
 
 

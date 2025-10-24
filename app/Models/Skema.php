@@ -37,6 +37,7 @@ class Skema extends Model
     {
         return $this->hasMany(JadwalAsesmen::class, 'skema_id', 'id');
     }
+    
 
     // Accessor untuk URL thumbnail
     public function getThumbnailUrlAttribute()

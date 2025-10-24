@@ -183,7 +183,7 @@ Route::middleware(['auth'])->group(function () {
 
   Route::middleware(['auth'])->prefix('asesi/asesmen')->name('asesi.asesmen.')->group(function () {
     Route::get('/', [PendaftaranAsesmenController::class, 'index'])->name('index');
-    Route::get('/create', [PendaftaranAsesmenController::class, 'create'])->name('create');
+Route::get('/create/{jadwal?}', [PendaftaranAsesmenController::class, 'create'])->name('create');
     Route::post('/', [PendaftaranAsesmenController::class, 'store'])->name('store');
     Route::get('/list_jadwal', [PendaftaranAsesmenController::class, 'listJadwal'])->name('list_jadwal');
 
@@ -298,6 +298,6 @@ Route::prefix('sa/persiapan')->name('sa.persiapan.')->group(function () {
 Route::middleware(['auth'])->prefix('asesi')->name('asesi.')->group(function () {
     // 1 route untuk semua FR (APL.01, APL.02, AK.01, AK.03)
     Route::get('/{form}/{asesmen}', [App\Http\Controllers\FormFRController::class, 'show'])
-        ->where('form', 'apl01|apl02|ak01|ak03')
+        ->where('form', 'apl01|apl02|ak01|ak02|ak03')
         ->name('fr.show');
 });

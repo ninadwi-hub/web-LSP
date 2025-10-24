@@ -25,17 +25,17 @@
                 <table class="table table-bordered align-middle">
                     <tbody>
                         {{-- Skema --}}
-                        <tr>
-                            <th class="w-25 align-middle">Skema Sertifikasi Klaster/Asesmen</th>
-                            <td class="w-75" colspan="4" style="padding: 8px 12px;">
-                                <div class="row align-items-center mb-2">
+                         <tr>
+                            <th>Skema Sertifikasi Klaster/Asesmen</th>
+                                <td class="w-75" colspan="2" style="padding: 4px 10px;">
+                                <div class="row align-items-center">
                                     <label class="col-sm-2 col-form-label fw-bold">Judul</label>
-                                    <div class="col-sm-10">: {{ $asesmen->jadwal->skema->judul_skema ?? '-' }}</div>
+                                    <div class="col-sm-10">: {{ $asesmen->jadwal->skema->nama ?? '-' }}</div>
                                 </div>
-                                <hr class="my-1 border-dark">
+                        
                                 <div class="row align-items-center">
                                     <label class="col-sm-2 col-form-label fw-bold">Nomor</label>
-                                    <div class="col-sm-10">: {{ $asesmen->jadwal->skema->nomor_skema ?? '-' }}</div>
+                                    <div class="col-sm-10">: {{ $asesmen->jadwal->skema->kode ?? '-' }}</div>
                                 </div>
                             </td>
                         </tr>
@@ -115,7 +115,7 @@
                     <p class="fw-bold">Tanda Tangan Asesi</p>
                     <img src="{{ asset('storage/' . ($asesmen->dokumen->tanda_tangan ?? 'placeholder-sign.png')) }}" alt="Tanda Tangan Asesi" height="80">
                     <p class="text-muted mt-2">Tgl: {{ now()->format('Y-m-d') }}</p>
-                    <p class="fw-semibold">{{ $asesmen->biodata->nama_lengkap ?? '-' }}</p>
+                    <p class="fw-semibold">{{ $asesmen->biodata->user->name ?? '-' }}</p>
                 </div>
                 <div class="col-md-6">
                     <p class="fw-bold">Tanda Tangan Asesor</p>
