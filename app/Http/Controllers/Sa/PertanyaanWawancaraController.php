@@ -13,9 +13,10 @@ class PertanyaanWawancaraController extends Controller
     // Halaman daftar semua pertanyaan
     public function index()
     {
-        $pertanyaans = PertanyaanWawancara::with('unitKompetensi', 'skema')->get();
-        return view('sa.pertanyaan_wawancara.index', compact('pertanyaans'));
+        $skemas = \App\Models\Skema::all();
+        return view('sa.pertanyaan_wawancara.index', compact('skemas'));
     }
+
 
     // Halaman detail pertanyaan per skema
     public function show($id)
