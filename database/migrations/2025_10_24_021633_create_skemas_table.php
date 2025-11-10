@@ -26,13 +26,11 @@ return new class extends Migration
             $table->text('ringkasan')->nullable();
             $table->string('file_skema')->nullable();
             $table->timestamps();
-<<<<<<<< HEAD:database/migrations/2025_10_24_021633_create_skemas_table.php
-            $table->integer('kuota')->default(0);
-========
-            $table->string('kuota')->default(0);
 
-            // 🔄 ubah dari boolean ke string agar bisa simpan 'aktif' / 'nonaktif'
->>>>>>>> a12e1de (route):database/migrations/2025_10_24_014319_create_skemas_table.php
+            // gunakan integer untuk kolom kuota
+            $table->integer('kuota')->default(0);
+
+            // ubah dari boolean ke string agar bisa simpan 'aktif' / 'nonaktif'
             $table->string('status')->default('aktif');
         });
     }
