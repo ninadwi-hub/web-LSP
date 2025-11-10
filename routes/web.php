@@ -313,8 +313,17 @@ Route::prefix('sa/persiapan')->name('sa.persiapan.')->group(function () {
     Route::delete('/jadwal/{jadwal}', [JadwalAsesmenController::class, 'destroy'])->name('jadwal.destroy');
 });
 Route::middleware(['auth'])->prefix('asesi')->name('asesi.')->group(function () {
-    // 1 route untuk semua FR (APL.01, APL.02, AK.01, AK.03)
+    // Menampilkan form APL.01, APL.02, AK.01, AK.02, AK.03
     Route::get('/{form}/{asesmen}', [App\Http\Controllers\FormFRController::class, 'show'])
         ->where('form', 'apl01|apl02|ak01|ak02|ak03')
         ->name('fr.show');
+
+    // Simpan data form APL.01
+    Route::post('/apl01/store', [App\Http\Controllers\FormFRController::class, 'storeApl01'])
+        ->name('apl01.store');
+
+    // ✅ Tambahkan route simpan APL.02 di bawah ini
+    Route::post('/apl02/store', [App\Http\Controllers\FormFRController::class, 'storeApl02'])
+        ->name('apl02.store');
 });
+

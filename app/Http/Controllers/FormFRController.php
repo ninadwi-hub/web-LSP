@@ -34,6 +34,26 @@ class FormFRController extends Controller
 
     return view($viewPath, compact('asesmen', 'biodata', 'dokumen', 'asesor'));
 }
+public function storeApl01(Request $request)
+{
+    $request->validate([
+        'asesmen_id' => 'required|exists:pendaftaran_asesmens,id',
+    ]);
+
+    $asesmen = PendaftaranAsesmen::with(['biodata.user'])->findOrFail($request->asesmen_id);
+
+    // Simpan data form APL.01 (contoh)
+    // Pastikan kamu punya model Apl01, atau sesuaikan dengan nama tabel kamu
+    \App\Models\Apl01::create([
+        'pendaftaran_id' => $asesmen->id,
+        'nama_lengkap' => $asesmen->biodata->user->name ?? '',
+        'email' => $asesmen->biodata->user->email ?? '',
+        'created_by' => auth()->id(),
+    ]);
+
+    return redirect()->route('asesi.asesmen.index')
+        ->with('success', 'Form APL.01 berhasil disimpan.');
+}
 
 public function create($jadwal_id = null)
 {

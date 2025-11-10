@@ -449,17 +449,17 @@
                     </div>
 
                <div class="col-md-5">
-    <label class="form-label">Tempat Uji Kompetensi (TUK)</label>
-    <select name="tuk" class="form-select">
-        <option value="">-- Pilih TUK --</option>
-        @foreach($tuks as $tuk)
-            <option value="{{ $tuk->nama }}"
-                {{ old('tuk', $asesmen->tuk ?? '') == $tuk->nama ? 'selected' : '' }}>
-                {{ $tuk->nama }}
-            </option>
-        @endforeach
-    </select>
-</div>
+                    <label class="form-label">Tempat Uji Kompetensi (TUK)</label>
+                    <select name="tuk" class="form-select">
+                        <option value="">-- Pilih TUK --</option>
+                        @foreach($tuks as $tuk)
+                            <option value="{{ $tuk->nama }}"
+                                {{ old('tuk', $asesmen->tuk ?? '') == $tuk->nama ? 'selected' : '' }}>
+                                {{ $tuk->nama }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
 
                 <div class="col-md-4">
